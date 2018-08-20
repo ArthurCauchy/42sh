@@ -6,11 +6,14 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 11:03:45 by acauchy           #+#    #+#             */
-/*   Updated: 2018/07/17 15:17:21 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/08/20 17:30:53 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include <stdlib.h>
+#include "libft.h"
+#include "utils.h"
+#include "env.h"
 
 static t_env	*create_entry(char *key, char *value)
 {

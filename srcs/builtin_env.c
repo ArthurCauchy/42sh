@@ -6,11 +6,13 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/07/17 16:43:41 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/08/20 18:03:52 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include "libft.h"
+#include "env.h"
+#include "builtins.h"
 
 static void	add_to_tmp_env(t_env **env, char *str)
 {

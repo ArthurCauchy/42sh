@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:11:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/18 21:39:31 by arthur           ###   ########.fr       */
+/*   Updated: 2018/08/20 18:24:05 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,23 @@ typedef struct		s_builtin
 
 typedef int	(*t_builtin_fct)(t_env**, char**);
 
+/*
+** builtins_manager.c
+*/
+
+void				clear_builtins(void);
+void				load_builtin(char *name, int (*func)(t_env**, char**));
+t_builtin_fct		search_builtin(char *name);
 
 /*
-**		in builtins_utils.c
+** builtins_utils.c
 */
 
 int					builtin_parse_options(char **args, char *options, int options_size);
 int					builtin_validate_options(char *options, char *valid_set);
 
 /*
-**		in builtin_[builtin_name].c
+** builtin_[builtin_name].c
 */
 
 int					builtin_exit(t_env **env, char **args);
@@ -42,11 +49,9 @@ int					builtin_setenv(t_env **env, char **args);
 int					builtin_unsetenv(t_env **env, char **args);
 int					builtin_echo(t_env **env, char **args);
 int					builtin_which(t_env **env, char **args);
-int					builtin_procs(t_env **env, char **args);
-int					builtin_fg(t_env **env, char **args);
 
 /*
-**		in builtin_cd[...].c
+** builtin_cd[...].c
 */
 
 void				print_chdir_error(char *path);

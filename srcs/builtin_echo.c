@@ -6,11 +6,13 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/07/17 14:35:55 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/08/20 18:06:05 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include <sys/types.h>
+#include "libft.h"
+#include "env.h"
 
 int			builtin_echo(t_env **env, char **args)
 {

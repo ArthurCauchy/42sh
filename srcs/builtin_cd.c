@@ -6,11 +6,15 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/07/19 16:22:56 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/08/20 17:42:40 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include <stdlib.h>
+#include "libft.h"
+#include "utils.h"
+#include "env.h"
+#include "builtins.h"
 
 void		print_chdir_error(char *path)
 {

@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/07/17 15:15:10 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/08/20 18:21:44 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct		s_env
 }					t_env;
 
 /*
-** in s_env.c
+** s_env.c
 */
 
 void				clear_env(t_env *env);
@@ -30,12 +30,11 @@ void				unset_env(t_env **head, char *key);
 t_env				*copy_env(t_env **env);
 
 /*
-** in env.c
+** env.c
 */
 
 void				print_env(t_env **env);
 char				*read_from_env(t_env **env, char *key);
 char				**env_to_array(t_env **env);
-
 
 #endif

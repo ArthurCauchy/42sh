@@ -6,11 +6,16 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/06/04 16:13:53 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/08/20 18:23:02 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "twenty_one_sh.h"
+#include <stdlib.h>
+#include "libft.h"
+#include "utils.h"
+#include "env.h"
+#include "path.h"
+#include "builtins.h"
 
 static void	print_shell_builtin(char *name)
 {

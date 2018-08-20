@@ -6,11 +6,13 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/07/17 16:33:18 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/08/20 17:41:23 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include <stdlib.h>
+#include "libft.h"
+#include "env.h"
 
 /*
 ** OLD VERSION of acauchy's 21sh, restore this later ?

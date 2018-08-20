@@ -6,11 +6,16 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 14:24:18 by acauchy           #+#    #+#             */
-/*   Updated: 2018/07/17 14:39:05 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/08/20 17:38:46 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "twenty_one_sh.h"
+#include <stdlib.h>
+#include "libft.h"
+#include "utils.h"
+#include "builtins.h"
+
+#define BUILTIN_MAX 42 //TODO a bouger dans un header ? (sauf si on s'en sert pas ailleurs)
 
 static t_builtin	**get_builtins(void)
 {

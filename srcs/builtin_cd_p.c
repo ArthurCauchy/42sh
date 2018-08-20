@@ -6,11 +6,16 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/07/19 16:26:36 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/08/20 18:02:56 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include <limits.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include "libft.h"
+#include "env.h"
+#include "builtins.h"
 
 int	try_cd_p(t_env **env, char *path)
 {

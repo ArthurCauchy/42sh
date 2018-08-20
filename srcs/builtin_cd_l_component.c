@@ -6,11 +6,14 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/07/19 15:37:38 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/08/20 17:54:14 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include <limits.h>
+#include <stdlib.h>
+#include "libft.h"
+#include "utils.h"
 
 void		add_to_compo_lst(t_list **list, char *buff)
 {

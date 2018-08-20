@@ -6,16 +6,21 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/07/19 16:23:13 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/08/20 17:52:27 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include <limits.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include "libft.h"
+#include "env.h"
+#include "builtins.h"
 
 static char		*add_final_slash(char **path)
 {
 	if ((*path)[ft_strlen(*path) - 1] != '/')
-		*path = ft_strjoin_free(*path, "/", 1);
+		*path = ft_strjoin_free(*path, ft_strdup("/"));
 	return (*path);
 }
 
