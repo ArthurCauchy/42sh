@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 14:24:18 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/20 17:38:46 by arthur           ###   ########.fr       */
+/*   Updated: 2018/08/22 08:47:26 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static t_builtin	**get_builtins(void)
 
 /*
 ** Clear the loaded builtins.
-** Has to be performed before exiting to avoid memory leaks.
 */
 
 void				clear_builtins(void)
@@ -45,6 +44,8 @@ void				clear_builtins(void)
 
 /*
 ** Loads a new builtin command.
+** Input: the name of the builtin and the function that IS the builtin.
+** This registers the builtin which can then be found using "search_builtin()"
 */
 
 void				load_builtin(char *name, int (*func)(t_env**, char**))
@@ -56,6 +57,7 @@ void				load_builtin(char *name, int (*func)(t_env**, char**))
 	if (!(new = (t_builtin*)ft_memalloc(sizeof(t_builtin))))
 		exit_error("load_builtin malloc() error");
 	new->name = name;
+	new->brief = NULL;
 	new->func = func;
 	builtins = get_builtins();
 	i = 0;
@@ -64,7 +66,12 @@ void				load_builtin(char *name, int (*func)(t_env**, char**))
 	builtins[i] = new;
 }
 
-t_builtin_fct		search_builtin(char *name)
+/*
+** Search a builtin by his name in the builtin register.
+** Returns a pointer to the corresponding builtin struct, or NULL if not found.
+*/
+
+t_builtin			*search_builtin(char *name)
 {
 	t_builtin	**builtins;
 	int			i;
@@ -75,7 +82,7 @@ t_builtin_fct		search_builtin(char *name)
 	{
 		if (ft_strcmp(name, builtins[i]->name) == 0)
 		{
-			return (builtins[i]->func);
+			return (builtins[i]);
 		}
 		++i;
 	}

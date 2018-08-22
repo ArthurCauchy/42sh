@@ -1,8 +1,9 @@
 TODO:
 - builtin help
 - builtins brief
-- import s_builtin struct from 21sh
 - write some doc and comments
+- make builtins behave like bash does
+- CDPATH
 
 Error from acauchy's 21sh:
 - strcmp in redirections !!!!! Change to libft's ft_strcmp

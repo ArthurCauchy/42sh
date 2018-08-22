@@ -6,18 +6,20 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:11:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/20 18:24:05 by arthur           ###   ########.fr       */
+/*   Updated: 2018/08/22 09:10:59 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
+# include "libft.h"
 # include "env.h"
 
 typedef struct		s_builtin
 {
 	char	*name;
+	char	*brief;
 	int		(*func)(t_env**, char**);
 }					t_builtin;
 
@@ -29,7 +31,7 @@ typedef int	(*t_builtin_fct)(t_env**, char**);
 
 void				clear_builtins(void);
 void				load_builtin(char *name, int (*func)(t_env**, char**));
-t_builtin_fct		search_builtin(char *name);
+t_builtin			*search_builtin(char *name);
 
 /*
 ** builtins_utils.c

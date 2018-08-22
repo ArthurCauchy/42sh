@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/08/20 18:24:29 by arthur           ###   ########.fr        #
+#    Updated: 2018/08/22 09:09:37 by arthur           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ COLOR_YELLOW = "\033[1;33;40m"
 COLOR_CYAN = "\033[1;36;40m"
 COLOR_RESET = "\033[0m"
 
-NAME = 21sh
+NAME = 42sh
 
 CC = gcc -g3
 CFLAGS = -Wall -Wextra -Werror
@@ -30,7 +30,8 @@ HEADER_PATH = headers
 HEADER_NAME = utils.h \
 			  env.h \
 			  path.h \
-			  builtins.h
+			  builtins.h \
+			  init.h
 HEADER = $(addprefix $(HEADER_PATH)/,$(HEADER_NAME))
 
 SRC_PATH = srcs
@@ -50,7 +51,11 @@ SRC_NAME = utils.c \
 		   builtin_setenv.c \
 		   builtin_unsetenv.c \
 		   builtin_echo.c \
-		   builtin_which.c
+		   builtin_which.c \
+		   init.c \
+		   init_builtins.c \
+		   init_env.c \
+		   main.c
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
