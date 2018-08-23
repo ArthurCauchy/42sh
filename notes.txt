@@ -4,6 +4,9 @@ TODO:
 - write some doc and comments
 - make builtins behave like bash does
 - CDPATH
+- should I lex amp (&) symbol since we dont use it ?
+- ajust INPUT_MAX_LEN in utils.h to match the new input's max
+- echo $? now always print 42 (temporary)
 
 Error from acauchy's 21sh:
 - strcmp in redirections !!!!! Change to libft's ft_strcmp

@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/22 09:33:31 by arthur           ###   ########.fr       */
+/*   Updated: 2018/08/23 12:25:35 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,21 @@
 #include "libft.h"
 #include "utils.h"
 #include "env.h"
+#include "builtins.h"
 #include "init.h"
 
-// TEMPORARY AND UNPROTECTED input loop
+t_env		*g_env = NULL;
 
+// TEMPORARY AND UNPROTECTED input loop
 static char	*ask_for_input(void)
 {
-	static char	buff[16384];
+	static char	buff[INPUT_MAX_LEN];
 	int			size_read;
 	char		*ret;
 
 	ret = NULL;
 	ft_putstr("$> ");
-	size_read = read(0, buff, 16384);
+	size_read = read(0, buff, INPUT_MAX_LEN);
 	if (size_read == -1)
 		exit_error("read() error");
 	buff[size_read] = '\0';
@@ -37,18 +39,42 @@ static char	*ask_for_input(void)
 	return (ret);
 }
 
+static void	start_command(t_word *cmd_args)
+{
+	t_builtin	*builtin;
+	char		**args;
+
+	args = ft_memalloc(sizeof(char*) * PARAMS_MAX);
+	if ((builtin = search_builtin(cmd_args->str)))
+	{
+		arglist_to_array(cmd_args, args);
+		builtin->func(&g_env, args);
+		delete_args(args);
+	}
+	else
+		ft_putendl_fd("Not a builtin.", 2);
+}
+
 int			main(int argc, char **argv, char **envp)
 {
-	t_env	*env;
+	char	*errmsg;
 	char	*input;
+	t_word	*cmd_args;
 
 	(void)argc;
 	(void)argv;
-	env = NULL;
-	init(&env, envp);
+	errmsg = NULL;
+	init(&g_env, envp);
 	while ((input = ask_for_input()) != NULL)
 	{
-		ft_putendl(input);
+		cmd_args = NULL;
+		lex_analysis(input, &cmd_args, &errmsg);
+		free(input);
+		if (errmsg)
+			print_n_free_errmsg(&errmsg);
+		else
+			start_command(cmd_args);
+		delete_wordlist(&cmd_args);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/20 17:30:28 by arthur           ###   ########.fr       */
+/*   Updated: 2018/08/23 11:22:00 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,9 @@ int		is_directory(char *filepath)
 			&& S_ISDIR(fileinfo.st_mode))
 		return (1);
 	return (0);
+}
+
+int		is_separator(char c)
+{
+	return (c == ' ' || c == '\t' || c == '\0');
 }

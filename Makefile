@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/08/22 09:09:37 by arthur           ###   ########.fr        #
+#    Updated: 2018/08/23 11:53:03 by arthur           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,11 +31,14 @@ HEADER_NAME = utils.h \
 			  env.h \
 			  path.h \
 			  builtins.h \
+			  lexing.h \
 			  init.h
 HEADER = $(addprefix $(HEADER_PATH)/,$(HEADER_NAME))
 
 SRC_PATH = srcs
 SRC_NAME = utils.c \
+		   utils2.c \
+		   utils_args.c \
 		   s_env.c \
 		   env.c \
 		   path.c \
@@ -55,6 +58,17 @@ SRC_NAME = utils.c \
 		   init.c \
 		   init_builtins.c \
 		   init_env.c \
+		   word.c \
+		   lexing.c \
+		   lexing_dollar.c \
+		   lexing_tilde.c \
+		   lexing_semicol.c \
+		   lexing_pipe_or.c \
+		   lexing_amp_and.c \
+		   lexing_shift.c \
+		   lexing_lshift.c \
+		   lexing_rshift.c \
+		   lexing_space.c \
 		   main.c
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))

@@ -1,45 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   global.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/23 12:13:16 by arthur           ###   ########.fr       */
+/*   Updated: 2018/08/23 11:27:17 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __UTILS_H
-# define __UTILS_H
+#ifndef __GLOBAL_H
+# define __GLOBAL_H
 
-# define INPUT_MAX_LEN 16384
-# define PARAMS_MAX 1024
+# include "env.h"
 
-# include "lexing.h"
-
-/*
-** utils.c
-*/
-
-void	exit_error(char *errmsg);
-int		is_there_a_file(char *filepath);
-int		is_executable(char *filepath);
-int		is_directory(char *filepath);
-int		is_separator(char c);
-
-/*
-** utils2.c
-*/
-
-void	print_n_free_errmsg(char **errmsg);
-
-/*
-** utils_args.c
-*/
-
-void	arglist_to_array(t_word *arglist, char **args);
-char	**copy_args(char **args);
-void	delete_args(char **args);
+extern t_env	*g_env;
 
 #endif
