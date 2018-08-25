@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/08/23 11:53:03 by arthur           ###   ########.fr        #
+#    Updated: 2018/08/25 18:59:01 by arthur           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRC_NAME = utils.c \
 		   builtin_unsetenv.c \
 		   builtin_echo.c \
 		   builtin_which.c \
+		   builtin_help.c \
 		   init.c \
 		   init_builtins.c \
 		   init_env.c \

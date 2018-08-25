@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 14:24:18 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/22 08:47:26 by arthur           ###   ########.fr       */
+/*   Updated: 2018/08/25 18:56:50 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void				clear_builtins(void)
 	i = 0;
 	while (i < BUILTIN_MAX && builtins[i] != NULL)
 	{
+		free(builtins[i]->brief);
 		free(builtins[i]);
 		++i;
 	}
@@ -48,7 +49,7 @@ void				clear_builtins(void)
 ** This registers the builtin which can then be found using "search_builtin()"
 */
 
-void				load_builtin(char *name, int (*func)(t_env**, char**))
+void				load_builtin(char *name, char *brief, int (*func)(t_env**, char**))
 {
 	t_builtin	*new;
 	t_builtin	**builtins;
@@ -57,7 +58,7 @@ void				load_builtin(char *name, int (*func)(t_env**, char**))
 	if (!(new = (t_builtin*)ft_memalloc(sizeof(t_builtin))))
 		exit_error("load_builtin malloc() error");
 	new->name = name;
-	new->brief = NULL;
+	new->brief = brief;
 	new->func = func;
 	builtins = get_builtins();
 	i = 0;
