@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 14:24:18 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/25 18:56:50 by arthur           ###   ########.fr       */
+/*   Updated: 2018/08/25 19:21:14 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 #include "utils.h"
 #include "builtins.h"
 
-#define BUILTIN_MAX 42 //TODO a bouger dans un header ? (sauf si on s'en sert pas ailleurs)
-
-static t_builtin	**get_builtins(void)
+t_builtin			**get_builtins(void)
 {
-	static t_builtin	*builtins[BUILTIN_MAX] = {NULL};
+	static t_builtin	*builtins[BUILTINS_MAX] = {NULL};
 
 	return (builtins);
 }
@@ -35,7 +33,7 @@ void				clear_builtins(void)
 
 	builtins = get_builtins();
 	i = 0;
-	while (i < BUILTIN_MAX && builtins[i] != NULL)
+	while (i < BUILTINS_MAX && builtins[i] != NULL)
 	{
 		free(builtins[i]->brief);
 		free(builtins[i]);
@@ -62,7 +60,7 @@ void				load_builtin(char *name, char *brief, int (*func)(t_env**, char**))
 	new->func = func;
 	builtins = get_builtins();
 	i = 0;
-	while (i < BUILTIN_MAX && builtins[i] != NULL)
+	while (i < BUILTINS_MAX && builtins[i] != NULL)
 		++i;
 	builtins[i] = new;
 }
@@ -79,12 +77,10 @@ t_builtin			*search_builtin(char *name)
 
 	builtins = get_builtins();
 	i = 0;
-	while (i < BUILTIN_MAX && builtins[i] != NULL)
+	while (i < BUILTINS_MAX && builtins[i] != NULL)
 	{
 		if (ft_strcmp(name, builtins[i]->name) == 0)
-		{
 			return (builtins[i]);
-		}
 		++i;
 	}
 	return (NULL);

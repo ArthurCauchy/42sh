@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:11:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/25 18:58:41 by arthur           ###   ########.fr       */
+/*   Updated: 2018/08/25 19:21:41 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef int	(*t_builtin_fct)(t_env**, char**);
 ** builtins_manager.c
 */
 
+t_builtin			**get_builtins(void);
 void				clear_builtins(void);
 void				load_builtin(char *name, char *brief, int (*func)(t_env**, char**));
 t_builtin			*search_builtin(char *name);
