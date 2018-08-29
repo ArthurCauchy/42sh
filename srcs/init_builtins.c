@@ -14,12 +14,12 @@
 
 void		init_builtins(void)
 {
-	load_builtin("exit", "exit [return status]\nExit the current shell.", &builtin_exit);
-	load_builtin("cd", NULL, &builtin_cd);
-	load_builtin("env", NULL, &builtin_env);
+	load_builtin("exit", EXIT_HELP, &builtin_exit);
+	load_builtin("cd", CD_HELP, &builtin_cd);
+	load_builtin("env", ENV_HELP, &builtin_env);
 	load_builtin("setenv", NULL, &builtin_setenv);
 	load_builtin("unsetenv", NULL, &builtin_unsetenv);
-	load_builtin("echo", NULL, &builtin_echo);
+	load_builtin("echo", ECHO_HELP, &builtin_echo);
 	load_builtin("which", NULL, &builtin_which);
 	load_builtin("help", NULL, &builtin_help);
 }

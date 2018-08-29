@@ -16,6 +16,20 @@
 # include "libft.h"
 # include "env.h"
 
+# define EXIT_USAGE "exit [return status]"
+# define CD_USAGE "cd [-l|-p] [dir]"
+# define ENV_USAGE "env [-i] [var=value ...] [cmd]"
+# define ECHO_USAGE "echo [arg ...]"
+
+# define EXIT_BRIEF "Exit the shell."
+# define CD_BRIEF "Change the shell working directory."
+# define ECHO_BRIEF "Write arguments to the standard output."
+
+# define EXIT_HELP EXIT_USAGE "\n\n" EXIT_BRIEF
+# define CD_HELP CD_USAGE "\n\n" CD_BRIEF
+# define ENV_HELP ENV_USAGE
+# define ECHO_HELP ECHO_USAGE "\n\n" ECHO_BRIEF
+
 typedef struct		s_builtin
 {
 	char	*name;
