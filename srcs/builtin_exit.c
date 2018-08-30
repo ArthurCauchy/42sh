@@ -38,9 +38,16 @@ int	builtin_exit(t_env **env, char **args)
 }
 */
 
-// simple version
+static int	str_is_numeric(char *str)
+{
+	while (*str)
+		if (!ft_isdigit(*str++))
+			return (0);
+	return (1);
+}
 
-int	builtin_exit(t_env **env, char **args)
+// simple version
+int					builtin_exit(t_env **env, char **args)
 {
 	int	exit_status;
 
@@ -48,11 +55,19 @@ int	builtin_exit(t_env **env, char **args)
 	exit_status = 0;
 	if (args[1])
 	{
-		exit_status = ft_atoi(args[1]);
-		if (args[2])
+		if (str_is_numeric(args[1]))
 		{
-			ft_putendl_fd("exit: Too many arguments.", 2);
-			return (1);
+			exit_status = ft_atoi(args[1]);
+			if (args[2])
+			{
+				ft_putendl_fd("exit: Too many arguments.", 2);
+				return (1);
+			}
+		}
+		else
+		{
+			exit_status = 1; // what does it returns at school ?
+			ft_putendl_fd("exit: Numeric argument required.", 2);
 		}
 	}
 	exit(exit_status);

@@ -20,7 +20,7 @@
 # define CD_USAGE "cd [-l|-p] [dir]"
 # define ENV_USAGE "env [-i] [var=value ...] [cmd]"
 # define SETENV_USAGE "setenv [var] [value]"
-# define UNSETENV_USAGE "unsetenv [var]"
+# define UNSETENV_USAGE "unsetenv [var ...]"
 # define ECHO_USAGE "echo [arg ...]"
 # define WHICH_USAGE "which [cmd]"
 # define HELP_USAGE "help [builtin]"
@@ -29,9 +29,9 @@
 # define CD_BRIEF "Change the shell working directory."
 # define ENV_BRIEF "Start a command with a custom environment, or just print it if no command is specified."
 # define SETENV_BRIEF "Set an environment variable."
-# define UNSETENV_BRIEF "Unset an environment variable."
+# define UNSETENV_BRIEF "Unset given environment variables."
 # define ECHO_BRIEF "Write arguments to the standard output."
-# define WHICH_BRIEF "Show the full path an executable."
+# define WHICH_BRIEF "Show the full path of an executable."
 # define HELP_BRIEF "Print the help page of a builtin."
 
 # define EXIT_HELP EXIT_USAGE "\n\n" EXIT_BRIEF
