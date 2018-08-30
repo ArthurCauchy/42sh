@@ -17,9 +17,9 @@ void		init_builtins(void)
 	load_builtin("exit", EXIT_HELP, &builtin_exit);
 	load_builtin("cd", CD_HELP, &builtin_cd);
 	load_builtin("env", ENV_HELP, &builtin_env);
-	load_builtin("setenv", NULL, &builtin_setenv);
-	load_builtin("unsetenv", NULL, &builtin_unsetenv);
+	load_builtin("setenv", SETENV_HELP, &builtin_setenv);
+	load_builtin("unsetenv", UNSETENV_HELP, &builtin_unsetenv);
 	load_builtin("echo", ECHO_HELP, &builtin_echo);
-	load_builtin("which", NULL, &builtin_which);
-	load_builtin("help", NULL, &builtin_help);
+	load_builtin("which", WHICH_HELP, &builtin_which);
+	load_builtin("help", HELP_HELP, &builtin_help);
 }

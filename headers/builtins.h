@@ -19,16 +19,29 @@
 # define EXIT_USAGE "exit [return status]"
 # define CD_USAGE "cd [-l|-p] [dir]"
 # define ENV_USAGE "env [-i] [var=value ...] [cmd]"
+# define SETENV_USAGE "setenv [var] [value]"
+# define UNSETENV_USAGE "unsetenv [var]"
 # define ECHO_USAGE "echo [arg ...]"
+# define WHICH_USAGE "which [cmd]"
+# define HELP_USAGE "help [builtin]"
 
 # define EXIT_BRIEF "Exit the shell."
 # define CD_BRIEF "Change the shell working directory."
+# define ENV_BRIEF "Start a command with a custom environment, or just print it if no command is specified."
+# define SETENV_BRIEF "Set an environment variable."
+# define UNSETENV_BRIEF "Unset an environment variable."
 # define ECHO_BRIEF "Write arguments to the standard output."
+# define WHICH_BRIEF "Show the full path an executable."
+# define HELP_BRIEF "Print the help page of a builtin."
 
 # define EXIT_HELP EXIT_USAGE "\n\n" EXIT_BRIEF
 # define CD_HELP CD_USAGE "\n\n" CD_BRIEF
-# define ENV_HELP ENV_USAGE
+# define ENV_HELP ENV_USAGE "\n\n" ENV_BRIEF
+# define SETENV_HELP SETENV_USAGE "\n\n" SETENV_BRIEF
+# define UNSETENV_HELP UNSETENV_USAGE "\n\n" UNSETENV_BRIEF
 # define ECHO_HELP ECHO_USAGE "\n\n" ECHO_BRIEF
+# define WHICH_HELP WHICH_USAGE "\n\n" WHICH_BRIEF
+# define HELP_HELP HELP_USAGE "\n\n" HELP_BRIEF
 
 typedef struct		s_builtin
 {
