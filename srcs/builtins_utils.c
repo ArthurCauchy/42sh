@@ -12,6 +12,16 @@
 
 #include "libft.h"
 
+/*
+** read options given to a command
+** Params:
+** - char **args : the command arguments
+** - char *options : the buffer where to store found options
+** - int options_size : the size of the buffer
+** Return: the index of the first non-option parameter
+**
+** Note that the "options" buffer will be bzero'ed by this function.
+*/
 int		builtin_parse_options(char **args, char *options, int options_size)
 {
 	int		i;
@@ -35,6 +45,13 @@ int		builtin_parse_options(char **args, char *options, int options_size)
 	return (i);
 }
 
+/*
+** validate or invalidate an option buffer
+** Params:
+** - char *options : buffer containing the options
+** - char *valid_set : a set of valid options characters
+** Return: -1 if we found an invalid option, 0 if not
+*/
 int		builtin_validate_options(char *options, char *valid_set)
 {
 	size_t	i;
