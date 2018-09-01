@@ -24,6 +24,7 @@
 # define ECHO_USAGE "echo [arg ...]"
 # define WHICH_USAGE "which [cmd]"
 # define HELP_USAGE "help [builtin]"
+# define HISTORY_USAGE "history AND SOME OPTIONS" //TODO
 
 # define EXIT_BRIEF "Exit the shell."
 # define CD_BRIEF "Change the shell working directory."
@@ -33,6 +34,7 @@
 # define ECHO_BRIEF "Write arguments to the standard output."
 # define WHICH_BRIEF "Show the full path of an executable."
 # define HELP_BRIEF "Print the help page of a builtin."
+# define HISTORY_BRIEF "Print command history."
 
 # define EXIT_HELP EXIT_USAGE "\n\n" EXIT_BRIEF
 # define CD_HELP CD_USAGE "\n\n" CD_BRIEF
@@ -42,6 +44,7 @@
 # define ECHO_HELP ECHO_USAGE "\n\n" ECHO_BRIEF
 # define WHICH_HELP WHICH_USAGE "\n\n" WHICH_BRIEF
 # define HELP_HELP HELP_USAGE "\n\n" HELP_BRIEF
+# define HISTORY_HELP HISTORY_USAGE "\n\n" HISTORY_BRIEF
 
 typedef struct		s_builtin
 {
@@ -80,6 +83,7 @@ int					builtin_unsetenv(t_env **env, char **args);
 int					builtin_echo(t_env **env, char **args);
 int					builtin_which(t_env **env, char **args);
 int					builtin_help(t_env **env, char **args);
+int					builtin_history(t_env **env, char **args);
 
 /*
 ** builtin_cd[...].c

@@ -56,6 +56,7 @@ SRC_NAME = utils.c \
 		   builtin_echo.c \
 		   builtin_which.c \
 		   builtin_help.c \
+		   builtin_history.c \
 		   init.c \
 		   init_builtins.c \
 		   init_env.c \

@@ -22,4 +22,5 @@ void		init_builtins(void)
 	load_builtin("echo", ECHO_HELP, &builtin_echo);
 	load_builtin("which", WHICH_HELP, &builtin_which);
 	load_builtin("help", HELP_HELP, &builtin_help);
+	load_builtin("history", HISTORY_HELP, &builtin_history);
 }
