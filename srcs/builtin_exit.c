@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include "libft.h"
 #include "env.h"
+#include "history.h"
 
 /*
 ** OLD VERSION of acauchy's 21sh, restore this later ?
@@ -70,6 +71,7 @@ int					builtin_exit(t_env **env, char **args)
 			ft_putendl_fd("exit: Numeric argument required.", 2);
 		}
 	}
+	history_exit();
 	exit(exit_status);
 	return (0);
 }

@@ -15,6 +15,16 @@
 #include "utils.h"
 #include "lexing.h"
 
+int		args_size(char **args)
+{
+	int i;
+
+	i = 0;
+	while (args[i])
+		++i;
+	return (i);
+}
+
 void	arglist_to_array(t_word *arglist, char **args)
 {
 	t_word	*cur;

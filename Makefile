@@ -32,7 +32,9 @@ HEADER_NAME = utils.h \
 			  path.h \
 			  builtins.h \
 			  lexing.h \
-			  init.h
+			  init.h \
+				global.h \
+				history.h
 HEADER = $(addprefix $(HEADER_PATH)/,$(HEADER_NAME))
 
 SRC_PATH = srcs
@@ -71,6 +73,7 @@ SRC_NAME = utils.c \
 		   lexing_lshift.c \
 		   lexing_rshift.c \
 		   lexing_space.c \
+			 history.c \
 		   main.c
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))

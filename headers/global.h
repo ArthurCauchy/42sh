@@ -14,7 +14,9 @@
 # define __GLOBAL_H
 
 # include "env.h"
+# include "history.h"
 
-extern t_env	*g_env;
+extern t_env			*g_env;
+extern t_history	*g_history;
 
 #endif

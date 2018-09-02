@@ -11,9 +11,11 @@
 /* ************************************************************************** */
 
 #include "init.h"
+#include "history.h" //TODO remove
 
 void		init(t_env **env, char **envp)
 {
 	init_builtins();
 	init_env(env, envp);
+	init_history();
 }

@@ -16,9 +16,11 @@
 #include "utils.h"
 #include "env.h"
 #include "builtins.h"
+#include "history.h"
 #include "init.h"
 
-t_env		*g_env = NULL;
+t_env			*g_env = NULL;
+t_history	*g_history = NULL;
 
 // TEMPORARY AND UNPROTECTED input loop
 static char	*ask_for_input(void)
@@ -68,6 +70,9 @@ int			main(int argc, char **argv, char **envp)
 	while ((input = ask_for_input()) != NULL)
 	{
 		cmd_args = NULL;
+		if (ft_strlen(input) == 0)
+			continue ;
+		history_add(input);
 		lex_analysis(input, &cmd_args, &errmsg);
 		free(input);
 		if (errmsg)

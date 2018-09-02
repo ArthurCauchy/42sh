@@ -69,6 +69,7 @@ SRC_NAME = ft_memset.c \
 		 ft_strnequ.c \
 		 ft_strsub.c \
 		 ft_strjoin.c \
+		 ft_strjoinl.c \
 		 ft_strjoin_free.c \
 		 ft_strtrim.c \
 		 ft_strsplit.c \

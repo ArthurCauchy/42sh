@@ -16,6 +16,8 @@
 # define INPUT_MAX_LEN 16384
 # define PARAMS_MAX 1024
 # define BUILTINS_MAX 42
+# define HISTFILE "/tmp/.42sh_history"
+# define HISTSIZE 500
 
 # include "lexing.h"
 
@@ -39,6 +41,7 @@ void	print_n_free_errmsg(char **errmsg);
 ** utils_args.c
 */
 
+int		args_size(char **args);
 void	arglist_to_array(t_word *arglist, char **args);
 char	**copy_args(char **args);
 void	delete_args(char **args);
