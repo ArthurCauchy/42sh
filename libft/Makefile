@@ -20,9 +20,9 @@ COLOR_YELLOW = "\033[1;33;40m"
 COLOR_CYAN = "\033[1;36;40m"
 COLOR_RESET = "\033[0m"
 
-CC = gcc -g3
+CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g3 -Wall -Wextra -Werror
 
 NAME = libft.a
 

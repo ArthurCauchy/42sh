@@ -11,7 +11,6 @@
 # **************************************************************************** #
 
 SHELL:=/bin/bash
-UNAME_S := $(shell uname -s)
 
 .PHONY: all clean fclean re compile
 
@@ -23,8 +22,8 @@ COLOR_RESET = "\033[0m"
 
 NAME = 42sh
 
-CC = gcc -g3
-CFLAGS = -Wall -Wextra -Werror
+CC = gcc
+CFLAGS = -g3 -Wall -Wextra -Werror
 
 HEADER_PATH = headers
 HEADER_NAME = utils.h \
