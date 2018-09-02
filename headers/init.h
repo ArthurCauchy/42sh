@@ -33,4 +33,10 @@ void	init_env(t_env **env, char **envp);
 
 void	init_builtins(void);
 
+/*
+** init_history.c
+*/
+
+void	init_history(void);
+
 #endif

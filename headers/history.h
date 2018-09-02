@@ -15,8 +15,6 @@
 
 typedef struct	s_history
 {
-	int			(*history_init)(void);
-	//historic initialisation, put at the beginning of program
 	void		(*history_add)(char *);
 	//add value at the end of the history list
 	void		(*history_clear)(void);
@@ -58,6 +56,5 @@ int     history_writeA(char *file);
 int     history_writeT(char *file, char **hist);
 void    history_clear(void);
 void    history_exit(void);
-int     init_history(void);
 
 #endif

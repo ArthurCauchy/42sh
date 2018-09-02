@@ -60,8 +60,9 @@ SRC_NAME = utils.c \
 		   builtin_help.c \
 		   builtin_history.c \
 		   init.c \
-		   init_builtins.c \
 		   init_env.c \
+		   init_builtins.c \
+		   init_history.c \
 		   word.c \
 		   lexing.c \
 		   lexing_dollar.c \

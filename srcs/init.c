@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "init.h"
-#include "history.h" //TODO remove
 
 void		init(t_env **env, char **envp)
 {
