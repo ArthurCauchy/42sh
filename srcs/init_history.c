@@ -50,7 +50,6 @@ int			init_history(void)
 	g_history->history_add = history_add;
 	g_history->history_get = history_get;
 	g_history->history_read = history_read;
-	g_history->history_exit = history_exit;
 	g_history->history_clear = history_clear;
 	g_history->history_del = history_del;
 	g_history->history_writeA = history_writeA;

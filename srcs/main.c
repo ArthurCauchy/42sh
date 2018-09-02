@@ -70,16 +70,17 @@ int			main(int argc, char **argv, char **envp)
 	while ((input = ask_for_input()) != NULL)
 	{
 		cmd_args = NULL;
-		if (ft_strlen(input) == 0)
-			continue ;
-		history_add(input);
-		lex_analysis(input, &cmd_args, &errmsg);
+		if (ft_strlen(input) > 0)
+		{
+			history_add(input);
+			lex_analysis(input, &cmd_args, &errmsg);
+			if (errmsg)
+				print_n_free_errmsg(&errmsg);
+			else
+				start_command(cmd_args);
+			delete_wordlist(&cmd_args);
+		}
 		free(input);
-		if (errmsg)
-			print_n_free_errmsg(&errmsg);
-		else
-			start_command(cmd_args);
-		delete_wordlist(&cmd_args);
 	}
 	return (0);
 }

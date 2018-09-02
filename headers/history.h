@@ -23,15 +23,12 @@ typedef struct	s_history
 	//return specified value from the list
 	void		(*history_del)(int);
 	//delete specified elem from the list
-	void		(*history_exit)(void);
-	//free everything and write content to HISTFILE
 	int			(*history_writeA)(char *);
 	//write (append) current history list to specified file
 	int			(*history_writeT)(char *, char **);
 	//write (trunc) HIST list to specified file
 	char		**(*history_read)(char *, int);
 	//return read lines from a file
-
 	int			position;
 	//save current position when browsing history list (up, down arrow key)
 	int			SIZE;

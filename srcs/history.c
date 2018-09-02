@@ -121,9 +121,8 @@ char		**history_read(char *filename, int start)
 	char	**hist;
 	int		fd;
 
-	if (!(hist = (char **)malloc(sizeof(char *) * (g_history->SIZE + 1))))
+	if (!(hist = (char **)ft_memalloc(sizeof(char *) * (g_history->SIZE + 1))))
 		exit_error("malloc() error");
-	hist_null(&hist);
 	fd = open(filename, O_RDONLY);
 	if (fd > 0)
 	{
@@ -133,6 +132,7 @@ char		**history_read(char *filename, int start)
 		to_last(&file, start);
 		to_tab(&file, &hist);
 		close(fd);
+		//free(hist);
 		return (hist);
 	}
 	free(hist);
@@ -282,5 +282,6 @@ void		history_exit(void)
 {
 	g_history->history_writeA(HISTFILE);
 	g_history->history_clear();
+	//free(g_history->hist);
 	free(g_history);
 }
