@@ -20,8 +20,8 @@ void	lex_space_word(char *cmdline, t_word **wordlist,
 	(void)errmsg;
 	lexdata->buff[lexdata->j] = '\0';
 	lexdata->j = 0;
-	if (ft_strlen(lexdata->buff) > 0)
-		add_word(ARG, lexdata->buff, wordlist);
+	if (lexdata->force_add || ft_strlen(lexdata->buff) > 0)
+		add_word(ARG, lexdata->buff, wordlist, lexdata);
 	while (lexdata->i <= ft_strlen(cmdline)
 			&& is_separator(cmdline[lexdata->i]))
 		++lexdata->i;

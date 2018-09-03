@@ -15,7 +15,8 @@
 #include "utils.h"
 #include "lexing.h"
 
-void			add_word(t_token token, char *str, t_word **wordlist)
+void			add_word(t_token token, char *str,
+		t_word **wordlist, t_lexdata *lexdata)
 {
 	t_word	*word;
 	t_word	*cur;
@@ -30,10 +31,12 @@ void			add_word(t_token token, char *str, t_word **wordlist)
 			cur = cur->next;
 		cur->next = word;
 	}
+	lexdata->force_add = 0;
 }
 
 static void		update_quotes(char *cmdline, t_lexdata *lexdata)
 {
+	lexdata->force_add = 1;
 	if (lexdata->quoted == 0)
 	{
 		if (cmdline[lexdata->i] == '\'')

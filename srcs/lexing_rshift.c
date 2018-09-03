@@ -48,5 +48,5 @@ void		lex_rshift_word(char *cmdline, t_word **wordlist,
 	lex_shift_dest_redirect(cmdline, wordlist, lexdata, errmsg);
 	lexdata->buff[lexdata->j] = '\0';
 	lexdata->j = 0;
-	add_word(token, lexdata->buff, wordlist);
+	add_word(token, lexdata->buff, wordlist, lexdata);
 }

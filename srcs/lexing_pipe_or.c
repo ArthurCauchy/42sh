@@ -19,13 +19,13 @@ void	lex_pipe_or_word(char *cmdline, t_word **wordlist,
 	(void)errmsg;
 	lexdata->buff[lexdata->j] = '\0';
 	lexdata->j = 0;
-	if (ft_strlen(lexdata->buff) > 0)
-		add_word(ARG, lexdata->buff, wordlist);
+	if (lexdata->force_add || ft_strlen(lexdata->buff) > 0)
+		add_word(ARG, lexdata->buff, wordlist, lexdata);
 	if (cmdline[lexdata->i + 1] == '|')
 	{
-		add_word(OR, "||", wordlist);
+		add_word(OR, "||", wordlist, lexdata);
 		++lexdata->i;
 	}
 	else
-		add_word(PIPE, "|", wordlist);
+		add_word(PIPE, "|", wordlist, lexdata);
 }

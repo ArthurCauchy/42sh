@@ -32,10 +32,11 @@ typedef enum		e_token
 
 typedef struct		s_lexdata
 {
-	char	*buff;
+	char		*buff;
 	size_t	i;
 	size_t	j;
-	int		quoted;
+	int			quoted;
+	int			force_add;
 }					t_lexdata;
 
 typedef struct		s_word
@@ -57,7 +58,8 @@ void	delete_wordlist(t_word **head);
 ** lexing.c, lexing_[token].c
 */
 
-void	add_word(t_token token, char *str, t_word **wordlist);
+void	add_word(t_token token, char *str,
+		t_word **wordlist, t_lexdata *lexdata);
 void	lex_analysis(char *cmdline, t_word **wordlist, char **errmsg);
 void	lex_semicol_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata,
 		char **errmsg);

@@ -20,7 +20,7 @@ void	lex_semicol_word(char *cmdline, t_word **wordlist,
 	(void)errmsg;
 	lexdata->buff[lexdata->j] = '\0';
 	lexdata->j = 0;
-	if (ft_strlen(lexdata->buff) > 0)
-		add_word(ARG, lexdata->buff, wordlist);
-	add_word(SEMICOL, ";", wordlist);
+	if (lexdata->force_add || ft_strlen(lexdata->buff) > 0)
+		add_word(ARG, lexdata->buff, wordlist, lexdata);
+	add_word(SEMICOL, ";", wordlist, lexdata);
 }

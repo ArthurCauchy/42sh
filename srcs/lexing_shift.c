@@ -25,8 +25,8 @@ void	lex_shift_src_redirect(char *cmdline, t_word **wordlist,
 		--lexdata->j;
 	lexdata->buff[lexdata->j] = '\0';
 	lexdata->j = 0;
-	if (ft_strlen(lexdata->buff) > 0)
-		add_word(ARG, lexdata->buff, wordlist);
+	if (lexdata->force_add || ft_strlen(lexdata->buff) > 0)
+		add_word(ARG, lexdata->buff, wordlist, lexdata);
 	if (ft_isdigit(src_fd))
 		lexdata->buff[lexdata->j++] = src_fd;
 }
