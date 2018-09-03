@@ -4,9 +4,9 @@ TODO:
 - should I lex amp (&) symbol since we dont use it ?
 - ajust INPUT_MAX_LEN in utils.h to match the new input's max
 - echo $? now always print 42 (temporary)
-- merge with lumenthi's history builtin
 - change HISTFILE to ~/.42sh_history
-- fix leak
+- fix leak in history
+- full test of history builtin
 
 Error from acauchy's 21sh:
 - strcmp in redirections !!!!! Change to libft's ft_strcmp

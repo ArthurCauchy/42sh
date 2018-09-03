@@ -24,7 +24,7 @@
 # define ECHO_USAGE "echo [arg ...]"
 # define WHICH_USAGE "which [cmd]"
 # define HELP_USAGE "help [builtin]"
-# define HISTORY_USAGE "history AND SOME OPTIONS" //TODO
+# define HISTORY_USAGE "history [-c] [-d offset] [n]\nhistory -anrw [filename]\nhistory -ps arg [arg ...]"
 
 # define EXIT_BRIEF "Exit the shell."
 # define CD_BRIEF "Change the shell working directory."
@@ -34,7 +34,7 @@
 # define ECHO_BRIEF "Write arguments to the standard output."
 # define WHICH_BRIEF "Show the full path of an executable."
 # define HELP_BRIEF "Print the help page of a builtin."
-# define HISTORY_BRIEF "Print command history."
+# define HISTORY_BRIEF "Display or manipulate the history list."
 
 # define EXIT_HELP EXIT_USAGE "\n\n" EXIT_BRIEF
 # define CD_HELP CD_USAGE "\n\n" CD_BRIEF
