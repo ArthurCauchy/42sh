@@ -36,6 +36,7 @@ typedef struct		s_lexdata
 	size_t	i;
 	size_t	j;
 	int			quoted;
+	int			escaped;
 	int			force_add;
 }					t_lexdata;
 
@@ -77,6 +78,7 @@ void	lex_rshift_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata,
 		char **errmsg);
 void	lex_lshift_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata,
 		char **errmsg);
+void	lex_escape(char *cmdline, t_lexdata *lexdata, char **errmsg);
 void	lex_tilde_exp(char *cmdline, t_lexdata *lexdata, char **errmsg);
 void	lex_dollar_exp(char *cmdline, t_lexdata *lexdata, char **errmsg);
 

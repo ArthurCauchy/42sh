@@ -86,6 +86,8 @@ static void		do_lex(char *cmdline, t_word **wordlist,
 	else if (!lexdata->quoted && cmdline[lexdata->i] == '~'
 			&& lexdata->j == 0)
 		lex_tilde_exp(cmdline, lexdata, errmsg);
+	else if (cmdline[lexdata->i] == '\\')
+		lex_escape(cmdline, lexdata, errmsg);
 	else if (lexdata->quoted != 1 && cmdline[lexdata->i] == '$')
 		lex_dollar_exp(cmdline, lexdata, errmsg);
 	else if (cmdline[lexdata->i] == '\'' || cmdline[lexdata->i] == '"')
@@ -110,6 +112,8 @@ void			lex_analysis(char *cmdline, t_word **wordlist, char **errmsg)
 		*errmsg = ft_strdup("Unmatched '''.");
 	else if (!*errmsg && lexdata->quoted == 2)
 		*errmsg = ft_strdup("Unmatched '\"'.");
+	else if (!*errmsg && lexdata->escaped == 1)
+		*errmsg = ft_strdup("Here we should ask a second line of input."); // TODO do so
 	free(lexdata->buff);
 	free(lexdata);
 }

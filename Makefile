@@ -64,6 +64,7 @@ SRC_NAME = utils.c \
 		   init_history.c \
 		   word.c \
 		   lexing.c \
+		   lexing_escape.c \
 		   lexing_dollar.c \
 		   lexing_tilde.c \
 		   lexing_semicol.c \
