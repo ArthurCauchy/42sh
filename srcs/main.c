@@ -51,10 +51,10 @@ static void	start_command(t_word *cmd_args)
 	{
 		arglist_to_array(cmd_args, args);
 		builtin->func(&g_env, args);
-		delete_args(args);
 	}
 	else
 		ft_putendl_fd("Not a builtin.", 2);
+	delete_args(args);
 }
 
 int			main(int argc, char **argv, char **envp)

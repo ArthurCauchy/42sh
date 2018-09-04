@@ -16,27 +16,9 @@
 #include "env.h"
 #include "global.h"
 
-/*int			builtin_history(t_env **env, char **args)
-{
-	int			i;
-	char		options[4096];
-
-	(void)env;
-	(void)i;
-	i = builtin_parse_options(args, options, 4096);
-	if (builtin_validate_options(options, "acdrnpsw") == -1) // probably need to check for incompatible options too
-	{
-		ft_putendl_fd("Usage : history AND SOME OPTIONS", 2); //TODO
-		return (1);
-	}
-	ft_putstr("Options found :");
-	ft_putendl(options);
-	return (0);
-}*/
-
 static int	history_doclear(void)
 {
-	g_history->history_clear();
+	history_clear();
 	ft_putendl("Cleaning history...");
 	return (1);
 }
@@ -130,7 +112,7 @@ int			history_d(char **args, int start)
 		return (0);
 	else if (new < 0 || new > (g_history->nb_lines - 1))
 		return (del_error(elem));
-	g_history->history_del(new);
+	history_del(new);
 	return (0);
 }
 
@@ -148,14 +130,14 @@ int			history_r(char *file)
 
 	i = 0;
 	if (file == NULL || ft_strcmp(file, "") == 0)
-		ta = g_history->history_read(HISTFILE, 0);
+		ta = history_read(HISTFILE, 0);
 	else
-		ta = g_history->history_read(file, 0);
+		ta = history_read(file, 0);
 	if (ta == NULL)
 		return (read_error(file));
 	while (ta[i])
 	{
-		g_history->history_add(ta[i]);
+		history_add(ta[i]);
 		free(ta[i]);
 		i++;
 	}
@@ -170,11 +152,11 @@ int		history_w(char *file)
 	ret = 0;
 	if (file == NULL || ft_strcmp(file, "") == 0)
 	{
-		ret = g_history->history_writeT(HISTFILE, g_history->line);
+		ret = history_writeT(HISTFILE, g_history->line);
 		g_history->start = g_history->nb_lines;
 	}
 	else
-		ret = g_history->history_writeT(file, g_history->line);
+		ret = history_writeT(file, g_history->line);
 	return (ret = 1 ? 0 : 1);
 }
 
@@ -184,7 +166,7 @@ int			history_p(char **args)
 
 	i = 2;
 	if (args[i])
-		g_history->history_del(g_history->nb_lines - 1);
+		history_del(g_history->nb_lines - 1);
 	while (args[i])
 		ft_putendl(args[i++]);
 	return (0);
@@ -198,7 +180,7 @@ int			history_s(char **args)
 	i = 2;
 	if (args[i])
 	{
-		g_history->history_del(g_history->nb_lines - 1);
+		history_del(g_history->nb_lines - 1);
 		str = ft_strdup("");
 		while (args[i])
 		{
@@ -206,7 +188,7 @@ int			history_s(char **args)
 			if (args[i])
 				str = ft_strjoinl(str, " ");
 		}
-		g_history->history_add(str);
+		history_add(str);
 		free(str);
 	}
 	return (0);
@@ -214,7 +196,7 @@ int			history_s(char **args)
 
 int			history_a(char *file)
 {
-	return (g_history->history_writeA(file));
+	return (history_writeA(file));
 }
 
 int			history_n(char *file)
@@ -224,14 +206,14 @@ int			history_n(char *file)
 
 	i = 0;
 	if (file == NULL || ft_strcmp(file, "") == 0)
-		add = g_history->history_read(HISTFILE, g_history->start_file);
+		add = history_read(HISTFILE, g_history->start_file);
 	else
-		add = g_history->history_read(file, g_history->start_file);
+		add = history_read(file, g_history->start_file);
 	if (add == NULL)
 		return (1);
 	while (add[i])
 	{
-		g_history->history_add(add[i]);
+		history_add(add[i]);
 		free(add[i]);
 		i++;
 	}

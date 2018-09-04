@@ -47,13 +47,6 @@ int			init_history(void)
 	g_history->position = 0;
 	g_history->index = 0;
 	g_history->start_file = 0;
-	g_history->history_add = history_add;
-	g_history->history_get = history_get;
-	g_history->history_read = history_read;
-	g_history->history_clear = history_clear;
-	g_history->history_del = history_del;
-	g_history->history_writeA = history_writeA;
-	g_history->history_writeT = history_writeT;
 	if (!(g_history->line = history_read(HISTFILE, 0)))
 		g_history->line = history_error();
 	g_history->nb_lines = args_size(g_history->line);

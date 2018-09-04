@@ -15,20 +15,6 @@
 
 typedef struct	s_history
 {
-	void		(*history_add)(char *);
-	//add value at the end of the history list
-	void		(*history_clear)(void);
-	//clear the whole history list
-	char		*(*history_get)(int);
-	//return specified value from the list
-	void		(*history_del)(int);
-	//delete specified elem from the list
-	int			(*history_writeA)(char *);
-	//write (append) current history list to specified file
-	int			(*history_writeT)(char *, char **);
-	//write (trunc) HIST list to specified file
-	char		**(*history_read)(char *, int);
-	//return read lines from a file
 	int			position;
 	//save current position when browsing history list (up, down arrow key)
 	int			SIZE;
@@ -42,7 +28,7 @@ typedef struct	s_history
 	int			index;
 	//when displaying our history, gives us the real elem number
 	char		**line;
-	//tab where commands are stored
+	//array where commands are stored
 }								t_history;
 
 char    **history_read(char *filename, int start);

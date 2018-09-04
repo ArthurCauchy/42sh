@@ -132,7 +132,6 @@ char		**history_read(char *filename, int start)
 		to_last(&file, start);
 		to_tab(&file, &hist);
 		close(fd);
-		//free(hist);
 		return (hist);
 	}
 	free(hist);
@@ -280,8 +279,8 @@ void		history_clear(void)
 
 void		history_exit(void)
 {
-	g_history->history_writeA(HISTFILE);
-	g_history->history_clear();
-	//free(g_history->hist);
+	history_writeA(HISTFILE);
+	history_clear();
+	free(g_history->line);
 	free(g_history);
 }
