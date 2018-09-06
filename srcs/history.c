@@ -6,7 +6,7 @@
 /*   By: lumenthi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 10:38:26 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/09/01 18:55:23 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/09/06 11:54:54 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,12 @@ void		history_del(int elem)
 
 char		*history_get(int elem)
 {
-	return (ft_strdup(g_history->line[elem]));
+	char	*ret;
+
+	if (elem < 0 || elem >= g_history->nb_lines)
+		return (NULL);
+	ret = ft_strdup(g_history->line[elem]);
+	return (ret);
 }
 
 void		history_add(char *cmd)

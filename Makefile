@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/08/25 18:59:01 by arthur           ###   ########.fr        #
+#    Updated: 2018/09/06 11:42:29 by lumenthi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,8 @@ SRC_NAME = utils.c \
 		   lexing_lshift.c \
 		   lexing_rshift.c \
 		   lexing_space.c \
-			 history.c \
+		   history.c \
+		   exc_mark.c \
 		   main.c
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))

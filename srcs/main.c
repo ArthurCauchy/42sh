@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/23 12:25:35 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/06 11:48:23 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int			main(int argc, char **argv, char **envp)
 	while ((input = ask_for_input()) != NULL)
 	{
 		cmd_args = NULL;
+		exc_mark(&input);
 		if (ft_strlen(input) > 0)
 		{
 			history_add(input);
