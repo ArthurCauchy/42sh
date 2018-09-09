@@ -6,12 +6,32 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:48:57 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/22 09:01:41 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/09 11:53:54 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "env.h"
+
+static void	update_shlvl(t_env **env)
+{
+	char	*shlvl;
+	int		value;
+
+	if ((shlvl = read_from_env(env, "SHLVL")))
+	{
+		if (ft_str_is_numeric(shlvl))
+		{
+			value = ft_atoi(shlvl);
+			if (value > 0)
+			{
+				set_env(env, ft_strdup("SHLVL"), ft_itoa(value + 1));
+				return ;
+			}
+		}
+	}
+	set_env(env, ft_strdup("SHLVL"), ft_strdup("1"));
+}
 
 void	init_env(t_env **env, char **envp)
 {
@@ -34,4 +54,5 @@ void	init_env(t_env **env, char **envp)
 		}
 		++i;
 	}
+	update_shlvl(env);
 }

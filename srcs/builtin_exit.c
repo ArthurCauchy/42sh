@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/20 17:41:23 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/09 11:45:12 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,6 @@ int	builtin_exit(t_env **env, char **args)
 }
 */
 
-static int	str_is_numeric(char *str)
-{
-	while (*str)
-		if (!ft_isdigit(*str++))
-			return (0);
-	return (1);
-}
-
 // simple version
 int					builtin_exit(t_env **env, char **args)
 {
@@ -56,7 +48,7 @@ int					builtin_exit(t_env **env, char **args)
 	exit_status = 0;
 	if (args[1])
 	{
-		if (str_is_numeric(args[1]))
+		if (ft_str_is_numeric(args[1]))
 		{
 			exit_status = ft_atoi(args[1]);
 			if (args[2])
