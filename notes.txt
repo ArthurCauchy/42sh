@@ -5,7 +5,6 @@ TODO:
 - ajust INPUT_MAX_LEN in utils.h to match the new input's max
 - echo $? now always print 42 (temporary)
 - change HISTFILE to ~/.42sh_history
-- fix leak in history
 - full test of history builtin
 
 Error from acauchy's 21sh:

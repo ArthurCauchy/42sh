@@ -6,7 +6,7 @@
 /*   By: lumenthi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/04 10:30:03 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/09/06 11:49:45 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/09/09 17:54:04 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,6 +313,38 @@ static int	ft_mix(char **str, int *i)
 	return (0);
 }
 
+static int	is_backslash(char *str, int pos, int s_quote)
+{
+	int	ret;
+	int	i;
+
+	i = pos;
+	while (str[i] && str[i - 1] == 92)
+		i--;
+	ret = pos - i;
+	if (ret % 2 == 1 && !s_quote)
+		return (1);
+	return (0);
+}
+
+static int	is_legit(char *str, int pos)
+{
+	int	i;
+	int	s_quote;
+
+	s_quote = 0;
+	i = 0;
+	while (i < pos && str[i])
+	{
+		if (str[i] == 39 && !is_backslash(str, i, s_quote))
+			s_quote = (s_quote == 0) ? 1 : 0;
+		i++;
+	}
+	if (s_quote == 1 || (str[pos - 1] && str[pos - 1] == 92))
+		return (0);
+	return (1);
+}
+
 int			exc_mark(char **str)
 {
 	int		i;
@@ -322,7 +354,7 @@ int			exc_mark(char **str)
 	mark = 0;
 	while ((*str)[i])
 	{
-		if ((*str)[i] == '!')
+		if ((*str)[i] == '!' && is_legit(*str, i))
 		{
 			if ((ft_mix(str, &i)))
 				return (1);
