@@ -6,7 +6,7 @@
 /*   By: lumenthi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/04 10:30:03 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/09/09 17:54:04 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/09/10 16:00:03 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -340,10 +340,11 @@ static int	is_legit(char *str, int pos)
 			s_quote = (s_quote == 0) ? 1 : 0;
 		i++;
 	}
-	if (s_quote == 1 || (str[pos - 1] && str[pos - 1] == 92))
+	if (s_quote == 1 || (pos - 1 > 0 && str[pos - 1] && str[pos - 1] == 92))
 		return (0);
 	return (1);
 }
+
 
 int			exc_mark(char **str)
 {
@@ -358,6 +359,8 @@ int			exc_mark(char **str)
 		{
 			if ((ft_mix(str, &i)))
 				return (1);
+			if (i+1 > (int)ft_strlen(*str))
+				break;
 			mark = 1;
 		}
 		i++;
