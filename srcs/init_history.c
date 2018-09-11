@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_history.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lumenthi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 10:38:26 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/09/01 18:55:23 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/09/11 23:08:07 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,26 @@ static char             **history_error(void)
 
 	if (!(hist = (char **)ft_memalloc(sizeof(char *) * (g_history->SIZE + 1))))
 		exit_error("malloc() error");
-	ft_putstr_fd("42sh: cant read from ", 2);
-	ft_putendl_fd(HISTFILE, 2);
+//	ft_putstr_fd("42sh: cant read from ", 2);
+//	ft_putendl_fd(g_history->HISTFILE, 2);
 	return (hist);
 }
 
+static char *home_error(void)
+{
+	ft_putstr_fd("no $HOME variable, history saved in /tmp\n", 2);
+	return (ft_strjoin("/tmp", "/.42sh_history"));
+}
+
+static char *get_home(void)
+{
+	char	*ret;
+
+	ret = NULL;
+	if (!(ret = getenv("HOME"))) //replace by your getenv ft
+		return (home_error());
+	return (ft_strjoin(ret, "/.42sh_history"));
+}
 
 int			init_history(void)
 {
@@ -43,11 +58,12 @@ int			init_history(void)
 		size_error();
 	else
 		g_history->SIZE = HISTSIZE;
+	g_history->HISTFILE = get_home();
 	g_history->nb_lines = 0;
 	g_history->position = 0;
 	g_history->index = 0;
 	g_history->start_file = 0;
-	if (!(g_history->line = history_read(HISTFILE, 0)))
+	if (!(g_history->line = history_read(g_history->HISTFILE, 0)))
 		g_history->line = history_error();
 	g_history->nb_lines = args_size(g_history->line);
 	g_history->start  = args_size(g_history->line);

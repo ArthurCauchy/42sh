@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exc_mark.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lumenthi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/04 10:30:03 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/09/10 16:00:03 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/09/11 22:01:22 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ static int	check_matches(char *str1, char *str2)
 {
 	int i;
 	i = 0;
-	
+
 	while (str1[i] && str2[i] && str1[i] == str2[i])
 		i++;
 	if (i == (int)ft_strlen(str1))
@@ -331,12 +331,16 @@ static int	is_legit(char *str, int pos)
 {
 	int	i;
 	int	s_quote;
+	int	d_quote;
 
 	s_quote = 0;
+	d_quote = 0;
 	i = 0;
 	while (i < pos && str[i])
 	{
-		if (str[i] == 39 && !is_backslash(str, i, s_quote))
+		if (str[i] == 34 && !is_backslash(str, i, 0))
+			d_quote = (d_quote == 0) ? 1 : 0;
+		else if (str[i] == 39 && !is_backslash(str, i, s_quote) && d_quote == 0)
 			s_quote = (s_quote == 0) ? 1 : 0;
 		i++;
 	}
@@ -344,7 +348,6 @@ static int	is_legit(char *str, int pos)
 		return (0);
 	return (1);
 }
-
 
 int			exc_mark(char **str)
 {

@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/20 18:03:52 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/11 23:04:31 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 static int	history_doclear(void)
 {
 	history_clear();
-	ft_putendl("Cleaning history...");
 	return (1);
 }
 
@@ -55,7 +54,6 @@ int		print_nhistory(int nb)
 
 	i = 0;
 	start = g_history->nb_lines - nb;
-	ft_putendl("history:\n");
 	if (g_history->nb_lines <= 0)
 		return (1);
 	while (g_history->line[i])
@@ -130,7 +128,7 @@ int			history_r(char *file)
 
 	i = 0;
 	if (file == NULL || ft_strcmp(file, "") == 0)
-		ta = history_read(HISTFILE, 0);
+		ta = history_read(g_history->HISTFILE, 0);
 	else
 		ta = history_read(file, 0);
 	if (ta == NULL)
@@ -152,7 +150,7 @@ int		history_w(char *file)
 	ret = 0;
 	if (file == NULL || ft_strcmp(file, "") == 0)
 	{
-		ret = history_writeT(HISTFILE, g_history->line);
+		ret = history_writeT(g_history->HISTFILE, g_history->line);
 		g_history->start = g_history->nb_lines;
 	}
 	else
@@ -206,7 +204,7 @@ int			history_n(char *file)
 
 	i = 0;
 	if (file == NULL || ft_strcmp(file, "") == 0)
-		add = history_read(HISTFILE, g_history->start_file);
+		add = history_read(g_history->HISTFILE, g_history->start_file);
 	else
 		add = history_read(file, g_history->start_file);
 	if (add == NULL)
