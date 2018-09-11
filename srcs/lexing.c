@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 13:53:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/23 11:12:11 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/11 12:57:14 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void		do_lex(char *cmdline, t_word **wordlist,
 	else if (!lexdata->quoted && cmdline[lexdata->i] == '~'
 			&& lexdata->j == 0)
 		lex_tilde_exp(cmdline, lexdata, errmsg);
-	else if (cmdline[lexdata->i] == '\\')
+	else if (lexdata->quoted != 1 && cmdline[lexdata->i] == '\\')
 		lex_escape(cmdline, lexdata, errmsg);
 	else if (lexdata->quoted != 1 && cmdline[lexdata->i] == '$')
 		lex_dollar_exp(cmdline, lexdata, errmsg);
