@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 15:57:30 by acauchy           #+#    #+#              #
-#    Updated: 2018/09/09 11:44:09 by arthur           ###   ########.fr        #
+#    Updated: 2018/09/11 16:47:09 by arthur           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC_NAME = ft_memset.c \
 		 ft_memcmp.c \
 		 ft_strlen.c \
 		 ft_strdup.c \
+		 ft_strndup.c \
 		 ft_strdup_free.c \
 		 ft_strcpy.c \
 		 ft_strncpy.c \

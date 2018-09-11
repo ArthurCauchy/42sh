@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/09/06 11:42:29 by lumenthi         ###   ########.fr        #
+#    Updated: 2018/09/11 15:32:55 by arthur           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC_NAME = utils.c \
 		   builtins_utils.c \
 		   builtin_exit.c \
 		   builtin_cd.c \
+		   builtin_cd_cdpath.c \
 		   builtin_cd_l.c \
 		   builtin_cd_l_component.c \
 		   builtin_cd_l_simplify.c \

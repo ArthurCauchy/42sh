@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/20 17:42:40 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/11 17:33:25 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,21 @@ void		print_chdir_error(char *path)
 		ft_putendl_fd(": No such file or directory.", 2);
 }
 
-static int	try_cd(char *options, t_env **env, char *path)
+static int	try_cd(char *options, t_env **env, char **path)
 {
+	char	*cdpath;
+
+	if ((*path)[0] && (*path)[0] != '/' && (*path)[0] != '.'
+			&& (cdpath = search_cdpath(env, *path)))
+	{
+		free(*path);
+		*path = cdpath;
+	}
 	if (ft_strchr(options, 'p') && (!ft_strchr(options, 'l')
 				|| ft_strchr(options, 'p') > ft_strchr(options, 'l')))
-		return (try_cd_p(env, path));
+		return (try_cd_p(env, *path));
 	else
-		return (try_cd_l(env, path));
+		return (try_cd_l(env, *path));
 }
 
 static int	builtin_cd_withargs(char *options, t_env **env, char **args)
@@ -51,11 +59,11 @@ static int	builtin_cd_withargs(char *options, t_env **env, char **args)
 			ft_putendl_fd("cd: Environment variable 'OLDPWD' not found !", 2);
 			return (1);
 		}
-		retcode = try_cd(options, env, oldpwd);
+		retcode = try_cd(options, env, &oldpwd);
 		free(oldpwd);
 		return (retcode);
 	}
-	return (try_cd(options, env, args[0]));
+	return (try_cd(options, env, &args[0]));
 }
 
 
@@ -81,7 +89,7 @@ int			builtin_cd(t_env **env, char **args)
 				" or undefined !", 2);
 		return (1);
 	}
-	retcode = try_cd(options, env, home);
+	retcode = try_cd(options, env, &home);
 	free(home);
 	return (retcode);
 }

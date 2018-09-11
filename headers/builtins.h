@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:11:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/25 19:21:41 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/11 14:55:22 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int					builtin_history(t_env **env, char **args);
 */
 
 void				print_chdir_error(char *path);
+char				*search_cdpath(t_env **env, char *path);
 int					try_cd_l(t_env **env, char *path);
 int					try_cd_p(t_env **env, char *path);
 void				add_to_compo_lst(t_list **list, char *buff);

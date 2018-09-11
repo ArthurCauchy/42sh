@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:23:26 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/20 18:22:41 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/11 15:32:33 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,6 @@ static char	*try_access_indir(char *dir, char *cmd)
 	return (NULL);
 }
 
-static void	free_splited_path(char **array)
-{
-	char **cur;
-
-	cur = array;
-	while (*cur)
-	{
-		free(*cur);
-		++cur;
-	}
-	free(array);
-}
-
 char		*find_cmd_path(t_env **env, t_env **cmd_env, char *cmd)
 {
 	char	*path;
@@ -49,7 +36,6 @@ char		*find_cmd_path(t_env **env, t_env **cmd_env, char *cmd)
 
 	if (!(path = read_from_env(cmd_env, "PATH"))
 			&& !(path = read_from_env(env, "PATH")))
-		return (NULL);
 	ret = NULL;
 	split_path = ft_strsplit(path, ':');
 	cur = split_path;
@@ -59,7 +45,7 @@ char		*find_cmd_path(t_env **env, t_env **cmd_env, char *cmd)
 			break ;
 		++cur;
 	}
-	free_splited_path(split_path);
+	delete_args(split_path);
 	free(path);
 	return (ret);
 }
