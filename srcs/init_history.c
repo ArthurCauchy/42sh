@@ -40,17 +40,20 @@ static char *home_error(void)
 	return (ft_strjoin("/tmp", "/.42sh_history"));
 }
 
-static char *get_home(void)
+static char *get_home(t_env **env)
 {
 	char	*ret;
+	char	*tmp;
 
 	ret = NULL;
-	if (!(ret = getenv("HOME"))) //replace by your getenv ft
+	if (!(tmp = read_from_env(env, "HOME")))
 		return (home_error());
-	return (ft_strjoin(ret, "/.42sh_history"));
+	ret = ft_strjoin(tmp, "/.42sh_history");
+	free(tmp);
+	return (ret);
 }
 
-int			init_history(void)
+int			init_history(t_env **env)
 {
 	if (!(g_history = malloc(sizeof(t_history))))
 		exit_error("malloc() error");
@@ -58,7 +61,7 @@ int			init_history(void)
 		size_error();
 	else
 		g_history->SIZE = HISTSIZE;
-	g_history->HISTFILE = get_home();
+	g_history->HISTFILE = get_home(env);
 	g_history->nb_lines = 0;
 	g_history->position = 0;
 	g_history->index = 0;

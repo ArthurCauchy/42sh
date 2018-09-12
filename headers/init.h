@@ -37,6 +37,6 @@ void	init_builtins(void);
 ** init_history.c
 */
 
-void	init_history(void);
+void	init_history(t_env **env);
 
 #endif

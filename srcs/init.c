@@ -16,5 +16,5 @@ void		init(t_env **env, char **envp)
 {
 	init_builtins();
 	init_env(env, envp);
-	init_history();
+	init_history(env);
 }
