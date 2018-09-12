@@ -1,15 +1,15 @@
 TODO:
 - write some doc and comments
-- CDPATH
 - should I lex amp (&) symbol since we dont use it ?
 - ajust INPUT_MAX_LEN in utils.h to match the new input's max
 - echo $? now always print 42 (temporary)
 - change HISTFILE to ~/.42sh_history
-- full test of history builtin
 - line edition
 	- FIX : ctrl+c when autocomp
 	- IMPROVE : using arrow keys when autocomp should move in choices and not history
-- options of echo builtin ?
+- options of echo builtin ? (not posix but could be good)
+- fancy prompt
+- parsing
 
 Error from acauchy's 21sh:
 - strcmp in redirections !!!!! Change to libft's ft_strcmp

@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/11 17:33:25 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/12 12:30:39 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static int	try_cd(char *options, t_env **env, char **path)
 	if ((*path)[0] && (*path)[0] != '/' && (*path)[0] != '.'
 			&& (cdpath = search_cdpath(env, *path)))
 	{
+		ft_putendl(cdpath);
 		free(*path);
 		*path = cdpath;
 	}
@@ -59,7 +60,8 @@ static int	builtin_cd_withargs(char *options, t_env **env, char **args)
 			ft_putendl_fd("cd: Environment variable 'OLDPWD' not found !", 2);
 			return (1);
 		}
-		retcode = try_cd(options, env, &oldpwd);
+		if ((retcode = try_cd(options, env, &oldpwd)) == 0)
+				ft_putendl(oldpwd);
 		free(oldpwd);
 		return (retcode);
 	}
