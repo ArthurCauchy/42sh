@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/25 19:19:27 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/11 22:07:42 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # define INPUT_MAX_LEN 16384
 # define PARAMS_MAX 1024
 # define BUILTINS_MAX 42
-# define HISTFILE "/tmp/.42sh_history"
 # define HISTSIZE 500
 
 # include "lexing.h"

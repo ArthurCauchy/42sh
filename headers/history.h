@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/06 11:46:47 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/09/11 22:07:20 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ typedef struct	s_history
 	//save current position when browsing history list (up, down arrow key)
 	int			SIZE;
 	//= HISTSIZE
+	char		*HISTFILE;
+	//= HISTFILE
 	int			nb_lines;
 	//nb of lines in our current history tab
 	int			start;

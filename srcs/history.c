@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lumenthi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 10:38:26 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/09/06 11:54:54 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/09/11 22:49:13 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ char		**history_read(char *filename, int start)
 	if (fd > 0)
 	{
 		file = read_file(fd);
-		if (ft_strcmp(filename, HISTFILE) == 0)
+		if (ft_strcmp(filename, g_history->HISTFILE) == 0)
 			g_history->start_file = get_elems(file);
 		to_last(&file, start);
 		to_tab(&file, &hist);
@@ -241,7 +241,7 @@ int			history_writeA(char *file)
 		i++;
 	if (file == NULL || ft_strcmp(file, "") == 0)
 	{
-		ret = h_append(HISTFILE, g_history->line + i);
+		ret = h_append(g_history->HISTFILE, g_history->line + i);
 		g_history->start = g_history->nb_lines;
 	}
 	else
@@ -284,8 +284,9 @@ void		history_clear(void)
 
 void		history_exit(void)
 {
-	history_writeA(HISTFILE);
+	history_writeA(g_history->HISTFILE);
 	history_clear();
+	free(g_history->HISTFILE);
 	free(g_history->line);
 	free(g_history);
 }
