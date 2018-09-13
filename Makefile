@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/09/13 17:55:45 by acauchy          ###   ########.fr        #
+#    Updated: 2018/09/13 21:34:35 by lumenthi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,7 +121,7 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(HEADER)
 
 $(NAME): $(OBJ)
 	@echo -e $(COLOR_YELLOW)"Linking "$@"..."$(COLOR_RESET)
-	$(CC) $^ $(LIBCURSES) $(LIBTERMCAP) $(LIBFT) $(LIBFTPRINTF) -o $@
+	$(CC) $^ $(LIBCURSES) $(LIBTERMCAP) $(LIBFTPRINTF) $(LIBFT) -o $@
 	@echo -e $(COLOR_GREEN)$(NAME)" successfully created."$(COLOR_RESET)
 
 $(OBJ_PATH):
