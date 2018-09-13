@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/13 17:46:29 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/09/13 17:55:32 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,6 @@ int				return_key(t_line *line);
 int				get_line(char *prompt, char *new_line, t_line *line, char **env);
 void			init_line(char	*prompt, t_line *line);
 int				prompt_open_quote(char *line, char **env);
-int				prompt(char **env);
 char			**path(char **env);
 int				dslash_before(char *line, int index);
 void			ft_freestrstr(char **cp_env);

@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/09/13 17:41:31 by acauchy          ###   ########.fr        #
+#    Updated: 2018/09/13 17:55:45 by acauchy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,7 +91,6 @@ SRC_NAME = utils.c \
 		   line_get_line.c \
 		   line_my_free.c \
 		   line_prompt_open_quote.c \
-		   line_prompt.c \
 		   line_auto_complet.c \
 		   line_sort_list.c \
 		   line_auto_color.c \
