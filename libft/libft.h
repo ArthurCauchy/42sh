@@ -6,7 +6,7 @@
 /*   By: acauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 10:12:28 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/11 16:47:29 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/13 16:18:33 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <string.h>
 # include <stdarg.h>
+
+# define GNL_BUFF_SIZE 15
 
 typedef struct	s_list
 {
@@ -25,10 +27,17 @@ typedef struct	s_list
 
 typedef struct	s_arg
 {
-	int							alignleft;
-	int							width;
-	void						(*print_fct)(int, struct s_arg*, void*);
+	int		alignleft;
+	int		width;
+	void	(*print_fct)(int, struct s_arg*, void*);
 }				t_arg;
+
+typedef struct	s_stock_list
+{
+	int					fd;
+	char				*stock;
+	struct s_stock_list	*next;
+}				t_stocklist;
 
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void	*s, size_t n);
@@ -84,6 +93,7 @@ char			*ft_strjoinl(char *s1, char *s2);
 char			*ft_strjoin_free(char *s1, char *s2);
 char			*ft_strtrim(char const *s);
 char			**ft_strsplit(char const *s, char c);
+char			**ft_split(char *str, char *charset);
 char			*ft_strfill_right(char const *s, size_t size, char fill_char);
 char			*ft_itoa(int n);
 char			*ft_lltoa(long long n);
@@ -114,6 +124,7 @@ void			ft_fminiprint(int fd, char *str, ...);
 void			ft_multifree(int nbargs, ...);
 int				ft_count(char *str, char c);
 int				ft_str_is_numeric(char *str);
+int				get_next_line(const int fd, char **line);
 
 /*
 ** The following functions MUST NOT be used.

@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 15:57:30 by acauchy           #+#    #+#              #
-#    Updated: 2018/09/11 16:47:09 by arthur           ###   ########.fr        #
+#    Updated: 2018/09/13 16:18:17 by acauchy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,7 @@ SRC_NAME = ft_memset.c \
 		 ft_strjoin_free.c \
 		 ft_strtrim.c \
 		 ft_strsplit.c \
+		 ft_split.c \
 		 ft_strfill_right.c \
 		 ft_itoa.c \
 		 ft_lltoa.c \
@@ -83,6 +84,7 @@ SRC_NAME = ft_memset.c \
 		 ft_tolower.c \
 		 ft_putchar.c \
 		 ft_putstr.c \
+		 ft_putnstr.c \
 		 ft_putendl.c \
 		 ft_putnbr.c \
 		 ft_puthex.c \
@@ -105,7 +107,8 @@ SRC_NAME = ft_memset.c \
 		 ft_printfcts.c \
 		 ft_multifree.c \
 		 ft_count.c \
-		 ft_str_is_numeric.c
+		 ft_str_is_numeric.c \
+		 ft_get_next_line.c
 
 OBJ_PATH = objs
 OBJ_NAME = $(SRC_NAME:.c=.o)
