@@ -13,6 +13,7 @@ TODO:
 - synchronize UP/DOWN arrow with new history system
 - / should ask for a line of input
 - display command line when error (command: no such builtin)
+- globals in line_edit.h > remove it and if we REALLY need to keep one, move the declarations to global.h
 
 Error from acauchy's 21sh:
 - strcmp in redirections !!!!! Change to libft's ft_strcmp

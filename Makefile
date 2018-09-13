@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/09/13 16:34:28 by acauchy          ###   ########.fr        #
+#    Updated: 2018/09/13 17:41:31 by acauchy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,9 @@ HEADER_NAME = utils.h \
 			  builtins.h \
 			  lexing.h \
 			  init.h \
-				global.h \
-				history.h
+			  global.h \
+			  history.h \
+			  line_edit.h
 HEADER = $(addprefix $(HEADER_PATH)/,$(HEADER_NAME))
 
 SRC_PATH = srcs
@@ -121,7 +122,7 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(HEADER)
 
 $(NAME): $(OBJ)
 	@echo -e $(COLOR_YELLOW)"Linking "$@"..."$(COLOR_RESET)
-	$(CC) $^ $(LIBCURSES) $(LIBTERMCAP) $(LIBFT) -o $@
+	$(CC) $^ $(LIBCURSES) $(LIBTERMCAP) $(LIBFT) $(LIBFTPRINTF) -o $@
 	@echo -e $(COLOR_GREEN)$(NAME)" successfully created."$(COLOR_RESET)
 
 $(OBJ_PATH):

@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:52:52 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/13 15:11:09 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/09/13 17:02:59 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ static void		for_open_quote(char *new_line, char *line, t_line *quote_line, char
 
 int				prompt_open_quote(char *line, char **env)
 {
-	char	new_line[MAX_BUF];
+	char	new_line[INPUT_MAX_LEN];
 	t_line	quote_line;
 
 	while (open_quote_exit(line))
 	{
-		ft_bzero(new_line, MAX_BUF);
+		ft_bzero(new_line, INPUT_MAX_LEN);
 		if (g_open_backslash > 0)
 		{
 			get_line("> ", new_line, &quote_line, env);
@@ -68,7 +68,7 @@ int				prompt_open_quote(char *line, char **env)
 		else
 		{
 			for_open_quote(new_line, line, &quote_line, env);
-			if (ft_strlen(line) + ft_strlen(new_line) < MAX_BUF - 1)
+			if (ft_strlen(line) + ft_strlen(new_line) < INPUT_MAX_LEN - 1)
 				ft_strcat(line, new_line);
 			g_with_termcap ? ft_putchar('\n') : (void)g_with_termcap;
 		}

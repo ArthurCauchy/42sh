@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/13 15:09:53 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/09/13 17:46:51 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ static void				for_init_line(t_line *line)
 
 void					init_line(char *prompt, t_line *line)
 {
-	ft_bzero(line->buf, MAX_BUF);
-	ft_bzero(line->ici_doc, MAX_BUF);
-	ft_bzero(line->auto_compare, MAX_BUF);
+	ft_bzero(line->buf, INPUT_MAX_LEN);
+	ft_bzero(line->ici_doc, INPUT_MAX_LEN);
+	ft_bzero(line->auto_compare, INPUT_MAX_LEN);
 	line->pos = 0;
 	line->buf_len = 0;
 	line->line_max = tgetnum("co");
@@ -59,7 +59,7 @@ void					init_line(char *prompt, t_line *line)
 	line->his_mostup = 0;
 	line->up_indown = 0;
 	line->one_his = 0;
-	line->last_his = g_history;
+	line->last_his = g_history2;
 	line->is_tabb4 = 0;
 	line->auto_ct = -1;
 	line->auto_lt = NULL;
@@ -70,7 +70,7 @@ void					init_line(char *prompt, t_line *line)
 
 static void				help_for_line(char **ligne, char *new_line, char *pt)
 {
-	ft_bzero(new_line, MAX_BUF);
+	ft_bzero(new_line, INPUT_MAX_LEN);
 	*ligne = NULL;
 	g_end_line = 0;
 	init_attr(SETOLD);

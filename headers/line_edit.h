@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/13 14:36:14 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/09/13 17:46:29 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <sys/types.h>
 # include <limits.h>
 # include "libft.h"
+# include "utils.h"
 
 int		g_open_dquote;
 int		g_open_squote;
@@ -26,7 +27,6 @@ int		g_inside_doc_quote;
 int		g_clc;
 int		g_dld;
 
-# define MAX_BUF 10000
 # define SETNEW 1
 # define SETOLD 0
 # define NOT_DIR 0
@@ -66,21 +66,21 @@ int		g_dld;
 # define BGYELLOW "\033[7;33m"
 # define RESET "\033[0m"
 
-typedef struct	s_history
+typedef struct	s_history2
 {
-	char				his[MAX_BUF];
-	struct s_history	*next;
-	struct s_history	*pre;
-}				t_history;
+	char				his[INPUT_MAX_LEN];
+	struct s_history2	*next;
+	struct s_history2	*pre;
+}				t_history2;
 
-t_history	*g_history;
+t_history2	*g_history2;
 
 typedef struct	s_autolist
 {
 	int					len;
 	int					is_dic;
 	int					ct;
-	char				name[MAX_BUF];
+	char				name[INPUT_MAX_LEN];
 	struct s_autolist	*next;
 	struct s_autolist	*pre;
 }				t_autolist;
@@ -96,12 +96,12 @@ typedef struct	s_win
 typedef struct	s_line
 {
 	int				pos;
-	unsigned char	buf[MAX_BUF];
-	unsigned char	cp[MAX_BUF];
-	unsigned char	here_mark[MAX_BUF];
-	unsigned char	here[MAX_BUF];
-	unsigned char	ici_doc[MAX_BUF];
-	unsigned char	auto_compare[MAX_BUF];
+	unsigned char	buf[INPUT_MAX_LEN];
+	unsigned char	cp[INPUT_MAX_LEN];
+	unsigned char	here_mark[INPUT_MAX_LEN];
+	unsigned char	here[INPUT_MAX_LEN];
+	unsigned char	ici_doc[INPUT_MAX_LEN];
+	unsigned char	auto_compare[INPUT_MAX_LEN];
 	int				buf_len;
 	int				line_max;
 	int				screen_height;
@@ -117,7 +117,7 @@ typedef struct	s_line
 	int				auto_current_dic;
 	t_win			w;
 	t_autolist		*auto_lt;
-	t_history		*last_his;
+	t_history2		*last_his;
 
 	int				(*printable)(struct s_line *line, unsigned long a_key);
 	int				(*move_left)(struct s_line *line);
@@ -151,16 +151,15 @@ typedef struct	s_key
 	int				(*func)(t_line *);
 }				t_key;
 
-typedef struct	s_helper{
+typedef struct	s_helper
+{
 	int		i;
 	int		j;
 	int		k;
 	int		index;
 }				t_helper;
 
-char		g_new_line[MAX_BUF];
-char		g_temp_file[MAX_BUF];
-t_line		g_line;
+char		g_temp_file[INPUT_MAX_LEN];
 
 int				init_attr(int mod);
 int				my_putc(int c);

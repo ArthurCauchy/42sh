@@ -82,7 +82,7 @@ t_autolist	*add_a_list(t_autolist *list, char *name, unsigned char type)
 
 	add = malloc(sizeof(t_autolist));
 	add->next = NULL;
-	ft_bzero(add->name, MAX_BUF);
+	ft_bzero(add->name, INPUT_MAX_LEN);
 	ft_strcpy(add->name, name);
 	add->len = ft_strlen(add->name);
 	if (type == DT_DIR)
@@ -169,9 +169,9 @@ t_autolist	*addlist_no_path(t_line *line, t_autolist *list)
 {
 	DIR				*dirp;
 	struct dirent	*dir;
-	char			dic[MAX_BUF];
+	char			dic[INPUT_MAX_LEN];
 
-	path_last_slash((char *)line->auto_compare, dic, MAX_BUF);
+	path_last_slash((char *)line->auto_compare, dic, INPUT_MAX_LEN);
 	if ((dirp = opendir(dic)))
 	{
 		while ((dir = readdir(dirp)))
@@ -342,12 +342,12 @@ void	free_auto_lt(t_line *line)
 
 static void	put_first_lst(t_line *line)
 {
-	char	dic[MAX_BUF];
+	char	dic[INPUT_MAX_LEN];
 	char	*str;
 
 	if (ft_strchr((char *)line->auto_compare, '/'))
 	{
-		path_last_slash((char *)line->auto_compare, dic, MAX_BUF);
+		path_last_slash((char *)line->auto_compare, dic, INPUT_MAX_LEN);
 		str = line->auto_lt->name + ft_strlen((char *)line->auto_compare) - ft_strlen(dic);
 	}
 	else

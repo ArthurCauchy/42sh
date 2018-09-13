@@ -6,14 +6,14 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/11 22:07:42 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/09/13 16:56:50 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __UTILS_H
 # define __UTILS_H
 
-# define INPUT_MAX_LEN 16384
+# define INPUT_MAX_LEN 10000
 # define PARAMS_MAX 1024
 # define BUILTINS_MAX 42
 # define HISTSIZE 500

@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:43:52 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/13 14:41:24 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/09/13 17:01:07 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int			ctrl_d(t_line *line)
 int			ctrl_c(char *new_line, t_line *line)
 {
 	(void)new_line;
-	ft_bzero(new_line, MAX_BUF);
+	ft_bzero(new_line, INPUT_MAX_LEN);
 	g_clc = 1;
 	free_auto_lt(line);
 	line->auto_ct = -1;

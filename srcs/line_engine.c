@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:47:13 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/13 14:37:59 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/09/13 16:59:30 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int			engine(t_line *line, unsigned long key, char **env)
 	i = -1;
 	if ((32 <= key && key <= 126))
 	{
-		if (line->buf_len == MAX_BUF - 1)
+		if (line->buf_len == INPUT_MAX_LEN - 1)
 		{
 			line->is_tabb4 = 0;
 			g_end_line = 1;
