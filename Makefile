@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/09/13 21:34:35 by lumenthi         ###   ########.fr        #
+#    Updated: 2018/09/14 15:05:53 by arthur           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ SRC_NAME = utils.c \
 		   builtin_help.c \
 		   builtin_history.c \
 		   init.c \
+		   init_signals.c \
 		   init_env.c \
 		   init_builtins.c \
 		   init_history.c \

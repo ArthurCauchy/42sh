@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/22 09:10:19 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/14 15:06:20 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 */
 
 void	init(t_env **env, char **envp);
+
+/*
+** init_signals.h
+*/
+
+void	init_signals(void);
 
 /*
 ** init_env.c

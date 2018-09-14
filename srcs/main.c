@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/14 14:51:36 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/14 15:33:50 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,51 +23,16 @@
 t_env			*g_env = NULL;
 t_history	*g_history = NULL;
 
-/*
-// TEMPORARY AND UNPROTECTED input loop
-static char	*ask_for_input(void)
-{
-static char	buff[INPUT_MAX_LEN];
-int			size_read;
-char		*ret;
-
-ret = NULL;
-ft_putstr("$> ");
-size_read = read(0, buff, INPUT_MAX_LEN);
-if (size_read == -1)
-exit_error("read() error");
-buff[size_read] = '\0';
-if (size_read > 0 && buff[size_read - 1] == '\n')
-buff[size_read - 1] = '\0';
-ret = ft_strdup(buff);
-return (ret);
-}
-*/
-
-static int	not_empty(char *new_line)
-{
-	int	i;
-
-	i = -1;
-	while (new_line[++i])
-	{
-		if (new_line[i] != ' ' && new_line[i] != '\t')
-			return (1);
-	}
-	return (0);
-}
-
 static char	*ask_for_input(void)
 {
 	char	buffer[INPUT_MAX_LEN];
 	t_line	line;
 
+	ft_bzero(buffer, INPUT_MAX_LEN);
 	get_line("$> ", buffer, &line, &g_env);
-	ft_putchar('\n');
-	if (not_empty(buffer))
-		return (ft_strdup(buffer));
-	else
-		return (NULL);
+	if (g_with_termcap)
+		ft_putchar('\n');
+	return (ft_strdup(buffer));
 }
 
 static void	start_command(t_word *cmd_args)

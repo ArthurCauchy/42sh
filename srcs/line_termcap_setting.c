@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   termcap_setting.c                                  :+:      :+:    :+:   */
+/*   line_termcap_setting.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:30:47 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/13 14:37:40 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/09/14 15:14:18 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 #include <sys/uio.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include <signal.h>
 #include "line_edit.h"
 
 static int	return_message(char *message, int re_value, int fd)
