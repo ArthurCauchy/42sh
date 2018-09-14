@@ -3,83 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   line_his_up_down.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:49:10 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/13 14:39:23 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/09/14 13:28:31 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "line_edit.h"
+#include "global.h"
+#include "history.h"
 
-static void		for_his_up(t_line *line)
-{
-	if (!line->last_his->pre)
-		line->his_mostup = 1;
-	if (line->up_indown && !line->last_his->next)
-		line->one_his = 1;
-}
-
-int				history_up(t_line *line)
+int		history_up(t_line *line)
 {
 	int		i;
+	int		max;
+	char	*cmd;
 
-	i = -1;
+	i = 0;
+	max = g_history->nb_lines;
 	if (line->buf_len)
 		delete_all(line);
-	if (line->last_his)
+	if (g_history->nb_lines == 0)
+		return (0);
+	(g_history->position < max) ? g_history->position++ : 0;
+	cmd = ft_strdup(g_history->line[max - g_history->position]);
+	while (cmd[i])
 	{
-		if (!line->his_mostdown && line->last_his->pre)
-			line->last_his = (line->last_his)->pre;
-		if (!line->his_mostup)
-		{
-			while (line->last_his->his[++i])
-			{
-				put_a_key(line, line->last_his->his[i]);
-				line->buf[i] = line->last_his->his[i];
-			}
-		}
-		if (line->his_mostup == 1)
-			line->up_indown = 1;
-		if (!line->last_his->next)
-			line->his_mostdown = 0;
-		for_his_up(line);
+		put_a_key(line, cmd[i]);
+		line->buf[i] = cmd[i];
+		i++;
 	}
+	free(cmd);
 	return (0);
-}
-
-static void		for_his_down(t_line *line)
-{
-	if (!line->last_his->next)
-		line->his_mostdown = 0;
-	if (!line->last_his->pre)
-		line->his_mostup = 1;
 }
 
 int				history_down(t_line *line)
 {
 	int		i;
+	int		max;
+	char	*cmd;
 
-	i = -1;
+	i = 0;
+	max = g_history->nb_lines;
 	if (line->buf_len)
 		delete_all(line);
-	if (line->last_his && !line->last_his->next && !line->one_his)
-		line->his_mostup = 0;
-	if (line->last_his && (line->last_his->next || line->one_his))
+	if (g_history->position > 1)
+		g_history->position--;
+	else if (g_history->position == 1)
 	{
-		if (!line->up_indown && (line->last_his)->next)
-			line->last_his = (line->last_his)->next;
-		while (line->last_his->his[++i])
-		{
-			put_a_key(line, line->last_his->his[i]);
-			line->buf[i] = line->last_his->his[i];
-		}
-		line->his_mostup = 0;
-		line->up_indown = 0;
-		for_his_down(line);
-		line->one_his = 0;
+		g_history->position--;
+		return (0);
 	}
-	else if (line->last_his && !line->last_his->next)
-		line->his_mostdown = 1;
+	else
+		return (0);
+	cmd = ft_strdup(g_history->line[max - g_history->position]);
+	while (cmd[i])
+	{
+		put_a_key(line, cmd[i]);
+		line->buf[i] = cmd[i];
+		i++;
+	}
+	free(cmd);
 	return (0);
 }

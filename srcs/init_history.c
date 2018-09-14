@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 10:38:26 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/09/11 23:08:07 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/09/14 13:17:30 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ static char             **history_error(void)
 
 	if (!(hist = (char **)ft_memalloc(sizeof(char *) * (g_history->SIZE + 1))))
 		exit_error("malloc() error");
-//	ft_putstr_fd("42sh: cant read from ", 2);
-//	ft_putendl_fd(g_history->HISTFILE, 2);
 	return (hist);
 }
 
