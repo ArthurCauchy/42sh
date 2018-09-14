@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_get_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/13 17:46:51 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/09/14 12:40:44 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void					init_line(char *prompt, t_line *line)
 	line->his_mostup = 0;
 	line->up_indown = 0;
 	line->one_his = 0;
-	line->last_his = g_history2;
 	line->is_tabb4 = 0;
 	line->auto_ct = -1;
 	line->auto_lt = NULL;

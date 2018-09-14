@@ -7,15 +7,17 @@ TODO:
 - parsing
 - line edition
 	- IMPROVE : using arrow keys when autocomp should move in choices and not history
+	- LEAKS!
 - options of echo builtin ?
 - signals?
 - shortcuts (ex: CTRL + L)
-- synchronize UP/DOWN arrow with new history system
-- / should ask for a line of input
+- / and unmatched quotes (', "") should ask for a line of input
 - display command line when error (command: no such builtin)
 - globals in line_edit.h > remove it and if we REALLY need to keep one, move the declarations to global.h
 - use the new env in line edition
 - FIX empty line exits the shell
+- copy-paste functionality?
+- should we make autocompletion compatible with CDPATH?
 
 Error from acauchy's 21sh:
 - strcmp in redirections !!!!! Change to libft's ft_strcmp

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_edit.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/13 17:55:32 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/09/14 12:39:27 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,6 @@ int		g_dld;
 # define BGYELLOW "\033[7;33m"
 # define RESET "\033[0m"
 
-typedef struct	s_history2
-{
-	char				his[INPUT_MAX_LEN];
-	struct s_history2	*next;
-	struct s_history2	*pre;
-}				t_history2;
-
-t_history2	*g_history2;
-
 typedef struct	s_autolist
 {
 	int					len;
@@ -117,7 +108,6 @@ typedef struct	s_line
 	int				auto_current_dic;
 	t_win			w;
 	t_autolist		*auto_lt;
-	t_history2		*last_his;
 
 	int				(*printable)(struct s_line *line, unsigned long a_key);
 	int				(*move_left)(struct s_line *line);
