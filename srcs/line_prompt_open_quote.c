@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:52:52 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/13 17:02:59 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/09/14 14:40:20 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int		open_quote_exit(char *line)
 	return (0);
 }
 
-static void		for_open_quote(char *new_line, char *line, t_line *quote_line, char **env)
+static void		for_open_quote(char *new_line, char *line, t_line *quote_line, t_env **env)
 {
 	if (!g_clc)
 		ft_strcat(line, "\n");
@@ -50,7 +50,7 @@ static void		for_open_quote(char *new_line, char *line, t_line *quote_line, char
 		get_line("quote> ", new_line, quote_line, env);
 }
 
-int				prompt_open_quote(char *line, char **env)
+int				prompt_open_quote(char *line, t_env **env)
 {
 	char	new_line[INPUT_MAX_LEN];
 	t_line	quote_line;

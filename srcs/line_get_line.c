@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/14 12:40:44 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/09/14 14:34:49 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void				help_for_line(char **ligne, char *new_line, char *pt)
 	g_dld = 0;
 }
 
-int						get_line(char *prompt, char *new_line, t_line *line, char **env)
+int						get_line(char *prompt, char *new_line, t_line *line, t_env **env)
 {
 	unsigned long	key;
 	char			*ligne;

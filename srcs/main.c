@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/13 17:57:27 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/09/14 14:51:36 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static char	*ask_for_input(void)
 	char	buffer[INPUT_MAX_LEN];
 	t_line	line;
 
-	get_line("$> ", buffer, &line, env_to_array(&g_env));
+	get_line("$> ", buffer, &line, &g_env);
 	ft_putchar('\n');
 	if (not_empty(buffer))
 		return (ft_strdup(buffer));

@@ -1,6 +1,7 @@
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <unistd.h>
+#include "env.h"
 #include "line_edit.h"
 
 int			dslash_before(char *line, int index)
@@ -30,14 +31,14 @@ unsigned long	get_key(void)
 			((unsigned long)buff[4] << 32) + ((unsigned long)buff[5] << 40));
 }
 
-char		**path(char **env)
+char		**path(t_env **env)
 {
-	while (env && *env)
-	{
-		if (!ft_strncmp(*env, "PATH=", 5))
-			return (ft_split(*env + 5, ":"));
-		env++;
-	}
-	return (NULL);
+	char	*path;
+	char	**split_path;
+
+	if (!(path = read_from_env(env, "PATH")))
+		return (NULL);
+	split_path = ft_strsplit(path, ':');
+	return (split_path);
 }
 

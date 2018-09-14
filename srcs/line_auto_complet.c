@@ -198,7 +198,7 @@ t_autolist	*addlist_no_path(t_line *line, t_autolist *list)
 }
 
 
-t_autolist	*get_autolist(t_line *line, char **env)
+t_autolist	*get_autolist(t_line *line, t_env **env)
 {
 	t_autolist	*list;
 	char		**all_path;
@@ -478,7 +478,7 @@ int		return_key(t_line *line)
 	return (0);
 }
 
-int		my_tabkey(t_line *line, char **env)
+int		my_tabkey(t_line *line, t_env **env)
 {
 	ft_strcpy((char *)line->auto_compare, (char *)line->buf + auto_start((char *)line->buf));
 	if (line->auto_ct == -1)

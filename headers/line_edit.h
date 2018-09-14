@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/14 12:39:27 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/09/14 14:50:50 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <limits.h>
 # include "libft.h"
 # include "utils.h"
+# include "env.h"
 
 int		g_open_dquote;
 int		g_open_squote;
@@ -108,7 +109,6 @@ typedef struct	s_line
 	int				auto_current_dic;
 	t_win			w;
 	t_autolist		*auto_lt;
-
 	int				(*printable)(struct s_line *line, unsigned long a_key);
 	int				(*move_left)(struct s_line *line);
 	int				(*move_right)(struct s_line *line);
@@ -131,8 +131,8 @@ typedef struct	s_line
 	int				(*ctrl_d)(struct s_line *line);
 	int				(*return_key)(struct s_line *line);
 	int				(*delete_at_position)(struct s_line *line);
-	int				(*my_tabkey)(struct s_line *line, char **env);
-	int				(*engine)(struct s_line *line, unsigned long a_key, char **env);
+	int				(*my_tabkey)(struct s_line *line, t_env **env);
+	int				(*engine)(struct s_line *line, unsigned long a_key, t_env **env);
 }				t_line;
 
 typedef struct	s_key
@@ -149,11 +149,9 @@ typedef struct	s_helper
 	int		index;
 }				t_helper;
 
-char		g_temp_file[INPUT_MAX_LEN];
-
 int				init_attr(int mod);
 int				my_putc(int c);
-int				engine(t_line *line, unsigned long key, char **env);
+int				engine(t_line *line, unsigned long key, t_env **env);
 int				move_left(t_line *line);
 int				move_nleft(t_line *line);
 int				mv_left_word(t_line *line);
@@ -164,7 +162,7 @@ int				delete_key(t_line *line);
 int				delete_all(t_line *line);
 int				delete_at_position(t_line *line);
 int				ctrl_d(t_line *line);
-int				my_tabkey(t_line *line, char **env);
+int				my_tabkey(t_line *line, t_env **env);
 int				ctrl_c(char *new_line, t_line *line);
 int				printable(t_line *line, unsigned long key);
 void			put_a_key(t_line *line, unsigned long key);
@@ -180,10 +178,10 @@ int				paste(t_line *line);
 int				go_up(t_line *line);
 int				go_down(t_line *line);
 int				return_key(t_line *line);
-int				get_line(char *prompt, char *new_line, t_line *line, char **env);
+int				get_line(char *prompt, char *new_line, t_line *line, t_env **env);
 void			init_line(char	*prompt, t_line *line);
-int				prompt_open_quote(char *line, char **env);
-char			**path(char **env);
+int				prompt_open_quote(char *line, t_env **env);
+char			**path(t_env **env);
 int				dslash_before(char *line, int index);
 void			ft_freestrstr(char **cp_env);
 unsigned long	get_key(void);
