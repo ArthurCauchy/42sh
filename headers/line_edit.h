@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/14 15:01:09 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/18 17:01:21 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,5 +207,11 @@ void			sort_list(t_autolist **list);
 */
 void			bg_yellow(void);
 void			color_reset(void);
+
+/*
+** line_input.c
+*/
+
+char			*ask_for_input(char *prompt);
 
 #endif

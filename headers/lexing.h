@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/23 11:11:39 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/18 17:00:13 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	delete_wordlist(t_word **head);
 
 void	add_word(t_token token, char *str,
 		t_word **wordlist, t_lexdata *lexdata);
-void	lex_analysis(char *cmdline, t_word **wordlist, char **errmsg);
+void	lex_analysis(char **cmdline, t_word **wordlist, char **errmsg);
 void	lex_semicol_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata,
 		char **errmsg);
 void	lex_space_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata,
