@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexing_escape.c                                    :+:      :+:    :+:   */
+/*   line_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/04 14:15:05 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/18 15:52:49 by acauchy          ###   ########.fr       */
+/*   Created: 2018/09/18 15:59:23 by acauchy           #+#    #+#             */
+/*   Updated: 2018/09/18 16:04:46 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
-#include "lexing.h"
+#include "utils.h"
+#include "line_edit.h"
+#include "global.h"
 
-void	lex_escape(char *cmdline, t_lexdata *lexdata, char **errmsg)
+char *ask_for_input(char *prompt)
 {
-	char	next_char;
+	char    buffer[INPUT_MAX_LEN];
+	t_line  line;
 
-	(void)errmsg;
-	next_char = cmdline[lexdata->i + 1];
-	if (next_char)
-	{
-		if (lexdata->quoted == 2 && next_char != '"')
-			lexdata->buff[lexdata->j++] = '\\';
-		lexdata->buff[lexdata->j++] = cmdline[lexdata->i + 1];
-		++lexdata->i;
-	}
-	else
-	{
-		lexdata->escaped = 1;
-		cmdline[lexdata->i] = '\0';
-	}
+	ft_bzero(buffer, INPUT_MAX_LEN);
+	get_line(prompt, buffer, &line, &g_env);
+	if (g_with_termcap)
+		ft_putchar('\n');
+	return (ft_strdup(buffer));
 }

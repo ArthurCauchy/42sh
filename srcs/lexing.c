@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 13:53:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/11 12:57:14 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/18 16:04:05 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #include "libft.h"
 #include "utils.h"
 #include "lexing.h"
+
+#include "line_edit.h"
+#include "global.h"
 
 void			add_word(t_token token, char *str,
 		t_word **wordlist, t_lexdata *lexdata)
@@ -96,24 +99,32 @@ static void		do_lex(char *cmdline, t_word **wordlist,
 		lexdata->buff[lexdata->j++] = cmdline[lexdata->i];
 }
 
-void			lex_analysis(char *cmdline, t_word **wordlist, char **errmsg)
+void			lex_analysis(char **cmdline, t_word **wordlist, char **errmsg)
 {
 	t_lexdata	*lexdata;
 
 	init_lexdata(&lexdata);
-	while (lexdata->i <= ft_strlen(cmdline))
+	while (42)
 	{
-		do_lex(cmdline, wordlist, lexdata, errmsg);
+		do_lex(*cmdline, wordlist, lexdata, errmsg);
 		if (*errmsg)
 			break ;
 		++lexdata->i;
+		if (lexdata->i > ft_strlen(*cmdline))
+		{
+			if (lexdata->quoted != 0 || lexdata->escaped == 1)
+			{
+				free(lexdata->buff);
+				free(lexdata);
+				delete_wordlist(wordlist);
+				*cmdline = ft_strjoin_free(*cmdline, ask_for_input("> "));
+				init_lexdata(&lexdata);
+				// check command too long here
+			}
+			else
+				break;
+		}
 	}
-	if (!*errmsg && lexdata->quoted == 1)
-		*errmsg = ft_strdup("Unmatched '''.");
-	else if (!*errmsg && lexdata->quoted == 2)
-		*errmsg = ft_strdup("Unmatched '\"'.");
-	else if (!*errmsg && lexdata->escaped == 1)
-		*errmsg = ft_strdup("Here we should ask a second line of input."); // TODO do so
 	free(lexdata->buff);
 	free(lexdata);
 }

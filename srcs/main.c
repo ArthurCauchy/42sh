@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/14 15:33:50 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/18 16:03:48 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,6 @@
 
 t_env			*g_env = NULL;
 t_history	*g_history = NULL;
-
-static char	*ask_for_input(void)
-{
-	char	buffer[INPUT_MAX_LEN];
-	t_line	line;
-
-	ft_bzero(buffer, INPUT_MAX_LEN);
-	get_line("$> ", buffer, &line, &g_env);
-	if (g_with_termcap)
-		ft_putchar('\n');
-	return (ft_strdup(buffer));
-}
 
 static void	start_command(t_word *cmd_args)
 {
@@ -61,14 +49,14 @@ int			main(int argc, char **argv, char **envp)
 	(void)argv;
 	errmsg = NULL;
 	init(&g_env, envp);
-	while ((input = ask_for_input()) != NULL)
+	while ((input = ask_for_input("$> ")) != NULL)
 	{
 		cmd_args = NULL;
 		exc_mark(&input);
 		if (ft_strlen(input) > 0)
 		{
 			history_add(input);
-			lex_analysis(input, &cmd_args, &errmsg);
+			lex_analysis(&input, &cmd_args, &errmsg);
 			if (errmsg)
 				print_n_free_errmsg(&errmsg);
 			else
