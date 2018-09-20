@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:50:31 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/13 14:38:28 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/09/20 15:26:57 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		move_left(t_line *line)
 int		move_nleft(t_line *line)
 {
 	while (line->pos > 0)
-		line->move_left(line);
+		move_left(line);
 	return (0);
 }
 
@@ -61,7 +61,7 @@ int		mv_left_word(t_line *line)
 		if (left)
 			left++;
 		while (line->pos > left)
-			line->move_left(line);
+			move_left(line);
 	}
 	return (0);
 }
@@ -81,7 +81,7 @@ int		mv_right_word(t_line *l)
 		|| l->buf[rt - 1] == '\t') && l->buf[rt] != ' ' && l->buf[rt] != '\t')
 		{
 			while (l->pos < rt)
-				l->move_right(l);
+				move_right(l);
 		}
 	}
 	return (0);

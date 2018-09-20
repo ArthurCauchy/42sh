@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_dirname.c                                      :+:      :+:    :+:   */
+/*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/22 12:44:42 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/20 16:14:52 by acauchy          ###   ########.fr       */
+/*   Created: 2018/09/20 16:12:11 by acauchy           #+#    #+#             */
+/*   Updated: 2018/09/20 16:13:10 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "line_edit.h"
-#include "colors.h"
+#ifndef COLORS_H
+# define COLORS_H
 
-void	bg_yellow(void)
-{
-	ft_printf(BGYELLOW);
-}
+# define BGYELLOW "\033[7;33m"
+# define RESET "\033[0m"
 
-void	color_reset(void)
-{
-	ft_printf(RESET);
-}
+#endif

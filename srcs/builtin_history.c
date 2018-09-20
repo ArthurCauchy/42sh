@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/11 23:04:31 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/09/20 14:55:27 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,13 +287,13 @@ static char	ret_char(char **str)
 		return ('s');
 	else if (ft_strchr(*str, 'p') && spe_free(str))
 		return ('p');
-	else if (ft_strchr(*str, 'a')  && spe_free(str))
+	else if (ft_strchr(*str, 'a') && spe_free(str))
 		return ('a');
-	else if (ft_strchr(*str, 'n')  && spe_free(str))
+	else if (ft_strchr(*str, 'n') && spe_free(str))
 		return ('n');
-	else if (ft_strchr(*str, 'r')  && spe_free(str))
+	else if (ft_strchr(*str, 'r') && spe_free(str))
 		return ('r');
-	else if (ft_strchr(*str, 'w')  && spe_free(str))
+	else if (ft_strchr(*str, 'w') && spe_free(str))
 		return ('w');
 	return ('0');
 }

@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/09/18 17:00:44 by acauchy          ###   ########.fr        #
+#    Updated: 2018/09/20 16:13:25 by acauchy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ HEADER_NAME = utils.h \
 			  init.h \
 			  global.h \
 			  history.h \
-			  line_edit.h
+			  line_edit.h \
+			  colors.h
 HEADER = $(addprefix $(HEADER_PATH)/,$(HEADER_NAME))
 
 SRC_PATH = srcs
@@ -91,7 +92,6 @@ SRC_NAME = utils.c \
 		   line_helper.c \
 		   line_get_line.c \
 		   line_my_free.c \
-		   line_prompt_open_quote.c \
 		   line_auto_complet.c \
 		   line_sort_list.c \
 		   line_auto_color.c \

@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/11 17:36:30 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/20 14:50:20 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	ends_with_slash(char *str)
 	prev = -1;
 	while (*str)
 	{
-		prev = *str; 
+		prev = *str;
 		++str;
 	}
 	if (prev == '/')
@@ -61,7 +61,7 @@ static char	*try_pathname(char *pathname, char *dir)
 {
 	char	*tmp;
 	char	*concat;
-	
+
 	if (!ends_with_slash(pathname))
 	{
 		tmp = ft_strjoin(pathname, "/");
@@ -76,7 +76,7 @@ static char	*try_pathname(char *pathname, char *dir)
 	return (NULL);
 }
 
-char	*search_cdpath(t_env **env, char *path)
+char		*search_cdpath(t_env **env, char *path)
 {
 	char	*cdpath;
 	char	**split_cdpath;
@@ -93,10 +93,10 @@ char	*search_cdpath(t_env **env, char *path)
 		if (ft_strcmp(*cur, "") == 0)
 		{
 			if ((ret = try_pathname("./", path)))
-				break;
+				break ;
 		}
 		else if ((ret = try_pathname(*cur, path)))
-			break;
+			break ;
 		++cur;
 	}
 	delete_args(split_cdpath);

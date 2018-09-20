@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/25 19:29:46 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/20 14:52:55 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	print_builtins_list(void)
 {
 	t_builtin	**builtins;
 	int			i;
-	
+
 	builtins = get_builtins();
 	i = 0;
 	while (i < BUILTINS_MAX && builtins[i] != NULL)
@@ -41,8 +41,6 @@ int			builtin_help(t_env **env, char **args)
 		ft_putendl("\nAvailable builtins :");
 		print_builtins_list();
 	}
-	else if (args[2])
-		ft_putendl_fd("Too many arguments.", 2);
 	else
 	{
 		if ((builtin = search_builtin(args[1])))

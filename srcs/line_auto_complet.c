@@ -12,8 +12,6 @@ static void	init_auto_start(int *i, int *find_start, int *res)
 	*i = 0;
 	*find_start = 0;
 	*res = 0;
-	g_open_dquote = -1;
-	g_open_squote = -1;
 }
 
 int		auto_start(char *line)
@@ -21,17 +19,21 @@ int		auto_start(char *line)
 	int		i;
 	int		find_start;
 	int		res;
+	int		open_squote;
+	int		open_dquote;
 
+	open_squote = -1;
+	open_dquote = -1;
 	init_auto_start(&i, &find_start, &res);
 	while (!find_start)
 	{
 		res = i;
-		while (line[i] && !(g_open_squote < 0 && g_open_dquote < 0 && (line[i] == ' ' || line[i] == '\t')))
+		while (line[i] && !(open_squote < 0 && open_dquote < 0 && (line[i] == ' ' || line[i] == '\t')))
 		{
-			if (line[i] == '"' && dslash_before(line, i) && g_open_squote < 0)
-				g_open_dquote = -g_open_dquote;
-			if (line[i] == '\'' && dslash_before(line, i) && g_open_dquote < 0)
-				g_open_squote = -g_open_squote;
+			if (line[i] == '"' && dslash_before(line, i) && open_squote < 0)
+				open_dquote = -open_dquote;
+			if (line[i] == '\'' && dslash_before(line, i) && open_dquote < 0)
+				open_squote = -open_squote;
 			i++;
 		}
 		if (!line[i])
@@ -75,6 +77,13 @@ t_autolist	*add_one_list(t_autolist *list, t_autolist *add)
 	cp->next = add;
 	return (list);
 }
+
+/*
+** Params :
+** - list : autocompletion list
+** - name : the name of this element of the list
+** - type : 0 = regular file, 1 = directory
+*/
 
 t_autolist	*add_a_list(t_autolist *list, char *name, unsigned char type)
 {
@@ -123,7 +132,7 @@ t_autolist	*addlist_buildin(t_line *line, t_autolist *list)
 	while (++i < 6)
 	{
 		if (!ft_strncmp((char *)line->auto_compare, buildin[i], ft_strlen((char *)line->auto_compare)) && !buildin_exit(list, buildin[i]))
-						list = add_a_list(list, buildin[i], NOT_DIR);
+						list = add_a_list(list, buildin[i], 0);
 	}
 return (list);
 }
@@ -353,22 +362,22 @@ static void	put_first_lst(t_line *line)
 	else
 		str = line->auto_lt->name + ft_strlen((char *)line->auto_compare);
 	while (*str)
-		line->printable(line, *str++);
+		printable(line, *str++);
 }
 
 static void	put_choice_end(t_line *line, int chioce_isdic)
 {
 	if (chioce_isdic)
-		line->printable(line, '/');
+		printable(line, '/');
 	else
-		line->printable(line, ' ');
+		printable(line, ' ');
 	free_auto_lt(line);
 }
 
 static void	one_autolist(t_line *line)
 {
 	put_first_lst(line);
-	line->move_nright(line);
+	move_nright(line);
 	put_choice_end(line, line->auto_lt->is_dic);
 }
 
@@ -403,7 +412,7 @@ static void	put_choice(t_line *line, int *i)
 			{
 				calcu_i(line, cp, i);
 				while (--*i)
-					line->delete_key(line);
+					delete_key(line);
 			}
 			if (line->auto_ct == 0)
 				put_first_lst(line);
@@ -411,7 +420,7 @@ static void	put_choice(t_line *line, int *i)
 			{
 				str = cp->name;
 				while (*str)
-					line->printable(line, *str++);
+					printable(line, *str++);
 			}
 		}
 		cp = cp->next;
@@ -423,15 +432,15 @@ void			clear_auto_onscreen(t_line *line)
 {
 	int		i;
 
-	init_attr(SETOLD);
+	init_attr(BASIC_LINE_EDIT);
 	ft_printf("\n");
-	init_attr(SETNEW);
+	init_attr(ADVANCED_LINE_EDIT);
 	tputs(tgetstr("cd", 0), 1, my_putc);
 	tputs(tgetstr("up", 0), 1, my_putc);
 	i = line->start_po + line->pos + 1;
 	line->pos = 0 - line->start_po;
 	while (--i)
-		line->move_right(line);
+		move_right(line);
 }
 
 void				is_tab(unsigned long key, t_line *line)
@@ -452,7 +461,7 @@ static void	cusor_back(t_line *line)
 
 	//	clear_auto_onscreen(line);
 	i = line->w.line + 2;
-	init_attr(SETNEW);
+	init_attr(ADVANCED_LINE_EDIT);
 	while (--i)
 		tputs(tgetstr("up", 0), 1, my_putc);
 	line->pos = 0 - line->start_po;
@@ -466,9 +475,9 @@ int		return_key(t_line *line)
 	move_nright(line);
 	put_choice_end(line, line->auto_is_dic);
 	/*
-	   init_attr(SETOLD);
+	   init_attr(BASIC_LINE_EDIT);
 	   ft_printf("\n");
-	   init_attr(SETNEW);
+	   init_attr(ADVANCED_LINE_EDIT);
 	   tputs(tgetstr("cd", 0), 1, my_putc);
 	   tputs(tgetstr("up", 0), 1, my_putc);
 	   line->pos = 0 - line->start_po;
@@ -494,11 +503,11 @@ int		my_tabkey(t_line *line, t_env **env)
 			one_autolist(line);
 		else
 		{
-			init_attr(SETOLD);
+			init_attr(BASIC_LINE_EDIT);
 			ft_printf("\n");
-			init_attr(SETNEW);
+			init_attr(ADVANCED_LINE_EDIT);
 			tputs(tgetstr("cd", 0), 1, my_putc);
-			init_attr(SETOLD);
+			init_attr(BASIC_LINE_EDIT);
 			put_colum(line);
 			cusor_back(line);
 			line->auto_ct = line->auto_ct + 1;;

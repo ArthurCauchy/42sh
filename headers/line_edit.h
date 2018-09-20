@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/18 17:01:21 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/09/20 16:19:35 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,10 @@
 # include "utils.h"
 # include "env.h"
 
-int		g_open_dquote;
-int		g_open_squote;
-int		g_open_backslash;
-int		g_end_line;
-int		g_with_termcap;
-int		g_inside_doc_quote;
-int		g_clc;
-int		g_dld;
-
-# define SETNEW 1
-# define SETOLD 0
-# define NOT_DIR 0
-# define STDIN_FILENO 0
-# define STDOUT_FILENO 1
+# define ADVANCED_LINE_EDIT 1
+# define BASIC_LINE_EDIT 0
 # define NB_KEY 21
+
 # define ARROW_LEFT 4479771
 # define ARROW_RIGHT 4414235
 # define ARROW_UP 4283163
@@ -64,8 +53,6 @@ int		g_dld;
 # define TAB_KEY 9
 # define RETURN_KEY 10
 # define DELETE_AT_POSITION 2117294875
-# define BGYELLOW "\033[7;33m"
-# define RESET "\033[0m"
 
 typedef struct	s_autolist
 {
@@ -107,32 +94,12 @@ typedef struct	s_line
 	int				auto_ct;
 	int				auto_is_dic;
 	int				auto_current_dic;
+	int				in_heredoc;
+	int				end_line;
+	int				clc;
+	int				dld;
 	t_win			w;
 	t_autolist		*auto_lt;
-	int				(*printable)(struct s_line *line, unsigned long a_key);
-	int				(*move_left)(struct s_line *line);
-	int				(*move_right)(struct s_line *line);
-	int				(*delete_key)(struct s_line *line);
-	int				(*move_nleft)(struct s_line *line);
-	int				(*move_nright)(struct s_line *line);
-	int				(*mv_left_word)(struct s_line *line);
-	int				(*mv_right_word)(struct s_line *line);
-	int				(*history_up)(struct s_line *line);
-	int				(*history_down)(struct s_line *line);
-	int				(*cp_all)(struct s_line *line);
-	int				(*cp_begin)(struct s_line *line);
-	int				(*cp_end)(struct s_line *line);
-	int				(*cut_all)(struct s_line *line);
-	int				(*cut_begin)(struct s_line *line);
-	int				(*cut_end)(struct s_line *line);
-	int				(*paste)(struct s_line *line);
-	int				(*go_up)(struct s_line *line);
-	int				(*go_down)(struct s_line *line);
-	int				(*ctrl_d)(struct s_line *line);
-	int				(*return_key)(struct s_line *line);
-	int				(*delete_at_position)(struct s_line *line);
-	int				(*my_tabkey)(struct s_line *line, t_env **env);
-	int				(*engine)(struct s_line *line, unsigned long a_key, t_env **env);
 }				t_line;
 
 typedef struct	s_key
@@ -180,12 +147,10 @@ int				go_down(t_line *line);
 int				return_key(t_line *line);
 int				get_line(char *prompt, char *new_line, t_line *line, t_env **env);
 void			init_line(char	*prompt, t_line *line);
-int				prompt_open_quote(char *line, t_env **env);
 char			**path(t_env **env);
 int				dslash_before(char *line, int index);
 void			ft_freestrstr(char **cp_env);
 unsigned long	get_key(void);
-
 
 /*
 ** auto_complet.c

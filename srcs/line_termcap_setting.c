@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:30:47 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/14 15:14:18 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/20 16:01:28 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int			init_attr(int mod)
 		if (tcgetattr(0, &old) == -1)
 			return (return_message("can't get att", -1, 2));
 	}
-	if (mod == SETNEW)
+	if (mod == ADVANCED_LINE_EDIT)
 	{
 		for_attr(&new, old);
 		if (tgetent(NULL, getenv("TERM")) != 1)

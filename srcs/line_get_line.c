@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/14 14:34:49 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/20 16:03:02 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,33 +17,7 @@
 #include <sys/uio.h>
 #include <unistd.h>
 #include "line_edit.h"
-
-static void				for_init_line(t_line *line)
-{
-	line->printable = printable;
-	line->move_left = move_left;
-	line->move_right = move_right;
-	line->move_nleft = move_nleft;
-	line->move_nright = move_nright;
-	line->delete_key = delete_key;
-	line->mv_left_word = mv_left_word;
-	line->mv_right_word = mv_right_word;
-	line->history_up = history_up;
-	line->history_down = history_down;
-	line->cp_all = cp_all;
-	line->cp_begin = cp_begin;
-	line->cp_end = cp_end;
-	line->cut_all = cut_all;
-	line->cut_begin = cut_begin;
-	line->cut_end = cut_end;
-	line->paste = paste;
-	line->go_up = go_up;
-	line->go_down = go_down;
-	line->ctrl_d = ctrl_d;
-	line->return_key = return_key;
-	line->delete_at_position = delete_at_position;
-	line->engine = engine;
-}
+#include "global.h"
 
 void					init_line(char *prompt, t_line *line)
 {
@@ -63,19 +37,19 @@ void					init_line(char *prompt, t_line *line)
 	line->auto_ct = -1;
 	line->auto_lt = NULL;
 	line->auto_is_dic = 0;
+	line->in_heredoc = 0;
+	line->end_line = 0;
+	line->dld = 0;
+	line->clc = 0;
 	g_with_termcap = 1;
-	for_init_line(line);
 }
 
 static void				help_for_line(char **ligne, char *new_line, char *pt)
 {
 	ft_bzero(new_line, INPUT_MAX_LEN);
 	*ligne = NULL;
-	g_end_line = 0;
-	init_attr(SETOLD);
+	init_attr(BASIC_LINE_EDIT);
 	ft_putstr(pt);
-	g_clc = 0;
-	g_dld = 0;
 }
 
 int						get_line(char *prompt, char *new_line, t_line *line, t_env **env)
@@ -84,16 +58,16 @@ int						get_line(char *prompt, char *new_line, t_line *line, t_env **env)
 	char			*ligne;
 
 	help_for_line(&ligne, new_line, prompt);
-	if (init_attr(SETNEW) == 0)
+	if (init_attr(ADVANCED_LINE_EDIT) == 0)
 	{
 		init_line(prompt, line);
-		while (((key = get_key()) && !(!line->is_tabb4 &&  key == '\n')) && !g_clc && !g_dld)
+		while (((key = get_key()) && !(!line->is_tabb4 &&  key == '\n')) && !line->clc && !line->dld)
 		{
 			if (key == CONTRL_C)
 				return (ctrl_c(new_line, line));
-			line->engine(line, key, env);
+			engine(line, key, env);
 		}
-		init_attr(SETOLD);
+		init_attr(BASIC_LINE_EDIT);
 		ft_strcpy(new_line, (const char *)line->buf);
 	}
 	else

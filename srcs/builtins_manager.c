@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 14:24:18 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/25 19:21:14 by arthur           ###   ########.fr       */
+/*   Updated: 2018/09/20 14:56:42 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "utils.h"
 #include "builtins.h"
 
-t_builtin			**get_builtins(void)
+t_builtin	**get_builtins(void)
 {
 	static t_builtin	*builtins[BUILTINS_MAX] = {NULL};
 
@@ -26,7 +26,7 @@ t_builtin			**get_builtins(void)
 ** Clear the loaded builtins.
 */
 
-void				clear_builtins(void)
+void		clear_builtins(void)
 {
 	t_builtin	**builtins;
 	int			i;
@@ -47,7 +47,7 @@ void				clear_builtins(void)
 ** This registers the builtin which can then be found using "search_builtin()"
 */
 
-void				load_builtin(char *name, char *brief, int (*func)(t_env**, char**))
+void		load_builtin(char *name, char *brief, int (*func)(t_env**, char**))
 {
 	t_builtin	*new;
 	t_builtin	**builtins;
@@ -70,7 +70,7 @@ void				load_builtin(char *name, char *brief, int (*func)(t_env**, char**))
 ** Returns a pointer to the corresponding builtin struct, or NULL if not found.
 */
 
-t_builtin			*search_builtin(char *name)
+t_builtin	*search_builtin(char *name)
 {
 	t_builtin	**builtins;
 	int			i;

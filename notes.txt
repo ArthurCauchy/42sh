@@ -1,20 +1,17 @@
 TODO:
 - write some doc and comments
 - should I lex amp (&) symbol since we dont use it ?
-- ajust INPUT_MAX_LEN in utils.h to match the new input's max
 - echo $? now always print 42 (temporary)
 - fancy prompt
 - parsing
 - line edition
 	- IMPROVE : using arrow keys when autocomp should move in choices and not history
 	- LEAKS!
+	- check crash & leaks if BASIC line edition enabled (no termcaps)
 - options of echo builtin ?
 - signals?
 - shortcuts (ex: CTRL + L)
-- \ and unmatched quotes (', "") should ask for a line of input
-	- WORK IN PROGRESS, merging with saxiao's work
 - display command line when error (command: no such builtin)
-- globals in line_edit.h > remove it and if we REALLY need to keep one, move the declarations to global.h
 - copy-paste functionality? (change shortcuts)
 
 Error from acauchy's 21sh:
