@@ -6,17 +6,33 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/15 14:24:13 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/15 15:14:56 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __PARSING_H
 # define __PARSING_H
 
-// TODO define structures here
+# include "lexing.h"
 
 /*
-** lexing.c
+** separator is the token separating this parse block with the next one.
+** It must be one of the following :
+** - PIPE
+** - OR
+** - AND
+** - SEMICOL
+** - NULL
+*/
+
+typedef struct	s_parse_block {
+	t_wordlist		wordlist;
+	token			separator;
+	s_parse_block	*next;
+}				t_parse_block;
+
+/*
+** parsing.c
 */
 
 // TODO define funtions here

@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/09/20 16:13:25 by acauchy          ###   ########.fr        #
+#    Updated: 2018/10/15 15:14:46 by acauchy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ HEADER_NAME = utils.h \
 			  path.h \
 			  builtins.h \
 			  lexing.h \
+			  parsing.h \
 			  init.h \
 			  global.h \
 			  history.h \
