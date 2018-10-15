@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/15 15:14:56 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/15 16:16:00 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 ** - OR
 ** - AND
 ** - SEMICOL
-** - NULL
+** - NONE
 */
 
 typedef struct	s_parse_block {
