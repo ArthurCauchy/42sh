@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/18 17:00:13 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/15 16:16:13 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 typedef enum		e_token
 {
+	NONE,
 	ARG,
 	LSHIFT,
 	LSHIFT_AMP,
