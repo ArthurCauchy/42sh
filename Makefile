@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/10/15 16:35:05 by lumenthi         ###   ########.fr        #
+#    Updated: 2018/10/15 17:19:17 by acauchy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ HEADER_NAME = utils.h \
 			  builtins.h \
 			  lexing.h \
 			  parsing.h \
+			  interpreter.h \
 			  init.h \
 			  global.h \
 			  history.h \
@@ -68,8 +69,9 @@ SRC_NAME = utils.c \
 		   init_builtins.c \
 		   init_history.c \
 		   word.c \
-		   parsing.c \
 		   lexing.c \
+		   parsing.c \
+		   interpreter.c \
 		   lexing_escape.c \
 		   lexing_dollar.c \
 		   lexing_tilde.c \
