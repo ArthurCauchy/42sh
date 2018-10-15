@@ -516,6 +516,44 @@ int		my_tabkey(t_line *line, t_env **env)
 	return (0);
 }
 
+int		arrow_keys_in_autoline(t_line *line, t_env **env, unsigned long key)
+{
+	int		real_nb_line;
+
+	real_nb_line = nb_list(line->auto_lt) / line->w.col;
+	if (nb_list(line->auto_lt) % line->w.col)
+		real_nb_line++;
+	line->auto_ct--;
+	if (key == ARROW_LEFT)
+	{
+		if (line->auto_ct % nb_list(line->auto_lt) % real_nb_line == 0)
+			line->auto_ct = line->auto_ct + (line->w.col - 1) * real_nb_line;
+		else
+		line->auto_ct - real_nb_line;
+	}
+	else if (key == ARROW_RIGHT)
+	{
+		if (line->auto_ct % nb_list(line->auto_lt) % real_nb_line == line->w.col - 1)
+			line->auto_ct = line->auto_ct - (line->w.col - 1) * real_nb_line;
+		else
+		line->auto_ct + real_nb_line;
+	}
+	else if (key == ARROW_UP)
+	{
+		if (line->auto_ct % nb_list(line->auto_lt) == 0)
+			line->auto_ct = nb_list(line->auto_lt) - 1;
+		else
+			line->auto_ct--;
+	}
+	else (key == ARROW_DOWN)
+	{
+		if (line->auto_ct % nb_list(line->auto_lt) == (nb_list(line->auto_lt) - 1))
+			line->auto_ct = 0;
+		else
+			line->auto_ct++;
+	}
+	my_tabkey(line, env);
+}
 /*
    int		main()
    {

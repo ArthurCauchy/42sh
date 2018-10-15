@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:47:13 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/20 15:38:48 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/15 18:05:05 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ static void	init_for_engine(t_key *t)
 	init_for_enginie_2(t);
 }
 
+int			key_isarrow(unsigned long key)
+{
+	return (key == ARROW_LEFT || key == ARROW_RIGHT || key == ARROW_UP || key == ARROW_DOWN);
+}
+
 int			engine(t_line *line, unsigned long key, t_env **env)
 {
 	int		i;
@@ -82,6 +87,8 @@ int			engine(t_line *line, unsigned long key, t_env **env)
 	}
 	else if (key == TAB_KEY)
 		my_tabkey(line, env);
+	else if (line->is_tabb4 && line->auto_ct >= 0 && key_isarrow(key))
+		arrow_keys_in_autoline(line, env, key);
 	else
 	{
 		init_for_engine(t);
@@ -91,12 +98,12 @@ int			engine(t_line *line, unsigned long key, t_env **env)
 			{
 				t[i].func(line);
 				if (line->is_tabb4)
-					
-				free_auto_lt(line);
+
+					free_auto_lt(line);
 				line->auto_ct = -1;
-				}
+			}
 		}
 	}
-	is_tab(key, line);
-	return (0);
+		is_tab(key, line);
+		return (0);
 }

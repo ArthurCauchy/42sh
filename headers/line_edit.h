@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/20 16:19:35 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/15 17:54:08 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ t_autolist		*add_one_list(t_autolist *list, t_autolist *add);
 int				nb_list(t_autolist *list);
 void			free_auto_lt(t_line *line);
 void			is_tab(unsigned long key, t_line *line);
+int				arrow_keys_in_autoline(t_line *line, t_env **env, unsigned long key);
 
 /*
 ** sort_list.c
