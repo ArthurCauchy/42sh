@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/20 15:55:57 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/15 16:24:26 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "history.h"
 #include "init.h"
 #include "line_edit.h"
+#include "parsing.h"
 
 t_env			*g_env = NULL;
 t_history	*g_history = NULL;
@@ -45,6 +46,7 @@ int			main(int argc, char **argv, char **envp)
 	char	*errmsg;
 	char	*input;
 	t_word	*cmd_args;
+	t_parse_block *parsed;
 
 	(void)argc;
 	(void)argv;
@@ -61,7 +63,11 @@ int			main(int argc, char **argv, char **envp)
 			if (errmsg)
 				print_n_free_errmsg(&errmsg);
 			else
+			{
+				parsed = do_parsing(cmd_args, errmsg);
 				start_command(cmd_args);
+			}
+
 			delete_wordlist(&cmd_args);
 		}
 		free(input);
