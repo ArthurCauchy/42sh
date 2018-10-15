@@ -6,12 +6,14 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/15 16:16:13 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/15 16:37:22 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __LEXING_H
 # define __LEXING_H
+
+# include <stddef.h>
 
 typedef enum		e_token
 {
@@ -34,8 +36,8 @@ typedef enum		e_token
 typedef struct		s_lexdata
 {
 	char		*buff;
-	size_t	i;
-	size_t	j;
+	size_t		i;
+	size_t		j;
 	int			quoted;
 	int			escaped;
 	int			force_add;

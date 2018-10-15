@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/10/15 15:14:46 by acauchy          ###   ########.fr        #
+#    Updated: 2018/10/15 16:35:05 by lumenthi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,7 @@ SRC_NAME = utils.c \
 		   init_builtins.c \
 		   init_history.c \
 		   word.c \
+		   parsing.c \
 		   lexing.c \
 		   lexing_escape.c \
 		   lexing_dollar.c \
