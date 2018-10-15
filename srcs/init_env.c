@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:48:57 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/10 16:05:49 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/15 13:09:01 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	update_shlvl(t_env **env)
 	free(shlvl);
 }
 
-void	init_env(t_env **env, char **envp)
+void		init_env(t_env **env, char **envp)
 {
 	size_t	i;
 	size_t	j;

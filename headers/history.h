@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/11 22:07:20 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/10/15 12:41:06 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ char    **history_read(char *filename, int start);
 void    history_del(int elem);
 char    *history_get(int elem);
 void    history_add(char *cmd);
-int     history_writeA(char *file);
-int     history_writeT(char *file, char **hist);
+int     history_write_a(char *file);
+int     history_write_t(char *file, char **hist);
 void    history_clear(void);
 void    history_exit(void);
 int		exc_mark(char **str); //exc_mark function

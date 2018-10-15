@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_engine.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:47:13 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/20 15:38:48 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/15 12:35:08 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,9 @@ int			engine(t_line *line, unsigned long key, t_env **env)
 			{
 				t[i].func(line);
 				if (line->is_tabb4)
-					
-				free_auto_lt(line);
+					free_auto_lt(line);
 				line->auto_ct = -1;
-				}
+			}
 		}
 	}
 	is_tab(key, line);
