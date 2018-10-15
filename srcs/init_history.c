@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 10:38:26 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/09/14 13:17:30 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/10/15 12:55:50 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,15 @@
 #include "history.h"
 #include "global.h"
 
-static int  size_error(void)
+static int	size_error(void)
 {
-	ft_putendl_fd("42sh: invalid HISTSIZE value, setting it to default (500)", 2);
+	ft_putendl_fd("42sh: invalid HISTSIZE value"
+			", setting it to default (500)", 2);
 	g_history->SIZE = 500;
 	return (0);
 }
 
-static char             **history_error(void)
+static char	**history_error(void)
 {
 	char **hist;
 
@@ -32,13 +33,13 @@ static char             **history_error(void)
 	return (hist);
 }
 
-static char *home_error(void)
+static char	*home_error(void)
 {
 	ft_putstr_fd("no $HOME variable, history saved in /tmp\n", 2);
 	return (ft_strjoin("/tmp", "/.42sh_history"));
 }
 
-static char *get_home(t_env **env)
+static char	*get_home(t_env **env)
 {
 	char	*ret;
 	char	*tmp;
@@ -67,6 +68,6 @@ int			init_history(t_env **env)
 	if (!(g_history->line = history_read(g_history->HISTFILE, 0)))
 		g_history->line = history_error();
 	g_history->nb_lines = args_size(g_history->line);
-	g_history->start  = args_size(g_history->line);
+	g_history->start = args_size(g_history->line);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/20 14:55:27 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/15 12:53:45 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,11 +150,11 @@ int		history_w(char *file)
 	ret = 0;
 	if (file == NULL || ft_strcmp(file, "") == 0)
 	{
-		ret = history_writeT(g_history->HISTFILE, g_history->line);
+		ret = history_write_t(g_history->HISTFILE, g_history->line);
 		g_history->start = g_history->nb_lines;
 	}
 	else
-		ret = history_writeT(file, g_history->line);
+		ret = history_write_t(file, g_history->line);
 	return (ret = 1 ? 0 : 1);
 }
 
@@ -194,7 +194,7 @@ int			history_s(char **args)
 
 int			history_a(char *file)
 {
-	return (history_writeA(file));
+	return (history_write_a(file));
 }
 
 int			history_n(char *file)
@@ -375,6 +375,5 @@ int			builtin_history(t_env **env, char **args)
 		return (history_s(args));
 	else if (arg == 'd')
 		return (history_d(args, start));
-	else
-		return (1);
+	return (1);
 }
