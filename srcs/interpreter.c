@@ -6,10 +6,11 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/16 11:56:34 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/16 12:01:28 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "parsing.h"
 
 /*
@@ -25,9 +26,9 @@
 int			do_interpret(t_parse_block *parsed)
 {
 	t_parse_block	*cur;
-	t_wordlist		*wordlist;
+	t_word			*wordlist;
 
-	cur = *parsed;
+	cur = parsed;
 	while (cur)
 	{
 		wordlist = cur->wordlist;

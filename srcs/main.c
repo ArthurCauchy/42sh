@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/16 11:32:16 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/16 12:02:39 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@
 #include "init.h"
 #include "line_edit.h"
 #include "parsing.h"
+#include "interpreter.h"
 
 t_env			*g_env = NULL;
 t_history	*g_history = NULL;
 int			g_with_termcap = 0;
 
-static void	start_command(t_word *cmd_args)
+/*static void	start_command(t_word *cmd_args)
 {
 	t_builtin	*builtin;
 	char		**args;
@@ -39,7 +40,7 @@ static void	start_command(t_word *cmd_args)
 	else
 		ft_putendl_fd("Not a builtin.", 2);
 	delete_args(args);
-}
+}*/
 
 int			main(int argc, char **argv, char **envp)
 {
