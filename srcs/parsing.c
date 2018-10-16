@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 15:24:43 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/10/16 14:54:15 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/10/16 18:17:02 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,34 @@ int	is_parsing_separator(t_token elem)
 	return (0);
 }
 
+void free_parse_block(t_parse_block **parse)
+{
+	t_parse_block *cur;
+	t_parse_block *prev;
+
+	cur = *parse;
+	prev = NULL;
+	while (cur)
+	{
+		delete_wordlist(&(*parse)->wordlist);
+		prev = cur;
+		cur = cur->next;
+		free(prev);
+	}
+	*parse = NULL;
+}
+
+t_parse_block *new_parse_block(t_word *word, t_token separator)
+{
+	t_parse_block *ret;
+
+	ret = (t_parse_block *)malloc(sizeof(t_parse_block));
+	ret->wordlist = word;
+	ret->separator = separator;
+	ret->next = NULL;
+	return (ret);
+}
+
 t_parse_block* do_parsing(t_word *wordlist, char **errmsg)
 {
 	t_parse_block *parsing;
@@ -91,9 +119,7 @@ t_parse_block* do_parsing(t_word *wordlist, char **errmsg)
 	tmp_word = NULL;
 	tmp_block = NULL;
 	tmp = wordlist;
-	tmp_block = (t_parse_block *)malloc(sizeof(t_parse_block));
-	tmp_block->wordlist = NULL;
-	tmp_block->next = NULL;
+	tmp_block = new_parse_block(NULL, NONE);
 	(void)errmsg;
 	while (tmp)
 	{
@@ -101,20 +127,25 @@ t_parse_block* do_parsing(t_word *wordlist, char **errmsg)
 		{
 			tmp_block->separator = tmp->token;
 			block_push(&parsing, tmp_block);
+			free_parse_block(&tmp_block);
+			tmp_block = new_parse_block((t_word *)malloc(sizeof(t_parse_block)), NONE);
 		}
 		else
 			word_push(&tmp_block->wordlist, tmp);
 		tmp = tmp->next;
 	}
-	//	PRINT
-		// while (tmp_block)
-		// {
-		// 	display_words(tmp_block->wordlist);
-		// 	if (tmp_block->separator == PIPE)
-		// 		printf("separator: PIPE\n");
-		//  	tmp_block = tmp_block->next;
-		// }
-	//	PRINT
-	free(tmp_block);
+//		PRINT
+		t_parse_block *display = parsing;
+		while (display)
+		{
+			ft_putstr("BEGIN BLOCK\n");
+			display_words(display->wordlist);
+			if (display->separator == PIPE)
+				printf("separator: PIPE\n");
+		 	display = display->next;
+			ft_putstr("END BLOCK\n\n");
+		}
+//		PRINT
+//	free_parse_block(&tmp_block);
 	return (parsing);
 }
