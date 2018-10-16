@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   line_engine.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:47:13 by saxiao            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/10/15 18:05:05 by saxiao           ###   ########.fr       */
+=======
+/*   Updated: 2018/10/15 12:35:08 by lumenthi         ###   ########.fr       */
+>>>>>>> a10a5b1a54395ac85d8f83a0557576e671c032c1
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +102,6 @@ int			engine(t_line *line, unsigned long key, t_env **env)
 			{
 				t[i].func(line);
 				if (line->is_tabb4)
-
 					free_auto_lt(line);
 				line->auto_ct = -1;
 			}

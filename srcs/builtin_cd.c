@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/20 14:57:21 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/15 12:53:05 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,12 @@ static int	builtin_cd_withargs(char *options, t_env **env, char **args)
 			return (1);
 		}
 		if ((retcode = try_cd(options, env, &oldpwd)) == 0)
-				ft_putendl(oldpwd);
+			ft_putendl(oldpwd);
 		free(oldpwd);
 		return (retcode);
 	}
 	return (try_cd(options, env, &args[0]));
 }
-
-
 
 int			builtin_cd(t_env **env, char **args)
 {

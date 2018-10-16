@@ -8,6 +8,8 @@ TODO:
 	- IMPROVE : using arrow keys when autocomp should move in choices and not history
 	- LEAKS!
 	- check crash & leaks if BASIC line edition enabled (no termcaps)
+	- secure the window resize by getting the win resize signal
+	- secure the scrolling (ex : disable writing when the command line goes above the window size)
 - options of echo builtin ?
 - signals?
 - shortcuts (ex: CTRL + L)

@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/04 10:30:03 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/09/11 22:01:22 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/10/15 12:58:47 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	fill_one(char *str, char **middle, int *i)
 	(*middle)[j] = '\0';
 }
 
-static void fill_minus(char *str, char **middle, int *i)
+static void	fill_minus(char *str, char **middle, int *i)
 {
 	int j;
 
@@ -166,8 +166,8 @@ static char	*get_digit(char *middle)
 static int	check_matches(char *str1, char *str2)
 {
 	int i;
-	i = 0;
 
+	i = 0;
 	while (str1[i] && str2[i] && str1[i] == str2[i])
 		i++;
 	if (i == (int)ft_strlen(str1))
@@ -176,7 +176,7 @@ static int	check_matches(char *str1, char *str2)
 		return (0);
 }
 
-static char *get_alpha(char *middle)
+static char	*get_alpha(char *middle)
 {
 	int	i;
 	int	tmp;
@@ -362,8 +362,8 @@ int			exc_mark(char **str)
 		{
 			if ((ft_mix(str, &i)))
 				return (1);
-			if (i+1 > (int)ft_strlen(*str))
-				break;
+			if (i + 1 > (int)ft_strlen(*str))
+				break ;
 			mark = 1;
 		}
 		i++;
