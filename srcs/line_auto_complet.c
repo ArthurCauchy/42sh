@@ -380,7 +380,7 @@ static void	one_autolist(t_line *line)
 	move_nright(line);
 	put_choice_end(line, line->auto_lt->is_dic);
 }
-
+/*
 static void	calcu_i(t_line *line, t_autolist *this,  int *i)
 {
 	t_autolist	*cp;
@@ -395,6 +395,7 @@ static void	calcu_i(t_line *line, t_autolist *this,  int *i)
 	else
 		*i = this->pre->len + 1;
 }
+*/
 
 static void	put_choice(t_line *line, int *i)
 {
@@ -408,13 +409,14 @@ static void	put_choice(t_line *line, int *i)
 	{
 		if (line->auto_ct % nb_list(line->auto_lt) == cp->ct)
 		{
-			if (line->auto_ct > 0)
+			if (line->auto_last_choice_len != -1)
 			{
-				calcu_i(line, cp, i);
+				//calcu_i(line, cp, i);
+				*i = line->auto_last_choice_len + 1;
 				while (--*i)
 					delete_key(line);
 			}
-			if (line->auto_ct == 0)
+			if (line->auto_last_choice_len == -1)
 				put_first_lst(line);
 			else
 			{
@@ -422,6 +424,7 @@ static void	put_choice(t_line *line, int *i)
 				while (*str)
 					printable(line, *str++);
 			}
+			line->auto_last_choice_len = ft_strlen(cp->name);
 		}
 		cp = cp->next;
 	}
@@ -445,7 +448,7 @@ void			clear_auto_onscreen(t_line *line)
 
 void				is_tab(unsigned long key, t_line *line)
 {
-	if (key == TAB_KEY || ((key == ARROW_LEFT || key == ARROW_RIGHT) && line->is_tabb4 == 1))
+	if (key == TAB_KEY || (key_isarrow(key) && line->is_tabb4 == 1))
 		line->is_tabb4 = 1;
 	else
 	{
@@ -472,16 +475,9 @@ static void	cusor_back(t_line *line)
 int		return_key(t_line *line)
 {
 	line->auto_ct = -1;
+	line->auto_last_choice_len = -1;
 	move_nright(line);
 	put_choice_end(line, line->auto_is_dic);
-	/*
-	   init_attr(BASIC_LINE_EDIT);
-	   ft_printf("\n");
-	   init_attr(ADVANCED_LINE_EDIT);
-	   tputs(tgetstr("cd", 0), 1, my_putc);
-	   tputs(tgetstr("up", 0), 1, my_putc);
-	   line->pos = 0 - line->start_po;
-	   */
 	clear_auto_onscreen(line);
 	move_nright(line);
 	return (0);
@@ -526,33 +522,45 @@ int		arrow_keys_in_autoline(t_line *line, t_env **env, unsigned long key)
 	line->auto_ct--;
 	if (key == ARROW_LEFT)
 	{
-		if (line->auto_ct % nb_list(line->auto_lt) % real_nb_line == 0)
+		if (line->auto_ct % nb_list(line->auto_lt) / real_nb_line != 0)
+		line->auto_ct = line->auto_ct - real_nb_line;
+		else
+		{
+		if (line->auto_ct % nb_list(line->auto_lt) % real_nb_line + (line->w.col - 1) * real_nb_line < nb_list(line->auto_lt))
 			line->auto_ct = line->auto_ct + (line->w.col - 1) * real_nb_line;
 		else
-		line->auto_ct - real_nb_line;
+			line->auto_ct = line->auto_ct + (line->w.col - 2) * real_nb_line;
+		}
 	}
 	else if (key == ARROW_RIGHT)
 	{
-		if (line->auto_ct % nb_list(line->auto_lt) % real_nb_line == line->w.col - 1)
-			line->auto_ct = line->auto_ct - (line->w.col - 1) * real_nb_line;
+		if (line->auto_ct % nb_list(line->auto_lt) + real_nb_line < nb_list(line->auto_lt))
+		line->auto_ct = line->auto_ct + real_nb_line;
 		else
-		line->auto_ct + real_nb_line;
+			line->auto_ct = line->auto_ct % nb_list(line->auto_lt) % real_nb_line;
 	}
 	else if (key == ARROW_UP)
 	{
-		if (line->auto_ct % nb_list(line->auto_lt) == 0)
-			line->auto_ct = nb_list(line->auto_lt) - 1;
+		if (line->auto_ct % nb_list(line->auto_lt) % real_nb_line == 0)
+		{
+			if (line->auto_ct % nb_list(line->auto_lt) + real_nb_line - 2 > nb_list(line->auto_lt))
+				line->auto_ct = nb_list(line->auto_lt) - 1;
+			else
+			line->auto_ct = line->auto_ct % nb_list(line->auto_lt) + real_nb_line - 1;
+		}
 		else
 			line->auto_ct--;
 	}
-	else (key == ARROW_DOWN)
+	else if (key == ARROW_DOWN)
 	{
-		if (line->auto_ct % nb_list(line->auto_lt) == (nb_list(line->auto_lt) - 1))
-			line->auto_ct = 0;
+		if (line->auto_ct % nb_list(line->auto_lt) == nb_list(line->auto_lt) - 1 || line->auto_ct % nb_list(line->auto_lt) % real_nb_line == real_nb_line - 1)
+			line->auto_ct = line->auto_ct - line->auto_ct % nb_list(line->auto_lt) % real_nb_line;
 		else
 			line->auto_ct++;
 	}
 	my_tabkey(line, env);
+	line->is_tabb4 = 1;
+	return (0);
 }
 /*
    int		main()

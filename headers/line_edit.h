@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/16 09:40:54 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/16 16:58:29 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct	s_line
 	int				one_his;
 	int				here_end;
 	int				is_tabb4;
+	int				auto_last_choice_len;
 	int				auto_ct;
 	int				auto_is_dic;
 	int				auto_current_dic;
@@ -179,5 +180,11 @@ void			color_reset(void);
 */
 
 char			*ask_for_input(char *prompt);
+
+/*
+** line_engine.c
+*/
+
+int				key_isarrow(unsigned long key);
 
 #endif
