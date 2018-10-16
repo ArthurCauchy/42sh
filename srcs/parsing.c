@@ -6,18 +6,18 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 15:24:43 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/10/15 17:14:30 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/10/15 18:00:59 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include <stdio.h> //for printf, remove
+#include <stdio.h> //for printf, remove after
 
-void word_push(t_word **wordlist, t_word *new_word)
+void word_push(t_word *wordlist, t_word *new_word)
 {
 	t_word *tmp;
 
-	tmp = *wordlist;
+	tmp = wordlist;
 	while (tmp)
 		tmp = tmp->next;
 	tmp = (t_word *)malloc(sizeof(t_word));
@@ -26,7 +26,18 @@ void word_push(t_word **wordlist, t_word *new_word)
 	tmp->next = NULL;
 }
 
-void block_push()
+void block_push(t_parse_block *blocklist, t_parse_block *new_block)
+{
+	t_parse_block *tmp;
+
+	tmp = blocklist;
+	while (tmp)
+		tmp = tmp->next;
+	tmp = (t_parse_block *)malloc(sizeof(t_parse_block));
+	tmp->wordlist = new_block->wordlist;
+	tmp->separator = new_block->separator;
+	tmp->next = NULL;
+}
 
 t_parse_block* do_parsing(t_word *wordlist, char **errmsg)
 {
