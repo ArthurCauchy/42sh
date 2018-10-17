@@ -6,10 +6,11 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/17 12:21:40 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/17 14:55:39 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/wait.h>
 #include <unistd.h>
 #include "libft.h"
 #include "utils.h"
@@ -20,22 +21,30 @@
 // actually run the command, TODO move it to a separate file
 static int	start_command(t_word *cmd_args)
 {
+	int			status;
 	int			ret;
 	t_builtin	*builtin;
 	char		**args;
 	
+	ft_putendl("=========================");
 	args = ft_memalloc(sizeof(char*) * PARAMS_MAX);
+	arglist_to_array(cmd_args, args);
 	if ((builtin = search_builtin(cmd_args->str)))
 	{
 		// apply redirects builtin-style
-		arglist_to_array(cmd_args, args);
 		ret = builtin->func(&g_env, args);
 	}
 	else
 	{
-		ft_putendl_fd("Not a builtin.", 2);
-		//apply redirects normal
-		return (1);
+		if (fork() == 0)
+		{
+			// apply redirects normal
+			if (execve(args[0], args, env_to_array(&g_env)) < 0)
+				return (1);
+			exit(1);
+		}
+		wait(&status);
+		return (WEXITSTATUS(status));
 	}
 	delete_args(args);
 	return (ret);
