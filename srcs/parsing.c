@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 15:24:43 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/10/17 14:51:03 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/10/17 15:47:57 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void word_push(t_word **wordlist, t_word *new_word)
 	t_word *cur;
 	t_word *prev;
 
+	printf("new_word: %s\n", new_word->str);
 	cur = *wordlist;
 	prev = NULL;
 	while (cur)
@@ -50,6 +51,18 @@ void word_push(t_word **wordlist, t_word *new_word)
 		*wordlist = cur;
 }
 
+void word_push_all(t_word **wordlist, t_word *new_words)
+{
+	t_word *tmp_new;
+
+	tmp_new = new_words;
+	while (tmp_new)
+	{
+		word_push(wordlist, tmp_new);
+		tmp_new = tmp_new->next;
+	}
+}
+
 void block_push(t_parse_block **blocklist, t_parse_block *new_block)
 {
 	t_parse_block *cur;
@@ -65,7 +78,7 @@ void block_push(t_parse_block **blocklist, t_parse_block *new_block)
 	cur = (t_parse_block *)malloc(sizeof(t_parse_block));
 	cur->wordlist = NULL;
 	cur->separator = new_block->separator;
-	word_push(&cur->wordlist, new_block->wordlist);
+	word_push_all(&cur->wordlist, new_block->wordlist);
 	cur->next = NULL;
 	if (prev)
 		prev->next = cur;
@@ -127,7 +140,6 @@ t_parse_block* do_parsing(t_word *wordlist, char **errmsg)
 		if (tmp->next == NULL)
 		{
 			word_push(&tmp_block->wordlist, tmp);
-			tmp_block->separator = tmp->token;
 			block_push(&parsing, tmp_block);
 			free_parse_block(&tmp_block);
 		}
@@ -143,16 +155,16 @@ t_parse_block* do_parsing(t_word *wordlist, char **errmsg)
 		tmp = tmp->next;
 	}
 //		PRINT
-		// t_parse_block *display = parsing;
-		// while (display)
-		// {
-		// 	ft_putstr("BEGIN BLOCK\n");
-		// 	display_words(display->wordlist);
-		// 	if (display->separator == PIPE)
-		// 		printf("separator: PIPE\n");
-		//  	display = display->next;
-		// 	ft_putstr("END BLOCK\n\n");
-		// }
+		t_parse_block *display = parsing;
+		while (display)
+		{
+			ft_putstr("BEGIN BLOCK\n");
+			display_words(display->wordlist);
+			if (display->separator == PIPE)
+				printf("separator: PIPE\n");
+		 	display = display->next;
+			ft_putstr("END BLOCK\n");
+		}
 //		PRINT
 	return (parsing);
 }
