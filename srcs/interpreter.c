@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/17 17:14:05 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/17 17:30:33 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 // TODO make a file like word.c but for parse_block
 static t_parse_block*	clone_parse_block(t_parse_block *orig)
 {
-	return(new_parse_block(copy_wordlist(orig->wordlist), orig->separator));
+	return (new_parse_block(copy_wordlist(orig->wordlist), orig->separator));
 }
 
 // debug start_command : actually just prints the args
@@ -69,7 +69,7 @@ static int	pipeline_run(t_parse_block *pipeline)
 	return (ret);
 }
 
-static void	pipeline_add(t_parse_block **pipeline, t_parse_block *new)
+static void	pipeline_add(t_parse_block **pipeline, t_parse_block *new) // TODO optimize, don't need 2 variables to do that
 {
 	t_parse_block	*prev;
 	t_parse_block	*cur;
@@ -77,9 +77,12 @@ static void	pipeline_add(t_parse_block **pipeline, t_parse_block *new)
 	prev = NULL;
 	cur = *pipeline;
 	while (cur)
+	{
+		prev = cur;
 		cur = cur->next;
+	}
 	if (prev)
-		cur->next = clone_parse_block(new);
+		prev->next = clone_parse_block(new);
 	else
 		*pipeline = clone_parse_block(new);
 }
@@ -106,5 +109,6 @@ int			do_interpret(t_parse_block *parsed)
 		}
 		cur = cur->next;
 	}
+	free_parse_block(&pipeline);
 	return (ret);
 }
