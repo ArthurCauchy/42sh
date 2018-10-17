@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:56:09 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/17 12:14:30 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/17 15:25:25 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_signals(void)
 {
-	//signal(SIGINT, SIG_IGN); TEMPORARY DISABLED (for the sake of debug)
+	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGTTIN, SIG_IGN);

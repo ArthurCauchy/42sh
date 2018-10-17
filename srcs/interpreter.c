@@ -6,12 +6,10 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/17 14:58:29 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/17 15:33:37 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <sys/wait.h>
 #include <unistd.h>
 #include "libft.h"
 #include "utils.h"
@@ -19,36 +17,22 @@
 #include "parsing.h"
 #include "global.h"
 
-// actually run the command, TODO move it to a separate file
+// debug start_command : actualy just prints the args
 static int	start_command(t_word *cmd_args)
 {
-	int			status;
-	int			ret;
-	t_builtin	*builtin;
-	char		**args;
-	
-	ft_putendl("=========================");
-	args = ft_memalloc(sizeof(char*) * PARAMS_MAX);
-	arglist_to_array(cmd_args, args);
-	if ((builtin = search_builtin(cmd_args->str)))
+	t_word	*cur;
+
+	cur = cmd_args;
+	ft_putstr("Starting process : '");
+	while (cur)
 	{
-		// apply redirects builtin-style
-		ret = builtin->func(&g_env, args);
+		if (cur != cmd_args)
+			ft_putchar(' ');
+		ft_putstr(cur->str);
+		cur = cur->next;
 	}
-	else
-	{
-		if (fork() == 0)
-		{
-			// apply redirects normal
-			if (execve(args[0], args, env_to_array(&g_env)) < 0)
-				return (1);
-			exit(1);
-		}
-		wait(&status);
-		return (WEXITSTATUS(status));
-	}
-	delete_args(args);
-	return (ret);
+	ft_putstr("\'\n");
+	return (0);
 }
 
 static int	pipeline_run(t_parse_block *pipeline)
@@ -95,31 +79,6 @@ static void	pipeline_add(t_parse_block **pipeline, t_parse_block *new)
 		*pipeline = new;
 }
 
-// TEST INTRERPRET : just prints the blocks from parsing
-/*int			do_interpret(t_parse_block *parsed)
-{
-	t_parse_block	*cur;
-	t_word			*wordlist;
-
-	cur = parsed;
-	while (cur)
-	{
-		wordlist = cur->wordlist;
-		while (wordlist)
-		{
-			ft_putstr(wordlist->str);
-			if (wordlist->next)
-				ft_putchar('\n');
-			else
-				ft_putchar(' ');
-			wordlist = wordlist->next;
-		}
-		cur = cur->next;
-	}
-	return (0);
-}*/
-
-// real fct
 int			do_interpret(t_parse_block *parsed)
 {
 	int				ret;
@@ -138,7 +97,7 @@ int			do_interpret(t_parse_block *parsed)
 			if ((ret != 0 && cur->separator == AND)
 					|| (ret == 0 && cur->separator == OR))
 				return (ret);
-			pipeline = NULL; // pipeline clear
+			pipeline = NULL;
 		}
 		cur = cur->next;
 	}
