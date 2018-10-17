@@ -6,25 +6,47 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/16 18:17:13 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/17 11:58:25 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "libft.h"
+#include "utils.h"
+#include "builtins.h"
 #include "parsing.h"
+#include "global.h"
 
 // actually run the command, TODO move it to a separate file
-static void start_command()
+static int	start_command(t_word *cmd_args)
 {
-
+	int			ret;
+	t_builtin	*builtin;
+	char		**args;
+	
+	args = ft_memalloc(sizeof(char*) * PARAMS_MAX);
+	if ((builtin = search_builtin(cmd_args->str)))
+	{
+		// apply redirects builtin-style
+		arglist_to_array(cmd_args, args);
+		ret = builtin->func(&g_env, args);
+	}
+	else
+	{
+		ft_putendl_fd("Not a builtin.", 2);
+		//apply redirects normal
+		return (1);
+	}
+	delete_args(args);
+	return (ret);
 }
 
-int			pipeline_run(t_parse_block *pipeline)
+static int	pipeline_run(t_parse_block *pipeline)
 {
+	int	ret;
 	// TODO can the pipeline be NULL ? if yes check it first
 	t_parse_block	*cur;
-	int				pipefd[2];
+	//int				pipefd[2];
 	
 	cur = pipeline;
 	while (pipeline)
@@ -40,14 +62,15 @@ int			pipeline_run(t_parse_block *pipeline)
 			// redirect this command's STDOUT to pipefd[1]
 		}
 		*/
-		start_command();
+		ret = start_command(pipeline->wordlist);
 		pipeline = pipeline->next;
 	}
 	// TODO clean pipes if commands not successful etc etc
+	return (ret);
 }
 
 // is this function actually the name as block_push or smthng in parsing.c ? the name is better for this use case tho
-void		pipeline_add(t_parse_block **pipeline, t_parse_block *new)
+static void	pipeline_add(t_parse_block **pipeline, t_parse_block *new)
 {
 	t_parse_block	*prev;
 	t_parse_block	*cur;
@@ -63,7 +86,7 @@ void		pipeline_add(t_parse_block **pipeline, t_parse_block *new)
 }
 
 // TEST INTRERPRET : just prints the blocks from parsing
-int			do_interpret(t_parse_block *parsed)
+/*int			do_interpret(t_parse_block *parsed)
 {
 	t_parse_block	*cur;
 	t_word			*wordlist;
@@ -83,8 +106,8 @@ int			do_interpret(t_parse_block *parsed)
 		}
 		cur = cur->next;
 	}
-	return (/*status code*/0);
-}
+	return (0);
+}*/
 
 // real fct
 int			do_interpret(t_parse_block *parsed)
@@ -95,15 +118,15 @@ int			do_interpret(t_parse_block *parsed)
 
 	ret = 0;
 	pipeline = NULL;
-	cur = *parsed;
+	cur = parsed;
 	while (cur)
 	{
 		pipeline_add(&pipeline, cur);
-		if (parsed->token == PIPE)
+		if (parsed->separator == PIPE)
 			continue;
 		ret = pipeline_run(pipeline);
-		if ((ret != 0 && cur->token == AND)
-				|| (ret == 0 && cur->token == OR))
+		if ((ret != 0 && cur->separator == AND)
+				|| (ret == 0 && cur->separator == OR))
 			return (ret);
 		pipeline = NULL; // pipeline clear
 		cur = cur->next;

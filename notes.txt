@@ -15,6 +15,7 @@ TODO:
 - shortcuts (ex: CTRL + L)
 - display command line when error (command: no such builtin)
 - copy-paste functionality? (change shortcuts)
+- somehow remove redirection tokens from the main string BEFORE checking for builtin (cmd : '>toto echo a' should work)
 
 Error from acauchy's 21sh:
 - strcmp in redirections !!!!! Change to libft's ft_strcmp
