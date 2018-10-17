@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 15:24:43 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/10/17 15:56:11 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/10/17 17:13:50 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void free_parse_block(t_parse_block **parse)
 	prev = NULL;
 	while (cur)
 	{
-		delete_wordlist(&(*parse)->wordlist);
+		delete_wordlist(&(cur)->wordlist);
 		prev = cur;
 		cur = cur->next;
 		free(prev);

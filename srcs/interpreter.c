@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/17 16:29:37 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/10/17 17:14:05 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,13 @@
 #include "parsing.h"
 #include "global.h"
 
-// debug start_command : actualy just prints the args
+// TODO make a file like word.c but for parse_block
+static t_parse_block*	clone_parse_block(t_parse_block *orig)
+{
+	return(new_parse_block(copy_wordlist(orig->wordlist), orig->separator));
+}
+
+// debug start_command : actually just prints the args
 static int	start_command(t_word *cmd_args)
 {
 	t_word	*cur;
@@ -63,7 +69,6 @@ static int	pipeline_run(t_parse_block *pipeline)
 	return (ret);
 }
 
-// is this function actually the name as block_push or smthng in parsing.c ? the name is better for this use case tho
 static void	pipeline_add(t_parse_block **pipeline, t_parse_block *new)
 {
 	t_parse_block	*prev;
@@ -74,9 +79,9 @@ static void	pipeline_add(t_parse_block **pipeline, t_parse_block *new)
 	while (cur)
 		cur = cur->next;
 	if (prev)
-		cur->next = new;
+		cur->next = clone_parse_block(new);
 	else
-		*pipeline = new;
+		*pipeline = clone_parse_block(new);
 }
 
 int			do_interpret(t_parse_block *parsed)
@@ -94,10 +99,10 @@ int			do_interpret(t_parse_block *parsed)
 		if (parsed->separator != PIPE)
 		{
 			ret = pipeline_run(pipeline);
+			free_parse_block(&pipeline);
 			if ((ret != 0 && cur->separator == AND)
 					|| (ret == 0 && cur->separator == OR))
 				return (ret);
-			pipeline = NULL;
 		}
 		cur = cur->next;
 	}

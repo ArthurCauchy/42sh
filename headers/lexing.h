@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/16 11:50:26 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/10/17 17:03:53 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct		s_word
 
 t_word	*new_word(t_token token, char *str);
 void	remove_word(t_word **wordlist, t_word *word);
+t_word	*copy_wordlist(t_word *wordlist);
 void	delete_wordlist(t_word **head);
 
 /*

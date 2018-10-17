@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/17 15:54:01 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/10/17 17:06:49 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,11 @@ typedef struct	s_parse_block
 	struct s_parse_block	*next;
 }				t_parse_block;
 
-void	delete_wordlist(t_word **head);
-void	free_parse_block(t_parse_block **parse);
-
 /*
 ** parsing.c
 */
-
-t_parse_block *do_parsing(t_word *wordlist, char **errmsg);
-
-// TODO define funtions here
+void			free_parse_block(t_parse_block **parse); // TODO move to separate file 'parse_block.c'
+t_parse_block	*new_parse_block(t_word *word, t_token separator); // same
+t_parse_block	*do_parsing(t_word *wordlist, char **errmsg);
 
 #endif
