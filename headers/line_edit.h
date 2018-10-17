@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/17 15:13:07 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/17 17:59:47 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <sys/types.h>
 # include <limits.h>
-# include "libft.h"
+# include "../libft/libft.h"
 # include "utils.h"
 # include "env.h"
 
@@ -156,12 +156,6 @@ unsigned long	get_key(void);
 /*
 ** auto_complet.c
 */
-t_autolist		*add_a_list(t_autolist *list, char *name, unsigned char type);
-t_autolist		*add_one_list(t_autolist *list, t_autolist *add);
-int				nb_list(t_autolist *list);
-void			free_auto_lt(t_line *line);
-void			is_tab(unsigned long key, t_line *line);
-int				arrow_keys_in_autoline(t_line *line, t_env **env, unsigned long key);
 
 /*
 ** sort_list.c
@@ -186,5 +180,50 @@ char			*ask_for_input(char *prompt);
 */
 
 int				key_isarrow(unsigned long key);
+int				arrow_keys_in_autoline(t_line *line, t_env **env, unsigned long key);
+
+/*
+** auto_start_current.c
+*/
+
+int				auto_start(char *line);
+int				auto_current(t_line *line);
+
+/*
+** auto_add_a_list_nbuildin.c
+*/
+
+t_autolist		*add_a_list(t_autolist *list, char *name, unsigned char type);
+t_autolist		*add_one_list(t_autolist *list, t_autolist *add);
+t_autolist		*addlist_buildin(t_line *line, t_autolist *list);
+
+/*
+** auto_get_autolist.c
+*/
+
+t_autolist		*get_autolist(t_line *line, t_env **env);
+void			path_last_slash(char *start, char *dic, int index);
+
+/*
+** auto_put_colum.c
+*/
+
+void			put_colum(t_line *line);
+
+/*
+** auto_calcu.c
+*/
+
+void			init_win(t_autolist *list, int win_col, t_win *win);
+int				nb_list(t_autolist *list);
+void			free_auto_lt(t_line *line);
+void			is_tab(unsigned long key, t_line *line);
+
+/*
+** auto_return_key.c
+*/
+
+int				return_key(t_line *line);
+void			clear_auto_onscreen(t_line *line);
 
 #endif
