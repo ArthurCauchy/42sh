@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 15:24:43 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/10/17 12:26:20 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/10/17 14:51:03 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ void block_push(t_parse_block **blocklist, t_parse_block *new_block)
 		cur = cur->next;
 	}
 	cur = (t_parse_block *)malloc(sizeof(t_parse_block));
-	cur->wordlist = new_block->wordlist;
+	cur->wordlist = NULL;
 	cur->separator = new_block->separator;
+	word_push(&cur->wordlist, new_block->wordlist);
 	cur->next = NULL;
 	if (prev)
 		prev->next = cur;
@@ -128,13 +129,13 @@ t_parse_block* do_parsing(t_word *wordlist, char **errmsg)
 			word_push(&tmp_block->wordlist, tmp);
 			tmp_block->separator = tmp->token;
 			block_push(&parsing, tmp_block);
- //			free_parse_block(&tmp_block);
+			free_parse_block(&tmp_block);
 		}
 		else if (is_parsing_separator(tmp->token))
 		{
 			tmp_block->separator = tmp->token;
 			block_push(&parsing, tmp_block);
-//			free_parse_block(&tmp_block);
+			free_parse_block(&tmp_block);
 			tmp_block = new_parse_block(NULL, NONE);
 		}
 		else
@@ -142,17 +143,16 @@ t_parse_block* do_parsing(t_word *wordlist, char **errmsg)
 		tmp = tmp->next;
 	}
 //		PRINT
-		t_parse_block *display = parsing;
-		while (display)
-		{
-			ft_putstr("BEGIN BLOCK\n");
-			display_words(display->wordlist);
-			if (display->separator == PIPE)
-				printf("separator: PIPE\n");
-		 	display = display->next;
-			ft_putstr("END BLOCK\n\n");
-		}
+		// t_parse_block *display = parsing;
+		// while (display)
+		// {
+		// 	ft_putstr("BEGIN BLOCK\n");
+		// 	display_words(display->wordlist);
+		// 	if (display->separator == PIPE)
+		// 		printf("separator: PIPE\n");
+		//  	display = display->next;
+		// 	ft_putstr("END BLOCK\n\n");
+		// }
 //		PRINT
-//	free_parse_block(&tmp_block);
 	return (parsing);
 }
