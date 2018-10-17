@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 15:24:43 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/10/16 18:17:02 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/10/17 12:16:00 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ t_parse_block* do_parsing(t_word *wordlist, char **errmsg)
 		{
 			tmp_block->separator = tmp->token;
 			block_push(&parsing, tmp_block);
-			free_parse_block(&tmp_block);
-			tmp_block = new_parse_block((t_word *)malloc(sizeof(t_parse_block)), NONE);
+//			free_parse_block(&tmp_block);
+//			tmp_block = new_parse_block((t_word *)malloc(sizeof(t_parse_block)), NONE);
 		}
 		else
 			word_push(&tmp_block->wordlist, tmp);
