@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/09/20 16:13:25 by acauchy          ###   ########.fr        #
+#    Updated: 2018/10/17 15:27:32 by saxiao           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,6 +96,7 @@ SRC_NAME = utils.c \
 		   line_sort_list.c \
 		   line_auto_color.c \
 		   line_input.c \
+		   auto_key_isarrow.c \
 		   main.c
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))

@@ -1,17 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   line_auto_complet.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/17 15:05:59 by saxiao            #+#    #+#             */
+/*   Updated: 2018/10/17 15:25:08 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <curses.h>
 #include <term.h>
 #include <stdlib.h>
 #include <dirent.h>
 #include <unistd.h>
-#include "ft_printf.h"
-#include "line_edit.h"
+#include "../libft/ft_printf/includes/ft_printf.h"
+#include "../headers/line_edit.h"
 
 static void	init_auto_start(int *i, int *find_start, int *res)
 {
 	*i = 0;
 	*find_start = 0;
 	*res = 0;
+}
+
+static void for_auto_start(char *line, int *i, int *open_squote, int *open_dquote)
+{
+	if (line[*i] == '"' && dslash_before(line, *i) && *open_squote < 0)
+		*open_dquote = -*open_dquote;
+	if (line[*i] == '\'' && dslash_before(line, *i) && *open_dquote < 0)
+		*open_squote = -*open_squote;
+	(*i)++;
 }
 
 int		auto_start(char *line)
@@ -28,14 +49,9 @@ int		auto_start(char *line)
 	while (!find_start)
 	{
 		res = i;
-		while (line[i] && !(open_squote < 0 && open_dquote < 0 && (line[i] == ' ' || line[i] == '\t')))
-		{
-			if (line[i] == '"' && dslash_before(line, i) && open_squote < 0)
-				open_dquote = -open_dquote;
-			if (line[i] == '\'' && dslash_before(line, i) && open_dquote < 0)
-				open_squote = -open_squote;
-			i++;
-		}
+		while (line[i] && !(open_squote < 0 && open_dquote < 0 && \
+					(line[i] == ' ' || line[i] == '\t')))
+			for_auto_start(line, &i, &open_squote, &open_dquote);
 		if (!line[i])
 			find_start = 1;
 		else
@@ -79,11 +95,11 @@ t_autolist	*add_one_list(t_autolist *list, t_autolist *add)
 }
 
 /*
-** Params :
-** - list : autocompletion list
-** - name : the name of this element of the list
-** - type : 0 = regular file, 1 = directory
-*/
+ ** Params :
+ ** - list : autocompletion list
+ ** - name : the name of this element of the list
+ ** - type : 0 = regular file, 1 = directory
+ */
 
 t_autolist	*add_a_list(t_autolist *list, char *name, unsigned char type)
 {
@@ -110,7 +126,7 @@ int			buildin_exit(t_autolist *list, char *buildin)
 	while (cp)
 	{
 		if (!ft_strcmp(cp->name, buildin))
-		return (1);
+			return (1);
 		cp = cp->next;
 	}
 	return (0);
@@ -132,9 +148,9 @@ t_autolist	*addlist_buildin(t_line *line, t_autolist *list)
 	while (++i < 6)
 	{
 		if (!ft_strncmp((char *)line->auto_compare, buildin[i], ft_strlen((char *)line->auto_compare)) && !buildin_exit(list, buildin[i]))
-						list = add_a_list(list, buildin[i], 0);
+			list = add_a_list(list, buildin[i], 0);
 	}
-return (list);
+	return (list);
 }
 
 t_autolist	*addlist_in_path(t_line *line, char **path, t_autolist *list)
@@ -159,7 +175,7 @@ t_autolist	*addlist_in_path(t_line *line, char **path, t_autolist *list)
 		path++;
 	}
 	if (!auto_current(line))
-	list = addlist_buildin(line, list);
+		list = addlist_buildin(line, list);
 	return (list);
 }
 
@@ -186,20 +202,7 @@ t_autolist	*addlist_no_path(t_line *line, t_autolist *list)
 		while ((dir = readdir(dirp)))
 		{
 			if (!ft_strncmp((char *)line->auto_compare + ft_strlen(dic), dir->d_name, ft_strlen((char *)line->auto_compare + ft_strlen(dic))))
-			{
-			/*
-				add = malloc(sizeof(t_autolist));
-				add->next = NULL;
-				ft_bzero(add->name, MAX_BUF);
-				ft_strcpy(add->name, dir->d_name);
-				add->len = ft_strlen(add->name);
-				if (dir->d_type == DT_DIR)
-					add->is_dic = 1;
-				else
-					add->is_dic = 0;
-					*/
 				list = add_a_list(list, dir->d_name, dir->d_type);
-			}
 		}
 		closedir(dirp);
 	}
@@ -214,13 +217,15 @@ t_autolist	*get_autolist(t_line *line, t_env **env)
 
 	list = NULL;
 	all_path = NULL;
-	(void)line;
 	if (auto_current(line))
 		all_path = ft_split("./", " ");
 	else
-	all_path = path(env);
+		all_path = path(env);
 	if (!ft_strchr((char *)line->auto_compare, '/'))
-		list = addlist_in_path(line, all_path, list);
+	{
+		if (ft_strlen((char *)line->auto_compare) || !ft_strcmp(all_path[0], "./"))
+			list = addlist_in_path(line, all_path, list);
+	}
 	else
 		list = addlist_no_path(line, list);
 	ft_freestrstr(all_path);
@@ -299,7 +304,6 @@ void	put_colum(t_line *line)
 
 	ct.j = -1;
 	total_row = line->w.line;
-	//lt = line->auto_lt;
 	lt = start_list(line, &total_row);
 	while (++(ct.j) < total_row)
 	{
@@ -380,22 +384,6 @@ static void	one_autolist(t_line *line)
 	move_nright(line);
 	put_choice_end(line, line->auto_lt->is_dic);
 }
-/*
-static void	calcu_i(t_line *line, t_autolist *this,  int *i)
-{
-	t_autolist	*cp;
-
-	if (line->auto_ct % nb_list(line->auto_lt) == 0)
-	{
-		cp = this;
-		while (cp->next)
-			cp = cp->next;
-		*i = cp->len + 1;
-	}
-	else
-		*i = this->pre->len + 1;
-}
-*/
 
 static void	put_choice(t_line *line, int *i)
 {
@@ -411,7 +399,6 @@ static void	put_choice(t_line *line, int *i)
 		{
 			if (line->auto_last_choice_len != -1)
 			{
-				//calcu_i(line, cp, i);
 				*i = line->auto_last_choice_len + 1;
 				while (--*i)
 					delete_key(line);
@@ -462,7 +449,6 @@ static void	cusor_back(t_line *line)
 {
 	int		i;
 
-	//	clear_auto_onscreen(line);
 	i = line->w.line + 2;
 	init_attr(ADVANCED_LINE_EDIT);
 	while (--i)
@@ -485,6 +471,7 @@ int		return_key(t_line *line)
 
 int		my_tabkey(t_line *line, t_env **env)
 {
+	ft_bzero((char *)line->auto_compare, INPUT_MAX_LEN);
 	ft_strcpy((char *)line->auto_compare, (char *)line->buf + auto_start((char *)line->buf));
 	if (line->auto_ct == -1)
 	{
@@ -511,63 +498,3 @@ int		my_tabkey(t_line *line, t_env **env)
 	}
 	return (0);
 }
-
-int		arrow_keys_in_autoline(t_line *line, t_env **env, unsigned long key)
-{
-	int		real_nb_line;
-
-	real_nb_line = nb_list(line->auto_lt) / line->w.col;
-	if (nb_list(line->auto_lt) % line->w.col)
-		real_nb_line++;
-	line->auto_ct--;
-	if (key == ARROW_LEFT)
-	{
-		if (line->auto_ct % nb_list(line->auto_lt) / real_nb_line != 0)
-		line->auto_ct = line->auto_ct - real_nb_line;
-		else
-		{
-		if (line->auto_ct % nb_list(line->auto_lt) % real_nb_line + (line->w.col - 1) * real_nb_line < nb_list(line->auto_lt))
-			line->auto_ct = line->auto_ct + (line->w.col - 1) * real_nb_line;
-		else
-			line->auto_ct = line->auto_ct + (line->w.col - 2) * real_nb_line;
-		}
-	}
-	else if (key == ARROW_RIGHT)
-	{
-		if (line->auto_ct % nb_list(line->auto_lt) + real_nb_line < nb_list(line->auto_lt))
-		line->auto_ct = line->auto_ct + real_nb_line;
-		else
-			line->auto_ct = line->auto_ct % nb_list(line->auto_lt) % real_nb_line;
-	}
-	else if (key == ARROW_UP)
-	{
-		if (line->auto_ct % nb_list(line->auto_lt) % real_nb_line == 0)
-		{
-			if (line->auto_ct % nb_list(line->auto_lt) + real_nb_line - 2 > nb_list(line->auto_lt))
-				line->auto_ct = nb_list(line->auto_lt) - 1;
-			else
-			line->auto_ct = line->auto_ct % nb_list(line->auto_lt) + real_nb_line - 1;
-		}
-		else
-			line->auto_ct--;
-	}
-	else if (key == ARROW_DOWN)
-	{
-		if (line->auto_ct % nb_list(line->auto_lt) == nb_list(line->auto_lt) - 1 || line->auto_ct % nb_list(line->auto_lt) % real_nb_line == real_nb_line - 1)
-			line->auto_ct = line->auto_ct - line->auto_ct % nb_list(line->auto_lt) % real_nb_line;
-		else
-			line->auto_ct++;
-	}
-	my_tabkey(line, env);
-	line->is_tabb4 = 1;
-	return (0);
-}
-/*
-   int		main()
-   {
-   int i = auto_start("  'ls l ' l");
-   printf(" i=%d\n", i);
-   return (0);
-
-   }
-   */

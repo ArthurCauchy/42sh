@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:47:13 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/16 17:05:54 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/17 14:47:15 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int			engine(t_line *line, unsigned long key, t_env **env)
 			return (0);
 		}
 		line->auto_ct = -1;
+		line->auto_last_choice_len = -1;
 		printable(line, key);
 	}
 	else if (key == TAB_KEY)
@@ -100,6 +101,7 @@ int			engine(t_line *line, unsigned long key, t_env **env)
 				if (line->is_tabb4)
 					free_auto_lt(line);
 				line->auto_ct = -1;
+				line->auto_last_choice_len = -1;
 			}
 		}
 	}

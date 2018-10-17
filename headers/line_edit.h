@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/16 16:58:29 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/17 15:13:07 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ void			color_reset(void);
 char			*ask_for_input(char *prompt);
 
 /*
-** line_engine.c
+** auto_key_isarrow.c
 */
 
 int				key_isarrow(unsigned long key);
