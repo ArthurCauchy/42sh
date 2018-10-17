@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/17 15:33:37 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/17 16:29:37 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	pipeline_run(t_parse_block *pipeline)
 	// TODO can the pipeline be NULL ? if yes check it first
 	t_parse_block	*cur;
 	//int				pipefd[2];
-	
+
 	cur = pipeline;
 	while (pipeline)
 	{

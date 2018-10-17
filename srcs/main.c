@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/17 15:49:08 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/10/17 15:54:28 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int			main(int argc, char **argv, char **envp)
 				parsed = do_parsing(cmd_args, &errmsg);
 				//start_command(cmd_args);
 				do_interpret(parsed); // TODO save return into global for last command status
-				// TODO delete 'parsed' here
+				free_parse_block(&parsed);
 			}
 			delete_wordlist(&cmd_args);
 		}

@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 15:24:43 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/10/17 15:47:57 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/10/17 15:56:11 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void word_push(t_word **wordlist, t_word *new_word)
 	t_word *cur;
 	t_word *prev;
 
-	printf("new_word: %s\n", new_word->str);
 	cur = *wordlist;
 	prev = NULL;
 	while (cur)
