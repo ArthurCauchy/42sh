@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/17 11:58:25 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/17 12:21:40 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,13 +122,14 @@ int			do_interpret(t_parse_block *parsed)
 	while (cur)
 	{
 		pipeline_add(&pipeline, cur);
-		if (parsed->separator == PIPE)
-			continue;
-		ret = pipeline_run(pipeline);
-		if ((ret != 0 && cur->separator == AND)
-				|| (ret == 0 && cur->separator == OR))
-			return (ret);
-		pipeline = NULL; // pipeline clear
+		if (parsed->separator != PIPE)
+		{
+			ret = pipeline_run(pipeline);
+			if ((ret != 0 && cur->separator == AND)
+					|| (ret == 0 && cur->separator == OR))
+				return (ret);
+			pipeline = NULL; // pipeline clear
+		}
 		cur = cur->next;
 	}
 	return (ret);
