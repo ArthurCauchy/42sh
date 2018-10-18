@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 09:34:09 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/18 09:36:54 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/18 15:02:02 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	for_put_choice(t_autolist *cp, t_line *line)
 	str = cp->name;
 	while (*str)
 		printable(line, *str++);
+	line->auto_is_dic = cp->is_dic;
 }
 
 void		put_choice(t_line *line, int *i)

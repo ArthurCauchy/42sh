@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:47:13 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/18 13:59:17 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/18 15:08:16 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int			engine(t_line *line, unsigned long key, t_env **env)
 	}
 	else if (key == TAB_KEY)
 		my_tabkey(line, env);
-	else if (line->is_tabb4 && key_isarrow(key))
+	else if (line->is_tabb4 && key_isarrow(key) && line->auto_lt)
 	{
 		if (line->auto_last_choice_len != -1)
 			arrow_keys_in_autoline(line, env, key);
