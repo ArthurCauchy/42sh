@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/18 13:59:14 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/18 14:16:00 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ void			sort_list(t_autolist **list);
 ** line_auto_color.c
 */
 void			bg_yellow(void);
-void			green(void);
+void			boldgreen(void);
 void			blue(void);
 void			color_reset(void);
 

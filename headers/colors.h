@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 16:12:11 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/18 13:47:11 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/18 14:12:40 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define COLORS_H
 
 # define BGYELLOW "\033[7;33m"
-# define GREEN "\033[0;32m"
+# define BOLDGREEN "\033[1m\033[32m"
 # define BLUE "\033[1;36m"
 # define RESET "\033[0m"
 

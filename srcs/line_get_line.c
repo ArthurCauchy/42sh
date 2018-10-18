@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/18 13:53:48 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/18 14:16:26 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	help_for_line(char *new_line, char *prompt)
 {
 	ft_bzero(new_line, INPUT_MAX_LEN);
 	init_attr(BASIC_LINE_EDIT);
-	green();
+	boldgreen();
 	ft_putstr(prompt);
 	color_reset();
 }
