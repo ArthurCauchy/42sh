@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 17:50:04 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/17 17:59:02 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/18 09:24:19 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "../libft/ft_printf/includes/ft_printf.h"
 #include "../headers/line_edit.h"
 
-static void	put_choice_end(t_line *line, int chioce_isdic)
+void	put_choice_end(t_line *line, int chioce_isdic)
 {
 	if (chioce_isdic)
 		printable(line, '/');
@@ -39,7 +39,7 @@ int		return_key(t_line *line)
 	return (0);
 }
 
-void			clear_auto_onscreen(t_line *line)
+void	clear_auto_onscreen(t_line *line)
 {
 	int		i;
 

@@ -5,8 +5,7 @@ TODO:
 - fancy prompt
 - parsing
 - line edition
-	- IMPROVE : using arrow keys when autocomp should move in choices and not history
-	- LEAKS!
+	- LEAKS! --- in env.c ft_strdup didn't free
 	- check crash & leaks if BASIC line edition enabled (no termcaps)
 	- secure the window resize by getting the win resize signal
 	- secure the scrolling (ex : disable writing when the command line goes above the window size)
@@ -14,7 +13,6 @@ TODO:
 - signals?
 - shortcuts (ex: CTRL + L)
 - display command line when error (command: no such builtin)
-- copy-paste functionality? (change shortcuts)
 
 Error from acauchy's 21sh:
 - strcmp in redirections !!!!! Change to libft's ft_strcmp

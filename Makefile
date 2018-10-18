@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/10/17 17:59:52 by saxiao           ###   ########.fr        #
+#    Updated: 2018/10/18 10:03:47 by saxiao           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,7 +92,6 @@ SRC_NAME = utils.c \
 		   line_helper.c \
 		   line_get_line.c \
 		   line_my_free.c \
-		   line_auto_complet.c \
 		   line_sort_list.c \
 		   line_auto_color.c \
 		   line_input.c \
@@ -103,6 +102,8 @@ SRC_NAME = utils.c \
 		   auto_put_colum.c \
 		   auto_calcu.c \
 		   auto_return_key.c \
+		   auto_put_choice.c \
+		   auto_my_tabkey.c \
 		   main.c
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))

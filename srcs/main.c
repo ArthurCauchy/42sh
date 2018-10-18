@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/17 14:10:11 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/18 11:54:46 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	start_command(t_word *cmd_args)
 		ft_putendl_fd("Not a builtin.", 2);
 	delete_args(args);
 }
-#include <stdio.h>
+
 int			main(int argc, char **argv, char **envp)
 {
 	char	*errmsg;
@@ -52,7 +52,6 @@ int			main(int argc, char **argv, char **envp)
 	init(&g_env, envp);
 	while ((input = ask_for_input("$> ")) != NULL)
 	{
-		printf("%s\n", input);
 		cmd_args = NULL;
 		exc_mark(&input);
 		if (ft_strlen(input) > 0)

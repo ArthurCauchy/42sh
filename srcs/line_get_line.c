@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/16 17:08:14 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/18 09:56:23 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <unistd.h>
-#include "line_edit.h"
-#include "global.h"
+#include "../headers/line_edit.h"
+#include "../headers/global.h"
 
-void					init_line(char *prompt, t_line *line)
+void		init_line(char *prompt, t_line *line)
 {
 	ft_bzero(line->buf, INPUT_MAX_LEN);
 	ft_bzero(line->ici_doc, INPUT_MAX_LEN);
@@ -45,24 +45,35 @@ void					init_line(char *prompt, t_line *line)
 	g_with_termcap = 1;
 }
 
-static void				help_for_line(char **ligne, char *new_line, char *pt)
+static void	help_for_line(char *new_line, char *pt)
 {
 	ft_bzero(new_line, INPUT_MAX_LEN);
-	*ligne = NULL;
 	init_attr(BASIC_LINE_EDIT);
 	ft_putstr(pt);
 }
 
-int						get_line(char *prompt, char *new_line, t_line *line, t_env **env)
+static void	get_line_without_termcaps(char *new_line)
 {
-	unsigned long	key;
 	char			*ligne;
 
-	help_for_line(&ligne, new_line, prompt);
+	ligne = NULL;
+	g_with_termcap = 0;
+	if (get_next_line(1, &ligne) == 0)
+		exit(0);
+	ligne ? ft_strcpy(new_line, (const char *)ligne) : (void)ligne;
+	ligne ? free(ligne) : (void)ligne;
+}
+
+int			get_line(char *prompt, char *new_line, t_line *line, t_env **env)
+{
+	unsigned long	key;
+
+	help_for_line(new_line, prompt);
 	if (init_attr(ADVANCED_LINE_EDIT) == 0)
 	{
 		init_line(prompt, line);
-		while (((key = get_key()) && !(!line->is_tabb4 &&  key == '\n')) && !line->clc && !line->dld)
+		while (((key = get_key()) && !(!line->is_tabb4 &&  key == '\n')) \
+				&& !line->clc && !line->dld)
 		{
 			if (key == CONTRL_L)
 			{
@@ -77,12 +88,6 @@ int						get_line(char *prompt, char *new_line, t_line *line, t_env **env)
 		ft_strcpy(new_line, (const char *)line->buf);
 	}
 	else
-	{
-		g_with_termcap = 0;
-		if (get_next_line(1, &ligne) == 0)
-			exit(0);
-		ligne ? ft_strcpy(new_line, (const char *)ligne) : (void)ligne;
-		ligne ? free(ligne) : (void)ligne;
-	}
+		get_line_without_termcaps(new_line);
 	return (0);
 }
