@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 17:33:25 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/17 17:35:06 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/18 13:59:05 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static t_autolist	*start_list(t_line *line, int *total_row)
 
 static void			for_put_colum(t_line *line, t_autolist *cp)
 {
+	if (cp->is_dic)
+		blue();
 	if (cp->ct == line->auto_ct % nb_list(line->auto_lt))
 		bg_yellow();
 	ft_printf("%-*s", line->w.max, cp->name);

@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/18 11:40:55 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/18 13:59:14 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@
 # define ADVANCED_LINE_EDIT 1
 # define BASIC_LINE_EDIT 0
 # define NB_KEY 21
+# define NORMAL_PROMPT 1
+# define HEREDOC_PROMPT 2
+# define SQUOTE_PROMPT 3
+# define DQUOTE_PROMPT 4
+# define SLASH_PROMPT 5
 
 # define ARROW_LEFT 4479771
 # define ARROW_RIGHT 4414235
@@ -164,13 +169,15 @@ void			sort_list(t_autolist **list);
 ** line_auto_color.c
 */
 void			bg_yellow(void);
+void			green(void);
+void			blue(void);
 void			color_reset(void);
 
 /*
 ** line_input.c
 */
 
-char			*ask_for_input(char *prompt);
+char			*ask_for_input(int prompt_choice);
 
 /*
 ** auto_key_isarrow.c

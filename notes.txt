@@ -2,7 +2,6 @@ TODO:
 - write some doc and comments
 - should I lex amp (&) symbol since we dont use it ?
 - echo $? now always print 42 (temporary)
-- fancy prompt
 - parsing
 - line edition
 	- LEAKS! --- in env.c ft_strdup didn't free

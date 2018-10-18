@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 13:53:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/18 16:04:05 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/18 13:39:35 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void			lex_analysis(char **cmdline, t_word **wordlist, char **errmsg)
 				free(lexdata->buff);
 				free(lexdata);
 				delete_wordlist(wordlist);
-				*cmdline = ft_strjoin_free(*cmdline, ask_for_input("> "));
+				*cmdline = ft_strjoin_free(*cmdline, ask_for_input(SLASH_PROMPT));
 				init_lexdata(&lexdata);
 				// check command too long here
 			}

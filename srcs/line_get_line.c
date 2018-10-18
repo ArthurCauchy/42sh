@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/18 09:56:23 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/18 13:53:48 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,13 @@ void		init_line(char *prompt, t_line *line)
 	g_with_termcap = 1;
 }
 
-static void	help_for_line(char *new_line, char *pt)
+static void	help_for_line(char *new_line, char *prompt)
 {
 	ft_bzero(new_line, INPUT_MAX_LEN);
 	init_attr(BASIC_LINE_EDIT);
-	ft_putstr(pt);
+	green();
+	ft_putstr(prompt);
+	color_reset();
 }
 
 static void	get_line_without_termcaps(char *new_line)

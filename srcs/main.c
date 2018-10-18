@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/18 11:54:46 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/18 13:18:51 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int			main(int argc, char **argv, char **envp)
 	(void)argv;
 	errmsg = NULL;
 	init(&g_env, envp);
-	while ((input = ask_for_input("$> ")) != NULL)
+	while ((input = ask_for_input(NORMAL_PROMPT)) != NULL)
 	{
 		cmd_args = NULL;
 		exc_mark(&input);
