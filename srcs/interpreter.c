@@ -45,10 +45,8 @@ static int	pipeline_run(t_parse_block *pipeline)
 {
 	int	ret;
 	// TODO can the pipeline be NULL ? if yes check it first
-	t_parse_block	*cur;
 	//int				pipefd[2];
 
-	cur = pipeline;
 	while (pipeline)
 	{
 		/* PIPE HANDLING

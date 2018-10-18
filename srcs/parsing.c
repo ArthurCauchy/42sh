@@ -124,12 +124,10 @@ t_parse_block *new_parse_block(t_word *word, t_token separator)
 t_parse_block* do_parsing(t_word *wordlist, char **errmsg)
 {
 	t_parse_block *parsing;
-	t_word *tmp_word;
 	t_word *tmp;
 	t_parse_block *tmp_block;
 
 	parsing = NULL;
-	tmp_word = NULL;
 	tmp_block = NULL;
 	tmp = wordlist;
 	tmp_block = new_parse_block(NULL, NONE);
