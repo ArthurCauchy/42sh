@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 17:33:25 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/18 13:59:05 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/18 16:21:09 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,12 @@ static void			for_put_colum(t_line *line, t_autolist *cp)
 	if (cp->is_dic)
 		blue();
 	if (cp->ct == line->auto_ct % nb_list(line->auto_lt))
+	{
+		line->auto_is_dic = cp->is_dic;
 		bg_yellow();
+	}
 	ft_printf("%-*s", line->w.max, cp->name);
 	color_reset();
-	line->auto_is_dic = cp->is_dic;
 }
 
 void				put_colum(t_line *line)
