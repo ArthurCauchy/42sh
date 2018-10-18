@@ -6,12 +6,14 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/20 18:21:29 by arthur           ###   ########.fr       */
+/*   Updated: 2018/10/18 19:52:41 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __PATH_H
 # define __PATH_H
+
+#include "env.h"
 
 /*
 ** path.c

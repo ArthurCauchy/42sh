@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/13 16:56:50 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/18 19:47:25 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print_n_free_errmsg(char **errmsg);
 */
 
 int		args_size(char **args);
-void	arglist_to_array(t_word *arglist, char **args);
+char	**arglist_to_array(t_word *arglist);
 char	**copy_args(char **args);
 void	delete_args(char **args);
 
