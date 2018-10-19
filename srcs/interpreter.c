@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/19 16:15:06 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/19 17:36:10 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,6 @@
 #include "parsing.h"
 #include "starter.h"
 #include "global.h"
-
-// debug start_command : actually just prints the args
-/*static int	start_command(t_word *cmd_args)
-{
-	t_word	*cur;
-
-	cur = cmd_args;
-	ft_putstr("Starting process : '");
-	while (cur)
-	{
-		if (cur != cmd_args)
-			ft_putchar(' ');
-		ft_putstr(cur->str);
-		cur = cur->next;
-	}
-	ft_putstr("\'\n");
-	return (0);
-}*/
-
-//#include <stdio.h>
 
 // NOTE : the pipeline should always contain at least 1 program
 static int	pipeline_run(t_parse_block *pipeline)
@@ -57,7 +37,6 @@ static int	pipeline_run(t_parse_block *pipeline)
 	while (pipeline)
 	{
 		redirs = NULL;
-		//printf("block:%p wl:%p token:%d\n", pipeline, pipeline->wordlist, pipeline->separator);
 		// PIPE HANDLING
 		if (analyze_redirects(&pipeline->wordlist, &redirs, &errmsg) == -1)
 		{
@@ -90,22 +69,19 @@ static int	pipeline_run(t_parse_block *pipeline)
 	return (ret);
 }
 
-static void	pipeline_add(t_parse_block **pipeline, t_parse_block *new) // TODO optimize, don't need 2 variables to do that
+static void	pipeline_add(t_parse_block **pipeline, t_parse_block *new)
 {
-	t_parse_block	*prev;
 	t_parse_block	*cur;
 
-	prev = NULL;
 	cur = *pipeline;
-	while (cur)
+	if (!cur)
 	{
-		prev = cur;
-		cur = cur->next;
-	}
-	if (prev)
-		prev->next = clone_parse_block(new);
-	else
 		*pipeline = clone_parse_block(new);
+		return;
+	}
+	while (cur->next)
+		cur = cur->next;
+	cur->next = clone_parse_block(new);
 }
 
 int			do_interpret(t_parse_block *parsed)
