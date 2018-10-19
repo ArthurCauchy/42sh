@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/17 17:06:49 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/19 12:00:45 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,16 @@ typedef struct	s_parse_block
 	t_token					separator;
 	struct s_parse_block	*next;
 }				t_parse_block;
+
+/*
+** parse_block.c
+*/
+
+void word_push(t_word **wordlist, t_word *new_word);
+void block_push(t_parse_block **blocklist, t_parse_block *new_block);
+void free_parse_block(t_parse_block **parse);
+t_parse_block *new_parse_block(t_word *word, t_token separator);
+
 
 /*
 ** parsing.c
