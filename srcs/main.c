@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/18 13:18:51 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/19 12:10:36 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@
 #include "history.h"
 #include "init.h"
 #include "line_edit.h"
+#include "parsing.h"
+#include "interpreter.h"
 
 t_env			*g_env = NULL;
 t_history	*g_history = NULL;
 int			g_with_termcap = 0;
 
-static void	start_command(t_word *cmd_args)
+/*static void	start_command(t_word *cmd_args)
 {
 	t_builtin	*builtin;
 	char		**args;
@@ -38,13 +40,14 @@ static void	start_command(t_word *cmd_args)
 	else
 		ft_putendl_fd("Not a builtin.", 2);
 	delete_args(args);
-}
+}*/
 
 int			main(int argc, char **argv, char **envp)
 {
 	char	*errmsg;
 	char	*input;
 	t_word	*cmd_args;
+	t_parse_block *parsed;
 
 	(void)argc;
 	(void)argv;
@@ -61,7 +64,12 @@ int			main(int argc, char **argv, char **envp)
 			if (errmsg)
 				print_n_free_errmsg(&errmsg);
 			else
-				start_command(cmd_args);
+			{
+				parsed = do_parsing(cmd_args, &errmsg);
+				//start_command(cmd_args);
+				do_interpret(parsed); // TODO save return into global for last command status
+				free_parse_block(&parsed);
+			}
 			delete_wordlist(&cmd_args);
 		}
 		free(input);

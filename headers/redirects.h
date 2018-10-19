@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_signals.c                                     :+:      :+:    :+:   */
+/*   redirects.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/15 12:56:09 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/17 15:25:25 by acauchy          ###   ########.fr       */
+/*   Created: 2018/07/17 14:11:13 by acauchy           #+#    #+#             */
+/*   Updated: 2018/10/18 19:50:11 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
+#ifndef REDIRECTS_H
+# define REDIRECTS_H
 
-void	init_signals(void)
+# include "lexing.h"
+
+typedef struct		s_redirect
 {
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGTSTP, SIG_IGN);
-	signal(SIGTTIN, SIG_IGN);
-	signal(SIGTTOU, SIG_IGN);
-}
+	char							*left;
+	char							*right;
+	t_token						token;
+	struct s_redirect	*next;
+}					t_redirect;
+
+#endif

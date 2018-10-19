@@ -1,22 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_signals.c                                     :+:      :+:    :+:   */
+/*   starter.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/15 12:56:09 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/17 15:25:25 by acauchy          ###   ########.fr       */
+/*   Created: 2018/07/17 14:11:13 by acauchy           #+#    #+#             */
+/*   Updated: 2018/10/18 19:11:44 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
+#ifndef STARTER_H
+# define STARTER_H
 
-void	init_signals(void)
+# include "redirects.h"
+
+typedef struct		s_process
 {
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGTSTP, SIG_IGN);
-	signal(SIGTTIN, SIG_IGN);
-	signal(SIGTTOU, SIG_IGN);
-}
+	char		*path;
+	char		**args;
+	t_redirect	*redirs;
+}					t_process;
+
+/*
+** process.c
+*/
+
+t_process			*new_process(char **args);
+void				delete_process(t_process *proc);
+
+/*
+** starter.c
+*/
+
+int					start_process(t_process *proc, int forked);
+
+#endif

@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/10/18 10:03:47 by saxiao           ###   ########.fr        #
+#    Updated: 2018/10/19 12:10:20 by acauchy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,10 @@ HEADER_NAME = utils.h \
 			  path.h \
 			  builtins.h \
 			  lexing.h \
+			  parsing.h \
+			  interpreter.h \
+			  starter.h \
+			  redirects.h \
 			  init.h \
 			  global.h \
 			  history.h \
@@ -78,6 +82,11 @@ SRC_NAME = utils.c \
 		   lexing_lshift.c \
 		   lexing_rshift.c \
 		   lexing_space.c \
+		   parse_block.c \
+		   parsing.c \
+		   interpreter.c \
+		   process.c \
+		   starter.c \
 		   history.c \
 		   exc_mark.c \
 		   line_termcap_setting.c \

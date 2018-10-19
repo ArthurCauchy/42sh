@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_signals.c                                     :+:      :+:    :+:   */
+/*   interpreter.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/15 12:56:09 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/17 15:25:25 by acauchy          ###   ########.fr       */
+/*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
+/*   Updated: 2018/10/15 17:16:45 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
+#ifndef __INTERPRETER_H
+# define __INTERPRETER_H
 
-void	init_signals(void)
-{
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGTSTP, SIG_IGN);
-	signal(SIGTTIN, SIG_IGN);
-	signal(SIGTTOU, SIG_IGN);
-}
+# include "parsing.h"
+
+/*
+** interpreter.c
+*/
+
+int	do_interpret(t_parse_block *parsed);
+
+#endif
