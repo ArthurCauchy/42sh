@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/20 16:19:35 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/18 14:16:00 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,18 @@
 
 # include <sys/types.h>
 # include <limits.h>
-# include "libft.h"
+# include "../libft/libft.h"
 # include "utils.h"
 # include "env.h"
 
 # define ADVANCED_LINE_EDIT 1
 # define BASIC_LINE_EDIT 0
 # define NB_KEY 21
+# define NORMAL_PROMPT 1
+# define HEREDOC_PROMPT 2
+# define SQUOTE_PROMPT 3
+# define DQUOTE_PROMPT 4
+# define SLASH_PROMPT 5
 
 # define ARROW_LEFT 4479771
 # define ARROW_RIGHT 4414235
@@ -30,23 +35,20 @@
 # define MY_DELECT 127
 # define MY_HOME 4741915
 # define MY_END 4610843
-# define CT_SHIFT_LEFT 74999712013083
+# define CT_SHIFT_ARROW_LEFT 74999712013083
+# define CT_SHIFT_ARROW_RIGHT 73900200385307
 # define CONTRL_L 12
-# define CONTRL_H 8
-# define CONTRL_A 1
-# define CONTRL_B 2
-# define CONTRL_E 5
+# define OPTION_SHIFT_A 34243
+# define OPTION_SHIFT_B 45508
+# define OPTION_SHIFT_E 46274
 # define CONTRL_P 16
-# define ALT_M 46530
-# define CONTRL_PERCENT 29
-# define ALT_S 40899
-# define ALT_UP 1096489755
-# define ALT_DOWN 1113266971
+# define OPTION_A 42435
+# define OPTION_B 11241698
+# define OPTION_E 46274
 # define OPTION_SHIFT_U 43202
 # define OPTION_SHIFT_D 36547
-# define CONTRL_N 14
-# define SHIFT_UP 71683997260571
-# define SHIFT_DOWN 71683997260571
+# define OPTION_ARROW_UP 1096489755
+# define OPTION_ARROW_DOWN 1113266971
 # define CONTRL_F 6
 # define CONTRL_D 4
 # define CONTRL_C 3
@@ -91,6 +93,7 @@ typedef struct	s_line
 	int				one_his;
 	int				here_end;
 	int				is_tabb4;
+	int				auto_last_choice_len;
 	int				auto_ct;
 	int				auto_is_dic;
 	int				auto_current_dic;
@@ -129,7 +132,6 @@ int				delete_key(t_line *line);
 int				delete_all(t_line *line);
 int				delete_at_position(t_line *line);
 int				ctrl_d(t_line *line);
-int				my_tabkey(t_line *line, t_env **env);
 int				ctrl_c(char *new_line, t_line *line);
 int				printable(t_line *line, unsigned long key);
 void			put_a_key(t_line *line, unsigned long key);
@@ -144,7 +146,6 @@ int				cut_end(t_line *line);
 int				paste(t_line *line);
 int				go_up(t_line *line);
 int				go_down(t_line *line);
-int				return_key(t_line *line);
 int				get_line(char *prompt, char *new_line, t_line *line, t_env **env);
 void			init_line(char	*prompt, t_line *line);
 char			**path(t_env **env);
@@ -153,13 +154,10 @@ void			ft_freestrstr(char **cp_env);
 unsigned long	get_key(void);
 
 /*
-** auto_complet.c
+** auto_my_tabkey.c
 */
-t_autolist		*add_a_list(t_autolist *list, char *name, unsigned char type);
-t_autolist		*add_one_list(t_autolist *list, t_autolist *add);
-int				nb_list(t_autolist *list);
-void			free_auto_lt(t_line *line);
-void			is_tab(unsigned long key, t_line *line);
+
+int				my_tabkey(t_line *line, t_env **env);
 
 /*
 ** sort_list.c
@@ -171,12 +169,73 @@ void			sort_list(t_autolist **list);
 ** line_auto_color.c
 */
 void			bg_yellow(void);
+void			boldgreen(void);
+void			blue(void);
 void			color_reset(void);
 
 /*
 ** line_input.c
 */
 
-char			*ask_for_input(char *prompt);
+char			*ask_for_input(int prompt_choice);
+
+/*
+** auto_key_isarrow.c
+*/
+
+int				key_isarrow(unsigned long key);
+int				arrow_keys_in_autoline(t_line *line, t_env **env, unsigned long key);
+
+/*
+** auto_start_current.c
+*/
+
+int				auto_start(char *line);
+int				auto_current(t_line *line);
+
+/*
+** auto_add_a_list_nbuildin.c
+*/
+
+t_autolist		*add_a_list(t_autolist *list, char *name, unsigned char type);
+t_autolist		*add_one_list(t_autolist *list, t_autolist *add);
+t_autolist		*addlist_buildin(t_line *line, t_autolist *list);
+
+/*
+** auto_get_autolist.c
+*/
+
+t_autolist		*get_autolist(t_line *line, t_env **env);
+void			path_last_slash(char *start, char *dic, int index);
+
+/*
+** auto_put_colum.c
+*/
+
+void			put_colum(t_line *line);
+
+/*
+** auto_calcu.c
+*/
+
+void			init_win(t_autolist *list, int win_col, t_win *win);
+int				nb_list(t_autolist *list);
+void			free_auto_lt(t_line *line);
+void			is_tab(unsigned long key, t_line *line);
+
+/*
+** auto_return_key.c
+*/
+
+int				return_key(t_line *line);
+void			clear_auto_onscreen(t_line *line);
+void			put_choice_end(t_line *line, int chioce_isdic);
+
+/*
+** auto_put_choice.c
+*/
+
+void			one_autolist(t_line *line);
+void			put_choice(t_line *line, int *i);
 
 #endif

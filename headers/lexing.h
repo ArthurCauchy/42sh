@@ -6,15 +6,18 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/18 17:00:13 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/17 17:03:53 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __LEXING_H
 # define __LEXING_H
 
+# include <stddef.h>
+
 typedef enum		e_token
 {
+	NONE,
 	ARG,
 	LSHIFT,
 	LSHIFT_AMP,
@@ -33,8 +36,8 @@ typedef enum		e_token
 typedef struct		s_lexdata
 {
 	char		*buff;
-	size_t	i;
-	size_t	j;
+	size_t		i;
+	size_t		j;
 	int			quoted;
 	int			escaped;
 	int			force_add;
@@ -53,6 +56,7 @@ typedef struct		s_word
 
 t_word	*new_word(t_token token, char *str);
 void	remove_word(t_word **wordlist, t_word *word);
+t_word	*copy_wordlist(t_word *wordlist);
 void	delete_wordlist(t_word **head);
 
 /*

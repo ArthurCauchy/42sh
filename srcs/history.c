@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 10:38:26 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/09/14 13:17:07 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/10/15 12:42:36 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,7 @@ static int			h_append(char *file, char **hist)
 	int		fd;
 	char	*hist_string;
 
-	fd = open(file, O_RDWR|O_APPEND|O_CREAT, 0644);
+	fd = open(file, O_RDWR | O_APPEND | O_CREAT, 0644);
 	if (fd == -1)
 	{
 		ft_putstr_fd("42sh: cant write to ", 2);
@@ -230,7 +230,7 @@ static int			h_append(char *file, char **hist)
 	return (1);
 }
 
-int			history_writeA(char *file)
+int			history_write_a(char *file)
 {
 	int		i;
 	int		ret;
@@ -249,12 +249,12 @@ int			history_writeA(char *file)
 	return (ret = 1 ? 0 : 1);
 }
 
-int			history_writeT(char *file, char **hist)
+int			history_write_t(char *file, char **hist)
 {
 	int		fd;
 	char	*hist_string;
 
-	fd = open(file, O_RDWR|O_TRUNC|O_CREAT, 0644);
+	fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0644);
 	if (fd == -1)
 	{
 		ft_putstr_fd("42sh: cant write to ", 2);
@@ -284,7 +284,7 @@ void		history_clear(void)
 
 void		history_exit(void)
 {
-	history_writeA(g_history->HISTFILE);
+	history_write_a(g_history->HISTFILE);
 	history_clear();
 	free(g_history->HISTFILE);
 	free(g_history->line);

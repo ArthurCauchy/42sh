@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/09/20 16:13:25 by acauchy          ###   ########.fr        #
+#    Updated: 2018/10/19 12:10:20 by acauchy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,10 @@ HEADER_NAME = utils.h \
 			  path.h \
 			  builtins.h \
 			  lexing.h \
+			  parsing.h \
+			  interpreter.h \
+			  starter.h \
+			  redirects.h \
 			  init.h \
 			  global.h \
 			  history.h \
@@ -78,6 +82,11 @@ SRC_NAME = utils.c \
 		   lexing_lshift.c \
 		   lexing_rshift.c \
 		   lexing_space.c \
+		   parse_block.c \
+		   parsing.c \
+		   interpreter.c \
+		   process.c \
+		   starter.c \
 		   history.c \
 		   exc_mark.c \
 		   line_termcap_setting.c \
@@ -92,10 +101,18 @@ SRC_NAME = utils.c \
 		   line_helper.c \
 		   line_get_line.c \
 		   line_my_free.c \
-		   line_auto_complet.c \
 		   line_sort_list.c \
 		   line_auto_color.c \
 		   line_input.c \
+		   auto_key_isarrow.c \
+		   auto_start_current.c \
+		   auto_add_a_list_nbuildin.c \
+		   auto_get_autolist.c \
+		   auto_put_colum.c \
+		   auto_calcu.c \
+		   auto_return_key.c \
+		   auto_put_choice.c \
+		   auto_my_tabkey.c \
 		   main.c
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))

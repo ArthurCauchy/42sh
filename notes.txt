@@ -2,17 +2,17 @@ TODO:
 - write some doc and comments
 - should I lex amp (&) symbol since we dont use it ?
 - echo $? now always print 42 (temporary)
-- fancy prompt
 - parsing
 - line edition
-	- IMPROVE : using arrow keys when autocomp should move in choices and not history
-	- LEAKS!
+	- LEAKS! --- in env.c ft_strdup didn't free
 	- check crash & leaks if BASIC line edition enabled (no termcaps)
+	- secure the window resize by getting the win resize signal
+	- secure the scrolling (ex : disable writing when the command line goes above the window size)
 - options of echo builtin ?
 - signals?
 - shortcuts (ex: CTRL + L)
 - display command line when error (command: no such builtin)
-- copy-paste functionality? (change shortcuts)
+- somehow remove redirection tokens from the main string BEFORE checking for builtin (cmd : '>toto echo a' should work)
 
 Error from acauchy's 21sh:
 - strcmp in redirections !!!!! Change to libft's ft_strcmp

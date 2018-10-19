@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 16:19:36 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/23 12:12:46 by arthur           ###   ########.fr       */
+/*   Updated: 2018/10/18 19:44:58 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ int		args_size(char **args)
 	return (i);
 }
 
-void	arglist_to_array(t_word *arglist, char **args)
+char	**arglist_to_array(t_word *arglist)
 {
+	char	**args;
 	t_word	*cur;
 	size_t	i;
 
+	args = ft_memalloc(sizeof(char*) * PARAMS_MAX);
 	cur = arglist;
 	i = 0;
 	while (i < PARAMS_MAX && cur)
@@ -39,6 +41,7 @@ void	arglist_to_array(t_word *arglist, char **args)
 		cur = cur->next;
 	}
 	args[i] = NULL;
+	return (args);
 }
 
 char	**copy_args(char **args)
