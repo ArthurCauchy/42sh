@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/19 12:08:55 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/19 16:15:06 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 	return (0);
 }*/
 
+//#include <stdio.h>
+
 // NOTE : the pipeline should always contain at least 1 program
 static int	pipeline_run(t_parse_block *pipeline)
 {
@@ -46,26 +48,29 @@ static int	pipeline_run(t_parse_block *pipeline)
 	int			i;
 	int			status;
 	int			ret;
+	t_redirect	*redirs;
+	char		*errmsg;
 	//int				pipefd[2];
 
 	ft_bzero(child_fds, 4096 * sizeof(int));
 	pl_size = 0;
 	while (pipeline)
 	{
-		proc = new_process(arglist_to_array(pipeline->wordlist));
-		/* PIPE HANDLING
-		if (cur != pipeline)
+		redirs = NULL;
+		//printf("block:%p wl:%p token:%d\n", pipeline, pipeline->wordlist, pipeline->separator);
+		// PIPE HANDLING
+		if (analyze_redirects(&pipeline->wordlist, &redirs, &errmsg) == -1)
 		{
-			// redirect this command's STDIN to pipefd[0]
+			print_n_free_errmsg(&errmsg);
+			child_fds[pl_size++] = -1;
 		}
-		if (cur->next != NULL)
+		else
 		{
-			pipe(pipefd);
-			// redirect this command's STDOUT to pipefd[1]
+			proc = new_process(arglist_to_array(pipeline->wordlist));
+			proc->redirs = redirs;
+			child_fds[pl_size++] = start_process(proc, pipeline->next ? 1 : 0);
+			delete_process(proc);
 		}
-		*/
-		child_fds[pl_size++] = start_process(proc, pipeline->next ? 1 : 0);
-		delete_process(proc);
 		pipeline = pipeline->next;
 	}
 	// TODO actually one waitpid could be enough if all the subprocesses are in the same pgid
@@ -119,9 +124,9 @@ int			do_interpret(t_parse_block *parsed)
 		{
 			ret = pipeline_run(pipeline);
 			free_parse_block(&pipeline);
-			if ((ret != 0 && cur->separator == AND)
-					|| (ret == 0 && cur->separator == OR))
-				return (ret);
+			if (cur->next && ((ret != 0 && cur->separator == AND)
+					|| (ret == 0 && cur->separator == OR)))
+				cur = cur->next;
 		}
 		cur = cur->next;
 	}

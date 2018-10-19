@@ -1,4 +1,14 @@
-// TODO header 42
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   starter.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/19 14:35:33 by acauchy           #+#    #+#             */
+/*   Updated: 2018/10/19 14:35:56 by acauchy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <sys/types.h>
 #include <unistd.h>
@@ -28,7 +38,7 @@ int	start_process(t_process *proc, int forked)
 			|| !is_executable(proc->path)) // TODO print error msg based on error type
 	{
 		ft_putendl_fd("Command not found.", 2);
-		return (0);
+		return (-127);
 	}
 	if ((pid = fork()) < 0)
 		exit_error("fork() error");

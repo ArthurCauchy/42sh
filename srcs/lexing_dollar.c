@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 14:15:05 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/23 11:31:37 by arthur           ###   ########.fr       */
+/*   Updated: 2018/10/19 14:35:08 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	handle_special_varnames(char *cmdline,
 		t_lexdata *lexdata, char **var_value)
 {
 	if (cmdline[lexdata->i] == '?')
-		*var_value = ft_itoa(42); //TODO replace with last command status
+		*var_value = ft_itoa(g_last_command_status);
 	++lexdata->i;
 }
 

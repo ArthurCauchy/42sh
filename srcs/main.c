@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/19 12:10:36 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/19 14:34:41 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 t_env			*g_env = NULL;
 t_history	*g_history = NULL;
 int			g_with_termcap = 0;
+int			g_last_command_status = 0;
 
 /*static void	start_command(t_word *cmd_args)
 {
@@ -67,7 +68,7 @@ int			main(int argc, char **argv, char **envp)
 			{
 				parsed = do_parsing(cmd_args, &errmsg);
 				//start_command(cmd_args);
-				do_interpret(parsed); // TODO save return into global for last command status
+				g_last_command_status = do_interpret(parsed);
 				free_parse_block(&parsed);
 			}
 			delete_wordlist(&cmd_args);

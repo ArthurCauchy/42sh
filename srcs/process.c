@@ -34,6 +34,6 @@ void		delete_process(t_process *proc)
 {
 	free(proc->path);
 	delete_args(proc->args);
-	// free redirs
+	delete_redirects(proc->redirs);
 	free(proc);
 }
