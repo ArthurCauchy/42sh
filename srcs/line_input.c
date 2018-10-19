@@ -6,15 +6,16 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 15:59:23 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/18 14:34:07 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/19 16:46:05 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdlib.h>
 #include "../libft/libft.h"
-#include "../headers/utils.h"
-#include "../headers/line_edit.h"
-#include "../headers/global.h"
+#include "utils.h"
+#include "line_edit.h"
+#include "global.h"
 
 static void		last_path(char *start, char *dic, int index)
 {
@@ -33,19 +34,21 @@ static void		last_path(char *start, char *dic, int index)
 }
 
 //using getenv need to delect that func later on!!!!!!!
-#include <stdlib.h>
 static void		get_normal_prompt(char *prompt, int index)
 {
 	char	pwd[INPUT_MAX_LEN];
 	char	last_pwd[INPUT_MAX_LEN];
+	char	*home;
 
 	ft_bzero(prompt, index);
 	ft_bzero(pwd, INPUT_MAX_LEN);
 	getcwd(pwd, INPUT_MAX_LEN);
-	if (!ft_strcmp(pwd, getenv("HOME")))
+	home = read_from_env(&g_env, "HOME");
+	if (home && ft_strcmp(pwd, home) == 0)
 		ft_strcpy(last_pwd, "~");
 	else
-	last_path(pwd, last_pwd, INPUT_MAX_LEN);
+		last_path(pwd, last_pwd, INPUT_MAX_LEN);
+	free(home);
 	ft_strcpy(prompt, "-> ");
 	ft_strcat(prompt, last_pwd);
 	ft_strcat(prompt, " ");

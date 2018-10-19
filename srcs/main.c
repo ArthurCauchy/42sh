@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/19 12:10:36 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/19 15:53:18 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 t_env			*g_env = NULL;
 t_history	*g_history = NULL;
 int			g_with_termcap = 0;
+int			g_winsize_changed = 0;
+
 
 /*static void	start_command(t_word *cmd_args)
 {

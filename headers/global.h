@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/20 15:54:25 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/19 15:51:31 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@
 extern t_env			*g_env;
 extern t_history	*g_history;
 extern int			g_with_termcap;
+extern int			g_winsize_changed;
 
 #endif

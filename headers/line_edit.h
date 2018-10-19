@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/19 14:23:36 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/19 16:22:33 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct	s_line
 	unsigned char	here[INPUT_MAX_LEN];
 	unsigned char	ici_doc[INPUT_MAX_LEN];
 	unsigned char	auto_compare[INPUT_MAX_LEN];
+	char			prompt[INPUT_MAX_LEN];
 	int				buf_len;
 	int				line_max;
 	int				screen_height;
@@ -239,9 +240,11 @@ void			one_autolist(t_line *line);
 void			put_choice(t_line *line, int *i);
 
 /*
-** line_ctrl_d.c
+** line_clsreen_winchangesize.c
 */
 
+void			print_prompt(char *prompt);
 int				my_clear_screen(t_line *line);
+int				winsize_change(t_line *line);
 
 #endif

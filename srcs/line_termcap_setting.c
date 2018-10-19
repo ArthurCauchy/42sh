@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:30:47 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/17 14:42:26 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/19 16:58:09 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "line_edit.h"
+#include "global.h"
 
 static int	return_message(char *message, int re_value, int fd)
 {
@@ -51,8 +52,11 @@ int			init_attr(int mod)
 {
 	static struct termios	old;
 	static int				oldatt = 0;
+	static char				*term = NULL;
 	struct termios			new;
 
+	if (term == NULL)
+		term = read_from_env(&g_env, "TERM");
 	if (!oldatt)
 	{
 		oldatt = 1;
@@ -62,8 +66,9 @@ int			init_attr(int mod)
 	if (mod == ADVANCED_LINE_EDIT)
 	{
 		for_attr(&new, old);
-		if (tgetent(NULL, getenv("TERM")) != 1)
+		if (tgetent(NULL, term) != 1)
 		{
+			free(term);
 			default_termi_mode();
 			return (-1);
 		}
