@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/19 12:08:42 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/19 14:12:32 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ typedef struct	s_parse_block
 	t_token					separator;
 	struct s_parse_block	*next;
 }				t_parse_block;
+
+typedef struct	s_error
+{
+	int			before;
+	int			after;
+	t_token		separator;
+	char		*msg;
+}				t_error;
 
 /*
 ** parse_block.c
