@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 11:52:21 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/10/19 12:00:39 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/10/19 12:07:14 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,9 @@ t_parse_block *new_parse_block(t_word *word, t_token separator)
 	ret->separator = separator;
 	ret->next = NULL;
 	return (ret);
+}
+
+t_parse_block*	clone_parse_block(t_parse_block *orig)
+{
+	return (new_parse_block(copy_wordlist(orig->wordlist), orig->separator));
 }

@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/18 20:22:26 by arthur           ###   ########.fr       */
+/*   Updated: 2018/10/19 12:08:55 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@
 #include "parsing.h"
 #include "starter.h"
 #include "global.h"
-
-// TODO make a file like word.c but for parse_block
-static t_parse_block*	clone_parse_block(t_parse_block *orig)
-{
-	return (new_parse_block(copy_wordlist(orig->wordlist), orig->separator));
-}
 
 // debug start_command : actually just prints the args
 /*static int	start_command(t_word *cmd_args)
@@ -121,7 +115,7 @@ int			do_interpret(t_parse_block *parsed)
 	while (cur)
 	{
 		pipeline_add(&pipeline, cur);
-		if (parsed->separator != PIPE)
+		if (cur->separator != PIPE)
 		{
 			ret = pipeline_run(pipeline);
 			free_parse_block(&pipeline);
