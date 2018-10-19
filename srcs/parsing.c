@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 15:24:43 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/10/19 15:56:41 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/10/19 16:11:25 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int		set_error(t_error *error, t_word *tmp)
 	{
 		if (tmp->token == SEMICOL && is_parsing_separator(error->separator))
 			return (parse_error(SEMICOL));
+		if (error->before == 0)
+			return (parse_error(tmp->token));
 		error->separator = tmp->token;
 	}
 	if (is_last(tmp))
@@ -121,7 +123,11 @@ t_parse_block* do_parsing(t_word *wordlist, char **errmsg)
 	while (tmp)
 	{
 		if (!set_error(&error, tmp))
+		{
+			free_parse_block(&tmp_block);
+			free_parse_block(&parsing);
 			return (NULL);
+		}
 		if (is_parsing_separator(tmp->token))
 		{
 			tmp_block->separator = tmp->token;
