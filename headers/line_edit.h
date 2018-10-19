@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/18 14:16:00 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/19 14:23:36 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define ADVANCED_LINE_EDIT 1
 # define BASIC_LINE_EDIT 0
-# define NB_KEY 21
+# define NB_KEY 22
 # define NORMAL_PROMPT 1
 # define HEREDOC_PROMPT 2
 # define SQUOTE_PROMPT 3
@@ -237,5 +237,11 @@ void			put_choice_end(t_line *line, int chioce_isdic);
 
 void			one_autolist(t_line *line);
 void			put_choice(t_line *line, int *i);
+
+/*
+** line_ctrl_d.c
+*/
+
+int				my_clear_screen(t_line *line);
 
 #endif

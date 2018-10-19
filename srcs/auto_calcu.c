@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 17:38:07 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/18 10:13:39 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/19 13:51:04 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ void	free_auto_lt(t_line *line)
 
 void	is_tab(unsigned long key, t_line *line)
 {
-	if (key == TAB_KEY || (key_isarrow(key) && line->is_tabb4 == 1))
+	if ((key == TAB_KEY && nb_list(line->auto_lt) > 1) || \
+			(key_isarrow(key) && line->is_tabb4 == 1))
 		line->is_tabb4 = 1;
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/18 14:16:26 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/19 14:15:53 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,6 @@ int			get_line(char *prompt, char *new_line, t_line *line, t_env **env)
 		while (((key = get_key()) && !(!line->is_tabb4 &&  key == '\n')) \
 				&& !line->clc && !line->dld)
 		{
-			if (key == CONTRL_L)
-			{
-				ft_strcpy((char *)line->buf, "clear");
-				break ;
-			}
 			if (key == CONTRL_C)
 				return (ctrl_c(new_line, line));
 			engine(line, key, env);
