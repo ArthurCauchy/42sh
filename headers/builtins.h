@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:11:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/11 14:55:22 by arthur           ###   ########.fr       */
+/*   Updated: 2018/10/19 17:10:40 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ int					builtin_echo(t_env **env, char **args);
 int					builtin_which(t_env **env, char **args);
 int					builtin_help(t_env **env, char **args);
 int					builtin_history(t_env **env, char **args);
+int					builtin_alias(t_env **env, char **args);
+int					builtin_unalias(t_env **env, char **args);
 
 /*
 ** builtin_cd[...].c

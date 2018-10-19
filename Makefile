@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/10/19 12:10:20 by acauchy          ###   ########.fr        #
+#    Updated: 2018/10/19 17:11:22 by acauchy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,8 @@ SRC_NAME = utils.c \
 		   builtin_which.c \
 		   builtin_help.c \
 		   builtin_history.c \
+		   builtin_alias.c \
+		   builtin_unalias.c \
 		   init.c \
 		   init_signals.c \
 		   init_env.c \
@@ -113,6 +115,7 @@ SRC_NAME = utils.c \
 		   auto_return_key.c \
 		   auto_put_choice.c \
 		   auto_my_tabkey.c \
+		   alias.c \
 		   main.c
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
