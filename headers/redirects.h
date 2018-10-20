@@ -37,4 +37,27 @@ void				delete_redirects(t_redirect *redirs);
 void				add_redirect(t_redirect **redirs, char *left, char *right, t_token token);
 int					analyze_redirects(t_word **arglist, t_redirect **redirs, char **errmsg);
 
+/*
+** redirections_apply.c, redirections_apply_[token].c
+*/
+
+int					open_file_fd(char *filename, int mode,
+		int append, char **errmsg);
+int					apply_redirects(t_redirect *redirs,
+		int *fdtmp_array, int *fdsave_array, char **errmsg);
+int					apply_redirect_pipe(t_redirect *redir,
+		int *fdtmp_array, int *fdsave_array, char **errmsg);
+int			apply_redirect_lshift(t_redirect *redir,
+		int *fdtmp_array, int *fdsave_array, char **errmsg);
+int			apply_redirect_lshift_amp(t_redirect *redir,
+		int *fdtmp_array, int *fdsave_array, char **errmsg);
+int			apply_redirect_lshift2(t_redirect *redir,
+		int *fdtmp_array, int *fdsave_array, char **errmsg);
+int			apply_redirect_rshift(t_redirect *redir,
+		int *fdtmp_array, int *fdsave_array, char **errmsg);
+int			apply_redirect_rshift_amp(t_redirect *redir,
+		int *fdtmp_array, int *fdsave_array, char **errmsg);
+int			apply_redirect_rshift2(t_redirect *redir,
+		int *fdtmp_array, int *fdsave_array, char **errmsg);
+
 #endif

@@ -89,6 +89,8 @@ SRC_NAME = utils.c \
 		   starter.c \
 		   redirects.c \
 		   redirections.c \
+		   redirections_apply.c \
+		   redirections_apply_rshift.c \
 		   history.c \
 		   exc_mark.c \
 		   line_termcap_setting.c \
