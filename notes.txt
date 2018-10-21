@@ -9,6 +9,7 @@ TODO:
 - signals?
 - display command line when error (command: no such builtin)
 - $? after a parse error should be 1
-
-Error from acauchy's 21sh:
-- strcmp in redirections !!!!! Change to libft's ft_strcmp
+- REDIRECTIONS/STARTER
+    - shorten pipeline_run fct in interpreter.c
+    - shorten handle_pipes fct in interpreter.c
+	- handle builtins in pipe

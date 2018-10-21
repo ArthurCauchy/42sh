@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 14:35:33 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/19 14:35:56 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/21 13:10:37 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ int	start_process(t_process *proc, int forked)
 {
 	pid_t		pid;
 	t_builtin	*builtin;
+	char		*errmsg;
 
+	errmsg = NULL;
 	if (!forked && (builtin = search_builtin(proc->args[0])))
 		return (-builtin->func(&g_env, proc->args)); // TODO change to command env
 	if (!proc->path || !is_there_a_file(proc->path)
@@ -44,6 +46,8 @@ int	start_process(t_process *proc, int forked)
 		exit_error("fork() error");
 	if (pid == 0)
 	{
+		if (apply_redirects(proc->redirs, NULL, NULL, &errmsg) == -1)
+			exit_error(errmsg);
 		execve(proc->path, proc->args, env_to_array(&g_env)); // TODO change to command env
 		exit_error("execve() error");
 	}

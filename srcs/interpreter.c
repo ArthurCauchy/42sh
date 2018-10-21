@@ -6,10 +6,11 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/19 17:36:10 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/21 14:45:57 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
 #include "libft.h"
@@ -19,10 +20,47 @@
 #include "starter.h"
 #include "global.h"
 
+static void	handle_pipes(t_parse_block *pipeline, t_redirect **redirs)
+{
+	char		*tmp_str;
+	static int	pipefd[2] = {-1, -1};
+	static int	tmp_pipe = -1;
+
+	if (tmp_pipe != -1)
+	{
+		close(tmp_pipe);
+		tmp_pipe = -1;
+	}
+	if (pipefd[1] != -1)
+	{
+		close(pipefd[1]);
+		pipefd[1] = -1;
+	}
+	if (pipefd[0] != -1)
+	{
+		tmp_str = ft_itoa(pipefd[0]);
+		add_redirect(redirs, "0", tmp_str, PIPE);
+		free(tmp_str);
+		tmp_pipe = pipefd[0];
+		pipefd[0] = -1;
+	}
+	if (pipeline && pipeline->next)
+	{
+		if (pipe(pipefd) == -1)
+			exit_error("pipe() error");
+		tmp_str = ft_itoa(pipefd[1]);
+		add_redirect(redirs, "1", tmp_str, PIPE);
+		free(tmp_str);
+		tmp_str = ft_itoa(pipefd[0]);
+		add_redirect(redirs, "", tmp_str, FDCLOSE);
+		free(tmp_str);
+	}
+}
+
 // NOTE : the pipeline should always contain at least 1 program
 static int	pipeline_run(t_parse_block *pipeline)
 {
-	static int	child_fds[4096]; // TODO create a define for max process in pipe
+	static int	child_fds[FD_MAX];
 	t_process	*proc;
 	int			pl_size;
 	int			i;
@@ -30,14 +68,13 @@ static int	pipeline_run(t_parse_block *pipeline)
 	int			ret;
 	t_redirect	*redirs;
 	char		*errmsg;
-	//int				pipefd[2];
 
-	ft_bzero(child_fds, 4096 * sizeof(int));
+	ft_bzero(child_fds, FD_MAX * sizeof(int));
 	pl_size = 0;
 	while (pipeline)
 	{
 		redirs = NULL;
-		// PIPE HANDLING
+		handle_pipes(pipeline, &redirs);
 		if (analyze_redirects(&pipeline->wordlist, &redirs, &errmsg) == -1)
 		{
 			print_n_free_errmsg(&errmsg);
@@ -52,6 +89,7 @@ static int	pipeline_run(t_parse_block *pipeline)
 		}
 		pipeline = pipeline->next;
 	}
+	handle_pipes(NULL, NULL);
 	// TODO actually one waitpid could be enough if all the subprocesses are in the same pgid
 	i = 0;
 	while (i < pl_size)
@@ -65,7 +103,6 @@ static int	pipeline_run(t_parse_block *pipeline)
 		}
 		++i;
 	}
-	// TODO clean pipes if commands not successful etc etc
 	return (ret);
 }
 

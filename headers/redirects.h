@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:11:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/19 15:11:16 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/21 12:50:39 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@ void				delete_redirects(t_redirect *redirs);
 
 void				add_redirect(t_redirect **redirs, char *left, char *right, t_token token);
 int					analyze_redirects(t_word **arglist, t_redirect **redirs, char **errmsg);
+
+/*
+** redirections_fdsave.c
+*/
+
+void		save_filedes(int *fdtmp_array, int *fdsave_array, int fd);
+void		restore_filedes(int *fdtmp_array, int *fdsave_array);
 
 /*
 ** redirections_apply.c, redirections_apply_[token].c

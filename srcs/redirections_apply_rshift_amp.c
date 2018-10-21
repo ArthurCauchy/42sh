@@ -6,11 +6,14 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:30:48 by acauchy           #+#    #+#             */
-/*   Updated: 2018/06/25 16:35:30 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/21 13:14:44 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "twenty_one_sh.h"
+#include <unistd.h>
+#include <errno.h>
+#include "libft.h"
+#include "redirects.h"
 
 static int	is_numerical(char *str)
 {
@@ -42,7 +45,7 @@ int			apply_redirect_rshift_amp(t_redirect *redir,
 		left_fd = 1;
 	if (!is_numerical(redir->right))
 	{
-		if (strcmp(redir->right, "-") == 0)
+		if (ft_strcmp(redir->right, "-") == 0)
 		{
 			handle_close(fdtmp_array, fdsave_array, left_fd);
 			return (0);
