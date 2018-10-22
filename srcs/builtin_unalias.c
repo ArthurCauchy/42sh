@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 17:05:12 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/22 16:22:13 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/22 17:34:10 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,21 @@
 #include "global.h"
 #include "utils.h"
 #include <stdlib.h>
+
+void			delete_all_aliases(t_alias *alias)
+{
+	t_alias		*tmp;
+
+	if (alias)
+	{
+		ft_strdel(&alias->key);
+		ft_strdel(&alias->value);
+		tmp = alias->next;
+		free(alias);
+		delete_all_aliases(tmp);
+	}
+	g_aliases = NULL;
+}
 
 int				check_alias_existance(char *key, char *value)
 {
@@ -78,6 +93,19 @@ int				builtin_unalias(t_env **env, char **args)
 	(void)env;
 	if (args_size(args) != 2)
 		ft_fminiprint(1, "unalias usage : %l0s%\n", UNALIAS_USAGE);
+	else if (args[1][0] == '-')
+	{
+		if (ft_strcmp(args[1], "-a") == 0)
+		{
+			delete_all_aliases(g_aliases);
+			return (0);
+		}
+		else
+		{
+			ft_fminiprint(1, "unalias : illegal option %l0s%\n", args[1]);
+			ft_fminiprint(1, "usage : %l0s%\n", UNALIAS_USAGE);
+		}
+	}	
 	else
 	{
 		erase_alias(args[1]);

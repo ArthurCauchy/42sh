@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:11:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/22 16:23:56 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/22 17:32:41 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define WHICH_USAGE "which [cmd]"
 # define HELP_USAGE "help [builtin]"
 # define HISTORY_USAGE "history [-c] [-d offset] [n]\nhistory -anrw [filename]\nhistory -ps arg [arg ...]"
-# define ALIAS_USAGE "alias [name='value']"
+# define ALIAS_USAGE "alias [-a] or [name='value']"
 # define UNALIAS_USAGE "unalias [name]"
 
 # define EXIT_BRIEF "Exit the shell."
@@ -39,7 +39,7 @@
 # define HISTORY_BRIEF "Display or manipulate the history list."
 # define ALIAS_BRIEF "Create an alias, aliases allow a string to be substituted"
 # define ALIAS_BRIEF2 " for a word when it is used as the first word of a simple command."
-# define UNALIAS_BRIEF "Delete an alias."
+# define UNALIAS_BRIEF "Delete an alias, -a option delete all alias."
 
 # define EXIT_HELP EXIT_USAGE "\n\n" EXIT_BRIEF
 # define CD_HELP CD_USAGE "\n\n" CD_BRIEF
