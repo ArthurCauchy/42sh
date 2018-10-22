@@ -2,8 +2,6 @@ TODO:
 - should I lex amp (&) symbol since we dont use it ?
 - line edition
 	- check crash & leaks if BASIC line edition enabled (no termcaps)
-	- secure the window resize by getting the win resize signal
-	- secure the scrolling (ex : disable writing when the command line goes above the window size)
 - options of echo builtin ?
 - signals?
 - display command line when error (command: no such builtin)
@@ -12,3 +10,18 @@ TODO:
     - shorten pipeline_run fct in interpreter.c
     - shorten handle_pipes fct in interpreter.c
 - alias substitution
+
+
+key combinations
+1. move_left_word		CONTROL_SHIFT_ARROW_LEFT
+1. move_right_word		CONTROL_SHIFT_ARROW_RIGHT
+3. copy all				OPTION_CHIFT_A;
+3. copy begin			OPTION_CHIFT_B;
+3. copy end				OPTION_CHIFT_E;
+3. cut all				OPTION_A;
+3. cut begin			OPTION_B;
+3. cut end				OPTION_E;
+3. paste				CONTROL_P;
+3. go up 1 line			OPTION_AWRROW_UP;
+3. go down 1 line		OPTION_AWRROW_DOWN;
+(too lazy to change the number .... :))
