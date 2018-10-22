@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 17:05:12 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/20 18:14:07 by ccharrie         ###   ########.fr       */
+/*   Updated: 2018/10/22 15:40:38 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,36 +17,39 @@
 #include "utils.h"
 #include <stdlib.h>
 
-int			check_alias_existance(char *key, char *value)
+int				check_alias_existance(char *key, char *value)
 {
 	t_alias	*head;
 
-	head = aliases;
-	while (aliases)
+	head = g_aliases;
+	while (g_aliases)
 	{
-		if (ft_strcmp(aliases->key, key) == 0)
+		if (ft_strcmp(g_aliases->key, key) == 0)
 		{
-			free(aliases->value);
-			aliases->value = ft_strdup(value);
-			aliases = head;
+			free(g_aliases->value);
+			if (value)
+				g_aliases->value = ft_strdup(value);
+			else
+				g_aliases->value = ft_strdup("");
+			g_aliases = head;
 			return (0);
 		}
-		aliases = aliases->next;
+		g_aliases = g_aliases->next;
 	}
-	aliases = head;
+	g_aliases = head;
 	return (1);
 }
 
-static void		delete_alias(t_alias **prev, t_alias **aliases, t_alias **head,
-		t_alias **tmp)
+static void		delete_alias(t_alias **prev, t_alias **g_aliases,
+		t_alias **head, t_alias **tmp)
 {
 	if (*prev)
-		(*prev)->next = (*aliases)->next;
-	*tmp = (*aliases)->next;
-	if (*aliases == *head)
-		*head = (*aliases)->next;
-	ft_multifree(3, (*aliases)->key, (*aliases)->value, *aliases);
-	*aliases = *tmp;
+		(*prev)->next = (*g_aliases)->next;
+	*tmp = (*g_aliases)->next;
+	if (*g_aliases == *head)
+		*head = (*g_aliases)->next;
+	ft_multifree(3, (*g_aliases)->key, (*g_aliases)->value, *g_aliases);
+	*g_aliases = *tmp;
 }
 
 static void		erase_alias(char *alias_name)
@@ -55,31 +58,30 @@ static void		erase_alias(char *alias_name)
 	t_alias *tmp;
 	t_alias	*prev;
 
-	head = aliases;
+	head = g_aliases;
 	prev = NULL;
-	while (aliases)
+	while (g_aliases)
 	{
-		if (ft_strcmp(aliases->key, alias_name) == 0)
-			delete_alias(&prev, &aliases, &head, &tmp);
+		if (ft_strcmp(g_aliases->key, alias_name) == 0)
+			delete_alias(&prev, &g_aliases, &head, &tmp);
 		else
 		{
-			prev = aliases;
-			aliases = aliases->next;
+			prev = g_aliases;
+			g_aliases = g_aliases->next;
 		}
 	}
-	aliases = head;
+	g_aliases = head;
 }
 
-int			builtin_unalias(t_env **env, char **args)
+int				builtin_unalias(t_env **env, char **args)
 {
 	(void)env;
-
-	if (args_size(args) > 2)
-		ft_fminiprint(1, "unalias usage : %s", UNALIAS_USAGE);	
+	if (args_size(args) != 2)
+		ft_fminiprint(1, "unalias usage : %l0s%", UNALIAS_USAGE);
 	else
 	{
 		erase_alias(args[1]);
-		return(0);
+		return (0);
 	}
 	return (-1);
 }
