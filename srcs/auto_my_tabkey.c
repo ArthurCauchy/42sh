@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 15:05:59 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/18 09:44:09 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 12:29:33 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 #include <stdlib.h>
 #include <dirent.h>
 #include <unistd.h>
-#include "../libft/ft_printf/includes/ft_printf.h"
-#include "../headers/line_edit.h"
+#include "ft_printf.h"
+#include "line_edit.h"
 
 static void	cusor_back(t_line *line)
 {
@@ -41,7 +41,7 @@ static void	print_autolist(t_line *line)
 	init_attr(BASIC_LINE_EDIT);
 	put_colum(line);
 	cusor_back(line);
-	line->auto_ct = line->auto_ct + 1;;
+	line->auto_ct = line->auto_ct + 1;
 }
 
 int			my_tabkey(t_line *line, t_env **env)

@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/22 15:57:03 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/22 16:53:44 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_history	*g_history = NULL;
 int			g_with_termcap = 0;
 int			g_last_command_status = 0;
 t_alias		*g_aliases = NULL;
+int			g_winsize_changed = 0;
 
 int			main(int argc, char **argv, char **envp)
 {

@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:47:13 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/18 15:08:16 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/19 14:23:39 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	init_for_enginie_2(t_key *t)
 	t[19].func = ctrl_d;
 	t[20].a_key = RETURN_KEY;
 	t[20].func = return_key;
+	t[21].a_key = CONTRL_L;
+	t[21].func = my_clear_screen;
 }
 
 static void	init_for_engine(t_key *t)

@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/10/22 15:58:15 by acauchy          ###   ########.fr        #
+#    Updated: 2018/10/22 16:54:20 by acauchy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,6 +117,7 @@ SRC_NAME = utils.c \
 		   line_sort_list.c \
 		   line_auto_color.c \
 		   line_input.c \
+		   line_clscreen_winchangesize.c \
 		   auto_key_isarrow.c \
 		   auto_start_current.c \
 		   auto_add_a_list_nbuildin.c \

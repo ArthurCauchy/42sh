@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 12:45:28 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/13 16:34:49 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/22 12:25:41 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,25 @@ void			del_one_list(t_autolist **list, t_autolist *onelt)
 	}
 }
 
-void		sort_list(t_autolist **list)
+void			sort_list(t_autolist **list)
 {
 	t_autolist	*cp;
 	t_autolist	*add;
 	t_autolist	*re;
 
 	re = NULL;
-		while (*list)
+	while (*list)
+	{
+		add = *list;
+		cp = (*list)->next;
+		while (cp)
 		{
-			add = *list;
-			cp = (*list)->next;
-			while (cp)
-			{
-				if (ft_strcmp(cp->name, add->name) < 0)
-					add = cp;
-				cp = cp->next;
-			}
-			re = add_one_list(re, add);
-			del_one_list(list, add);
+			if (ft_strcmp(cp->name, add->name) < 0)
+				add = cp;
+			cp = cp->next;
 		}
-		*list = re;
+		re = add_one_list(re, add);
+		del_one_list(list, add);
+	}
+	*list = re;
 }
