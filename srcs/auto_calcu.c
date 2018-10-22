@@ -6,12 +6,12 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 17:38:07 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/19 13:51:04 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 11:32:31 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "../headers/line_edit.h"
+#include "line_edit.h"
 
 void	init_win(t_autolist *list, int win_col, t_win *win)
 {

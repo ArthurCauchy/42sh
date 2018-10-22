@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/19 16:37:01 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 11:53:53 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <unistd.h>
 #include "line_edit.h"
 #include "global.h"
+#include "init.h"
 
 void		init_line(char *prompt, t_line *line)
 {
@@ -64,17 +65,16 @@ static void	get_line_without_termcaps(char *new_line)
 	ligne ? ft_strcpy(new_line, (const char *)ligne) : (void)ligne;
 	ligne ? free(ligne) : (void)ligne;
 }
-#include "init.h"
+
 int			get_line(char *prompt, char *new_line, t_line *line, t_env **env)
 {
 	unsigned long	key;
 
 	help_for_line(new_line, prompt);
-	init_signals();
 	if (init_attr(ADVANCED_LINE_EDIT) == 0)
 	{
 		init_line(prompt, line);
-		while (((key = get_key(line)) && !(!line->is_tabb4 &&  key == '\n')) \
+		while (((key = get_key()) && !(!line->is_tabb4 &&  key == '\n')) \
 				&& !line->clc && !line->dld)
 		{
 			if (key == CONTRL_C)

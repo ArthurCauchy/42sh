@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/19 16:22:33 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 11:52:51 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ void			init_line(char	*prompt, t_line *line);
 char			**path(t_env **env);
 int				dslash_before(char *line, int index);
 void			ft_freestrstr(char **cp_env);
-unsigned long	get_key(t_line *line);
+unsigned long	get_key(void);
 
 /*
 ** auto_my_tabkey.c

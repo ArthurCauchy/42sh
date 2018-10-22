@@ -6,11 +6,11 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 09:34:09 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/19 13:41:51 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 11:37:27 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/line_edit.h"
+#include "line_edit.h"
 
 static void	put_first_lst(t_line *line)
 {

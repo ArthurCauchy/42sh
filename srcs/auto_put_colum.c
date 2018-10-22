@@ -6,12 +6,12 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 17:33:25 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/18 16:23:29 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 11:37:47 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/ft_printf/includes/ft_printf.h"
-#include "../headers/line_edit.h"
+#include "ft_printf.h"
+#include "line_edit.h"
 
 static int			jump_list(t_line *line, int *total_row)
 {

@@ -6,12 +6,12 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 16:45:17 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/17 16:56:54 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 11:32:18 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
 #include <dirent.h>
-#include "../headers/line_edit.h"
+#include "line_edit.h"
 
  t_autolist			*add_one_list(t_autolist *list, t_autolist *add)
 {

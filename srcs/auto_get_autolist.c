@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 15:05:59 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/17 17:22:05 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 11:32:45 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <curses.h>
 #include <term.h>
 #include <dirent.h>
-#include "../headers/line_edit.h"
+#include "line_edit.h"
 
 static t_autolist	*addlist_in_path(t_line *line, char **path, t_autolist *list)
 {

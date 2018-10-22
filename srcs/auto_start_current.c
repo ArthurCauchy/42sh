@@ -6,12 +6,12 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 15:39:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/17 15:39:09 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 11:38:34 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/ft_printf/includes/ft_printf.h"
-#include "../headers/line_edit.h"
+#include "ft_printf.h"
+#include "line_edit.h"
 
 static void	init_auto_start(int *i, int *find_start, int *res)
 {
