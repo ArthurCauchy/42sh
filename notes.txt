@@ -1,5 +1,4 @@
 TODO:
-- write some doc and comments
 - should I lex amp (&) symbol since we dont use it ?
 - line edition
 	- check crash & leaks if BASIC line edition enabled (no termcaps)
@@ -12,4 +11,4 @@ TODO:
 - REDIRECTIONS/STARTER
     - shorten pipeline_run fct in interpreter.c
     - shorten handle_pipes fct in interpreter.c
-	- handle builtins in pipe
+- alias substitution

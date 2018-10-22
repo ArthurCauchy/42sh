@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 13:53:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/18 13:39:35 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 16:40:02 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "libft.h"
 #include "utils.h"
 #include "lexing.h"
-
 #include "line_edit.h"
 #include "global.h"
 
@@ -117,12 +116,13 @@ void			lex_analysis(char **cmdline, t_word **wordlist, char **errmsg)
 				free(lexdata->buff);
 				free(lexdata);
 				delete_wordlist(wordlist);
-				*cmdline = ft_strjoin_free(*cmdline, ask_for_input(SLASH_PROMPT));
+				*cmdline = ft_strjoin_free(*cmdline,
+						ask_for_input(SLASH_PROMPT));
 				init_lexdata(&lexdata);
 				// check command too long here
 			}
 			else
-				break;
+				break ;
 		}
 	}
 	free(lexdata->buff);

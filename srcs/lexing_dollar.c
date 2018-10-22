@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 14:15:05 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/19 14:35:08 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/22 16:51:28 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void		lex_dollar_exp(char *cmdline, t_lexdata *lexdata, char **errmsg)
 	char	*var_value;
 	size_t	i;
 
+	(void)errmsg;
 	var_value = NULL;
 	++lexdata->i;
 	if (cmdline[lexdata->i] == '?')
@@ -58,10 +59,7 @@ void		lex_dollar_exp(char *cmdline, t_lexdata *lexdata, char **errmsg)
 			var_name[i++] = cmdline[lexdata->i++];
 		var_name[i] = '\0';
 		if (!(var_value = read_from_env(&g_env, var_name)))
-		{
-			*errmsg = ft_strjoin(var_name, ": Undefined variable.");
-			return ;
-		}
+			var_value = ft_strdup("");
 	}
 	--lexdata->i;
 	i = 0;
