@@ -16,8 +16,8 @@
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <unistd.h>
-#include "../headers/line_edit.h"
-#include "../headers/global.h"
+#include "line_edit.h"
+#include "global.h"
 
 void		init_line(char *prompt, t_line *line)
 {
@@ -64,23 +64,24 @@ static void	get_line_without_termcaps(char *new_line)
 	ligne ? ft_strcpy(new_line, (const char *)ligne) : (void)ligne;
 	ligne ? free(ligne) : (void)ligne;
 }
-
+#include "init.h"
 int			get_line(char *prompt, char *new_line, t_line *line, t_env **env)
 {
 	unsigned long	key;
 
 	help_for_line(new_line, prompt);
+	init_signals();
 	if (init_attr(ADVANCED_LINE_EDIT) == 0)
 	{
 		init_line(prompt, line);
-		while (((key = get_key()) && !(!line->is_tabb4 &&  key == '\n')) \
+		while (((key = get_key(line)) && !(!line->is_tabb4 &&  key == '\n')) \
 				&& !line->clc && !line->dld)
 		{
-			if (g_winsize_changed)
-				winsize_change(line);
 			if (key == CONTRL_C)
 				return (ctrl_c(new_line, line));
 			engine(line, key, env);
+			if (g_winsize_changed)
+				winsize_change(line);
 		}
 		init_attr(BASIC_LINE_EDIT);
 		ft_strcpy(new_line, (const char *)line->buf);

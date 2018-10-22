@@ -11,12 +11,19 @@
 /* ************************************************************************** */
 
 #include <signal.h>
+#include <curses.h>
+#include <term.h>
+#include "line_edit.h"
 #include "../headers/global.h"
 
 void	handle_winch(int signo)
 {
 	if (signo == SIGWINCH)
+	{
+//		if (g_with_termcap)
+			tputs(tgetstr("rs", 0), 1, my_putc);
 		g_winsize_changed = 1;
+		}
 }
 
 void	init_signals(void)

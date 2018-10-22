@@ -13,9 +13,9 @@
 #include <curses.h>
 #include <term.h>
 #include <stdlib.h>
-#include "../headers/line_edit.h"
-#include "../libft/ft_printf/includes/ft_printf.h"
-#include "../headers/global.h"
+#include "line_edit.h"
+#include "ft_printf.h"
+#include "global.h"
 
 void		print_prompt(char *prompt)
 {
@@ -31,13 +31,18 @@ static void	reprint_line(t_line *line)
 {
 	int				pos_saver;
 	char			buf_saver[INPUT_MAX_LEN];
+	char			prompt_saver[INPUT_MAX_LEN];
 	int				i;
 
 	i = -1;
 	pos_saver = line->pos;
 	ft_bzero(buf_saver, INPUT_MAX_LEN);
+	ft_bzero(prompt_saver, INPUT_MAX_LEN);
 	ft_strcpy(buf_saver, (char *)line->buf);
+	ft_strcpy(prompt_saver, (char *)line->prompt);
 	ft_bzero(line->buf, INPUT_MAX_LEN);
+	init_line(prompt_saver, line);
+	print_prompt(line->prompt);
 	line->pos = 0;
 	line->buf_len = 0;
 	while (++i < (int)ft_strlen(buf_saver))
@@ -50,16 +55,24 @@ static void	reprint_line(t_line *line)
 int			my_clear_screen(t_line *line)
 {
 	tputs(tgetstr("cl", 0), 1, my_putc);
-	print_prompt(line->prompt);
 	reprint_line(line);
 	return (0);
 }
 
 int			winsize_change(t_line *line)
 {
-	move_nleft(line);
-	init_line(line->prompt, line);
-	print_prompt(line->prompt);
+	//	move_nleft(line);
+	int		nb_line;
+
+	nb_line = (line->buf_len + line->start_po) / line->line_max;
+	if ((line->buf_len + line->start_po) % line->line_max)
+		nb_line++;
+	init_attr(BASIC_LINE_EDIT);
+	ft_printf("\n");
+	init_attr(ADVANCED_LINE_EDIT);
+	while (--nb_line >= 0)
+		tputs(tgetstr("up", 0), 1, my_putc);
+	tputs(tgetstr("cd", 0), 1, my_putc);
 	reprint_line(line);
 	g_winsize_changed = 0;
 	return (0);

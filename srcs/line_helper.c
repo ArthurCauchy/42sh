@@ -2,6 +2,7 @@
 #include <sys/uio.h>
 #include <unistd.h>
 #include "env.h"
+#include "global.h"
 #include "line_edit.h"
 
 int			dslash_before(char *line, int index)
@@ -20,11 +21,18 @@ int			dslash_before(char *line, int index)
 		return (1);
 	return (0);
 }
-
+#include <stdio.h>
 unsigned long	get_key(void)
 {
 	unsigned char	buff[6];
-
+	(void)line;
+/*
+	if (g_winsize_changed)
+	{
+	printf("nihao000000");
+		winsize_change(line);
+		}
+		*/
 	ft_bzero(buff, 6);
 	read(0, buff, 6);
 	return (buff[0] + (buff[1] << 8) + (buff[2] << 16) + (buff[3] << 24) + \

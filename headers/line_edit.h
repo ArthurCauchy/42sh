@@ -152,7 +152,7 @@ void			init_line(char	*prompt, t_line *line);
 char			**path(t_env **env);
 int				dslash_before(char *line, int index);
 void			ft_freestrstr(char **cp_env);
-unsigned long	get_key(void);
+unsigned long	get_key(t_line *line);
 
 /*
 ** auto_my_tabkey.c
