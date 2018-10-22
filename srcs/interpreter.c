@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/21 14:45:57 by arthur           ###   ########.fr       */
+/*   Updated: 2018/10/22 14:39:30 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	handle_pipes(t_parse_block *pipeline, t_redirect **redirs)
 }
 
 // NOTE : the pipeline should always contain at least 1 program
-static int	pipeline_run(t_parse_block *pipeline)
+static int	pipeline_run(t_env **cmd_env, t_parse_block *pipeline)
 {
 	static int	child_fds[FD_MAX];
 	t_process	*proc;
@@ -82,9 +82,9 @@ static int	pipeline_run(t_parse_block *pipeline)
 		}
 		else
 		{
-			proc = new_process(arglist_to_array(pipeline->wordlist));
+			proc = new_process(cmd_env, arglist_to_array(pipeline->wordlist));
 			proc->redirs = redirs;
-			child_fds[pl_size++] = start_process(proc, pipeline->next ? 1 : 0);
+			child_fds[pl_size++] = start_process(cmd_env, proc, pipeline->next ? 1 : 0);
 			delete_process(proc);
 		}
 		pipeline = pipeline->next;
@@ -121,7 +121,7 @@ static void	pipeline_add(t_parse_block **pipeline, t_parse_block *new)
 	cur->next = clone_parse_block(new);
 }
 
-int			do_interpret(t_parse_block *parsed)
+int			do_interpret(t_env **cmd_env, t_parse_block *parsed)
 {
 	int				ret;
 	t_parse_block	*pipeline;
@@ -135,7 +135,7 @@ int			do_interpret(t_parse_block *parsed)
 		pipeline_add(&pipeline, cur);
 		if (cur->separator != PIPE)
 		{
-			ret = pipeline_run(pipeline);
+			ret = pipeline_run(cmd_env, pipeline);
 			free_parse_block(&pipeline);
 			if (cur->next && ((ret != 0 && cur->separator == AND)
 					|| (ret == 0 && cur->separator == OR)))

@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 14:35:33 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/22 12:35:17 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/22 15:32:14 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 /*
 ** When a builtin is in a pipe, then the shell fork, the child execute the builtin and returns
 */
-static int	start_forked_builtin(t_process *proc, t_builtin *builtin)
+static int	start_forked_builtin(t_env **cmd_env, t_process *proc, t_builtin *builtin)
 {
 	pid_t	pid;
 	char	*errmsg;
@@ -34,12 +34,12 @@ static int	start_forked_builtin(t_process *proc, t_builtin *builtin)
 	{
 		if (apply_redirects(proc->redirs, NULL, NULL, &errmsg) == -1)
 			exit_error(errmsg);
-		exit(builtin->func(&g_env, proc->args));
+		exit(builtin->func(cmd_env, proc->args));
 	}
 	return (pid);
 }
 
-static int	start_external_process(t_process *proc)
+static int	start_external_process(t_env **cmd_env, t_process *proc)
 {
 	char	*errmsg;
 	pid_t	pid;
@@ -57,7 +57,7 @@ static int	start_external_process(t_process *proc)
 	{
 		if (apply_redirects(proc->redirs, NULL, NULL, &errmsg) == -1)
 			exit_error(errmsg);
-		execve(proc->path, proc->args, env_to_array(&g_env)); // TODO change to command env
+		execve(proc->path, proc->args, env_to_array(cmd_env));
 		exit_error("execve() error");
 	}
 	return (pid);
@@ -72,7 +72,7 @@ static int	start_external_process(t_process *proc)
 ** - (n>0) the new process pid
 ** - (n<0) error code or builtin's exit status
 */
-int			start_process(t_process *proc, int forked)
+int			start_process(t_env **cmd_env, t_process *proc, int forked)
 {
 	int			ret;
 	t_builtin	*builtin;
@@ -98,7 +98,7 @@ int			start_process(t_process *proc, int forked)
 			return (ret);
 		}
 		else
-			return (start_forked_builtin(proc, builtin));
+			return (start_forked_builtin(cmd_env, proc, builtin));
 	}
-	return (start_external_process(proc));
+	return (start_external_process(cmd_env, proc));
 }
