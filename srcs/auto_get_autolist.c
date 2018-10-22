@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 15:05:59 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 11:32:45 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 12:32:22 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <dirent.h>
 #include "line_edit.h"
 
-static t_autolist	*addlist_in_path(t_line *line, char **path, t_autolist *list)
+static t_autolist	*addlist_in_path(t_line *line, char **path, t_autolist *l)
 {
 	DIR				*dirp;
 	struct dirent	*dir;
@@ -29,17 +29,17 @@ static t_autolist	*addlist_in_path(t_line *line, char **path, t_autolist *list)
 			{
 				if (!ft_strncmp((char *)line->auto_compare, dir->d_name, \
 							ft_strlen((char *)line->auto_compare)) && \
-						!(!ft_strlen((char *)line->auto_compare) && 
+						!(!ft_strlen((char *)line->auto_compare) && \
 							dir->d_name[0] == '.'))
-					list = add_a_list(list, (char *)dir->d_name, dir->d_type);
+					l = add_a_list(l, (char *)dir->d_name, dir->d_type);
 			}
 			closedir(dirp);
 		}
 		path++;
 	}
 	if (!auto_current(line))
-		list = addlist_buildin(line, list);
-	return (list);
+		l = addlist_buildin(line, l);
+	return (l);
 }
 
 void				path_last_slash(char *start, char *dic, int index)

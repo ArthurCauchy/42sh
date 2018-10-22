@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 15:59:23 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/19 16:46:05 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 12:22:43 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,16 @@ static void		last_path(char *start, char *dic, int index)
 
 	if (ft_strcmp(start, "/"))
 	{
-	i = ft_strlen(start) - 1;
-	while (i >= 0 && start[i] != '/')
-		i--;
-	ft_bzero(dic, index);
-	ft_strcpy(dic, start + i + 1);
+		i = ft_strlen(start) - 1;
+		while (i >= 0 && start[i] != '/')
+			i--;
+		ft_bzero(dic, index);
+		ft_strcpy(dic, start + i + 1);
 	}
 	else
 		ft_strcpy(dic, start);
 }
 
-//using getenv need to delect that func later on!!!!!!!
 static void		get_normal_prompt(char *prompt, int index)
 {
 	char	pwd[INPUT_MAX_LEN];
@@ -54,12 +53,16 @@ static void		get_normal_prompt(char *prompt, int index)
 	ft_strcat(prompt, " ");
 }
 
-// we can choose NORMAL_PROMPT, HEREDOC_PROMPT, SQUOTE_PROMPT, DQUOTE_PROMPT, SQUOTE_PROMPT
-char *ask_for_input(int prompt_choice)
+/*
+** we can choose NORMAL_PROMPT, HEREDOC_PROMPT, SQUOTE_PROMPT,
+** DQUOTE_PROMPT, SQUOTE_PROMPT
+*/
+
+char			*ask_for_input(int prompt_choice)
 {
-	char    buffer[INPUT_MAX_LEN];
-	char    prompt[INPUT_MAX_LEN];
-	t_line  line;
+	char	buffer[INPUT_MAX_LEN];
+	char	prompt[INPUT_MAX_LEN];
+	t_line	line;
 
 	ft_bzero(buffer, INPUT_MAX_LEN);
 	ft_bzero(prompt, INPUT_MAX_LEN);

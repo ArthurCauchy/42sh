@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 15:05:59 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 11:36:44 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 12:29:33 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	print_autolist(t_line *line)
 	init_attr(BASIC_LINE_EDIT);
 	put_colum(line);
 	cusor_back(line);
-	line->auto_ct = line->auto_ct + 1;;
+	line->auto_ct = line->auto_ct + 1;
 }
 
 int			my_tabkey(t_line *line, t_env **env)

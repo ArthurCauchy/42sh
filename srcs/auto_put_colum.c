@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 17:33:25 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 11:37:47 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 12:43:23 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 static int			jump_list(t_line *line, int *total_row)
 {
-	int		row;
-	int		nb_row_command;
-	int		i;
+	int			row;
+	int			nb_row_command;
+	int			i;
 	t_autolist	*cp;
 
 	*total_row = line->w.line;
@@ -26,20 +26,20 @@ static int			jump_list(t_line *line, int *total_row)
 	while (--i > 0)
 		cp = cp->next;
 	nb_row_command = (line->buf_len + ft_strlen(cp->name) - \
-			ft_strlen((char *)line->auto_compare)- 1) / line->line_max + 1;
+			ft_strlen((char *)line->auto_compare) - 1) / line->line_max + 1;
 	if (line->screen_height - nb_row_command - line->w.line - 1 < 0)
 		*total_row = line->screen_height - nb_row_command - 1;
 	if (line->auto_ct < 0)
 		return (0);
 	row = line->auto_ct % nb_list(line->auto_lt) % line->w.line + 1;
-	if (nb_row_command + row  + 1 <= line->screen_height)
+	if (nb_row_command + row + 1 <= line->screen_height)
 		return (0);
-	return (row  + 3 - line->screen_height - nb_row_command);
+	return (row + 3 - line->screen_height - nb_row_command);
 }
 
 static t_autolist	*start_list(t_line *line, int *total_row)
 {
-	int		i;
+	int			i;
 	t_autolist	*cp;
 
 	i = jump_list(line, total_row) + 1;
@@ -67,7 +67,7 @@ void				put_colum(t_line *line)
 	t_autolist	*cp;
 	t_autolist	*lt;
 	t_helper	ct;
-	int			total_row;;
+	int			total_row;
 
 	ct.j = -1;
 	total_row = line->w.line;

@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 11:52:51 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 12:45:09 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ int				cut_end(t_line *line);
 int				paste(t_line *line);
 int				go_up(t_line *line);
 int				go_down(t_line *line);
-int				get_line(char *prompt, char *new_line, t_line *line, t_env **env);
+int				get_line(char *pt, char *new_line, t_line *line, t_env **env);
 void			init_line(char	*prompt, t_line *line);
 char			**path(t_env **env);
 int				dslash_before(char *line, int index);
@@ -185,7 +185,7 @@ char			*ask_for_input(int prompt_choice);
 */
 
 int				key_isarrow(unsigned long key);
-int				arrow_keys_in_autoline(t_line *line, t_env **env, unsigned long key);
+int				arrow_keys_in_autoline(t_line *l, t_env **ev, unsigned long k);
 
 /*
 ** auto_start_current.c

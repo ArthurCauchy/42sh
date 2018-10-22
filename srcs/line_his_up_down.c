@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:49:10 by saxiao            #+#    #+#             */
-/*   Updated: 2018/09/14 13:28:31 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/10/22 12:16:39 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "global.h"
 #include "history.h"
 
-int		history_up(t_line *line)
+int			history_up(t_line *line)
 {
 	int		i;
 	int		max;
@@ -39,14 +39,19 @@ int		history_up(t_line *line)
 	return (0);
 }
 
-int				history_down(t_line *line)
+static void	init_forhis(int *i, int *max)
+{
+	*i = 0;
+	*max = g_history->nb_lines;
+}
+
+int			history_down(t_line *line)
 {
 	int		i;
 	int		max;
 	char	*cmd;
 
-	i = 0;
-	max = g_history->nb_lines;
+	init_forhis(&i, &max);
 	if (line->buf_len)
 		delete_all(line);
 	if (g_history->position > 1)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   line_helper.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/22 12:09:44 by saxiao            #+#    #+#             */
+/*   Updated: 2018/10/22 12:09:55 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <unistd.h>
@@ -5,7 +17,7 @@
 #include "global.h"
 #include "line_edit.h"
 
-int			dslash_before(char *line, int index)
+int				dslash_before(char *line, int index)
 {
 	int		i;
 	int		j;
@@ -32,7 +44,7 @@ unsigned long	get_key(void)
 			((unsigned long)buff[4] << 32) + ((unsigned long)buff[5] << 40));
 }
 
-char		**path(t_env **env)
+char			**path(t_env **env)
 {
 	char	*path;
 	char	**split_path;
@@ -43,7 +55,7 @@ char		**path(t_env **env)
 	return (split_path);
 }
 
-int			my_putc(int c)
+int				my_putc(int c)
 {
 	write(1, &c, 1);
 	return (0);

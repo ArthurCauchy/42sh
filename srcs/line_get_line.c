@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 11:53:53 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 12:23:31 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int			get_line(char *prompt, char *new_line, t_line *line, t_env **env)
 	if (init_attr(ADVANCED_LINE_EDIT) == 0)
 	{
 		init_line(prompt, line);
-		while (((key = get_key()) && !(!line->is_tabb4 &&  key == '\n')) \
+		while (((key = get_key()) && !(!line->is_tabb4 && key == '\n')) \
 				&& !line->clc && !line->dld)
 		{
 			if (key == CONTRL_C)

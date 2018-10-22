@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 15:10:24 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 11:37:07 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 12:29:57 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int			arrow_keys_in_autoline(t_line *line, t_env **env, unsigned long key)
 		auto_arrow_up(line, real_nb_line);
 	else if (key == ARROW_DOWN)
 		auto_arrow_down(line, real_nb_line);
-			my_tabkey(line, env);
+	my_tabkey(line, env);
 	line->is_tabb4 = 1;
 	return (0);
 }

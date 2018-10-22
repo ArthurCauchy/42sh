@@ -6,14 +6,15 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 16:45:17 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 11:32:18 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 12:28:54 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include <stdlib.h>
 #include <dirent.h>
 #include "line_edit.h"
 
- t_autolist			*add_one_list(t_autolist *list, t_autolist *add)
+t_autolist			*add_one_list(t_autolist *list, t_autolist *add)
 {
 	t_autolist	*cp;
 
@@ -33,11 +34,11 @@
 }
 
 /*
- ** Params :
- ** - list : autocompletion list
- ** - name : the name of this element of the list
- ** - type : 0 = regular file, 1 = directory
- */
+** Params :
+** - list : autocompletion list
+** - name : the name of this element of the list
+** - type : 0 = regular file, 1 = directory
+*/
 
 t_autolist			*add_a_list(t_autolist *l, char *name, unsigned char type)
 {

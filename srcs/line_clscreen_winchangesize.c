@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:43:52 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 11:32:01 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 12:08:48 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@
 
 void		print_prompt(char *prompt)
 {
-
 	init_attr(BASIC_LINE_EDIT);
 	boldgreen();
-	ft_printf("%s",prompt);
+	ft_printf("%s", prompt);
 	color_reset();
 	init_attr(ADVANCED_LINE_EDIT);
 }
