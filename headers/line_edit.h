@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 12:45:09 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 16:49:51 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ int				cut_end(t_line *line);
 int				paste(t_line *line);
 int				go_up(t_line *line);
 int				go_down(t_line *line);
+int				top_round(int nb, int dev);
 int				get_line(char *pt, char *new_line, t_line *line, t_env **env);
 void			init_line(char	*prompt, t_line *line);
 char			**path(t_env **env);

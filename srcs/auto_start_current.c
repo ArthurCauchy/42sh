@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 15:39:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 12:34:57 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 13:33:12 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	init_auto_start(int *i, int *find_start, int *res)
 	*res = 0;
 }
 
-static void	for_auto_start(char *line, int *i, int *open_sq, int *open_d)
+static void	for_auto_start(char *line, int *i, int *open_sq, int *open_dq)
 {
 	if (line[*i] == '"' && dslash_before(line, *i) && *open_sq < 0)
 		*open_dq = -*open_dq;
