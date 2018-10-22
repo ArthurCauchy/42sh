@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 17:05:12 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/22 15:38:42 by ccharrie         ###   ########.fr       */
+/*   Updated: 2018/10/22 16:22:02 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int				builtin_alias(t_env **env, char **args)
 
 	(void)env;
 	if (args_size(args) > 2)
-		ft_fminiprint(1, "alias usage : %l0s%", ALIAS_USAGE);
+		ft_fminiprint(1, "alias usage : %l0s%\n", ALIAS_USAGE);
 	else if (args_size(args) == 1)
 		display_aliases();
 	else if (!(ft_strchr(args[1], '=')))

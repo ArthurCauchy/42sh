@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:11:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/20 18:12:15 by ccharrie         ###   ########.fr       */
+/*   Updated: 2018/10/22 16:23:56 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # define WHICH_USAGE "which [cmd]"
 # define HELP_USAGE "help [builtin]"
 # define HISTORY_USAGE "history [-c] [-d offset] [n]\nhistory -anrw [filename]\nhistory -ps arg [arg ...]"
-# define ALIAS_USAGE "alias [name='value']\n"
-# define UNALIAS_USAGE "unalias [name]\n"
+# define ALIAS_USAGE "alias [name='value']"
+# define UNALIAS_USAGE "unalias [name]"
 
 # define EXIT_BRIEF "Exit the shell."
 # define CD_BRIEF "Change the shell working directory."
@@ -37,6 +37,9 @@
 # define WHICH_BRIEF "Show the full path of an executable."
 # define HELP_BRIEF "Print the help page of a builtin."
 # define HISTORY_BRIEF "Display or manipulate the history list."
+# define ALIAS_BRIEF "Create an alias, aliases allow a string to be substituted"
+# define ALIAS_BRIEF2 " for a word when it is used as the first word of a simple command."
+# define UNALIAS_BRIEF "Delete an alias."
 
 # define EXIT_HELP EXIT_USAGE "\n\n" EXIT_BRIEF
 # define CD_HELP CD_USAGE "\n\n" CD_BRIEF
@@ -47,6 +50,8 @@
 # define WHICH_HELP WHICH_USAGE "\n\n" WHICH_BRIEF
 # define HELP_HELP HELP_USAGE "\n\n" HELP_BRIEF
 # define HISTORY_HELP HISTORY_USAGE "\n\n" HISTORY_BRIEF
+# define ALIAS_HELP ALIAS_USAGE "\n\n" ALIAS_BRIEF ALIAS_BRIEF2
+# define UNALIAS_HELP UNALIAS_USAGE "\n\n" UNALIAS_BRIEF
 
 typedef struct		s_builtin
 {

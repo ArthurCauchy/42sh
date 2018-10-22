@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:48:57 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/19 17:04:30 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/22 16:24:01 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void		init_builtins(void)
 	load_builtin("which", WHICH_HELP, &builtin_which);
 	load_builtin("help", HELP_HELP, &builtin_help);
 	load_builtin("history", HISTORY_HELP, &builtin_history);
-	load_builtin("alias", NULL, &builtin_alias);
-	load_builtin("unalias", NULL, &builtin_unalias);
+	load_builtin("alias", ALIAS_HELP, &builtin_alias);
+	load_builtin("unalias", UNALIAS_HELP, &builtin_unalias);
 }
