@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 17:50:04 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 11:38:08 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 17:46:40 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int		return_key(t_line *line)
 	put_choice_end(line, line->auto_is_dic);
 	clear_auto_onscreen(line);
 	move_nright(line);
+	if (line->auto_lt)
+		free_auto_lt(line);
 	return (0);
 }
 
