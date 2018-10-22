@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:11:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/11 14:55:22 by arthur           ###   ########.fr       */
+/*   Updated: 2018/10/20 18:12:15 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define WHICH_USAGE "which [cmd]"
 # define HELP_USAGE "help [builtin]"
 # define HISTORY_USAGE "history [-c] [-d offset] [n]\nhistory -anrw [filename]\nhistory -ps arg [arg ...]"
+# define ALIAS_USAGE "alias [name='value']\n"
+# define UNALIAS_USAGE "unalias [name]\n"
 
 # define EXIT_BRIEF "Exit the shell."
 # define CD_BRIEF "Change the shell working directory."
@@ -52,6 +54,13 @@ typedef struct		s_builtin
 	char	*brief;
 	int		(*func)(t_env**, char**);
 }					t_builtin;
+
+typedef struct		s_alias
+{
+	char			*key;
+	char			*value;
+	struct s_alias	*next;
+}					t_alias;
 
 typedef int	(*t_builtin_fct)(t_env**, char**);
 
@@ -84,6 +93,8 @@ int					builtin_echo(t_env **env, char **args);
 int					builtin_which(t_env **env, char **args);
 int					builtin_help(t_env **env, char **args);
 int					builtin_history(t_env **env, char **args);
+int					builtin_alias(t_env **env, char **args);
+int					builtin_unalias(t_env **env, char **args);
 
 /*
 ** builtin_cd[...].c
@@ -100,5 +111,11 @@ char				*compo_to_str(t_list *list);
 void				simplify_path_dot(t_list **list);
 void				simplify_path_dotdot(t_list **list);
 void				simplify_path_slash(t_list **list);
+
+/*
+** builtin_alias
+*/
+
+int					check_alias_existance(char *key, char *value);
 
 #endif
