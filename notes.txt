@@ -14,3 +14,4 @@ TODO:
 - alias
     - handle quotes in alias
 		- do not perform alias substitution if the arg is quoted
+		- somehow find a way to avoid nested alias ON THE SAME ALIAS (alias abc=abc)
