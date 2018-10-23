@@ -46,16 +46,11 @@ int			main(int argc, char **argv, char **envp)
 		exc_mark(&input);
 		if (ft_strlen(input) > 0)
 		{
-			lex_analysis(&input, &cmd_args, &errmsg);
+			lex_analysis(&input, &cmd_args);
 			history_add(input);
-			if (errmsg)
-				print_n_free_errmsg(&errmsg);
-			else
-			{
-				parsed = do_parsing(cmd_args, &errmsg);
-				g_last_command_status = do_interpret(&g_env, parsed);
-				free_parse_block(&parsed);
-			}
+			parsed = do_parsing(cmd_args, &errmsg);
+			g_last_command_status = do_interpret(&g_env, parsed);
+			free_parse_block(&parsed);
 			delete_wordlist(&cmd_args);
 		}
 		free(input);

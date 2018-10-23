@@ -15,13 +15,12 @@
 #include "lexing.h"
 #include "global.h"
 
-void	lex_tilde_exp(char *cmdline, t_lexdata *lexdata, char **errmsg)
+void	lex_tilde_exp(char *cmdline, t_lexdata *lexdata)
 {
 	char	*home;
 	size_t	i;
 
 	(void)cmdline;
-	(void)errmsg;
 	if (!(home = read_from_env(&g_env, "HOME")))
 		return ;
 	i = 0;

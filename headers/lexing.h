@@ -65,25 +65,17 @@ void	delete_wordlist(t_word **head);
 
 void	add_word(t_token token, char *str,
 		t_word **wordlist, t_lexdata *lexdata);
-void	lex_analysis(char **cmdline, t_word **wordlist, char **errmsg);
-void	lex_semicol_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata,
-		char **errmsg);
-void	lex_space_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata,
-		char **errmsg);
-void	lex_amp_and_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata,
-		char **errmsg);
-void	lex_pipe_or_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata,
-		char **errmsg);
-void	lex_shift_src_redirect(char *cmdline, t_word **wordlist, t_lexdata *lexdata,
-		char **errmsg);
-void	lex_shift_dest_redirect(char *cmdline, t_word **wordlist, t_lexdata *lexdata,
-		char **errmsg);
-void	lex_rshift_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata,
-		char **errmsg);
-void	lex_lshift_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata,
-		char **errmsg);
-void	lex_escape(char *cmdline, t_lexdata *lexdata, char **errmsg);
-void	lex_tilde_exp(char *cmdline, t_lexdata *lexdata, char **errmsg);
-void	lex_dollar_exp(char *cmdline, t_lexdata *lexdata, char **errmsg);
+void	lex_analysis(char **cmdline, t_word **wordlist);
+void	lex_semicol_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata);
+void	lex_space_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata);
+void	lex_amp_and_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata);
+void	lex_pipe_or_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata);
+void	lex_shift_src_redirect(char *cmdline, t_word **wordlist, t_lexdata *lexdata);
+void	lex_shift_dest_redirect(char *cmdline, t_word **wordlist, t_lexdata *lexdata);
+void	lex_rshift_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata);
+void	lex_lshift_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata);
+void	lex_escape(char *cmdline, t_lexdata *lexdata);
+void	lex_tilde_exp(char *cmdline, t_lexdata *lexdata);
+void	lex_dollar_exp(char *cmdline, t_lexdata *lexdata);
 
 #endif

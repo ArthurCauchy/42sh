@@ -11,4 +11,6 @@ TODO:
 - REDIRECTIONS/STARTER
     - shorten pipeline_run fct in interpreter.c
     - shorten handle_pipes fct in interpreter.c
-- alias substitution
+- alias
+    - handle quotes in alias
+		- do not perform alias substitution if the arg is quoted

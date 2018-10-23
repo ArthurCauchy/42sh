@@ -41,13 +41,12 @@ static void	handle_special_varnames(char *cmdline,
 	++lexdata->i;
 }
 
-void		lex_dollar_exp(char *cmdline, t_lexdata *lexdata, char **errmsg)
+void		lex_dollar_exp(char *cmdline, t_lexdata *lexdata)
 {
 	char	var_name[4096];
 	char	*var_value;
 	size_t	i;
 
-	(void)errmsg;
 	var_value = NULL;
 	++lexdata->i;
 	if (cmdline[lexdata->i] == '?')

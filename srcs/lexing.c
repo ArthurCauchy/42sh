@@ -22,13 +22,11 @@ void			add_word(t_token token, char *str,
 {
 	t_word	*cur;
 	char		*alias;
-	char		*errmsg;
 
-	errmsg = NULL;
 	if (!*wordlist)
 	{
 		if ((alias = get_alias_value(str)))
-			lex_analysis(&alias, wordlist, &errmsg);
+			lex_analysis(&alias, wordlist);
 		else
 			*wordlist = new_word(token, str);
 	}
@@ -39,7 +37,7 @@ void			add_word(t_token token, char *str,
 			cur = cur->next;
 		if ((cur->token == PIPE || cur->token == AND || cur->token == OR
 				|| cur->token == SEMICOL) && (alias = get_alias_value(str)))
-			lex_analysis(&alias, wordlist, &errmsg);
+			lex_analysis(&alias, wordlist);
 		else
 			cur->next = new_word(token, str);
 	}
@@ -81,43 +79,41 @@ static void		init_lexdata(t_lexdata **lexdata)
 }
 
 static void		do_lex(char *cmdline, t_word **wordlist,
-		t_lexdata *lexdata, char **errmsg)
+		t_lexdata *lexdata)
 {
 	if (!lexdata->quoted && is_separator(cmdline[lexdata->i]))
-		lex_space_word(cmdline, wordlist, lexdata, errmsg);
+		lex_space_word(cmdline, wordlist, lexdata);
 	else if (!lexdata->quoted && cmdline[lexdata->i] == ';')
-		lex_semicol_word(cmdline, wordlist, lexdata, errmsg);
+		lex_semicol_word(cmdline, wordlist, lexdata);
 	else if (!lexdata->quoted && cmdline[lexdata->i] == '|')
-		lex_pipe_or_word(cmdline, wordlist, lexdata, errmsg);
+		lex_pipe_or_word(cmdline, wordlist, lexdata);
 	else if (!lexdata->quoted && cmdline[lexdata->i] == '&')
-		lex_amp_and_word(cmdline, wordlist, lexdata, errmsg);
+		lex_amp_and_word(cmdline, wordlist, lexdata);
 	else if (!lexdata->quoted && cmdline[lexdata->i] == '>')
-		lex_rshift_word(cmdline, wordlist, lexdata, errmsg);
+		lex_rshift_word(cmdline, wordlist, lexdata);
 	else if (!lexdata->quoted && cmdline[lexdata->i] == '<')
-		lex_lshift_word(cmdline, wordlist, lexdata, errmsg);
+		lex_lshift_word(cmdline, wordlist, lexdata);
 	else if (!lexdata->quoted && cmdline[lexdata->i] == '~'
 			&& lexdata->j == 0)
-		lex_tilde_exp(cmdline, lexdata, errmsg);
+		lex_tilde_exp(cmdline, lexdata);
 	else if (lexdata->quoted != 1 && cmdline[lexdata->i] == '\\')
-		lex_escape(cmdline, lexdata, errmsg);
+		lex_escape(cmdline, lexdata);
 	else if (lexdata->quoted != 1 && cmdline[lexdata->i] == '$')
-		lex_dollar_exp(cmdline, lexdata, errmsg);
+		lex_dollar_exp(cmdline, lexdata);
 	else if (cmdline[lexdata->i] == '\'' || cmdline[lexdata->i] == '"')
 		update_quotes(cmdline, lexdata);
 	else
 		lexdata->buff[lexdata->j++] = cmdline[lexdata->i];
 }
 
-void			lex_analysis(char **cmdline, t_word **wordlist, char **errmsg)
+void			lex_analysis(char **cmdline, t_word **wordlist)
 {
 	t_lexdata	*lexdata;
 
 	init_lexdata(&lexdata);
 	while (42)
 	{
-		do_lex(*cmdline, wordlist, lexdata, errmsg);
-		if (*errmsg)
-			break ;
+		do_lex(*cmdline, wordlist, lexdata);
 		++lexdata->i;
 		if (lexdata->i > ft_strlen(*cmdline))
 		{
