@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/21 12:52:28 by arthur           ###   ########.fr       */
+/*   Updated: 2018/10/22 17:43:44 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int		is_separator(char c);
 */
 
 void	print_n_free_errmsg(char **errmsg);
+char	*get_alias_value(char *key);
 
 /*
 ** utils_args.c
