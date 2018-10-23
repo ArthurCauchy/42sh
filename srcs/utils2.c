@@ -23,19 +23,14 @@ void	print_n_free_errmsg(char **errmsg)
 
 char	*get_alias_value(char *key)
 {
-	t_alias *head;
-	char	**res;
+	t_alias *cur;
 	
-	head = g_aliases;
-	while (g_aliases)
+	cur = g_aliases;
+	while (cur)
 	{
-		if (ft_strcmp(g_aliases->key, key) == 0)
-		{
-			res = &g_aliases->value;
-			g_aliases = head;
-			return (*res);
-		}
-		g_aliases = g_aliases->next;
+		if (ft_strcmp(cur->key, key) == 0)
+			return (cur->value);
+		cur = cur->next;
 	}
 	return (NULL);
 }

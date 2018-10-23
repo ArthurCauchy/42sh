@@ -20,18 +20,28 @@
 void			add_word(t_token token, char *str,
 		t_word **wordlist, t_lexdata *lexdata)
 {
-	t_word	*word;
 	t_word	*cur;
+	char		*alias;
+	char		*errmsg;
 
-	word = new_word(token, str);
+	errmsg = NULL;
 	if (!*wordlist)
-		*wordlist = word;
+	{
+		if ((alias = get_alias_value(str)))
+			lex_analysis(&alias, wordlist, &errmsg);
+		else
+			*wordlist = new_word(token, str);
+	}
 	else
 	{
 		cur = *wordlist;
 		while (cur->next)
 			cur = cur->next;
-		cur->next = word;
+		if ((cur->token == PIPE || cur->token == AND || cur->token == OR
+				|| cur->token == SEMICOL) && (alias = get_alias_value(str)))
+			lex_analysis(&alias, wordlist, &errmsg);
+		else
+			cur->next = new_word(token, str);
 	}
 	lexdata->force_add = 0;
 }
