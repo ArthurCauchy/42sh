@@ -41,6 +41,7 @@ typedef struct		s_lexdata
 	int			quoted;
 	int			escaped;
 	int			force_add;
+	char		*avoid;
 }					t_lexdata;
 
 typedef struct		s_word
@@ -65,7 +66,7 @@ void	delete_wordlist(t_word **head);
 
 void	add_word(t_token token, char *str,
 		t_word **wordlist, t_lexdata *lexdata);
-void	lex_analysis(char **cmdline, t_word **wordlist);
+void	lex_analysis(char **cmdline, t_word **wordlist, char *alias);
 void	lex_semicol_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata);
 void	lex_space_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata);
 void	lex_amp_and_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata);

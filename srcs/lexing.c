@@ -18,15 +18,15 @@
 #include "global.h"
 
 void			add_word(t_token token, char *str,
-		t_word **wordlist, t_lexdata *lexdata)
+		t_word **wordlist, t_lexdata *lexdata) // TODO rewrite this better
 {
 	t_word	*cur;
 	char		*alias;
 
 	if (!*wordlist)
 	{
-		if ((alias = get_alias_value(str)))
-			lex_analysis(&alias, wordlist);
+		if ((!lexdata->avoid || ft_strcmp(str, lexdata->avoid)) != 0 && (alias = get_alias_value(str)))
+			lex_analysis(&alias, wordlist, alias);
 		else
 			*wordlist = new_word(token, str);
 	}
@@ -35,9 +35,10 @@ void			add_word(t_token token, char *str,
 		cur = *wordlist;
 		while (cur->next)
 			cur = cur->next;
-		if ((cur->token == PIPE || cur->token == AND || cur->token == OR
-				|| cur->token == SEMICOL) && (alias = get_alias_value(str)))
-			lex_analysis(&alias, wordlist);
+		if ((cur->token == PIPE || cur->token == AND
+					|| cur->token == OR || cur->token == SEMICOL)
+				&& (!lexdata->avoid || ft_strcmp(str, lexdata->avoid) != 0) && (alias = get_alias_value(str)))
+			lex_analysis(&alias, wordlist, alias);
 		else
 			cur->next = new_word(token, str);
 	}
@@ -106,18 +107,25 @@ static void		do_lex(char *cmdline, t_word **wordlist,
 		lexdata->buff[lexdata->j++] = cmdline[lexdata->i];
 }
 
-void			lex_analysis(char **cmdline, t_word **wordlist)
+/*
+** Params:
+** - cmdline : the input buffer
+** - wordlist : the output list containing the lexed tokens
+** - avoid : the name of the alias to ignore in cas of alias lexing, or NULL
+*/
+void			lex_analysis(char **cmdline, t_word **wordlist, char *avoid)
 {
 	t_lexdata	*lexdata;
 
 	init_lexdata(&lexdata);
+	lexdata->avoid = avoid;
 	while (42)
 	{
 		do_lex(*cmdline, wordlist, lexdata);
 		++lexdata->i;
 		if (lexdata->i > ft_strlen(*cmdline))
 		{
-			if (lexdata->quoted != 0 || lexdata->escaped == 1)
+			if (!avoid && (lexdata->quoted != 0 || lexdata->escaped == 1)) // forbid quote in alias ? parse them before ?
 			{
 				free(lexdata->buff);
 				free(lexdata);

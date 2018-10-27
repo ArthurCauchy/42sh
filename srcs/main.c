@@ -46,7 +46,7 @@ int			main(int argc, char **argv, char **envp)
 		exc_mark(&input);
 		if (ft_strlen(input) > 0)
 		{
-			lex_analysis(&input, &cmd_args);
+			lex_analysis(&input, &cmd_args, NULL);
 			history_add(input);
 			parsed = do_parsing(cmd_args, &errmsg);
 			g_last_command_status = do_interpret(&g_env, parsed);
