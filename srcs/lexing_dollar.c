@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 14:15:05 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/23 11:31:37 by arthur           ###   ########.fr       */
+/*   Updated: 2018/10/22 16:51:28 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ static void	handle_special_varnames(char *cmdline,
 		t_lexdata *lexdata, char **var_value)
 {
 	if (cmdline[lexdata->i] == '?')
-		*var_value = ft_itoa(42); //TODO replace with last command status
+		*var_value = ft_itoa(g_last_command_status);
 	++lexdata->i;
 }
 
-void		lex_dollar_exp(char *cmdline, t_lexdata *lexdata, char **errmsg)
+void		lex_dollar_exp(char *cmdline, t_lexdata *lexdata)
 {
 	char	var_name[4096];
 	char	*var_value;
@@ -58,10 +58,7 @@ void		lex_dollar_exp(char *cmdline, t_lexdata *lexdata, char **errmsg)
 			var_name[i++] = cmdline[lexdata->i++];
 		var_name[i] = '\0';
 		if (!(var_value = read_from_env(&g_env, var_name)))
-		{
-			*errmsg = ft_strjoin(var_name, ": Undefined variable.");
-			return ;
-		}
+			var_value = ft_strdup("");
 	}
 	--lexdata->i;
 	i = 0;

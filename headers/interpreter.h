@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/15 17:16:45 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/22 14:36:11 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@
 ** interpreter.c
 */
 
-int	do_interpret(t_parse_block *parsed);
+int	do_interpret(t_env **cmd_env, t_parse_block *parsed);
 
 #endif

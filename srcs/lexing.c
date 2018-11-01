@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 13:53:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/18 13:39:35 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 16:40:02 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,33 @@
 #include "libft.h"
 #include "utils.h"
 #include "lexing.h"
-
 #include "line_edit.h"
 #include "global.h"
 
 void			add_word(t_token token, char *str,
-		t_word **wordlist, t_lexdata *lexdata)
+		t_word **wordlist, t_lexdata *lexdata) // TODO rewrite this better
 {
-	t_word	*word;
 	t_word	*cur;
+	char		*alias;
 
-	word = new_word(token, str);
 	if (!*wordlist)
-		*wordlist = word;
+	{
+		if ((!lexdata->avoid || ft_strcmp(str, lexdata->avoid)) != 0 && (alias = get_alias_value(str)))
+			lex_analysis(&alias, wordlist, alias);
+		else
+			*wordlist = new_word(token, str);
+	}
 	else
 	{
 		cur = *wordlist;
 		while (cur->next)
 			cur = cur->next;
-		cur->next = word;
+		if ((cur->token == PIPE || cur->token == AND
+					|| cur->token == OR || cur->token == SEMICOL)
+				&& (!lexdata->avoid || ft_strcmp(str, lexdata->avoid) != 0) && (alias = get_alias_value(str)))
+			lex_analysis(&alias, wordlist, alias);
+		else
+			cur->next = new_word(token, str);
 	}
 	lexdata->force_add = 0;
 }
@@ -72,57 +80,63 @@ static void		init_lexdata(t_lexdata **lexdata)
 }
 
 static void		do_lex(char *cmdline, t_word **wordlist,
-		t_lexdata *lexdata, char **errmsg)
+		t_lexdata *lexdata)
 {
 	if (!lexdata->quoted && is_separator(cmdline[lexdata->i]))
-		lex_space_word(cmdline, wordlist, lexdata, errmsg);
+		lex_space_word(cmdline, wordlist, lexdata);
 	else if (!lexdata->quoted && cmdline[lexdata->i] == ';')
-		lex_semicol_word(cmdline, wordlist, lexdata, errmsg);
+		lex_semicol_word(cmdline, wordlist, lexdata);
 	else if (!lexdata->quoted && cmdline[lexdata->i] == '|')
-		lex_pipe_or_word(cmdline, wordlist, lexdata, errmsg);
+		lex_pipe_or_word(cmdline, wordlist, lexdata);
 	else if (!lexdata->quoted && cmdline[lexdata->i] == '&')
-		lex_amp_and_word(cmdline, wordlist, lexdata, errmsg);
+		lex_amp_and_word(cmdline, wordlist, lexdata);
 	else if (!lexdata->quoted && cmdline[lexdata->i] == '>')
-		lex_rshift_word(cmdline, wordlist, lexdata, errmsg);
+		lex_rshift_word(cmdline, wordlist, lexdata);
 	else if (!lexdata->quoted && cmdline[lexdata->i] == '<')
-		lex_lshift_word(cmdline, wordlist, lexdata, errmsg);
+		lex_lshift_word(cmdline, wordlist, lexdata);
 	else if (!lexdata->quoted && cmdline[lexdata->i] == '~'
 			&& lexdata->j == 0)
-		lex_tilde_exp(cmdline, lexdata, errmsg);
+		lex_tilde_exp(cmdline, lexdata);
 	else if (lexdata->quoted != 1 && cmdline[lexdata->i] == '\\')
-		lex_escape(cmdline, lexdata, errmsg);
+		lex_escape(cmdline, lexdata);
 	else if (lexdata->quoted != 1 && cmdline[lexdata->i] == '$')
-		lex_dollar_exp(cmdline, lexdata, errmsg);
+		lex_dollar_exp(cmdline, lexdata);
 	else if (cmdline[lexdata->i] == '\'' || cmdline[lexdata->i] == '"')
 		update_quotes(cmdline, lexdata);
 	else
 		lexdata->buff[lexdata->j++] = cmdline[lexdata->i];
 }
 
-void			lex_analysis(char **cmdline, t_word **wordlist, char **errmsg)
+/*
+** Params:
+** - cmdline : the input buffer
+** - wordlist : the output list containing the lexed tokens
+** - avoid : the name of the alias to ignore in cas of alias lexing, or NULL
+*/
+void			lex_analysis(char **cmdline, t_word **wordlist, char *avoid)
 {
 	t_lexdata	*lexdata;
 
 	init_lexdata(&lexdata);
+	lexdata->avoid = avoid;
 	while (42)
 	{
-		do_lex(*cmdline, wordlist, lexdata, errmsg);
-		if (*errmsg)
-			break ;
+		do_lex(*cmdline, wordlist, lexdata);
 		++lexdata->i;
 		if (lexdata->i > ft_strlen(*cmdline))
 		{
-			if (lexdata->quoted != 0 || lexdata->escaped == 1)
+			if (!avoid && (lexdata->quoted != 0 || lexdata->escaped == 1)) // forbid quote in alias ? parse them before ?
 			{
 				free(lexdata->buff);
 				free(lexdata);
 				delete_wordlist(wordlist);
-				*cmdline = ft_strjoin_free(*cmdline, ask_for_input(SLASH_PROMPT));
+				*cmdline = ft_strjoin_free(*cmdline,
+						ask_for_input(SLASH_PROMPT));
 				init_lexdata(&lexdata);
 				// check command too long here
 			}
 			else
-				break;
+				break ;
 		}
 	}
 	free(lexdata->buff);

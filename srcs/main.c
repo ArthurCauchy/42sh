@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/19 12:10:36 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/01 10:42:04 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,12 @@
 #include "parsing.h"
 #include "interpreter.h"
 
-t_env			*g_env = NULL;
+t_env		*g_env = NULL;
 t_history	*g_history = NULL;
 int			g_with_termcap = 0;
-
-/*static void	start_command(t_word *cmd_args)
-{
-	t_builtin	*builtin;
-	char		**args;
-
-	args = ft_memalloc(sizeof(char*) * PARAMS_MAX);
-	if ((builtin = search_builtin(cmd_args->str)))
-	{
-		arglist_to_array(cmd_args, args);
-		builtin->func(&g_env, args);
-	}
-	else
-		ft_putendl_fd("Not a builtin.", 2);
-	delete_args(args);
-}*/
+int			g_last_command_status = 0;
+t_alias		*g_aliases = NULL;
+int			g_winsize_changed = 0;
 
 int			main(int argc, char **argv, char **envp)
 {
@@ -59,18 +46,18 @@ int			main(int argc, char **argv, char **envp)
 		exc_mark(&input);
 		if (ft_strlen(input) > 0)
 		{
-			lex_analysis(&input, &cmd_args, &errmsg);
+			lex_analysis(&input, &cmd_args, NULL);
 			history_add(input);
-			if (errmsg)
-				print_n_free_errmsg(&errmsg);
-			else
+			if (cmd_args)
 			{
 				parsed = do_parsing(cmd_args, &errmsg);
-				//start_command(cmd_args);
-				do_interpret(parsed); // TODO save return into global for last command status
+				if (!parsed)
+					g_last_command_status = 1;
+				else
+					g_last_command_status = do_interpret(&g_env, parsed);
 				free_parse_block(&parsed);
+				delete_wordlist(&cmd_args);
 			}
-			delete_wordlist(&cmd_args);
 		}
 		free(input);
 	}

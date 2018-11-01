@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/10/19 12:10:20 by acauchy          ###   ########.fr        #
+#    Updated: 2018/10/22 16:54:20 by acauchy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,8 @@ SRC_NAME = utils.c \
 		   builtin_which.c \
 		   builtin_help.c \
 		   builtin_history.c \
+		   builtin_alias.c \
+		   builtin_unalias.c \
 		   init.c \
 		   init_signals.c \
 		   init_env.c \
@@ -87,6 +89,17 @@ SRC_NAME = utils.c \
 		   interpreter.c \
 		   process.c \
 		   starter.c \
+		   redirects.c \
+		   redirections.c \
+		   redirections_fdsave.c \
+		   redirections_apply.c \
+		   redirections_apply_pipe.c \
+		   redirections_apply_rshift.c \
+		   redirections_apply_rshift2.c \
+		   redirections_apply_rshift_amp.c \
+		   redirections_apply_lshift.c \
+		   redirections_apply_lshift2.c \
+		   redirections_apply_lshift_amp.c \
 		   history.c \
 		   exc_mark.c \
 		   line_termcap_setting.c \
@@ -104,6 +117,7 @@ SRC_NAME = utils.c \
 		   line_sort_list.c \
 		   line_auto_color.c \
 		   line_input.c \
+		   line_clscreen_winchangesize.c \
 		   auto_key_isarrow.c \
 		   auto_start_current.c \
 		   auto_add_a_list_nbuildin.c \

@@ -6,10 +6,11 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/19 12:08:55 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/22 14:39:30 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
 #include "libft.h"
@@ -19,55 +20,76 @@
 #include "starter.h"
 #include "global.h"
 
-// debug start_command : actually just prints the args
-/*static int	start_command(t_word *cmd_args)
+static void	handle_pipes(t_parse_block *pipeline, t_redirect **redirs)
 {
-	t_word	*cur;
+	char		*tmp_str;
+	static int	pipefd[2] = {-1, -1};
+	static int	tmp_pipe = -1;
 
-	cur = cmd_args;
-	ft_putstr("Starting process : '");
-	while (cur)
+	if (tmp_pipe != -1)
 	{
-		if (cur != cmd_args)
-			ft_putchar(' ');
-		ft_putstr(cur->str);
-		cur = cur->next;
+		close(tmp_pipe);
+		tmp_pipe = -1;
 	}
-	ft_putstr("\'\n");
-	return (0);
-}*/
+	if (pipefd[1] != -1)
+	{
+		close(pipefd[1]);
+		pipefd[1] = -1;
+	}
+	if (pipefd[0] != -1)
+	{
+		tmp_str = ft_itoa(pipefd[0]);
+		add_redirect(redirs, "0", tmp_str, PIPE);
+		free(tmp_str);
+		tmp_pipe = pipefd[0];
+		pipefd[0] = -1;
+	}
+	if (pipeline && pipeline->next)
+	{
+		if (pipe(pipefd) == -1)
+			exit_error("pipe() error");
+		tmp_str = ft_itoa(pipefd[1]);
+		add_redirect(redirs, "1", tmp_str, PIPE);
+		free(tmp_str);
+		tmp_str = ft_itoa(pipefd[0]);
+		add_redirect(redirs, "", tmp_str, FDCLOSE);
+		free(tmp_str);
+	}
+}
 
 // NOTE : the pipeline should always contain at least 1 program
-static int	pipeline_run(t_parse_block *pipeline)
+static int	pipeline_run(t_env **cmd_env, t_parse_block *pipeline)
 {
-	static int	child_fds[4096]; // TODO create a define for max process in pipe
+	static int	child_fds[FD_MAX];
 	t_process	*proc;
 	int			pl_size;
 	int			i;
 	int			status;
 	int			ret;
-	//int				pipefd[2];
+	t_redirect	*redirs;
+	char		*errmsg;
 
-	ft_bzero(child_fds, 4096 * sizeof(int));
+	ft_bzero(child_fds, FD_MAX * sizeof(int));
 	pl_size = 0;
 	while (pipeline)
 	{
-		proc = new_process(arglist_to_array(pipeline->wordlist));
-		/* PIPE HANDLING
-		if (cur != pipeline)
+		redirs = NULL;
+		handle_pipes(pipeline, &redirs);
+		if (analyze_redirects(&pipeline->wordlist, &redirs, &errmsg) == -1)
 		{
-			// redirect this command's STDIN to pipefd[0]
+			print_n_free_errmsg(&errmsg);
+			child_fds[pl_size++] = -1;
 		}
-		if (cur->next != NULL)
+		else
 		{
-			pipe(pipefd);
-			// redirect this command's STDOUT to pipefd[1]
+			proc = new_process(cmd_env, arglist_to_array(pipeline->wordlist));
+			proc->redirs = redirs;
+			child_fds[pl_size++] = start_process(cmd_env, proc, pipeline->next ? 1 : 0);
+			delete_process(proc);
 		}
-		*/
-		child_fds[pl_size++] = start_process(proc, pipeline->next ? 1 : 0);
-		delete_process(proc);
 		pipeline = pipeline->next;
 	}
+	handle_pipes(NULL, NULL);
 	// TODO actually one waitpid could be enough if all the subprocesses are in the same pgid
 	i = 0;
 	while (i < pl_size)
@@ -81,29 +103,25 @@ static int	pipeline_run(t_parse_block *pipeline)
 		}
 		++i;
 	}
-	// TODO clean pipes if commands not successful etc etc
 	return (ret);
 }
 
-static void	pipeline_add(t_parse_block **pipeline, t_parse_block *new) // TODO optimize, don't need 2 variables to do that
+static void	pipeline_add(t_parse_block **pipeline, t_parse_block *new)
 {
-	t_parse_block	*prev;
 	t_parse_block	*cur;
 
-	prev = NULL;
 	cur = *pipeline;
-	while (cur)
+	if (!cur)
 	{
-		prev = cur;
-		cur = cur->next;
-	}
-	if (prev)
-		prev->next = clone_parse_block(new);
-	else
 		*pipeline = clone_parse_block(new);
+		return;
+	}
+	while (cur->next)
+		cur = cur->next;
+	cur->next = clone_parse_block(new);
 }
 
-int			do_interpret(t_parse_block *parsed)
+int			do_interpret(t_env **cmd_env, t_parse_block *parsed)
 {
 	int				ret;
 	t_parse_block	*pipeline;
@@ -117,11 +135,11 @@ int			do_interpret(t_parse_block *parsed)
 		pipeline_add(&pipeline, cur);
 		if (cur->separator != PIPE)
 		{
-			ret = pipeline_run(pipeline);
+			ret = pipeline_run(cmd_env, pipeline);
 			free_parse_block(&pipeline);
-			if ((ret != 0 && cur->separator == AND)
-					|| (ret == 0 && cur->separator == OR))
-				return (ret);
+			if (cur->next && ((ret != 0 && cur->separator == AND)
+					|| (ret == 0 && cur->separator == OR)))
+				cur = cur->next;
 		}
 		cur = cur->next;
 	}

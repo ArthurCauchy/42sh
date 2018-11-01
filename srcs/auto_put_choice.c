@@ -6,11 +6,11 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 09:34:09 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/18 16:21:15 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 12:33:24 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/line_edit.h"
+#include "line_edit.h"
 
 static void	put_first_lst(t_line *line)
 {
@@ -21,7 +21,7 @@ static void	put_first_lst(t_line *line)
 	{
 		path_last_slash((char *)line->auto_compare, dic, INPUT_MAX_LEN);
 		str = line->auto_lt->name + ft_strlen((char *)line->auto_compare) - \
-			  ft_strlen(dic);
+			ft_strlen(dic);
 	}
 	else
 		str = line->auto_lt->name + ft_strlen((char *)line->auto_compare);
@@ -39,6 +39,7 @@ void		one_autolist(t_line *line)
 static void	for_put_choice(t_autolist *cp, t_line *line)
 {
 	char		*str;
+
 	str = cp->name;
 	while (*str)
 		printable(line, *str++);

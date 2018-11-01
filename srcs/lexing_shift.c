@@ -14,12 +14,11 @@
 #include "lexing.h"
 
 void	lex_shift_src_redirect(char *cmdline, t_word **wordlist,
-		t_lexdata *lexdata, char **errmsg)
+		t_lexdata *lexdata)
 {
 	char	src_fd;
 
 	(void)cmdline;
-	(void)errmsg;
 	src_fd = 0;
 	if (lexdata->j == 1 && ft_isdigit(src_fd = lexdata->buff[lexdata->j - 1]))
 		--lexdata->j;
@@ -32,10 +31,9 @@ void	lex_shift_src_redirect(char *cmdline, t_word **wordlist,
 }
 
 void	lex_shift_dest_redirect(char *cmdline, t_word **wordlist,
-		t_lexdata *lexdata, char **errmsg)
+		t_lexdata *lexdata)
 {
 	(void)wordlist;
-	(void)errmsg;
 	if (cmdline[lexdata->i + 1] == '&')
 	{
 		lexdata->buff[lexdata->j++] = '&';

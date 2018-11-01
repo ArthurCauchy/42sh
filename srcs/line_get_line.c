@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/18 14:16:26 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 16:27:50 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <unistd.h>
-#include "../headers/line_edit.h"
-#include "../headers/global.h"
+#include "line_edit.h"
+#include "global.h"
+#include "init.h"
 
 void		init_line(char *prompt, t_line *line)
 {
 	ft_bzero(line->buf, INPUT_MAX_LEN);
 	ft_bzero(line->ici_doc, INPUT_MAX_LEN);
 	ft_bzero(line->auto_compare, INPUT_MAX_LEN);
+	ft_bzero(line->prompt, INPUT_MAX_LEN);
 	line->pos = 0;
 	line->buf_len = 0;
 	line->line_max = tgetnum("co");
@@ -43,15 +45,13 @@ void		init_line(char *prompt, t_line *line)
 	line->clc = 0;
 	line->auto_last_choice_len = -1;
 	g_with_termcap = 1;
+	ft_strcpy(line->prompt, prompt);
 }
 
 static void	help_for_line(char *new_line, char *prompt)
 {
 	ft_bzero(new_line, INPUT_MAX_LEN);
-	init_attr(BASIC_LINE_EDIT);
-	boldgreen();
-	ft_putstr(prompt);
-	color_reset();
+	print_prompt(prompt);
 }
 
 static void	get_line_without_termcaps(char *new_line)
@@ -74,17 +74,14 @@ int			get_line(char *prompt, char *new_line, t_line *line, t_env **env)
 	if (init_attr(ADVANCED_LINE_EDIT) == 0)
 	{
 		init_line(prompt, line);
-		while (((key = get_key()) && !(!line->is_tabb4 &&  key == '\n')) \
+		while (((key = get_key()) && !(!line->is_tabb4 && key == '\n')) \
 				&& !line->clc && !line->dld)
 		{
-			if (key == CONTRL_L)
-			{
-				ft_strcpy((char *)line->buf, "clear");
-				break ;
-			}
 			if (key == CONTRL_C)
 				return (ctrl_c(new_line, line));
 			engine(line, key, env);
+			if (g_winsize_changed)
+				winsize_change(line);
 		}
 		init_attr(BASIC_LINE_EDIT);
 		ft_strcpy(new_line, (const char *)line->buf);

@@ -6,11 +6,21 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:56:09 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/17 15:25:25 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/22 11:28:09 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
+#include <curses.h>
+#include <term.h>
+#include "line_edit.h"
+#include "../headers/global.h"
+
+void	handle_winch(int signo)
+{
+	if (signo == SIGWINCH)
+		g_winsize_changed = 1;
+}
 
 void	init_signals(void)
 {
@@ -19,4 +29,5 @@ void	init_signals(void)
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGTTIN, SIG_IGN);
 	signal(SIGTTOU, SIG_IGN);
+	signal(SIGWINCH, handle_winch);
 }

@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexing_pipe_or.c                                   :+:      :+:    :+:   */
+/*   redirections_apply_pipe.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/04 14:15:05 by acauchy           #+#    #+#             */
-/*   Updated: 2018/08/23 11:33:37 by arthur           ###   ########.fr       */
+/*   Created: 2018/04/24 13:30:38 by acauchy           #+#    #+#             */
+/*   Updated: 2018/10/21 12:35:19 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "libft.h"
-#include "lexing.h"
+#include "redirects.h"
 
-void	lex_pipe_or_word(char *cmdline, t_word **wordlist,
-		t_lexdata *lexdata)
+int	apply_redirect_pipe(t_redirect *redir,
+		int *fdtmp_array, int *fdsave_array, char **errmsg)
 {
-	lexdata->buff[lexdata->j] = '\0';
-	lexdata->j = 0;
-	if (lexdata->force_add || ft_strlen(lexdata->buff) > 0)
-		add_word(ARG, lexdata->buff, wordlist, lexdata);
-	if (cmdline[lexdata->i + 1] == '|')
-	{
-		add_word(OR, "||", wordlist, lexdata);
-		++lexdata->i;
-	}
-	else
-		add_word(PIPE, "|", wordlist, lexdata);
+	(void)errmsg;
+	if (fdtmp_array && fdsave_array)
+		save_filedes(fdtmp_array, fdsave_array, ft_atoi(redir->left));
+	dup2(ft_atoi(redir->right), ft_atoi(redir->left));
+	return (0);
 }

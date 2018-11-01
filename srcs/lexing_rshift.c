@@ -36,16 +36,16 @@ static void	lex_rshift_classic(char *cmdline,
 }
 
 void		lex_rshift_word(char *cmdline, t_word **wordlist,
-		t_lexdata *lexdata, char **errmsg)
+		t_lexdata *lexdata)
 {
 	t_token token;
 
-	lex_shift_src_redirect(cmdline, wordlist, lexdata, errmsg);
+	lex_shift_src_redirect(cmdline, wordlist, lexdata);
 	if (cmdline[lexdata->i + 1] == '>')
 		lex_rshift_append(cmdline, lexdata, &token);
 	else
 		lex_rshift_classic(cmdline, lexdata, &token);
-	lex_shift_dest_redirect(cmdline, wordlist, lexdata, errmsg);
+	lex_shift_dest_redirect(cmdline, wordlist, lexdata);
 	lexdata->buff[lexdata->j] = '\0';
 	lexdata->j = 0;
 	add_word(token, lexdata->buff, wordlist, lexdata);

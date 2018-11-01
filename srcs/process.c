@@ -7,24 +7,24 @@
 #include "starter.h"
 #include "global.h"
 
-static char	*get_proc_path(char *name)
+static char	*get_proc_path(t_env **cmd_env, char *name)
 {
 	char	*after_path;
 
 	if (ft_strchr(name, '/') && is_there_a_file(name))
 		return (ft_strdup(name));
-	else if (!ft_strchr(name, '/') && (after_path = find_cmd_path(&g_env, &g_env, name))) // TODO replace by cmd_env in case of env builtin, not yet implemented
+	else if (!ft_strchr(name, '/') && (after_path = find_cmd_path(&g_env, cmd_env, name)))
 		return (after_path);
 	else
 		return (NULL);
 }
 
-t_process	*new_process(char **args)
+t_process	*new_process(t_env **cmd_env, char **args)
 {
 	t_process	*new;
 
 	new = (t_process*)malloc(sizeof(t_process));
-	new->path = get_proc_path(args[0]);
+	new->path = get_proc_path(cmd_env, args[0]);
 	new->args = args;
 	new->redirs = NULL;
 	return (new);
@@ -34,6 +34,6 @@ void		delete_process(t_process *proc)
 {
 	free(proc->path);
 	delete_args(proc->args);
-	// free redirs
+	delete_redirects(proc->redirs);
 	free(proc);
 }

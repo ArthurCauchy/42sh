@@ -1,36 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   redirections_fdsave.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 11:34:35 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/22 17:44:46 by ccharrie         ###   ########.fr       */
+/*   Updated: 2018/10/21 12:53:14 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
-#include "global.h"
+#include <unistd.h>
+#include "utils.h"
 
-void	print_n_free_errmsg(char **errmsg)
+void	save_filedes(int *fdtmp_array, int *fdsave_array, int fd)
 {
-	ft_putendl_fd(*errmsg, 2);
-	free(*errmsg);
-	*errmsg = NULL;
+	if (fd < FD_MAX && fdsave_array[fd] < 0)
+	{
+		fdtmp_array[fd] = 1;
+		fdsave_array[fd] = dup(fd);
+	}
 }
 
-char	*get_alias_value(char *key)
+void	restore_filedes(int *fdtmp_array, int *fdsave_array)
 {
-	t_alias *cur;
-	
-	cur = g_aliases;
-	while (cur)
+	int	i;
+
+	i = FD_MAX - 1;
+	while (i >= 0)
 	{
-		if (ft_strcmp(cur->key, key) == 0)
-			return (cur->value);
-		cur = cur->next;
+		if (fdtmp_array[i] == 1)
+			close(i);
+		if (fdsave_array[i] > 0)
+		{
+			dup2(fdsave_array[i], i);
+			close(fdsave_array[i]);
+		}
+		--i;
 	}
-	return (NULL);
 }

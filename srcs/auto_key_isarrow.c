@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 15:10:24 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/17 15:13:25 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 12:29:57 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 #include <stdlib.h>
 #include <dirent.h>
 #include <unistd.h>
-#include "../libft/ft_printf/includes/ft_printf.h"
-#include "../headers/line_edit.h"
+#include "ft_printf.h"
+#include "line_edit.h"
 
 static void	auto_arrow_left(t_line *line, int real_nb_line)
 {
@@ -84,7 +84,7 @@ int			arrow_keys_in_autoline(t_line *line, t_env **env, unsigned long key)
 		auto_arrow_up(line, real_nb_line);
 	else if (key == ARROW_DOWN)
 		auto_arrow_down(line, real_nb_line);
-			my_tabkey(line, env);
+	my_tabkey(line, env);
 	line->is_tabb4 = 1;
 	return (0);
 }

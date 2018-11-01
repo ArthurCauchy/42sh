@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:30:47 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/17 14:42:26 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 11:52:46 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "line_edit.h"
+#include "global.h"
 
 static int	return_message(char *message, int re_value, int fd)
 {
@@ -47,12 +48,22 @@ static void	for_attr(struct termios *new, struct termios old)
 	tcsetattr(STDIN_FILENO, TCSADRAIN, new);
 }
 
+static int	freeterm_set2default(char *term)
+{
+	free(term);
+	default_termi_mode();
+	return (-1);
+}
+
 int			init_attr(int mod)
 {
 	static struct termios	old;
 	static int				oldatt = 0;
+	static char				*term = NULL;
 	struct termios			new;
 
+	if (term == NULL)
+		term = read_from_env(&g_env, "TERM");
 	if (!oldatt)
 	{
 		oldatt = 1;
@@ -62,19 +73,10 @@ int			init_attr(int mod)
 	if (mod == ADVANCED_LINE_EDIT)
 	{
 		for_attr(&new, old);
-		if (tgetent(NULL, getenv("TERM")) != 1)
-		{
-			default_termi_mode();
-			return (-1);
-		}
+		if (tgetent(NULL, term) != 1)
+			return (freeterm_set2default(term));
 	}
 	else
 		default_termi_mode();
-	return (0);
-}
-
-int			my_putc(int c)
-{
-	write(1, &c, 1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/18 14:16:00 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 16:49:51 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define ADVANCED_LINE_EDIT 1
 # define BASIC_LINE_EDIT 0
-# define NB_KEY 21
+# define NB_KEY 22
 # define NORMAL_PROMPT 1
 # define HEREDOC_PROMPT 2
 # define SQUOTE_PROMPT 3
@@ -83,6 +83,7 @@ typedef struct	s_line
 	unsigned char	here[INPUT_MAX_LEN];
 	unsigned char	ici_doc[INPUT_MAX_LEN];
 	unsigned char	auto_compare[INPUT_MAX_LEN];
+	char			prompt[INPUT_MAX_LEN];
 	int				buf_len;
 	int				line_max;
 	int				screen_height;
@@ -146,7 +147,8 @@ int				cut_end(t_line *line);
 int				paste(t_line *line);
 int				go_up(t_line *line);
 int				go_down(t_line *line);
-int				get_line(char *prompt, char *new_line, t_line *line, t_env **env);
+int				top_round(int nb, int dev);
+int				get_line(char *pt, char *new_line, t_line *line, t_env **env);
 void			init_line(char	*prompt, t_line *line);
 char			**path(t_env **env);
 int				dslash_before(char *line, int index);
@@ -184,7 +186,7 @@ char			*ask_for_input(int prompt_choice);
 */
 
 int				key_isarrow(unsigned long key);
-int				arrow_keys_in_autoline(t_line *line, t_env **env, unsigned long key);
+int				arrow_keys_in_autoline(t_line *l, t_env **ev, unsigned long k);
 
 /*
 ** auto_start_current.c
@@ -237,5 +239,13 @@ void			put_choice_end(t_line *line, int chioce_isdic);
 
 void			one_autolist(t_line *line);
 void			put_choice(t_line *line, int *i);
+
+/*
+** line_clsreen_winchangesize.c
+*/
+
+void			print_prompt(char *prompt);
+int				my_clear_screen(t_line *line);
+int				winsize_change(t_line *line);
 
 #endif

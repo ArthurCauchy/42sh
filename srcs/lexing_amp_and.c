@@ -14,9 +14,8 @@
 #include "lexing.h"
 
 void	lex_amp_and_word(char *cmdline, t_word **wordlist,
-		t_lexdata *lexdata, char **errmsg)
+		t_lexdata *lexdata)
 {
-	(void)errmsg;
 	lexdata->buff[lexdata->j] = '\0';
 	lexdata->j = 0;
 	if (lexdata->force_add || ft_strlen(lexdata->buff) > 0)

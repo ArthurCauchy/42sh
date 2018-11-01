@@ -14,11 +14,10 @@
 #include "libft.h"
 #include "lexing.h"
 
-void	lex_escape(char *cmdline, t_lexdata *lexdata, char **errmsg)
+void	lex_escape(char *cmdline, t_lexdata *lexdata)
 {
 	char	next_char;
 
-	(void)errmsg;
 	next_char = cmdline[lexdata->i + 1];
 	if (next_char)
 	{

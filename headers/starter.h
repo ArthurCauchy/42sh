@@ -6,13 +6,14 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:11:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/18 19:11:44 by arthur           ###   ########.fr       */
+/*   Updated: 2018/10/22 14:34:49 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STARTER_H
 # define STARTER_H
 
+# include "env.h"
 # include "redirects.h"
 
 typedef struct		s_process
@@ -26,13 +27,13 @@ typedef struct		s_process
 ** process.c
 */
 
-t_process			*new_process(char **args);
+t_process			*new_process(t_env **cmd_env, char **args);
 void				delete_process(t_process *proc);
 
 /*
 ** starter.c
 */
 
-int					start_process(t_process *proc, int forked);
+int					start_process(t_env **cmd_env, t_process *proc, int forked);
 
 #endif

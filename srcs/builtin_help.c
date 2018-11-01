@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/20 14:52:55 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/10/19 15:01:03 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void	print_builtins_list(void)
 	i = 0;
 	while (i < BUILTINS_MAX && builtins[i] != NULL)
 	{
-		ft_putstr("- ");
-		ft_putendl(builtins[i]->name);
+		ft_putstr_fd("- ", 2);
+		ft_putendl_fd(builtins[i]->name, 2);
 		++i;
 	}
 }
@@ -37,8 +37,8 @@ int			builtin_help(t_env **env, char **args)
 	(void)env;
 	if (!args[1])
 	{
-		ft_putendl("Usage: history [builtin]");
-		ft_putendl("\nAvailable builtins :");
+		ft_putendl_fd("Usage: history [builtin]", 2);
+		ft_putendl_fd("\nAvailable builtins :", 2);
 		print_builtins_list();
 	}
 	else
