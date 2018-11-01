@@ -4,10 +4,10 @@ TODO:
 	- check crash & leaks if BASIC line edition enabled (no termcaps)
 	- secure the window resize by getting the win resize signal
 	- secure the scrolling (ex : disable writing when the command line goes above the window size)
+	- ctrl+c when quote or dquote prompt should exit
 - options of echo builtin ?
 - signals?
 - display command line when error (command: no such builtin)
-- $? after a parse error should be 1
 - REDIRECTIONS/STARTER
     - shorten pipeline_run fct in interpreter.c
     - shorten handle_pipes fct in interpreter.c
