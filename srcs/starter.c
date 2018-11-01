@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 14:35:33 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/22 15:32:14 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/01 13:02:05 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,38 @@ static int	start_forked_builtin(t_env **cmd_env, t_process *proc, t_builtin *bui
 	return (pid);
 }
 
+static int	handle_exec_error(char *path, char **args)
+{
+	if (path && is_there_a_file(path))
+	{
+		if (is_directory(path))
+			ft_fminiprint(2, "%l0s%: Is a directory.\n", path);
+		else if (!is_executable(path))
+			ft_fminiprint(2, "%l0s%: Permission denied.\n", path);
+		else
+			return (0);
+		return (126);
+	}
+	else
+	{
+		if (args[0])
+			ft_fminiprint(2, "%l0s%: Command not found.\n", args[0]);
+		else
+			ft_fminiprint(2, "Command not found.\n");
+		return (127);
+	}
+}
+
 static int	start_external_process(t_env **cmd_env, t_process *proc)
 {
 	char	*errmsg;
 	pid_t	pid;
+	int		errcode;
 
 	errmsg = NULL;
-	if (!proc->path || !is_there_a_file(proc->path)
-			|| !is_executable(proc->path)) // TODO print error msg based on error type
-	{
-		ft_putendl_fd("Command not found.", 2);
-		return (-127);
-	}
+	errcode = handle_exec_error(proc->path, proc->args);
+	if (errcode != 0)
+		return (-errcode);
 	if ((pid = fork()) < 0)
 		exit_error("fork() error");
 	if (pid == 0)

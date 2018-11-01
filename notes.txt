@@ -7,7 +7,6 @@ TODO:
 	- ctrl+c when quote or dquote prompt should exit
 - options of echo builtin ?
 - signals?
-- display command line when error (command: no such builtin)
 - REDIRECTIONS/STARTER
     - shorten pipeline_run fct in interpreter.c
     - shorten handle_pipes fct in interpreter.c
