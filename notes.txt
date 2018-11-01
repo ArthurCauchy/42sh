@@ -13,3 +13,4 @@ TODO:
 - alias
     - handle quotes in alias (abandoned feature, alias containing quotes should not cause a crash tho)
 		- do not perform alias substitution if the arg is quoted
+- $$ variable expansion ?

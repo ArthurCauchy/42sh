@@ -6,14 +6,20 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:48:57 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/14 15:04:51 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/01 14:43:03 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/types.h>
+#include <unistd.h>
 #include "init.h"
+#include "global.h"
 
 void		init(t_env **env, char **envp)
 {
+	g_shell_pid = getpid();
+	setpgid(g_shell_pid, g_shell_pid);
+	tcsetpgrp(0, g_shell_pid);
 	init_signals();
 	init_builtins();
 	init_env(env, envp);

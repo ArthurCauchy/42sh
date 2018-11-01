@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 14:35:33 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/01 13:02:05 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/01 15:02:47 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 /*
 ** When a builtin is in a pipe, then the shell fork, the child execute the builtin and returns
 */
-static int	start_forked_builtin(t_env **cmd_env, t_process *proc, t_builtin *builtin)
+static int	start_forked_builtin(t_env **cmd_env, t_process *proc, t_builtin *builtin, pid_t *pgid)
 {
 	pid_t	pid;
 	char	*errmsg;
@@ -32,10 +32,17 @@ static int	start_forked_builtin(t_env **cmd_env, t_process *proc, t_builtin *bui
 		exit_error("fork() error");
 	if (pid == 0)
 	{
+		reset_sighandlers();
 		if (apply_redirects(proc->redirs, NULL, NULL, &errmsg) == -1)
 			exit_error(errmsg);
 		exit(builtin->func(cmd_env, proc->args));
 	}
+	if (*pgid == -1)
+	{
+		*pgid = pid;
+		tcsetpgrp(0, pid);
+	}
+	setpgid(pid, *pgid);
 	return (pid);
 }
 
@@ -61,7 +68,7 @@ static int	handle_exec_error(char *path, char **args)
 	}
 }
 
-static int	start_external_process(t_env **cmd_env, t_process *proc)
+static int	start_external_process(t_env **cmd_env, t_process *proc, pid_t *pgid)
 {
 	char	*errmsg;
 	pid_t	pid;
@@ -75,11 +82,18 @@ static int	start_external_process(t_env **cmd_env, t_process *proc)
 		exit_error("fork() error");
 	if (pid == 0)
 	{
+		reset_sighandlers();
 		if (apply_redirects(proc->redirs, NULL, NULL, &errmsg) == -1)
 			exit_error(errmsg);
 		execve(proc->path, proc->args, env_to_array(cmd_env));
 		exit_error("execve() error");
 	}
+	if (*pgid == -1)
+	{
+		*pgid = pid;
+		tcsetpgrp(0, pid);
+	}
+	setpgid(pid, *pgid);
 	return (pid);
 }
 
@@ -88,11 +102,14 @@ static int	start_external_process(t_env **cmd_env, t_process *proc)
 ** Params :
 ** - proc : process to start
 ** - forked : start command in new process ? 1:yes/0:no
+** - pgid : the Process Group ID of the new process. -1 if it should create it's own
 ** Return:
 ** - (n>0) the new process pid
 ** - (n<0) error code or builtin's exit status
+**
+** If the process creates it's own pgid, the value of the pgid pointer is set
 */
-int			start_process(t_env **cmd_env, t_process *proc, int forked)
+int			start_process(t_env **cmd_env, t_process *proc, int forked, pid_t *pgid)
 {
 	int			ret;
 	t_builtin	*builtin;
@@ -118,7 +135,7 @@ int			start_process(t_env **cmd_env, t_process *proc, int forked)
 			return (ret);
 		}
 		else
-			return (start_forked_builtin(cmd_env, proc, builtin));
+			return (start_forked_builtin(cmd_env, proc, builtin, pgid));
 	}
-	return (start_external_process(cmd_env, proc));
+	return (start_external_process(cmd_env, proc, pgid));
 }

@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:11:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/22 14:34:49 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/01 14:25:47 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ void				delete_process(t_process *proc);
 ** starter.c
 */
 
-int					start_process(t_env **cmd_env, t_process *proc, int forked);
+int					start_process(t_env **cmd_env, t_process *proc, int forked, pid_t *pgid);
 
 #endif

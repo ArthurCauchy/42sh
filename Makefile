@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/10/22 16:54:20 by acauchy          ###   ########.fr        #
+#    Updated: 2018/11/01 15:02:10 by arthur           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC_PATH = srcs
 SRC_NAME = utils.c \
 		   utils2.c \
 		   utils_args.c \
+		   utils_signals.c \
 		   s_env.c \
 		   env.c \
 		   path.c \

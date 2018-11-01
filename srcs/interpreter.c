@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/22 14:39:30 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/01 14:33:09 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,18 @@ static void	handle_pipes(t_parse_block *pipeline, t_redirect **redirs)
 // NOTE : the pipeline should always contain at least 1 program
 static int	pipeline_run(t_env **cmd_env, t_parse_block *pipeline)
 {
-	static int	child_fds[FD_MAX];
+	int			child_fds[FD_MAX];
 	t_process	*proc;
 	int			pl_size;
 	int			i;
+	pid_t		pgid;
 	int			status;
 	int			ret;
 	t_redirect	*redirs;
 	char		*errmsg;
 
 	ft_bzero(child_fds, FD_MAX * sizeof(int));
+	pgid = -1;
 	pl_size = 0;
 	while (pipeline)
 	{
@@ -84,13 +86,12 @@ static int	pipeline_run(t_env **cmd_env, t_parse_block *pipeline)
 		{
 			proc = new_process(cmd_env, arglist_to_array(pipeline->wordlist));
 			proc->redirs = redirs;
-			child_fds[pl_size++] = start_process(cmd_env, proc, pipeline->next ? 1 : 0);
+			child_fds[pl_size++] = start_process(cmd_env, proc, pipeline->next ? 1 : 0, &pgid);
 			delete_process(proc);
 		}
 		pipeline = pipeline->next;
 	}
 	handle_pipes(NULL, NULL);
-	// TODO actually one waitpid could be enough if all the subprocesses are in the same pgid
 	i = 0;
 	while (i < pl_size)
 	{
@@ -103,6 +104,7 @@ static int	pipeline_run(t_env **cmd_env, t_parse_block *pipeline)
 		}
 		++i;
 	}
+	tcsetpgrp(0, g_shell_pid);
 	return (ret);
 }
 

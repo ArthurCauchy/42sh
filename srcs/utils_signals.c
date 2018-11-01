@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   global.h                                           :+:      :+:    :+:   */
+/*   utils_signals.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/01 14:28:50 by arthur           ###   ########.fr       */
+/*   Created: 2018/06/04 16:19:36 by acauchy           #+#    #+#             */
+/*   Updated: 2018/11/01 15:00:48 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __GLOBAL_H
-# define __GLOBAL_H
+#include <signal.h>
 
-# include <sys/types.h>
-# include "env.h"
-# include "history.h"
-# include "builtins.h"
-
-extern t_env			*g_env;
-extern t_history	*g_history;
-extern int			g_with_termcap;
-extern int			g_last_command_status;
-extern t_alias		*g_aliases;
-extern int			g_winsize_changed;
-extern pid_t		g_shell_pid;
-
-#endif
+void	reset_sighandlers(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+	signal(SIGTSTP, SIG_DFL);
+	signal(SIGTTIN, SIG_DFL);
+	signal(SIGTTOU, SIG_DFL);
+	signal(SIGWINCH, SIG_DFL);
+}

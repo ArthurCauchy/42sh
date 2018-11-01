@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/22 17:43:44 by ccharrie         ###   ########.fr       */
+/*   Updated: 2018/11/01 15:01:23 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,10 @@ int		args_size(char **args);
 char	**arglist_to_array(t_word *arglist);
 char	**copy_args(char **args);
 void	delete_args(char **args);
+
+/*
+** utils_signals.c
+*/
+void	reset_sighandlers(void);
 
 #endif
