@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/01 10:42:04 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/01 11:55:43 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,36 +29,39 @@ int			g_last_command_status = 0;
 t_alias		*g_aliases = NULL;
 int			g_winsize_changed = 0;
 
+static void	main_loop(char *input)
+{
+	char			*errmsg;
+	t_word			*cmd_args;
+	t_parse_block	*parsed;
+	
+	errmsg = NULL;
+	cmd_args = NULL;
+	exc_mark(&input);
+	lex_analysis(&input, &cmd_args, NULL);
+	history_add(input);
+	if (cmd_args)
+	{
+		parsed = do_parsing(cmd_args, &errmsg);
+		if (!parsed)
+			g_last_command_status = 1;
+		else
+			g_last_command_status = do_interpret(&g_env, parsed);
+		free_parse_block(&parsed);
+		delete_wordlist(&cmd_args);
+	}
+}
+
 int			main(int argc, char **argv, char **envp)
 {
-	char	*errmsg;
 	char	*input;
-	t_word	*cmd_args;
-	t_parse_block *parsed;
 
 	(void)argc;
 	(void)argv;
-	errmsg = NULL;
 	init(&g_env, envp);
 	while ((input = ask_for_input(NORMAL_PROMPT)) != NULL)
 	{
-		cmd_args = NULL;
-		exc_mark(&input);
-		if (ft_strlen(input) > 0)
-		{
-			lex_analysis(&input, &cmd_args, NULL);
-			history_add(input);
-			if (cmd_args)
-			{
-				parsed = do_parsing(cmd_args, &errmsg);
-				if (!parsed)
-					g_last_command_status = 1;
-				else
-					g_last_command_status = do_interpret(&g_env, parsed);
-				free_parse_block(&parsed);
-				delete_wordlist(&cmd_args);
-			}
-		}
+		main_loop(input);
 		free(input);
 	}
 	return (0);
