@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/01 15:01:23 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/03 13:51:32 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ void	delete_args(char **args);
 /*
 ** utils_signals.c
 */
+
 void	reset_sighandlers(void);
+
+/*
+** utils_process.c
+*/
+
+int		get_process_return(int status);
 
 #endif

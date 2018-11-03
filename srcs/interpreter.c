@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/01 14:33:09 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/03 14:31:35 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ static int	pipeline_run(t_env **cmd_env, t_parse_block *pipeline)
 			ret = -child_fds[i];
 		else
 		{
-			waitpid(child_fds[i], &status, WUNTRACED); // TODO check WUNTRACED useful ?
-			ret = WEXITSTATUS(status);
+			waitpid(child_fds[i], &status, WUNTRACED);
+			ret = get_process_return(status);
 		}
 		++i;
 	}

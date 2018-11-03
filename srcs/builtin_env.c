@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/01 14:25:19 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/03 14:35:32 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	start_proc(char **args, t_env **tmp_env)
 	delete_process(proc);
 	clear_env(*tmp_env);
 	waitpid(pid, &status, WUNTRACED);
-	ret = WEXITSTATUS(status); // TODO replace with proper return value (even when signal-terminated)
+	ret = get_process_return(status);
 	return (ret);
 }
 
