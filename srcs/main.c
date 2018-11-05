@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/05 20:28:23 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/05 20:44:19 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static void	main_loop(char **input)
 			ft_strjoin_free(*input, ft_strdup("\n")),
 			tmp);
 		// TODO check command too long !!!
+		exc_mark(input); // TODO check si ca crash
 	}
 	history_add(*input);
 	if (cmd_args)
