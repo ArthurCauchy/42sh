@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/01 14:33:54 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/05 13:08:16 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,23 @@ static void	main_loop(char *input)
 	char			*errmsg;
 	t_word			*cmd_args;
 	t_parse_block	*parsed;
-	
+	int				ret;
+
 	errmsg = NULL;
 	cmd_args = NULL;
+	parsed = NULL;
 	exc_mark(&input);
 	lex_analysis(&input, &cmd_args, NULL);
 	history_add(input);
 	if (cmd_args)
 	{
-		parsed = do_parsing(cmd_args, &errmsg);
-		if (!parsed)
+		//0 = SUCCES;
+		//-1 = INVALID;
+		//1 = UNFINISHED;
+		if ((ret = do_parsing(cmd_args, &parsed, &errmsg)) == -1)
 			g_last_command_status = 1;
+		else if (ret == 1)
+			ft_putstr("ASK FOR INPUT\n");
 		else
 			g_last_command_status = do_interpret(&g_env, parsed);
 		free_parse_block(&parsed);

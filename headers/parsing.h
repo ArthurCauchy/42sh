@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/19 14:12:32 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/05 12:49:27 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ t_parse_block*	clone_parse_block(t_parse_block *orig);
 */
 void			free_parse_block(t_parse_block **parse); // TODO move to separate file 'parse_block.c'
 t_parse_block	*new_parse_block(t_word *word, t_token separator); // same
-t_parse_block	*do_parsing(t_word *wordlist, char **errmsg);
+int				do_parsing(t_word *wordlist, t_parse_block **parsing, char **errmsg);
 
 #endif
