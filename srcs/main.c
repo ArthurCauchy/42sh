@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/05 13:08:16 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/05 15:26:32 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,17 @@ static void	main_loop(char *input)
 		//0 = SUCCES;
 		//-1 = INVALID;
 		//1 = UNFINISHED;
-		if ((ret = do_parsing(cmd_args, &parsed, &errmsg)) == -1)
-			g_last_command_status = 1;
-		else if (ret == 1)
-			ft_putstr("ASK FOR INPUT\n");
-		else
+		if ((ret = do_parsing(cmd_args, &parsed, &errmsg)) == 0)
 			g_last_command_status = do_interpret(&g_env, parsed);
+		else if (ret == 1)
+		{
+			char *tmp;
+
+			tmp = ask_for_input(SLASH_PROMPT);
+			main_loop(ft_strjoin(input, tmp));
+		}
+		else
+			g_last_command_status = 1;
 		free_parse_block(&parsed);
 		delete_wordlist(&cmd_args);
 	}
