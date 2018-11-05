@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:43:52 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/19 16:22:22 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/05 12:52:40 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,5 @@ int			ctrl_c(char *new_line, t_line *line)
 	line->auto_ct = -1;
 	is_tab(CONTRL_C, line);
 	init_attr(BASIC_LINE_EDIT);
-	return (0);
+	return (1);
 }
