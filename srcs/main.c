@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/01 14:33:54 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/05 14:17:56 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_alias		*g_aliases = NULL;
 int			g_winsize_changed = 0;
 pid_t		g_shell_pid;
 
-static void	main_loop(char *input)
+static void	main_loop(char **input)
 {
 	char			*errmsg;
 	t_word			*cmd_args;
@@ -39,9 +39,9 @@ static void	main_loop(char *input)
 	
 	errmsg = NULL;
 	cmd_args = NULL;
-	exc_mark(&input);
-	lex_analysis(&input, &cmd_args, NULL);
-	history_add(input);
+	exc_mark(input);
+	lex_analysis(input, &cmd_args, NULL);
+	history_add(*input);
 	if (cmd_args)
 	{
 		parsed = do_parsing(cmd_args, &errmsg);
@@ -63,7 +63,7 @@ int			main(int argc, char **argv, char **envp)
 	init(&g_env, envp);
 	while ((input = ask_for_input(NORMAL_PROMPT)) != NULL)
 	{
-		main_loop(input);
+		main_loop(&input);
 		free(input);
 	}
 	return (0);
