@@ -26,3 +26,5 @@ key combinations
 3. go up 1 line			OPTION_AWRROW_UP;
 3. go down 1 line		OPTION_AWRROW_DOWN;
 (too lazy to change the number .... :))
+
+crash line too long with history
