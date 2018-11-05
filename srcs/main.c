@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/05 20:09:41 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/05 20:28:23 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			g_with_termcap = 0;
 int			g_last_command_status = 0;
 t_alias		*g_aliases = NULL;
 int			g_winsize_changed = 0;
-pid_t		g_shell_pid;
+pid_t		g_shell_pid = -1;
 
 static void	main_loop(char **input)
 {

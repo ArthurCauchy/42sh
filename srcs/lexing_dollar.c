@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 14:15:05 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/22 16:51:28 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/05 20:31:17 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static void	handle_special_varnames(char *cmdline,
 {
 	if (cmdline[lexdata->i] == '?')
 		*var_value = ft_itoa(g_last_command_status);
+	else if (cmdline[lexdata->i] == '$')
+		*var_value = ft_itoa(g_shell_pid);
 	++lexdata->i;
 }
 
@@ -49,7 +51,7 @@ void		lex_dollar_exp(char *cmdline, t_lexdata *lexdata)
 
 	var_value = NULL;
 	++lexdata->i;
-	if (cmdline[lexdata->i] == '?')
+	if (cmdline[lexdata->i] == '?' || cmdline[lexdata->i] == '$')
 		handle_special_varnames(cmdline, lexdata, &var_value);
 	else
 	{

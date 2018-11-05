@@ -9,7 +9,6 @@ TODO:
 - alias
     - handle quotes in alias (abandoned feature, alias containing quotes should not cause a crash tho)
 		- do not perform alias substitution if the arg is quoted
-- $$ variable expansion ?
 - check if the shell behaves like bash in case of signals exited processes
 - starting a shell in our 42sh : instantly prints "Stopped" and nothing happens (ONLY AT SCHOOL)
 
