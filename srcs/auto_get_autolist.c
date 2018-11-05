@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 15:05:59 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 12:32:22 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 17:17:35 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_autolist	*addlist_in_path(t_line *line, char **path, t_autolist *l)
 		path++;
 	}
 	if (!auto_current(line))
-		l = addlist_buildin(line, l);
+		l = addlist_buildin_alias(line, l);
 	return (l);
 }
 

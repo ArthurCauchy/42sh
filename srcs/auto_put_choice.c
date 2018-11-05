@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 09:34:09 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 12:33:24 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 20:07:41 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void		one_autolist(t_line *line)
 	put_first_lst(line);
 	move_nright(line);
 	put_choice_end(line, line->auto_lt->is_dic);
+	free_auto_lt(line);
 }
 
 static void	for_put_choice(t_autolist *cp, t_line *line)

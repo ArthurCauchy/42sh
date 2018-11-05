@@ -6,13 +6,14 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 12:09:44 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 12:09:55 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 17:46:31 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include "env.h"
 #include "global.h"
 #include "line_edit.h"
@@ -52,6 +53,7 @@ char			**path(t_env **env)
 	if (!(path = read_from_env(env, "PATH")))
 		return (NULL);
 	split_path = ft_strsplit(path, ':');
+	free (path);
 	return (split_path);
 }
 

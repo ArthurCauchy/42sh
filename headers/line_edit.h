@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 16:49:51 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/10/22 17:47:44 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ int				auto_current(t_line *line);
 
 t_autolist		*add_a_list(t_autolist *list, char *name, unsigned char type);
 t_autolist		*add_one_list(t_autolist *list, t_autolist *add);
-t_autolist		*addlist_buildin(t_line *line, t_autolist *list);
+t_autolist		*addlist_buildin_alias(t_line *line, t_autolist *list);
 
 /*
 ** auto_get_autolist.c
