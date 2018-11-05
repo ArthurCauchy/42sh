@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/05 15:26:32 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/05 15:42:46 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_alias		*g_aliases = NULL;
 int			g_winsize_changed = 0;
 pid_t		g_shell_pid;
 
-static void	main_loop(char *input)
+static void	main_loop(char **input)
 {
 	char			*errmsg;
 	t_word			*cmd_args;
@@ -41,9 +41,9 @@ static void	main_loop(char *input)
 	errmsg = NULL;
 	cmd_args = NULL;
 	parsed = NULL;
-	exc_mark(&input);
-	lex_analysis(&input, &cmd_args, NULL);
-	history_add(input);
+	exc_mark(input);
+	lex_analysis(input, &cmd_args, NULL);
+	history_add(*input);
 	if (cmd_args)
 	{
 		//0 = SUCCES;
@@ -54,9 +54,14 @@ static void	main_loop(char *input)
 		else if (ret == 1)
 		{
 			char *tmp;
+			char *new;
 
 			tmp = ask_for_input(SLASH_PROMPT);
-			main_loop(ft_strjoin(input, tmp));
+			new = ft_strjoin(*input, tmp);
+			free(tmp);
+			if (ft_strlen(new) < INPUT_MAX_LEN - 1)
+				main_loop(&new);
+			free(new);
 		}
 		else
 			g_last_command_status = 1;
@@ -74,7 +79,7 @@ int			main(int argc, char **argv, char **envp)
 	init(&g_env, envp);
 	while ((input = ask_for_input(NORMAL_PROMPT)) != NULL)
 	{
-		main_loop(input);
+		main_loop(&input);
 		free(input);
 	}
 	return (0);

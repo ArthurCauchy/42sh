@@ -1,4 +1,14 @@
-// TODO header 42
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/05 12:43:30 by acauchy           #+#    #+#             */
+/*   Updated: 2018/11/05 13:07:22 by acauchy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
@@ -34,6 +44,5 @@ void		delete_process(t_process *proc)
 {
 	free(proc->path);
 	delete_args(proc->args);
-	delete_redirects(proc->redirs);
 	free(proc);
 }
