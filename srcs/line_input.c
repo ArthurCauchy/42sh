@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 15:59:23 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/05 15:04:48 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/05 20:21:38 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ char			*ask_for_input(int prompt_choice)
 	char	buffer[INPUT_MAX_LEN];
 	char	prompt[INPUT_MAX_LEN];
 	t_line	line;
+	char	*ret;
 
 	ft_bzero(buffer, INPUT_MAX_LEN);
 	ft_bzero(prompt, INPUT_MAX_LEN);
@@ -81,8 +82,10 @@ char			*ask_for_input(int prompt_choice)
 	else
 		get_normal_prompt(prompt, INPUT_MAX_LEN);
 	if (get_line(prompt, buffer, &line, &g_env) == 1 && prompt_choice != NORMAL_PROMPT)
-		return (NULL);
+		ret = NULL;
+	else
+		ret = ft_strdup(buffer);
 	if (g_with_termcap)
 		ft_putchar('\n');
-	return (ft_strdup(buffer));
+	return (ret);
 }

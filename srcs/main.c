@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/05 16:32:21 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/05 20:09:41 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,33 @@ static void	main_loop(char **input)
 	t_word			*cmd_args;
 	t_parse_block	*parsed;
 	int				ret;
+	int				lex_ret;
 
 	errmsg = NULL;
 	cmd_args = NULL;
 	parsed = NULL;
 	exc_mark(input);
-	lex_analysis(input, &cmd_args, NULL);
+	while ((lex_ret = lex_analysis(input, &cmd_args, NULL)) != 0) // this while block should become a function
+	{
+		char *tmp;
+
+		delete_wordlist(&cmd_args);
+		if (lex_ret == 1)
+			tmp = ask_for_input(SQUOTE_PROMPT);
+		else if (lex_ret == 2)
+			tmp = ask_for_input(DQUOTE_PROMPT);
+		else
+			tmp = ask_for_input(SLASH_PROMPT);
+		if (tmp == NULL)
+		{
+			delete_wordlist(&cmd_args);
+			return ;
+		}
+		*input = ft_strjoin_free(
+			ft_strjoin_free(*input, ft_strdup("\n")),
+			tmp);
+		// TODO check command too long !!!
+	}
 	history_add(*input);
 	if (cmd_args)
 	{
