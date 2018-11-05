@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 15:24:43 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/10/19 16:11:25 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/10/19 16:37:58 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,8 @@ t_parse_block* do_parsing(t_word *wordlist, char **errmsg)
 			tmp_block->separator = tmp->token;
 			block_push(&parsing, tmp_block);
 			free_parse_block(&tmp_block);
-			tmp_block = new_parse_block(NULL, NONE);
+			if (tmp->next != NULL)
+				tmp_block = new_parse_block(NULL, NONE);
 		}
 		else if (tmp->next == NULL)
 		{
@@ -145,19 +146,19 @@ t_parse_block* do_parsing(t_word *wordlist, char **errmsg)
 			word_push(&tmp_block->wordlist, tmp);
 		tmp = tmp->next;
 	}
-// //		PRINT
-// 		t_parse_block *display = parsing;
-// 		while (display)
-// 		{
-// 			ft_putstr("BEGIN BLOCK\n");
-// 			display_words(display->wordlist);
-// 			if (display->separator == PIPE)
-// 				printf("separator: PIPE\n");
-// 			if (display->separator == NONE)
-// 				printf("separator: NONE\n");
-// 			display = display->next;
-// 			ft_putstr("END BLOCK\n");
-// 		}
-// //		PRINT
+		// PRINT
+		// t_parse_block *display = parsing;
+		// while (display)
+		// {
+		// 	ft_putstr("BEGIN BLOCK\n");
+		// 	display_words(display->wordlist);
+		// 	if (display->separator == PIPE)
+		// 		printf("separator: PIPE\n");
+		// 	if (display->separator == NONE)
+		// 		printf("separator: NONE\n");
+		// 	display = display->next;
+		// 	ft_putstr("END BLOCK\n");
+		// }
+		// PRINT
 	return (parsing);
 }
