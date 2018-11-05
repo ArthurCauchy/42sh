@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 15:59:23 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/22 12:22:43 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/05 15:04:48 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@ static void		get_normal_prompt(char *prompt, int index)
 /*
 ** we can choose NORMAL_PROMPT, HEREDOC_PROMPT, SQUOTE_PROMPT,
 ** DQUOTE_PROMPT, SQUOTE_PROMPT
+**
+** If the input line is empty, returns :
+** - an empty buffer if NORMAL_PROMPT
+** - NULL if anything else
 */
 
 char			*ask_for_input(int prompt_choice)
@@ -76,7 +80,8 @@ char			*ask_for_input(int prompt_choice)
 		ft_strcpy(prompt, "> ");
 	else
 		get_normal_prompt(prompt, INPUT_MAX_LEN);
-	get_line(prompt, buffer, &line, &g_env);
+	if (get_line(prompt, buffer, &line, &g_env) == 1 && prompt_choice != NORMAL_PROMPT)
+		return (NULL);
 	if (g_with_termcap)
 		ft_putchar('\n');
 	return (ft_strdup(buffer));
