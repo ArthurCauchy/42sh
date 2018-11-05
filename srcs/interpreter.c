@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/03 14:31:35 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/05 13:09:41 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ static int	pipeline_run(t_env **cmd_env, t_parse_block *pipeline)
 			print_n_free_errmsg(&errmsg);
 			child_fds[pl_size++] = -1;
 		}
+		else if (pipeline->wordlist == NULL)
+		{
+			ft_putendl_fd("Invalid null command.", 2); // the file should still be created but void
+			child_fds[pl_size++] = -1;
+		}
 		else
 		{
 			proc = new_process(cmd_env, arglist_to_array(pipeline->wordlist));
@@ -89,6 +94,7 @@ static int	pipeline_run(t_env **cmd_env, t_parse_block *pipeline)
 			child_fds[pl_size++] = start_process(cmd_env, proc, pipeline->next ? 1 : 0, &pgid);
 			delete_process(proc);
 		}
+		delete_redirects(redirs);
 		pipeline = pipeline->next;
 	}
 	handle_pipes(NULL, NULL);
