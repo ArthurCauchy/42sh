@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 14:35:33 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/06 14:39:41 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/06 16:12:37 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@
 #include "global.h"
 
 /*
-** When a builtin is in a pipe, then the shell fork, the child execute the builtin and returns
+** When a builtin is in a pipe, then the shell fork,
+** the child execute the builtin and returns
 */
-static int	start_forked_builtin(t_env **cmd_env, t_process *proc, t_builtin *builtin, pid_t *pgid)
+
+static int	start_forked_builtin(t_env **cmd_env,
+		t_process *proc, t_builtin *builtin, pid_t *pgid)
 {
 	pid_t	pid;
 	char	*errmsg;
@@ -76,7 +79,8 @@ static int	handle_exec_error(char *path, char **args)
 	}
 }
 
-static int	start_external_process(t_env **cmd_env, t_process *proc, pid_t *pgid)
+static int	start_external_process(t_env **cmd_env,
+		t_process *proc, pid_t *pgid)
 {
 	char	*errmsg;
 	pid_t	pid;
@@ -118,14 +122,17 @@ static int	start_external_process(t_env **cmd_env, t_process *proc, pid_t *pgid)
 ** Params :
 ** - proc : process to start
 ** - forked : start command in new process ? 1:yes/0:no
-** - pgid : the Process Group ID of the new process. -1 if it should create it's own
+** - pgid : the Process Group ID of the new process.
+**          -1 if it should create it's own
 ** Return:
 ** - (n>0) the new process pid
 ** - (n<=0) error code or builtin's exit status
 **
 ** If the process creates it's own pgid, the value of the pgid pointer is set
 */
-int			start_process(t_env **cmd_env, t_process *proc, int forked, pid_t *pgid)
+
+int			start_process(t_env **cmd_env,
+		t_process *proc, int forked, pid_t *pgid)
 {
 	int			ret;
 	t_builtin	*builtin;
@@ -140,7 +147,8 @@ int			start_process(t_env **cmd_env, t_process *proc, int forked, pid_t *pgid)
 		{
 			ft_bzero(fdtmp_array, FD_MAX * sizeof(int));
 			ft_memset(fdsave_array, -1, FD_MAX * sizeof(int));
-			if (apply_redirects(proc->redirs, fdtmp_array, fdsave_array, &errmsg) == -1)
+			if (apply_redirects(proc->redirs, fdtmp_array,
+						fdsave_array, &errmsg) == -1)
 			{
 				print_n_free_errmsg(&errmsg);
 				restore_filedes(fdtmp_array, fdsave_array);

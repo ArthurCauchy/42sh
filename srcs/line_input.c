@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 15:59:23 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/05 20:21:38 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/06 16:16:05 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ char			*ask_for_input(int prompt_choice)
 		ft_strcpy(prompt, "> ");
 	else
 		get_normal_prompt(prompt, INPUT_MAX_LEN);
-	if (get_line(prompt, buffer, &line, &g_env) == 1 && prompt_choice != NORMAL_PROMPT)
+	if (get_line(prompt, buffer, &line, &g_env) == 1
+			&& prompt_choice != NORMAL_PROMPT)
 		ret = NULL;
 	else
 		ret = ft_strdup(buffer);
