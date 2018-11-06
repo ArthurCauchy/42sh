@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 17:05:12 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/22 16:22:02 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/02 15:48:54 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ static void		alias_pushback(t_alias **new_alias)
 
 static int		malloc_alias(char **alias, t_alias **new_alias)
 {
+	if (ft_strchr(alias[1], '\'') || ft_strchr(alias[1], '\"'))
+	{
+		ft_putendl("alias error : quotes are not allowed inside the value");
+		return (-1);
+	}
 	if (!(*new_alias = (t_alias *)malloc(sizeof(t_alias))))
 		return (-1);
 	(*new_alias)->key = ft_strdup(alias[0]);
