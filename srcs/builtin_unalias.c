@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 17:05:12 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/22 17:34:10 by ccharrie         ###   ########.fr       */
+/*   Updated: 2018/11/02 15:56:26 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ int				check_alias_existance(char *key, char *value)
 	t_alias	*head;
 
 	head = g_aliases;
+	if (ft_strchr(alias[1], '\'') || ft_strchr(alias[1], '\"'))
+	{
+		ft_putendl("alias error : quotes are not allowed inside the value");
+		return (1);
+	}
 	while (g_aliases)
 	{
 		if (ft_strcmp(g_aliases->key, key) == 0)
