@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 17:05:12 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/02 15:56:26 by ccharrie         ###   ########.fr       */
+/*   Updated: 2018/11/06 14:25:26 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int				builtin_unalias(t_env **env, char **args)
 			ft_fminiprint(1, "unalias : illegal option %l0s%\n", args[1]);
 			ft_fminiprint(1, "usage : %l0s%\n", UNALIAS_USAGE);
 		}
-	}	
+	}
 	else
 	{
 		erase_alias(args[1]);
