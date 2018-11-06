@@ -12,6 +12,9 @@ TODO:
 - check if the shell behaves like bash in case of signals exited processes
 - starting a shell in our 42sh : instantly prints "Stopped" and nothing happens (ONLY AT SCHOOL)
 
+- lexing:
+	- variable resolution must NOT be done in parsing. must be done just before starting the command
+
 Need further investigation:
 - 'mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi' example from the 21sh subject
 	- wtf it works on my (acauchy's) 21sh
