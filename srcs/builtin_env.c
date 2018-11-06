@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/03 14:35:32 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/06 10:54:28 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	start_proc(char **args, t_env **tmp_env)
 	int			ret;
 	int			status;
 	t_process	*proc;
-	
+
 	pgid = -1;
 	ret = 0;
 	proc = new_process(tmp_env, copy_args(args));

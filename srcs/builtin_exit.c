@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/09 11:45:12 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/06 10:57:05 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,7 @@
 #include "env.h"
 #include "history.h"
 
-/*
-** OLD VERSION of acauchy's 21sh, restore this later ?
-**
 int	builtin_exit(t_env **env, char **args)
-{
-	int	exit_status;
-
-	(void)env;
-	exit_status = 0;
-	if (args[1])
-	{
-		exit_status = ft_atoi(args[1]);
-		if (args[2])
-		{
-			ft_putendl_fd("exit: Too many arguments.", 2);
-			return (1);
-		}
-	}
-	g_shell.exit_now = 1;
-	g_shell.exit_status = exit_status;
-	return (0);
-}
-*/
-
-// simple version
-int					builtin_exit(t_env **env, char **args)
 {
 	int	exit_status;
 
@@ -59,7 +34,7 @@ int					builtin_exit(t_env **env, char **args)
 		}
 		else
 		{
-			exit_status = 1; // what does it returns at school ?
+			exit_status = 255;
 			ft_putendl_fd("exit: Numeric argument required.", 2);
 		}
 	}

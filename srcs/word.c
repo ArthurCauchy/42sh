@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 10:29:04 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/17 17:04:24 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/06 10:50:52 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_word	*copy_wordlist(t_word *wordlist)
 	t_word	*cur_new;
 
 	new = NULL;
-	cur_orig = wordlist; 
+	cur_orig = wordlist;
 	prev_new = NULL;
 	cur_new = NULL;
 	while (cur_orig)
