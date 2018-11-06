@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/06 13:21:38 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/06 15:53:14 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,15 @@ t_alias		*g_aliases = NULL;
 int			g_winsize_changed = 0;
 pid_t		g_shell_pid = -1;
 
-static void	main_loop(char **input)
+static int	input_lexing(char **input, t_word **cmd_args)
 {
-	char			*errmsg;
-	t_word			*cmd_args;
-	t_parse_block	*parsed;
-	int				ret;
 	int				lex_ret;
-
-	errmsg = NULL;
-	cmd_args = NULL;
-	parsed = NULL;
-	exc_mark(input);
-	while ((lex_ret = lex_analysis(input, &cmd_args, NULL)) != 0) // this while block should become a function
+	
+	while ((lex_ret = lex_analysis(input, cmd_args, NULL)) != 0)
 	{
 		char *tmp;
 
-		delete_wordlist(&cmd_args);
+		delete_wordlist(cmd_args);
 		if (lex_ret == 1)
 			tmp = ask_for_input(SQUOTE_PROMPT);
 		else if (lex_ret == 2)
@@ -56,15 +48,36 @@ static void	main_loop(char **input)
 			tmp = ask_for_input(SLASH_PROMPT);
 		if (tmp == NULL)
 		{
-			delete_wordlist(&cmd_args);
-			return ;
+			delete_wordlist(cmd_args);
+			return (1);
 		}
-		*input = ft_strjoin_free(
-			ft_strjoin_free(*input, ft_strdup("\n")),
-			tmp);
+		if (lex_ret == 1 || lex_ret == 2)
+		{
+			*input = ft_strjoin_free(
+				ft_strjoin_free(*input, ft_strdup("\n")),
+				tmp);
+		}
+		else
+			*input = ft_strjoin_free(*input, tmp);
 		// TODO check command too long !!!
 		exc_mark(input); // TODO check si ca crash
 	}
+	return (0);
+}
+
+static void	main_loop(char **input)
+{
+	char			*errmsg;
+	t_word			*cmd_args;
+	t_parse_block	*parsed;
+	int				ret;
+
+	errmsg = NULL;
+	cmd_args = NULL;
+	parsed = NULL;
+	exc_mark(input);
+	if (input_lexing(input, &cmd_args) == 1)
+		return;
 	history_add(*input);
 	if (cmd_args)
 	{
