@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/06 15:53:14 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/06 16:29:55 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ pid_t		g_shell_pid = -1;
 static int	input_lexing(char **input, t_word **cmd_args)
 {
 	int				lex_ret;
-	
+
 	while ((lex_ret = lex_analysis(input, cmd_args, NULL)) != 0)
 	{
 		char *tmp;
@@ -78,10 +78,12 @@ static void	main_loop(char **input)
 	exc_mark(input);
 	if (input_lexing(input, &cmd_args) == 1)
 		return;
-	history_add(*input);
 	if (cmd_args)
 	{
-		if ((ret = do_parsing(cmd_args, &parsed, &errmsg)) == 0)
+		ret = do_parsing(cmd_args, &parsed, &errmsg);
+		if (ret != 1)
+			history_add(*input);
+		if (ret == 0)
 			g_last_command_status = do_interpret(&g_env, parsed);
 		else if (ret == 1)
 			recursive_main_loop(input);
@@ -98,16 +100,22 @@ void	recursive_main_loop(char **input)
 	char *new;
 	char *space;
 
-	space = ft_strjoin(*input, " ");
 	tmp = ask_for_input(SLASH_PROMPT);
-	new = ft_strjoin(space, tmp);
-	free(space);
-	free(tmp);
-	if (ft_strlen(new) < INPUT_MAX_LEN - 1)
-		main_loop(&new);
-	else
-		ft_putstr_fd("Command too long.\n", 2);
-	free(new);
+	if (tmp != NULL)
+	{
+		if (ft_strcmp(tmp, "") != 0)
+			space = ft_strjoin(*input, " ");
+		else
+			space = ft_strdup(*input);
+		new = ft_strjoin(space, tmp);
+		free(space);
+		free(tmp);
+		if (ft_strlen(new) < INPUT_MAX_LEN - 1)
+			main_loop(&new);
+		else
+			ft_putstr_fd("Command too long.\n", 2);
+		free(new);
+	}
 }
 
 int			main(int argc, char **argv, char **envp)

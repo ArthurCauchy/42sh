@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/11/05 14:19:42 by lumenthi         ###   ########.fr        #
+#    Updated: 2018/11/06 15:16:53 by lumenthi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,6 +103,9 @@ SRC_NAME = utils.c \
 		   redirections_apply_lshift.c \
 		   redirections_apply_lshift2.c \
 		   redirections_apply_lshift_amp.c \
+		   history_tools.c \
+		   history_init.c \
+		   history_helper.c \
 		   history.c \
 		   exc_mark.c \
 		   line_termcap_setting.c \
