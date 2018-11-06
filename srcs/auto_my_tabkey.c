@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 15:05:59 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 20:23:38 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/06 11:23:02 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ static void	home_auto_compare(t_line *line)
 		user_home = read_from_env(&g_env, "HOME");
 		if (user_home)
 		{
-		ft_strcpy((char *)temp, user_home);
-		ft_strcat(temp, (char *)line->auto_compare + 1);
-		ft_bzero(line->auto_compare, INPUT_MAX_LEN);
-		ft_strcpy((char *)line->auto_compare, (char *)temp);
-		free(user_home);
+			ft_strcpy((char *)temp, user_home);
+			ft_strcat(temp, (char *)line->auto_compare + 1);
+			ft_bzero(line->auto_compare, INPUT_MAX_LEN);
+			ft_strcpy((char *)line->auto_compare, (char *)temp);
+			free(user_home);
 		}
 	}
 }

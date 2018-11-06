@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 16:45:17 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 17:25:45 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/06 11:22:11 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int			buildin_exit(t_autolist *list, char *buildin)
 	return (0);
 }
 
-static t_autolist		*addlist_alias(t_line *line, t_autolist *list)
+static t_autolist	*addlist_alias(t_line *line, t_autolist *list)
 {
 	t_alias		*cp;
 

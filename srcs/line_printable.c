@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:52:08 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/05 16:39:34 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/06 11:25:48 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ static void	update_index(t_line *line, int hint, int new_pos, int *index)
 {
 	if (hint)
 		*index = (line->buf_len + line->start_po) / line->line_max - \
-				 (new_pos + line->start_po) / line->line_max;
+				(new_pos + line->start_po) / line->line_max;
 	else
 		*index = (line->buf_len + line->start_po) % line->line_max - \
-				 (new_pos + line->start_po) % line->line_max;
+				(new_pos + line->start_po) % line->line_max;
 }
 
 int			printable(t_line *line, unsigned long key)
@@ -66,7 +66,6 @@ int			printable(t_line *line, unsigned long key)
 	int		positive;
 	int		new_pos;
 	int		new_len;
-
 
 	if (line->buf_len + line->start_po >= INPUT_MAX_LEN - 1)
 		return (0);
