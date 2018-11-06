@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/06 12:08:47 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/06 14:58:15 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int				set_error(t_error *error, t_word *tmp);
 /*
 ** parsing.c
 */
+
 int				is_last(t_word *wordlist);
 int				is_parsing_separator(t_token elem);
 int				is_parsing_arg(t_token elem);
@@ -70,6 +71,7 @@ int				do_parsing(t_word *wordlist, t_parse_block **parsing, char **errmsg);
 /*
 ** main.c
 */
+
 void			recursive_main_loop(char **input);
 
 #endif
