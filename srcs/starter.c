@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 14:35:33 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/01 15:02:47 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/06 11:50:14 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ static int	start_forked_builtin(t_env **cmd_env, t_process *proc, t_builtin *bui
 		exit_error("fork() error");
 	if (pid == 0)
 	{
+		pid = getpid();
+		if (*pgid == -1)
+		{
+			tcsetpgrp(0, pid);
+			setpgid(pid, pid);
+		}
+		else
+			setpgid(pid, *pgid);
 		reset_sighandlers();
 		if (apply_redirects(proc->redirs, NULL, NULL, &errmsg) == -1)
 			exit_error(errmsg);
@@ -82,7 +90,14 @@ static int	start_external_process(t_env **cmd_env, t_process *proc, pid_t *pgid)
 		exit_error("fork() error");
 	if (pid == 0)
 	{
-		reset_sighandlers();
+		pid = getpid();
+		if (*pgid == -1)
+		{
+			tcsetpgrp(0, pid);
+			setpgid(pid, pid);
+		}
+		else
+			setpgid(pid, *pgid);
 		if (apply_redirects(proc->redirs, NULL, NULL, &errmsg) == -1)
 			exit_error(errmsg);
 		execve(proc->path, proc->args, env_to_array(cmd_env));
