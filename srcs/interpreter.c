@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/05 13:09:41 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/06 15:23:16 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static int	pipeline_run(t_env **cmd_env, t_parse_block *pipeline)
 	ft_bzero(child_fds, FD_MAX * sizeof(int));
 	pgid = -1;
 	pl_size = 0;
+	status = 0;
 	while (pipeline)
 	{
 		redirs = NULL;
