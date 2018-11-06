@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/06 13:57:46 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/06 14:47:42 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,10 @@ void	recursive_main_loop(char **input)
 	tmp = ask_for_input(SLASH_PROMPT);
 	if (tmp != NULL)
 	{
-		space = ft_strjoin(*input, " ");
+		if (ft_strcmp(tmp, "") != 0)
+			space = ft_strjoin(*input, " ");
+		else
+			space = ft_strdup(*input);
 		new = ft_strjoin(space, tmp);
 		free(space);
 		free(tmp);
