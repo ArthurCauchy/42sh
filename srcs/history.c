@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 10:38:26 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/10/15 12:42:36 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/06 12:36:19 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static void		to_tab(char **line, char ***hist)
 	while ((bn = ft_strchr(tmp, '\n')))
 	{
 		*bn = '\0';
-		(*hist)[i] = ft_strdup(tmp);
+		(*hist)[i] = ft_strndup(tmp, INPUT_MAX_LEN - 1);
 		len = ft_strlen(tmp) + 1;
 		free(tmp);
 		tmp = ft_strdup((*line) + len);

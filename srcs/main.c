@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/06 12:13:50 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/06 12:17:46 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,6 @@ static void	main_loop(char **input)
 	history_add(*input);
 	if (cmd_args)
 	{
-		//0 = SUCCES;
-		//-1 = INVALID;
-		//1 = UNFINISHED;
 		if ((ret = do_parsing(cmd_args, &parsed, &errmsg)) == 0)
 			g_last_command_status = do_interpret(&g_env, parsed);
 		else if (ret == 1)
