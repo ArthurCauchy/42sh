@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/05 20:44:19 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/06 13:21:38 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,30 +68,33 @@ static void	main_loop(char **input)
 	history_add(*input);
 	if (cmd_args)
 	{
-		//0 = SUCCES;
-		//-1 = INVALID;
-		//1 = UNFINISHED;
 		if ((ret = do_parsing(cmd_args, &parsed, &errmsg)) == 0)
 			g_last_command_status = do_interpret(&g_env, parsed);
 		else if (ret == 1)
-		{
-			char *tmp;
-			char *new;
-
-			tmp = ask_for_input(SLASH_PROMPT);
-			new = ft_strjoin(*input, tmp);
-			free(tmp);
-			if (ft_strlen(new) < INPUT_MAX_LEN - 1)
-				main_loop(&new);
-			else
-				ft_putstr_fd("Command too long.\n", 2);
-			free(new);
-		}
+			recursive_main_loop(input);
 		else
 			g_last_command_status = 1;
 		free_parse_block(&parsed);
 		delete_wordlist(&cmd_args);
 	}
+}
+
+void	recursive_main_loop(char **input)
+{
+	char *tmp;
+	char *new;
+	char *space;
+
+	space = ft_strjoin(*input, " ");
+	tmp = ask_for_input(SLASH_PROMPT);
+	new = ft_strjoin(space, tmp);
+	free(space);
+	free(tmp);
+	if (ft_strlen(new) < INPUT_MAX_LEN - 1)
+		main_loop(&new);
+	else
+		ft_putstr_fd("Command too long.\n", 2);
+	free(new);
 }
 
 int			main(int argc, char **argv, char **envp)
