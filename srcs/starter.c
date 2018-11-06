@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 14:35:33 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/06 12:10:00 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/06 14:39:41 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static int	start_forked_builtin(t_env **cmd_env, t_process *proc, t_builtin *bui
 		pid = getpid();
 		if (*pgid == -1)
 		{
-			tcsetpgrp(0, pid);
 			setpgid(pid, pid);
+			tcsetpgrp(0, pid);
 		}
 		else
 			setpgid(pid, *pgid);
@@ -93,11 +93,12 @@ static int	start_external_process(t_env **cmd_env, t_process *proc, pid_t *pgid)
 		pid = getpid();
 		if (*pgid == -1)
 		{
-			tcsetpgrp(0, pid);
 			setpgid(pid, pid);
+			tcsetpgrp(0, pid);
 		}
 		else
 			setpgid(pid, *pgid);
+		reset_sighandlers();
 		if (apply_redirects(proc->redirs, NULL, NULL, &errmsg) == -1)
 			exit_error(errmsg);
 		execve(proc->path, proc->args, env_to_array(cmd_env));
