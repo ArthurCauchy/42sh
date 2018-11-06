@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 12:43:30 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/05 13:07:22 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/06 11:57:39 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static char	*get_proc_path(t_env **cmd_env, char *name)
 
 	if (ft_strchr(name, '/') && is_there_a_file(name))
 		return (ft_strdup(name));
-	else if (!ft_strchr(name, '/') && (after_path = find_cmd_path(&g_env, cmd_env, name)))
+	else if (!ft_strchr(name, '/')
+			&& (after_path = find_cmd_path(&g_env, cmd_env, name)))
 		return (after_path);
 	else
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/06 10:54:28 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/06 12:13:41 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,23 @@ static void	add_to_tmp_env(t_env **env, char *str)
 
 static int	start_proc(char **args, t_env **tmp_env)
 {
-	pid_t		pid;
-	pid_t		pgid;
 	int			ret;
+	pid_t		pgid;
 	int			status;
 	t_process	*proc;
 
 	pgid = -1;
-	ret = 0;
 	proc = new_process(tmp_env, copy_args(args));
-	pid = start_process(tmp_env, proc, 1, &pgid);
+	ret = start_process(tmp_env, proc, 1, &pgid);
 	delete_process(proc);
 	clear_env(*tmp_env);
-	waitpid(pid, &status, WUNTRACED);
-	ret = get_process_return(status);
-	return (ret);
+	if (ret > 0)
+	{
+		waitpid(ret, &status, WUNTRACED);
+		return (get_process_return(status));
+	}
+	else
+		return (-ret);
 }
 
 int			builtin_env(t_env **env, char **args)

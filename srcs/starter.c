@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 14:35:33 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/06 11:50:14 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/06 12:10:00 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ static int	start_external_process(t_env **cmd_env, t_process *proc, pid_t *pgid)
 ** - pgid : the Process Group ID of the new process. -1 if it should create it's own
 ** Return:
 ** - (n>0) the new process pid
-** - (n<0) error code or builtin's exit status
+** - (n<=0) error code or builtin's exit status
 **
 ** If the process creates it's own pgid, the value of the pgid pointer is set
 */

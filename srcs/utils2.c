@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 11:34:35 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/22 17:44:46 by ccharrie         ###   ########.fr       */
+/*   Updated: 2018/11/06 11:56:21 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_n_free_errmsg(char **errmsg)
 char	*get_alias_value(char *key)
 {
 	t_alias *cur;
-	
+
 	cur = g_aliases;
 	while (cur)
 	{
