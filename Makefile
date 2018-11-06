@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/11/03 13:22:43 by arthur           ###   ########.fr        #
+#    Updated: 2018/11/05 14:19:42 by lumenthi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,6 +88,7 @@ SRC_NAME = utils.c \
 		   lexing_space.c \
 		   parse_block.c \
 		   parsing.c \
+		   parsing_error.c \
 		   interpreter.c \
 		   process.c \
 		   starter.c \

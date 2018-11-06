@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 13:53:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/22 16:40:02 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/05 15:15:09 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,11 @@ static void		do_lex(char *cmdline, t_word **wordlist,
 ** - wordlist : the output list containing the lexed tokens
 ** - avoid : the name of the alias to ignore in cas of alias lexing, or NULL
 */
+
 void			lex_analysis(char **cmdline, t_word **wordlist, char *avoid)
 {
 	t_lexdata	*lexdata;
+	char		*tmp;
 
 	init_lexdata(&lexdata);
 	lexdata->avoid = avoid;
@@ -130,8 +132,10 @@ void			lex_analysis(char **cmdline, t_word **wordlist, char *avoid)
 				free(lexdata->buff);
 				free(lexdata);
 				delete_wordlist(wordlist);
-				*cmdline = ft_strjoin_free(*cmdline,
-						ask_for_input(SLASH_PROMPT));
+				tmp = ask_for_input(SLASH_PROMPT);
+				*cmdline = ft_strjoin_free(
+						ft_strjoin_free(*cmdline, ft_strdup("\n")),
+						tmp);
 				init_lexdata(&lexdata);
 				// check command too long here
 			}
