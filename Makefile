@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/11/05 14:19:42 by lumenthi         ###   ########.fr        #
+#    Updated: 2018/11/06 15:00:18 by saxiao           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,7 +107,8 @@ SRC_NAME = utils.c \
 		   exc_mark.c \
 		   line_termcap_setting.c \
 		   line_engine.c \
-		   line_mv_left_right.c \
+		   line_mv_right.c \
+		   line_mv_left.c \
 		   line_delete.c \
 		   line_printable.c \
 		   line_his_up_down.c \

@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 17:47:44 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/06 16:45:06 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,5 +247,11 @@ void			put_choice(t_line *line, int *i);
 void			print_prompt(char *prompt);
 int				my_clear_screen(t_line *line);
 int				winsize_change(t_line *line);
+
+/*
+** auto_put_colum.c
+*/
+
+int				newline_b4(t_line *line, int index);
 
 #endif
