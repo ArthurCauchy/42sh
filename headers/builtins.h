@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:11:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/22 17:32:41 by ccharrie         ###   ########.fr       */
+/*   Updated: 2018/11/06 15:35:10 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,6 @@ void				simplify_path_slash(t_list **list);
 */
 
 int					check_alias_existance(char *key, char *value);
+int					check_alias_forbid_char(char *value);
 
 #endif
