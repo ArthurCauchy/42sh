@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 14:24:18 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/20 14:56:42 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/06 15:04:24 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void		clear_builtins(void)
 	i = 0;
 	while (i < BUILTINS_MAX && builtins[i] != NULL)
 	{
-		free(builtins[i]->brief);
 		free(builtins[i]);
+		builtins[i] = NULL;
 		++i;
 	}
 }
