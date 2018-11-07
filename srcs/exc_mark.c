@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/04 10:30:03 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/11/06 16:57:02 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/07 10:25:42 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "global.h"
 #include "exc_mark.h"
 
-static void	fill_inter(char *str, char **middle, int *i)
+void		fill_inter(char *str, char **middle, int *i)
 {
 	int j;
 
@@ -37,83 +37,11 @@ static void	fill_inter(char *str, char **middle, int *i)
 	(*middle)[j] = '\0';
 }
 
-static char	*get_digit(char *middle)
+static void	set_null(char **before, char **middle, char **after)
 {
-	char	*ret;
-
-	ret = history_get(ft_atoi(middle) - 1);
-	if (ret == NULL)
-		return (exc_error(middle));
-	return (ret);
-}
-
-static char	*get_alpha(char *middle)
-{
-	int	i;
-	int	tmp;
-	int	biggest;
-	int	ret;
-
-	i = g_history->nb_lines - 1;
-	biggest = 0;
-	ret = -1;
-	while (i >= 0)
-	{
-		tmp = check_matches(middle, g_history->line[i]);
-		if (tmp > biggest)
-		{
-			biggest = tmp;
-			ret = i;
-		}
-		i--;
-	}
-	if (ret > -1)
-		return (ft_strdup(g_history->line[ret]));
-	return (exc_error(middle));
-}
-
-static char	*get_minus(char *middle)
-{
-	int		nb;
-	char	*ret;
-
-	if (ft_isdigit(middle[1]))
-	{
-		nb = ft_atoi(middle);
-		nb = g_history->nb_lines + nb;
-		ret = history_get(nb);
-	}
-	else if (ft_isalpha(middle[1]))
-		ret = get_alpha(middle + 1);
-	else
-		return (exc_error(middle));
-	if (ret == NULL)
-		return (exc_error(middle));
-	return (ret);
-}
-
-static char	*get_exc(char *middle)
-{
-	char	*ret;
-
-	ret = history_get(g_history->nb_lines - 1);
-	if (ret == NULL)
-		return (exc_error(middle));
-	return (ret);
-}
-
-static char	*get_inter(char *middle)
-{
-	int i;
-
-	i = g_history->nb_lines - 1;
-	while (i >= 0)
-	{
-		if (ft_strstr(g_history->line[i], (middle + 1)))
-			return (ft_strdup(g_history->line[i]));
-		i--;
-	}
-	return (exc_error(middle));
+	*before = NULL;
+	*middle = NULL;
+	*after = NULL;
 }
 
 static int	ft_mix(char **str, int *i)
@@ -122,9 +50,7 @@ static int	ft_mix(char **str, int *i)
 	char	*middle;
 	char	*after;
 
-	before = NULL;
-	middle = NULL;
-	after = NULL;
+	set_null(&before, &middle, &after);
 	before = return_before(*str, *i);
 	after = return_after(*str, &middle, *i);
 	if (!(return_middle(&middle, before)))

@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/11/06 15:16:53 by lumenthi         ###   ########.fr        #
+#    Updated: 2018/11/07 10:23:44 by lumenthi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ HEADER_NAME = utils.h \
 			  global.h \
 			  history.h \
 			  line_edit.h \
-			  colors.h
+			  colors.h \
+			  exc_mark.h
 HEADER = $(addprefix $(HEADER_PATH)/,$(HEADER_NAME))
 
 SRC_PATH = srcs
@@ -108,6 +109,10 @@ SRC_NAME = utils.c \
 		   history_helper.c \
 		   history.c \
 		   exc_mark.c \
+		   exc_mark_fill.c \
+		   exc_mark_get.c \
+		   exc_mark_tools.c \
+		   exc_mark_return.c \
 		   line_termcap_setting.c \
 		   line_engine.c \
 		   line_mv_left_right.c \
