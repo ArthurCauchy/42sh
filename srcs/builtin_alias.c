@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 17:05:12 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/06 16:07:55 by ccharrie         ###   ########.fr       */
+/*   Updated: 2018/11/06 16:53:26 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void		display_aliases(void)
 	{
 		ft_putstr(g_aliases->key);
 		ft_putchar('=');
-		ft_putendl(g_aliases->value);
+		ft_fminiprint(1, "'%l0s%'\n", g_aliases->value);
 		g_aliases = g_aliases->next;
 	}
 	g_aliases = head;
