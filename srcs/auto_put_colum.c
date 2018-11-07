@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 17:33:25 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 12:43:23 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/07 19:46:14 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,17 @@ static int			jump_list(t_line *line, int *total_row)
 	int			row;
 	int			nb_row_command;
 	int			i;
-	t_autolist	*cp;
+//	t_autolist	*cp;
 
 	*total_row = line->w.line;
 	i = line->auto_ct % nb_list(line->auto_lt) + 1;
-	cp = line->auto_lt;
-	while (--i > 0)
-		cp = cp->next;
-	nb_row_command = (line->buf_len + ft_strlen(cp->name) - \
-			ft_strlen((char *)line->auto_compare) - 1) / line->line_max + 1;
+//	cp = line->auto_lt;
+//	while (--i > 0)
+//		cp = cp->next;
+	//nb_row_command = (line->buf_len + ft_strlen(cp->name) - \
+	//		ft_strlen((char *)line->auto_compare) - 1) / line->line_max + 1;
+	nb_row_command = nb_line_command(line);
+	//ft_printf("nb_row_command=%d   ", nb_row_command);
 	if (line->screen_height - nb_row_command - line->w.line - 1 < 0)
 		*total_row = line->screen_height - nb_row_command - 1;
 	if (line->auto_ct < 0)
@@ -71,6 +73,7 @@ void				put_colum(t_line *line)
 
 	ct.j = -1;
 	total_row = line->w.line;
+
 	lt = start_list(line, &total_row);
 	while (++(ct.j) < total_row)
 	{

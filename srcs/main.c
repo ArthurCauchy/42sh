@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/05 16:32:21 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/07 19:28:05 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int			main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
+	input = NULL;
 	init(&g_env, envp);
 	while ((input = ask_for_input(NORMAL_PROMPT)) != NULL)
 	{

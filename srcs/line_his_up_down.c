@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:49:10 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/06 19:46:39 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/07 15:32:04 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int			history_up(t_line *line)
 	char	*cmd;
 
 	if (!help_2big_input(&i, &max, line) && line->buf_len)
+//	help_2big_input(&i, &max, line);
 		delete_all(line);
 	if (g_history->nb_lines == 0)
 		return (0);

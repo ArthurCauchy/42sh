@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/06 16:45:06 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/07 13:03:39 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,8 @@ unsigned long	get_key(void);
 */
 
 int				my_tabkey(t_line *line, t_env **env);
+void			cusor_back(t_line *line);
+int				nb_line_command(t_line *line);
 
 /*
 ** sort_list.c

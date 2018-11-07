@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 15:05:59 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/06 11:23:02 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/07 19:46:08 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,50 @@
 #include "line_edit.h"
 #include "global.h"
 
-static void	cusor_back(t_line *line)
+int			nb_line_command(t_line *line)
+{
+	int		i;
+	int		j;
+	int		res;
+	char	all[INPUT_MAX_LEN + line->start_po];
+
+	ft_bzero(all, INPUT_MAX_LEN + line->start_po);
+	ft_strcpy(all, (char *)line->prompt);
+	ft_strcat(all, (char *)line->buf);
+	j = 0;
+	res = 0;
+	i = 0;
+	while (i < line->start_po + line->buf_len)
+	{
+		if ((i - j) % line->line_max == 0 || all[i] == '\n')
+		{
+			res++;
+			j = i;
+		}
+		i++;
+	}
+	return (res);
+}
+
+void		cusor_back(t_line *line)
 {
 	int		i;
 
-	i = line->w.line + 2;
+	i = line->w.line + nb_line_command(line) + 1;
 	init_attr(ADVANCED_LINE_EDIT);
+	tputs(tgetstr("cr", 0), 1, my_putc);
 	while (--i)
 		tputs(tgetstr("up", 0), 1, my_putc);
 	line->pos = 0 - line->start_po;
 	move_nright(line);
-	put_choice(line, &i);
 }
 
 static void	print_autolist(t_line *line)
 {
+	int		i;
+
+	i = 0;
+	put_choice(line, &i);
 	init_attr(BASIC_LINE_EDIT);
 	ft_printf("\n");
 	init_attr(ADVANCED_LINE_EDIT);

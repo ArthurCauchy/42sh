@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:43:38 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/06 21:51:24 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/07 17:55:23 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ static int	remove_all(t_line *line)
 		delete_key(line);
 		*/
 		move_nleft(line);
-		init_attr(BASIC_LINE_EDIT);
-		write(STDOUT_FILENO, "\n", 1);
-		init_attr(ADVANCED_LINE_EDIT);
-		tputs(tgetstr("up", 0), 1, my_putc);
+	//	init_attr(BASIC_LINE_EDIT);
+	//	write(STDOUT_FILENO, "\n", 1);
+	//	init_attr(ADVANCED_LINE_EDIT);
+		tputs(tgetstr("cr", 0), 1, my_putc);
 		tputs(tgetstr("cd", 0), 1, my_putc);
 		print_prompt(line->prompt);
 	//	i = line->start_po + 1;
@@ -60,6 +60,7 @@ int			delete_key(t_line *l)
 {
 	int		i;
 	int		new_pos;
+	char	cp[INPUT_MAX_LEN];
 
 	if (l->pos > 0)
 	{
@@ -68,14 +69,17 @@ int			delete_key(t_line *l)
 		remove_all(l);
 		while (++i < l->buf_len)
 			l->buf[i] = l->buf[i + 1];
+		ft_bzero(cp, INPUT_MAX_LEN);
+		ft_strcpy(cp, (char *)l->buf);
+		ft_bzero(l->buf, INPUT_MAX_LEN);
 	//	if (ft_strstr((char *)l->buf, "\n"))
 	//	tputs(tgetstr("up", 0), 1, my_putc);
 		i = 0;
 		l->buf_len = 0;
 		l->pos = 0;
 		init_attr(ADVANCED_LINE_EDIT);
-		while (l->buf[i])
-			printable(l, l->buf[i++]);
+		while (cp[i])
+			printable(l, cp[i++]);
 		/*
 		if ((l->buf_len + l->start_po) % l->line_max == (l->line_max - 1))
 			for_delect_key();
