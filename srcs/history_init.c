@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 15:00:56 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/11/06 15:22:48 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/07 20:33:30 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void		to_last(char **line, int start)
 			count++;
 	}
 	nb_elem = get_elems(*line);
-	if (nb_elem > g_history->SIZE)
+	if (nb_elem > g_history->size)
 	{
-		while ((*line)[i] && count < (nb_elem - g_history->SIZE))
+		while ((*line)[i] && count < (nb_elem - g_history->size))
 		{
 			if ((*line)[i++] == '\n')
 				count++;
@@ -85,13 +85,13 @@ char		**history_read(char *filename, int start)
 	char	**hist;
 	int		fd;
 
-	if (!(hist = (char **)ft_memalloc(sizeof(char *) * (g_history->SIZE + 1))))
+	if (!(hist = (char **)ft_memalloc(sizeof(char *) * (g_history->size + 1))))
 		exit_error("malloc() error");
 	fd = open(filename, O_RDONLY);
 	if (fd > 0)
 	{
 		file = read_file(fd);
-		if (ft_strcmp(filename, g_history->HISTFILE) == 0)
+		if (ft_strcmp(filename, g_history->histfile) == 0)
 			g_history->start_file = get_elems(file);
 		to_last(&file, start);
 		to_tab(&file, &hist);

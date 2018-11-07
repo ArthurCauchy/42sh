@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/06 15:17:10 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/07 20:29:00 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 typedef struct	s_history
 {
 	int			position;
-	int			SIZE;
-	char		*HISTFILE;
+	int			size;
+	char		*histfile;
 	int			nb_lines;
 	int			start;
 	int			start_file;

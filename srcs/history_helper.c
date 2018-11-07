@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 15:14:56 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/11/06 15:21:24 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/07 20:33:43 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		history_add(char *cmd)
 	int size;
 
 	size = args_size(g_history->line);
-	if (size >= g_history->SIZE)
+	if (size >= g_history->size)
 	{
 		tab_scroll(cmd);
 		g_history->index += 1;

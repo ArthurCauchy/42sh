@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/15 12:53:45 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/07 20:31:22 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int			history_d(char **args, int start)
 	elem = ft_atoi(args[start]);
 	i = 0;
 	new = (elem - g_history->index) - 1;
-	if (g_history->nb_lines == g_history->SIZE && new == -1)
+	if (g_history->nb_lines == g_history->size && new == -1)
 		return (0);
 	else if (new < 0 || new > (g_history->nb_lines - 1))
 		return (del_error(elem));
@@ -128,7 +128,7 @@ int			history_r(char *file)
 
 	i = 0;
 	if (file == NULL || ft_strcmp(file, "") == 0)
-		ta = history_read(g_history->HISTFILE, 0);
+		ta = history_read(g_history->histfile, 0);
 	else
 		ta = history_read(file, 0);
 	if (ta == NULL)
@@ -150,7 +150,7 @@ int		history_w(char *file)
 	ret = 0;
 	if (file == NULL || ft_strcmp(file, "") == 0)
 	{
-		ret = history_write_t(g_history->HISTFILE, g_history->line);
+		ret = history_write_t(g_history->histfile, g_history->line);
 		g_history->start = g_history->nb_lines;
 	}
 	else
@@ -204,7 +204,7 @@ int			history_n(char *file)
 
 	i = 0;
 	if (file == NULL || ft_strcmp(file, "") == 0)
-		add = history_read(g_history->HISTFILE, g_history->start_file);
+		add = history_read(g_history->histfile, g_history->start_file);
 	else
 		add = history_read(file, g_history->start_file);
 	if (add == NULL)
