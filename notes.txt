@@ -3,15 +3,14 @@ TODO:
 - line edition
 	- check crash & leaks if BASIC line edition enabled (no termcaps)
 	- secure the scrolling (ex : disable writing when the command line goes above the window size)
-	- ctrl+c when quote or dquote prompt should exit
 - options of echo builtin ?
-- signals?
 - alias
-    - handle quotes in alias (abandoned feature, alias containing quotes should not cause a crash tho)
-		- do not perform alias substitution if the arg is quoted
-- $$ variable expansion ?
+	- do not perform alias substitution if the arg is quoted
 - check if the shell behaves like bash in case of signals exited processes
 
+Need further investigation:
+- 'mkdir test ; cd test ; ls -a ; ls | cat | wc -c > fifi ; cat fifi' example from the 21sh subject
+	- wtf it works on my (acauchy's) 21sh
 
 key combinations
 1. move_left_word		CONTROL_SHIFT_ARROW_LEFT

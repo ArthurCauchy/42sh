@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/15 12:41:06 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/06 15:17:10 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,49 @@
 typedef struct	s_history
 {
 	int			position;
-	//save current position when browsing history list (up, down arrow key)
 	int			SIZE;
-	//= HISTSIZE
 	char		*HISTFILE;
-	//= HISTFILE
 	int			nb_lines;
-	//nb of lines in our current history tab
 	int			start;
-	//number of our starting elem
 	int			start_file;
-	//number of the last line read from HISTFILE
 	int			index;
-	//when displaying our history, gives us the real elem number
 	char		**line;
-	//array where commands are stored
-}								t_history;
+}				t_history;
 
-char    **history_read(char *filename, int start);
-void    history_del(int elem);
-char    *history_get(int elem);
+char			**history_read(char *filename, int start);
+void			history_del(int elem);
+char			*history_get(int elem);
 void    history_add(char *cmd);
 int     history_write_a(char *file);
 int     history_write_t(char *file, char **hist);
 void    history_clear(void);
 void    history_exit(void);
-int		exc_mark(char **str); //exc_mark function
+int		exc_mark(char **str);
+
+/*
+** history_tools.c
+*/
+
+void		hist_null(char ***hist);
+int			get_elems(char *line);
+char		*read_file(int fd);
+char		*to_string(char **ar);
+
+/*
+** history_init.c
+*/
+
+void		tab_scroll(char *cmd);
+char		**history_read(char *filename, int start);
+void		to_tab(char **line, char ***hist);
+void		to_last(char **line, int start);
+
+/*
+** history_helper.c
+*/
+
+void		history_del(int elem);
+char		*history_get(int elem);
+void		history_add(char *cmd);
 
 #endif

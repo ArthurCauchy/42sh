@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 11:52:21 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/11/05 15:11:12 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/07 18:52:10 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "parsing.h"
 #include <stdlib.h>
 
-void word_push(t_word **wordlist, t_word *new_word)
+void			word_push(t_word **wordlist, t_word *new_word)
 {
 	t_word *cur;
 	t_word *prev;
@@ -30,6 +30,7 @@ void word_push(t_word **wordlist, t_word *new_word)
 	cur = (t_word *)malloc(sizeof(t_word));
 	cur->token = new_word->token;
 	cur->str = ft_strdup(new_word->str);
+	cur->quoted = new_word->quoted;
 	cur->next = NULL;
 	if (prev)
 		prev->next = cur;
@@ -37,7 +38,7 @@ void word_push(t_word **wordlist, t_word *new_word)
 		*wordlist = cur;
 }
 
-static void word_push_all(t_word **wordlist, t_word *new_words)
+static void		word_push_all(t_word **wordlist, t_word *new_words)
 {
 	t_word *tmp_new;
 
@@ -49,7 +50,7 @@ static void word_push_all(t_word **wordlist, t_word *new_words)
 	}
 }
 
-void block_push(t_parse_block **blocklist, t_parse_block *new_block)
+void			block_push(t_parse_block **blocklist, t_parse_block *new_block)
 {
 	t_parse_block *cur;
 	t_parse_block *prev;
@@ -72,7 +73,7 @@ void block_push(t_parse_block **blocklist, t_parse_block *new_block)
 		*blocklist = cur;
 }
 
-void free_parse_block(t_parse_block **parse)
+void			free_parse_block(t_parse_block **parse)
 {
 	t_parse_block *cur;
 	t_parse_block *prev;
@@ -89,7 +90,7 @@ void free_parse_block(t_parse_block **parse)
 	*parse = NULL;
 }
 
-t_parse_block *new_parse_block(t_word *word, t_token separator)
+t_parse_block	*new_parse_block(t_word *word, t_token separator)
 {
 	t_parse_block *ret;
 
@@ -100,7 +101,7 @@ t_parse_block *new_parse_block(t_word *word, t_token separator)
 	return (ret);
 }
 
-t_parse_block*	clone_parse_block(t_parse_block *orig)
+t_parse_block	*clone_parse_block(t_parse_block *orig)
 {
 	return (new_parse_block(copy_wordlist(orig->wordlist), orig->separator));
 }

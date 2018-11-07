@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 17:05:12 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/22 16:22:02 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/06 16:07:55 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static int		create_alias(char **alias, char **args)
 			return (-1);
 		}
 	}
-	if (check_alias_existance(alias[0], alias[1]))
+	if ((i = check_alias_existance(alias[0], alias[1])) == 1)
 		malloc_alias(alias, &new_alias);
 	else
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/10/17 17:03:53 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/07 17:34:43 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct		s_word
 {
 	t_token			token;
 	char			*str;
+	int				quoted;
 	struct s_word	*next;
 }					t_word;
 
@@ -55,28 +56,38 @@ typedef struct		s_word
 ** word.c
 */
 
-t_word	*new_word(t_token token, char *str);
-void	remove_word(t_word **wordlist, t_word *word);
-t_word	*copy_wordlist(t_word *wordlist);
-void	delete_wordlist(t_word **head);
+t_word				*new_word(t_token token, char *str, int quoted);
+void				remove_word(t_word **wordlist, t_word *word);
+t_word				*copy_wordlist(t_word *wordlist);
+void				delete_wordlist(t_word **head);
 
 /*
 ** lexing.c, lexing_[token].c
 */
 
-void	add_word(t_token token, char *str,
+void				add_word(t_token token, char *str,
 		t_word **wordlist, t_lexdata *lexdata);
-void	lex_analysis(char **cmdline, t_word **wordlist, char *alias);
-void	lex_semicol_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata);
-void	lex_space_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata);
-void	lex_amp_and_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata);
-void	lex_pipe_or_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata);
-void	lex_shift_src_redirect(char *cmdline, t_word **wordlist, t_lexdata *lexdata);
-void	lex_shift_dest_redirect(char *cmdline, t_word **wordlist, t_lexdata *lexdata);
-void	lex_rshift_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata);
-void	lex_lshift_word(char *cmdline, t_word **wordlist, t_lexdata *lexdata);
-void	lex_escape(char *cmdline, t_lexdata *lexdata);
-void	lex_tilde_exp(char *cmdline, t_lexdata *lexdata);
-void	lex_dollar_exp(char *cmdline, t_lexdata *lexdata);
+int					lex_analysis(char **cmdline,
+		t_word **wordlist, char *alias);
+void				lex_semicol_word(char *cmdline,
+		t_word **wordlist, t_lexdata *lexdata);
+void				lex_space_word(char *cmdline,
+		t_word **wordlist, t_lexdata *lexdata);
+void				lex_amp_and_word(char *cmdline,
+		t_word **wordlist, t_lexdata *lexdata);
+void				lex_pipe_or_word(char *cmdline,
+		t_word **wordlist, t_lexdata *lexdata);
+void				lex_shift_src_redirect(char *cmdline,
+		t_word **wordlist, t_lexdata *lexdata);
+void				lex_shift_dest_redirect(char *cmdline,
+		t_word **wordlist, t_lexdata *lexdata);
+void				lex_rshift_word(char *cmdline,
+		t_word **wordlist, t_lexdata *lexdata);
+void				lex_lshift_word(char *cmdline,
+		t_word **wordlist, t_lexdata *lexdata);
+void				lex_escape(char *cmdline,
+		t_lexdata *lexdata);
+void				lex_tilde_exp(char *cmdline,
+		t_lexdata *lexdata);
 
 #endif
