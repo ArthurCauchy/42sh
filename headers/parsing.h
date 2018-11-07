@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/06 14:58:15 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/07 13:58:05 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,11 @@ int				do_parsing(t_word *wordlist, t_parse_block **parsing, char **errmsg);
 */
 
 void			recursive_main_loop(char **input);
+
+/*
+** parse_block_clone.c
+*/
+
+t_parse_block	*clone_parse_block(t_parse_block *orig);
 
 #endif

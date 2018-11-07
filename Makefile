@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/11/07 10:23:44 by lumenthi         ###   ########.fr        #
+#    Updated: 2018/11/07 13:59:26 by lumenthi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,6 +88,7 @@ SRC_NAME = utils.c \
 		   lexing_rshift.c \
 		   lexing_space.c \
 		   parse_block.c \
+		   parse_block_clone.c \
 		   parsing.c \
 		   parsing_error.c \
 		   interpreter.c \
