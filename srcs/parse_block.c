@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 11:52:21 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/11/06 16:08:15 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/07 18:52:10 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void			word_push(t_word **wordlist, t_word *new_word)
 	cur = (t_word *)malloc(sizeof(t_word));
 	cur->token = new_word->token;
 	cur->str = ft_strdup(new_word->str);
+	cur->quoted = new_word->quoted;
 	cur->next = NULL;
 	if (prev)
 		prev->next = cur;

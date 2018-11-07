@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/06 15:23:16 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/07 18:35:06 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,16 @@ static int	pipeline_run(t_env **cmd_env, t_parse_block *pipeline)
 		}
 		else if (pipeline->wordlist == NULL)
 		{
-			ft_putendl_fd("Invalid null command.", 2); // the file should still be created but void
+			ft_putendl_fd("Invalid null command.", 2); // in case of redir, the file should still be created but empty
 			child_fds[pl_size++] = -1;
 		}
 		else
 		{
-			proc = new_process(cmd_env, arglist_to_array(pipeline->wordlist));
+			char **args;
+			
+			apply_var_substitution(pipeline->wordlist);
+			args = arglist_to_array(pipeline->wordlist);
+			proc = new_process(cmd_env, args);
 			proc->redirs = redirs;
 			child_fds[pl_size++] = start_process(cmd_env, proc, pipeline->next ? 1 : 0, &pgid);
 			delete_process(proc);

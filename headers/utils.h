@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/03 13:51:32 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/07 18:33:22 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,11 @@ void	reset_sighandlers(void);
 */
 
 int		get_process_return(int status);
+
+/*
+** utils_vars.c
+*/
+
+void	apply_var_substitution(t_word *wordlist);
 
 #endif
