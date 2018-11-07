@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 13:53:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/05 19:49:01 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/07 16:33:07 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,29 @@
 #include "line_edit.h"
 #include "global.h"
 
-void			add_word(t_token token, char *str,
-		t_word **wordlist, t_lexdata *lexdata) // TODO rewrite this better
+void            add_word(t_token token, char *str,
+		t_word **wordlist, t_lexdata *lexdata)
 {
-	t_word	*cur;
-	char		*alias;
+	t_word	**target;
+	char	*alias;
 
-	if (!*wordlist)
+	ft_putstr_fd("avoid : ", 2);
+	if (lexdata->avoid)
+		ft_putendl_fd(lexdata->avoid, 2);
+	else
+		ft_putendl_fd("NULL", 2);
+	target = wordlist;
+	while (*target)
+		target = &((*target)->next);
+	if ((!lexdata->avoid || ft_strcmp(str, lexdata->avoid)) != 0
+			&& (*target == NULL || (*target)->token == PIPE || (*target)->token == AND
+				|| (*target)->token == OR || (*target)->token == SEMICOL)
+			&& (alias = get_alias_value(str)))
 	{
-		if ((!lexdata->avoid || ft_strcmp(str, lexdata->avoid)) != 0 && (alias = get_alias_value(str)))
-			lex_analysis(&alias, wordlist, alias);
-		else
-			*wordlist = new_word(token, str);
+		lex_analysis(&alias, wordlist, str);
 	}
 	else
-	{
-		cur = *wordlist;
-		while (cur->next)
-			cur = cur->next;
-		if ((cur->token == PIPE || cur->token == AND
-					|| cur->token == OR || cur->token == SEMICOL)
-				&& (!lexdata->avoid || ft_strcmp(str, lexdata->avoid) != 0) && (alias = get_alias_value(str)))
-			lex_analysis(&alias, wordlist, alias);
-		else
-			cur->next = new_word(token, str);
-	}
+		*target = new_word(token, str);
 	lexdata->force_add = 0;
 }
 
