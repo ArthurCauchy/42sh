@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 13:29:12 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/06 10:53:50 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/08 11:03:17 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	apply_redirect(t_redirect *redir, int *fdtmp_array,
 	if (redir->token == PIPE)
 		return (apply_redirect_pipe(redir, fdtmp_array, fdsave_array, errmsg));
 	if (redir->token == FDCLOSE)
-		close(ft_atoi(redir->right));
+		return (close(ft_atoi(redir->right)) * 0);
 	else if (redir->token == LSHIFT)
 		return (apply_redirect_lshift(redir,
 				fdtmp_array, fdsave_array, errmsg));
@@ -74,7 +74,8 @@ static int	apply_redirect(t_redirect *redir, int *fdtmp_array,
 	else if (redir->token == RSHIFT2)
 		return (apply_redirect_rshift2(redir,
 				fdtmp_array, fdsave_array, errmsg));
-	return (0);
+	else
+		return (0);
 }
 
 int			apply_redirects(t_redirect *redirs, int *fdtmp_array,

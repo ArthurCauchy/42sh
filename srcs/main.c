@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/06 16:29:55 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/08 10:56:23 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	main_loop(char **input)
 	parsed = NULL;
 	exc_mark(input);
 	if (input_lexing(input, &cmd_args) == 1)
-		return;
+		return ;
 	if (cmd_args)
 	{
 		ret = do_parsing(cmd_args, &parsed, &errmsg);
@@ -94,7 +94,7 @@ static void	main_loop(char **input)
 	}
 }
 
-void	recursive_main_loop(char **input)
+void		recursive_main_loop(char **input)
 {
 	char *tmp;
 	char *new;

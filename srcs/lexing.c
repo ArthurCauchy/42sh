@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 13:53:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/07 17:35:03 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/08 10:50:22 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "line_edit.h"
 #include "global.h"
 
-void            add_word(t_token token, char *str,
+void			add_word(t_token token, char *str,
 		t_word **wordlist, t_lexdata *lexdata)
 {
 	t_word	**target;
@@ -27,8 +27,9 @@ void            add_word(t_token token, char *str,
 	while (*target)
 		target = &((*target)->next);
 	if ((!lexdata->avoid || ft_strcmp(str, lexdata->avoid)) != 0
-			&& (*target == NULL || (*target)->token == PIPE || (*target)->token == AND
-				|| (*target)->token == OR || (*target)->token == SEMICOL)
+			&& (*target == NULL || (*target)->token == PIPE
+				|| (*target)->token == AND || (*target)->token == OR
+				|| (*target)->token == SEMICOL)
 			&& (alias = get_alias_value(str)))
 	{
 		lex_analysis(&alias, wordlist, str);

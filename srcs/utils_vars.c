@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 14:15:05 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/07 19:38:17 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/08 10:51:41 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static void	handle_special_varnames(char *src, int *i, char **var_value)
 		*var_value = ft_itoa(g_shell_pid);
 	++(*i);
 }
-
 
 static void	write_variable(char *src, char *dest, int *i, int *j)
 {
@@ -93,41 +92,3 @@ void		apply_var_substitution(t_word *wordlist)
 		cur = cur->next;
 	}
 }
-
-/*
-   static void	handle_special_varnames(char *cmdline,
-   t_lexdata *lexdata, char **var_value)
-   {
-   if (cmdline[lexdata->i] == '?')
- *var_value = ft_itoa(g_last_command_status);
- else if (cmdline[lexdata->i] == '$')
- *var_value = ft_itoa(g_shell_pid);
- ++lexdata->i;
- }
-
- void		lex_dollar_exp(char *cmdline, t_lexdata *lexdata)
- {
- char	var_name[4096];
- char	*var_value;
- size_t	i;
-
- var_value = NULL;
- ++lexdata->i;
- if (cmdline[lexdata->i] == '?' || cmdline[lexdata->i] == '$')
- handle_special_varnames(cmdline, lexdata, &var_value);
- else
- {
- i = 0;
- while (i < 4095 && !is_delim(cmdline[lexdata->i]))
- var_name[i++] = cmdline[lexdata->i++];
- var_name[i] = '\0';
- if (!(var_value = read_from_env(&g_env, var_name)))
- var_value = ft_strdup("");
- }
- --lexdata->i;
- i = 0;
- while (i < ft_strlen(var_value))
- lexdata->buff[lexdata->j++] = var_value[i++];
- free(var_value);
- }
- */
