@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 11:34:35 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/06 15:45:53 by ccharrie         ###   ########.fr       */
+/*   Updated: 2018/11/08 18:43:28 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 #include "libft.h"
 #include "global.h"
 
-void	print_n_free_errmsg(char **errmsg)
+void		print_n_free_errmsg(char **errmsg)
 {
 	ft_putendl_fd(*errmsg, 2);
 	free(*errmsg);
 	*errmsg = NULL;
 }
 
-char	*get_alias_value(char *key)
+char		*get_alias_value(char *key)
 {
 	t_alias *cur;
 
@@ -35,11 +35,12 @@ char	*get_alias_value(char *key)
 	return (NULL);
 }
 
-int		check_alias_forbid_char(char *value)
+int			check_alias_forbid_char(char *value)
 {
 	char	*setter;
 
-	if ((setter = ft_strchr(value, '\'')) || (setter = ft_strchr(value, '\"'))
+	if ((setter = ft_strchr(value, '\''))
+			|| (setter = ft_strchr(value, '\"'))
 			|| (setter = ft_strchr(value, '\\')))
 	{
 		ft_putstr("alias error : '");
