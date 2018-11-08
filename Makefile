@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/11/07 18:16:47 by arthur           ###   ########.fr        #
+#    Updated: 2018/11/08 12:43:52 by acauchy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ HEADER_NAME = utils.h \
 			  global.h \
 			  history.h \
 			  line_edit.h \
-			  colors.h
+			  colors.h \
+			  exc_mark.h
 HEADER = $(addprefix $(HEADER_PATH)/,$(HEADER_NAME))
 
 SRC_PATH = srcs
@@ -68,6 +69,10 @@ SRC_NAME = utils.c \
 		   builtin_which.c \
 		   builtin_help.c \
 		   builtin_history.c \
+		   builtin_history_error.c \
+		   builtin_history_helper.c \
+		   builtin_history_messages.c \
+		   builtin_history_options.c \
 		   builtin_alias.c \
 		   builtin_unalias.c \
 		   init.c \
@@ -87,6 +92,7 @@ SRC_NAME = utils.c \
 		   lexing_rshift.c \
 		   lexing_space.c \
 		   parse_block.c \
+		   parse_block_clone.c \
 		   parsing.c \
 		   parsing_error.c \
 		   interpreter.c \
@@ -108,6 +114,10 @@ SRC_NAME = utils.c \
 		   history_helper.c \
 		   history.c \
 		   exc_mark.c \
+		   exc_mark_fill.c \
+		   exc_mark_get.c \
+		   exc_mark_tools.c \
+		   exc_mark_return.c \
 		   line_termcap_setting.c \
 		   line_engine.c \
 		   line_mv_left_right.c \

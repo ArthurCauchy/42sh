@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 14:56:06 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/11/06 15:21:59 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/07 20:32:55 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void		hist_null(char ***hist)
 	int i;
 
 	i = 0;
-	while (i <= g_history->SIZE)
+	while (i <= g_history->size)
 	{
 		(*hist)[i] = NULL;
 		i++;

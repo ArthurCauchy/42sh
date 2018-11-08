@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 10:38:26 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/11/06 15:20:49 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/07 20:30:09 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int			history_write_a(char *file)
 		i++;
 	if (file == NULL || ft_strcmp(file, "") == 0)
 	{
-		ret = h_append(g_history->HISTFILE, g_history->line + i);
+		ret = h_append(g_history->histfile, g_history->line + i);
 		g_history->start = g_history->nb_lines;
 	}
 	else
@@ -94,9 +94,9 @@ void		history_clear(void)
 
 void		history_exit(void)
 {
-	history_write_a(g_history->HISTFILE);
+	history_write_a(g_history->histfile);
 	history_clear();
-	free(g_history->HISTFILE);
+	free(g_history->histfile);
 	free(g_history->line);
 	free(g_history);
 }

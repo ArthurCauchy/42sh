@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 10:38:26 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/10/15 12:55:50 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/07 20:32:40 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	size_error(void)
 {
 	ft_putendl_fd("42sh: invalid HISTSIZE value"
 			", setting it to default (500)", 2);
-	g_history->SIZE = 500;
+	g_history->size = 500;
 	return (0);
 }
 
@@ -28,7 +28,7 @@ static char	**history_error(void)
 {
 	char **hist;
 
-	if (!(hist = (char **)ft_memalloc(sizeof(char *) * (g_history->SIZE + 1))))
+	if (!(hist = (char **)ft_memalloc(sizeof(char *) * (g_history->size + 1))))
 		exit_error("malloc() error");
 	return (hist);
 }
@@ -59,13 +59,13 @@ int			init_history(t_env **env)
 	if (HISTSIZE <= 0)
 		size_error();
 	else
-		g_history->SIZE = HISTSIZE;
-	g_history->HISTFILE = get_home(env);
+		g_history->size = HISTSIZE;
+	g_history->histfile = get_home(env);
 	g_history->nb_lines = 0;
 	g_history->position = 0;
 	g_history->index = 0;
 	g_history->start_file = 0;
-	if (!(g_history->line = history_read(g_history->HISTFILE, 0)))
+	if (!(g_history->line = history_read(g_history->histfile, 0)))
 		g_history->line = history_error();
 	g_history->nb_lines = args_size(g_history->line);
 	g_history->start = args_size(g_history->line);
