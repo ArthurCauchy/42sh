@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/11/07 13:59:26 by lumenthi         ###   ########.fr        #
+#    Updated: 2018/11/08 11:54:37 by lumenthi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,10 @@ SRC_NAME = utils.c \
 		   builtin_which.c \
 		   builtin_help.c \
 		   builtin_history.c \
+		   builtin_history_error.c \
+		   builtin_history_helper.c \
+		   builtin_history_messages.c \
+		   builtin_history_options.c \
 		   builtin_alias.c \
 		   builtin_unalias.c \
 		   init.c \
