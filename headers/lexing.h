@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/07 17:34:43 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/08 14:23:45 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ typedef enum		e_token
 	FDCLOSE,
 	AND,
 	OR,
-	SEMICOL,
-	AMP
+	SEMICOL
 }					t_token;
 
 typedef struct		s_lexdata
