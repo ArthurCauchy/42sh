@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:11:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/06 15:35:10 by ccharrie         ###   ########.fr       */
+/*   Updated: 2018/11/08 17:14:05 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,28 @@
 # define ECHO_USAGE "echo [arg ...]"
 # define WHICH_USAGE "which [cmd]"
 # define HELP_USAGE "help [builtin]"
-# define HISTORY_USAGE "history [-c] [-d offset] [n]\nhistory -anrw [filename]\nhistory -ps arg [arg ...]"
+# define HISTORY_USAGE1 "history [-c] [-d offset] [n]\n"
+# define HISTORY_USAGE2 "history -anrw [filename]\n"
+# define HISTORY_USAGE3 "history -ps arg [arg ...]"
+# define HISTORY_USAGE HISTORY_USAGE1 HISTORY_USAGE2 HISTORY_USAGE3
 # define ALIAS_USAGE "alias [-a] or [name='value']"
 # define UNALIAS_USAGE "unalias [name]"
 
 # define EXIT_BRIEF "Exit the shell."
 # define CD_BRIEF "Change the shell working directory."
-# define ENV_BRIEF "Start a command with a custom environment, or just print it if no command is specified."
+# define ENV_BRIEF1 "Start a command with a custom environment, "
+# define ENV_BRIEF2 "or just print it if no command is specified."
+# define ENV_BRIEF ENV_BRIEF1 ENV_BRIEF2
 # define SETENV_BRIEF "Set an environment variable."
 # define UNSETENV_BRIEF "Unset given environment variables."
 # define ECHO_BRIEF "Write arguments to the standard output."
 # define WHICH_BRIEF "Show the full path of an executable."
 # define HELP_BRIEF "Print the help page of a builtin."
 # define HISTORY_BRIEF "Display or manipulate the history list."
-# define ALIAS_BRIEF "Create an alias, aliases allow a string to be substituted"
-# define ALIAS_BRIEF2 " for a word when it is used as the first word of a simple command."
+# define ALIAS_BRIEF1 "Create an alias, aliases allow a string to be"
+# define ALIAS_BRIEF2 " substituted for a word when it is used as the first"
+# define ALIAS_BRIEF3 " word of a simple command."
+# define ALIAS_BRIEF ALIAS_BRIEF1 ALIAS_BRIEF2 ALIAS_BRIEF3
 # define UNALIAS_BRIEF "Delete an alias, -a option delete all alias."
 
 # define EXIT_HELP EXIT_USAGE "\n\n" EXIT_BRIEF
@@ -50,7 +57,7 @@
 # define WHICH_HELP WHICH_USAGE "\n\n" WHICH_BRIEF
 # define HELP_HELP HELP_USAGE "\n\n" HELP_BRIEF
 # define HISTORY_HELP HISTORY_USAGE "\n\n" HISTORY_BRIEF
-# define ALIAS_HELP ALIAS_USAGE "\n\n" ALIAS_BRIEF ALIAS_BRIEF2
+# define ALIAS_HELP ALIAS_USAGE "\n\n" ALIAS_BRIEF
 # define UNALIAS_HELP UNALIAS_USAGE "\n\n" UNALIAS_BRIEF
 
 typedef struct		s_builtin
@@ -75,14 +82,16 @@ typedef int	(*t_builtin_fct)(t_env**, char**);
 
 t_builtin			**get_builtins(void);
 void				clear_builtins(void);
-void				load_builtin(char *name, char *brief, int (*func)(t_env**, char**));
+void				load_builtin(char *name, char *brief,
+		int (*func)(t_env**, char**));
 t_builtin			*search_builtin(char *name);
 
 /*
 ** builtins_utils.c
 */
 
-int					builtin_parse_options(char **args, char *options, int options_size);
+int					builtin_parse_options(char **args,
+		char *options, int options_size);
 int					builtin_validate_options(char *options, char *valid_set);
 
 /*
