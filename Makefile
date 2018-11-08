@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/11/08 12:43:52 by acauchy          ###   ########.fr        #
+#    Updated: 2018/11/08 16:31:02 by acauchy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,6 +98,7 @@ SRC_NAME = utils.c \
 		   interpreter.c \
 		   process.c \
 		   starter.c \
+		   starter_forked.c \
 		   redirects.c \
 		   redirections.c \
 		   redirections_fdsave.c \
