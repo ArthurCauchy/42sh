@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/07 18:35:06 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/08 13:11:00 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static int	pipeline_run(t_env **cmd_env, t_parse_block *pipeline)
 			args = arglist_to_array(pipeline->wordlist);
 			proc = new_process(cmd_env, args);
 			proc->redirs = redirs;
-			child_fds[pl_size++] = start_process(cmd_env, proc, pipeline->next ? 1 : 0, &pgid);
+			child_fds[pl_size++] = start_process(cmd_env, proc, pipeline->next || pgid != -1 ? 1 : 0, &pgid);
 			delete_process(proc);
 		}
 		delete_redirects(redirs);
