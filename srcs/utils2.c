@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 11:34:35 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/06 16:53:22 by ccharrie         ###   ########.fr       */
+/*   Updated: 2018/11/08 18:43:28 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int			check_alias_forbid_char(char *value)
 {
 	char	*setter;
 
-	if ((setter = ft_strchr(value, '\'')) || (setter = ft_strchr(value, '\"'))
+	if ((setter = ft_strchr(value, '\''))
+			|| (setter = ft_strchr(value, '\"'))
 			|| (setter = ft_strchr(value, '\\')))
 	{
 		ft_putstr("alias error : '");
