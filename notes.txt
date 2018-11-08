@@ -3,6 +3,8 @@ TODO:
 	- check crash & leaks if BASIC line edition enabled (no termcaps)
 	- secure the scrolling (ex : disable writing when the command line goes above the window size)
 - do not perform var substitution if the arg is quoted
+	- can't have a quote value per word bcz multiquoted word is possible
+		- mask would work but not efficient at all...
 
 key combinations
 1. move_left_word		CONTROL_SHIFT_ARROW_LEFT
