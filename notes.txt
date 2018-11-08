@@ -2,7 +2,7 @@ TODO:
 - line edition
 	- check crash & leaks if BASIC line edition enabled (no termcaps)
 	- secure the scrolling (ex : disable writing when the command line goes above the window size)
-- do not perform var/alias substitution if the arg is quoted
+- do not perform var substitution if the arg is quoted
 
 key combinations
 1. move_left_word		CONTROL_SHIFT_ARROW_LEFT

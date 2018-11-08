@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 14:35:33 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/08 16:39:28 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/08 22:43:08 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,7 @@ int			start_process(t_env **cmd_env,
 		t_process *proc, int forked, pid_t *pgid)
 {
 	t_builtin	*builtin;
-	char		*errmsg;
 
-	errmsg = NULL;
 	if ((builtin = search_builtin(proc->args[0])))
 	{
 		if (!forked)

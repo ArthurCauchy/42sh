@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 13:53:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/08 10:50:22 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/08 22:54:49 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void			add_word(t_token token, char *str,
 			&& (*target == NULL || (*target)->token == PIPE
 				|| (*target)->token == AND || (*target)->token == OR
 				|| (*target)->token == SEMICOL)
-			&& (alias = get_alias_value(str)))
+			&& !(lexdata->force_add) && (alias = get_alias_value(str)))
 	{
 		lex_analysis(&alias, wordlist, str);
 	}
 	else
-		*target = new_word(token, str, 0);
+		*target = new_word(token, str, lexdata->force_add);
 	lexdata->force_add = 0;
 }
 
