@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:13:44 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/11/07 10:42:47 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/08 11:28:10 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,11 @@ int			set_error(t_error *error, t_word *tmp)
 		return (0);
 	if (is_last(tmp))
 	{
-		if (is_parsing_separator(error->separator) && error->separator != SEMICOL)
+		if (is_parsing_separator(error->separator) &&
+			error->separator != SEMICOL)
 			return (2);
-		if (is_parsing_separator(error->separator) && (!error->before || !error->after) && error->separator != SEMICOL)
+		if (is_parsing_separator(error->separator) &&
+			(!error->before || !error->after) && error->separator != SEMICOL)
 			return (parse_error(error->separator));
 	}
 	return (1);

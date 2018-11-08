@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 15:24:43 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/11/07 20:24:50 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/08 11:27:25 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_parse_block **parsing)
 	*tmp = (*tmp)->next;
 }
 
-int	do_parsing(t_word *wordlist, t_parse_block **parsing, char **errmsg)
+int			do_parsing(t_word *wordlist, t_parse_block **parsing, char **errmsg)
 {
 	t_word			*tmp;
 	t_parse_block	*tmp_block;

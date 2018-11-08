@@ -6,7 +6,7 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 16:54:02 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/11/06 16:57:04 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/08 11:30:00 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_add(char *before, char *middle, char *after)
 	return (ret);
 }
 
-int	is_backslash(char *str, int pos, int s_quote)
+int		is_backslash(char *str, int pos, int s_quote)
 {
 	int	ret;
 	int	i;
@@ -53,7 +53,7 @@ char	*exc_error(char *str)
 	return (NULL);
 }
 
-int	check_matches(char *str1, char *str2)
+int		check_matches(char *str1, char *str2)
 {
 	int i;
 
@@ -66,7 +66,7 @@ int	check_matches(char *str1, char *str2)
 		return (0);
 }
 
-int	is_legit(char *str, int pos)
+int		is_legit(char *str, int pos)
 {
 	int	i;
 	int	s_quote;

@@ -6,9 +6,12 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 16:43:06 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/11/07 10:25:41 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/08 11:35:19 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef __EXC_MARK_H
+# define __EXC_MARK_H
 
 /*
 ** exc_mark_return.c
@@ -53,3 +56,5 @@ char	*get_alpha(char *middle);
 char	*get_minus(char *middle);
 char	*get_exc(char *middle);
 char	*get_inter(char *middle);
+
+#endif
