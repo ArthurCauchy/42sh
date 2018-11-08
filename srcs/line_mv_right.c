@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:50:31 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/06 14:58:34 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/08 23:27:28 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <term.h>
 #include "line_edit.h"
 
-int		mv_right_word(t_line *l)
+int			mv_right_word(t_line *l)
 {
 	int		rt;
 
@@ -26,7 +26,8 @@ int		mv_right_word(t_line *l)
 		while (rt < l->buf_len && (l->buf[rt] == ' ' || l->buf[rt] == '\t'))
 			rt++;
 		if (rt < l->buf_len && rt - 1 >= 0 && (l->buf[rt - 1] == ' ' \
-		|| l->buf[rt - 1] == '\t') && l->buf[rt] != ' ' && l->buf[rt] != '\t')
+					|| l->buf[rt - 1] == '\t') && l->buf[rt] != ' ' \
+				&& l->buf[rt] != '\t')
 		{
 			while (l->pos < rt)
 				move_right(l);
@@ -65,13 +66,14 @@ static int	right_newline(t_line *line)
 	return (j);
 }
 
-int		move_right(t_line *line)
+int			move_right(t_line *line)
 {
 	int		i;
 
 	if (line->pos < line->buf_len)
 	{
-		if (((line->pos + line->start_po) % line->line_max == line->line_max - 1) || line->buf[line->pos] == '\n')
+		if (((line->pos + line->start_po) % line->line_max == \
+					line->line_max - 1) || line->buf[line->pos] == '\n')
 		{
 			tputs(tgetstr("do", 0), 1, my_putc);
 			i = right_newline(line);

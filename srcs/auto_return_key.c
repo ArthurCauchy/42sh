@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 17:50:04 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/07 18:28:46 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/08 23:43:18 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@
 
 void	put_choice_end(t_line *line, int chioce_isdic)
 {
+	if (!last_letter_not_last_col(line))
+		tputs(tgetstr("cd", 0), 1, my_putc);
 	if (chioce_isdic)
 		printable(line, '/');
 	else
 		printable(line, ' ');
-	//free_auto_lt(line);
 }
-
 
 int		return_key(t_line *line)
 {
@@ -36,8 +36,8 @@ int		return_key(t_line *line)
 	move_nright(line);
 	put_choice_end(line, line->auto_is_dic);
 	if (nb_list(line->auto_lt) > 1)
-	clear_auto_onscreen(line);
-		move_nright(line);
+		clear_auto_onscreen(line);
+	move_nright(line);
 	if (line->auto_lt)
 		free_auto_lt(line);
 	return (0);
@@ -46,8 +46,8 @@ int		return_key(t_line *line)
 void	clear_auto_onscreen(t_line *line)
 {
 	int		i;
-	(void)line;
 
+	(void)line;
 	init_attr(BASIC_LINE_EDIT);
 	ft_printf("\n");
 	init_attr(ADVANCED_LINE_EDIT);

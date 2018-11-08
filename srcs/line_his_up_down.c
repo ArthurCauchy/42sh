@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:49:10 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/07 15:32:04 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/08 23:25:37 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,10 @@ static void	put_history(t_line *line, char *cmd, int index)
 {
 	while (cmd[index])
 	{
-		/*
-		if (cmd[index] == '\n')
-		{
-			init_attr(BASIC_LINE_EDIT);
-			ft_printf("\n");
-			line->buf_len++;
-			line->pos++;
-			init_attr(ADVANCED_LINE_EDIT);
-		}
-		else
-		*/
 		put_a_key(line, cmd[index]);
 		line->buf[index] = cmd[index];
 		index++;
 	}
-
 }
 
 int			history_up(t_line *line)
@@ -71,7 +59,6 @@ int			history_up(t_line *line)
 	char	*cmd;
 
 	if (!help_2big_input(&i, &max, line) && line->buf_len)
-//	help_2big_input(&i, &max, line);
 		delete_all(line);
 	if (g_history->nb_lines == 0)
 		return (0);

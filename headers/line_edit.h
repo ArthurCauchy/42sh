@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/07 13:03:39 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/08 23:38:25 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct	s_line
 	unsigned char	auto_compare[INPUT_MAX_LEN];
 	char			prompt[INPUT_MAX_LEN];
 	int				buf_len;
+	int				real_nb_auto_line;
 	int				line_max;
 	int				screen_height;
 	int				start_po;
@@ -256,4 +257,11 @@ int				winsize_change(t_line *line);
 
 int				newline_b4(t_line *line, int index);
 
+/*
+** auto_help.c
+*/
+
+int				last_letter_not_last_col(t_line *line);
+void			for_put_a_key(t_line *line, unsigned long key);
+int				not_last_letter(t_line *line);
 #endif

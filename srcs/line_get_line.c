@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 16:27:50 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/08 17:50:41 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void		init_line(char *prompt, t_line *line)
 	line->clc = 0;
 	line->auto_last_choice_len = -1;
 	g_with_termcap = 1;
+	line->real_nb_auto_line = 0;
 	ft_strcpy(line->prompt, prompt);
 }
 

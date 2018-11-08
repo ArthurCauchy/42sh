@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:52:08 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/06 21:51:30 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/08 23:38:44 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,42 +15,14 @@
 #include <unistd.h>
 #include "line_edit.h"
 
-int			not_last_letter(t_line *line)
-{
-	int		i;
-
-	if ((i = newline_b4(line, line->pos + 1)))
-		return (i % line->line_max);
-	return ((line->pos + 1 + line->start_po) % line->line_max);
-}
-
-void		for_put_a_key(t_line *line, unsigned long key)
-{
-	(void)line;
-	(void)key;
-		write(STDOUT_FILENO, &key, 1);
-	if (key == '\n')
-		tputs(tgetstr("cr", 0), 1, my_putc);
-		/*
-	else
-	{
-		init_attr(BASIC_LINE_EDIT);
-		write(STDOUT_FILENO, &key, 1);
-		init_attr(ADVANCED_LINE_EDIT);
-	}
-	*/
-}
-
 void		put_a_key(t_line *line, unsigned long key)
 {
-	//if ((line->pos + 1 + line->start_po) % line->line_max == 0)
 	if (!not_last_letter(line))
 	{
 		tputs(tgetstr("ic", 0), 1, my_putc);
 		for_put_a_key(line, key);
 		tputs(tgetstr("do", 0), 1, my_putc);
 		tputs(tgetstr("cr", 0), 1, my_putc);
-	//	for_put_a_key(line, key);
 	}
 	else
 		for_put_a_key(line, key);
@@ -91,9 +63,9 @@ static void	update_index(t_line *line, int hint, int new_pos, int *index)
 int			printable(t_line *line, unsigned long key)
 {
 	int		index;
-	int		positive;
 	int		new_pos;
 	int		new_len;
+	int		i;
 
 	if (line->buf_len + line->start_po >= INPUT_MAX_LEN - 1)
 		return (0);
@@ -105,16 +77,7 @@ int			printable(t_line *line, unsigned long key)
 	while (index < new_len)
 		put_a_key(line, line->buf[index++]);
 	update_index(line, 1, new_pos, &index);
-	/*
-	while (index-- > 0)
-		tputs(tgetstr("up", 0), 1, my_putc);
-	update_index(line, 0, new_pos, &index);
-	positive = index >= 0 ? index : -index;
-	while (positive-- > 0)
-		tputs(tgetstr(index > 0 ? "le" : "nd", 0), 1, my_putc);
-		*/
-	int		i = line->buf_len - new_pos + 1;
-	(void)positive;
+	i = line->buf_len - new_pos + 1;
 	while (--i)
 		move_left(line);
 	return (0);

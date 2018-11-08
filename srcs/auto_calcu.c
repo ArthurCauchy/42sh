@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 17:38:07 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/07 16:57:25 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/08 23:20:11 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	is_tab(unsigned long key, t_line *line)
 		line->is_tabb4 = 1;
 	else
 	{
-	//	if (line->is_tabb4)
-	//		clear_auto_onscreen(line);
+		if (line->is_tabb4)
+			clear_auto_onscreen(line);
 		line->is_tabb4 = 0;
 	}
 }

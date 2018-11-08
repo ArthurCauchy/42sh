@@ -6,11 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2018/11/07 20:00:10 by saxiao           ###   ########.fr        #
-=======
-#    Updated: 2018/11/07 18:16:47 by arthur           ###   ########.fr        #
->>>>>>> dev
+#    Updated: 2018/11/08 23:23:36 by saxiao           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -138,6 +134,7 @@ SRC_NAME = utils.c \
 		   auto_return_key.c \
 		   auto_put_choice.c \
 		   auto_my_tabkey.c \
+		   auto_help.c \
 		   main.c
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))

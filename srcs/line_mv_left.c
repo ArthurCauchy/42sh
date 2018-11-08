@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:50:31 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/06 19:12:53 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/08 23:30:10 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	case_newline(t_line *line)
 	return (j);
 }
 
-int		move_left(t_line *line)
+int			move_left(t_line *line)
 {
 	int		i;
 	int		nb;
@@ -57,7 +57,9 @@ int		move_left(t_line *line)
 	i = 0;
 	if (line->pos)
 	{
-		if (((line->pos + line->start_po) % line->line_max == 0) || line->buf[line->pos - 1] == '\n')
+		if ((line->pos + line->start_po > line->line_max - 1 && \
+					((line->pos + line->start_po) % line->line_max == 0)) \
+				|| line->buf[line->pos - 1] == '\n')
 		{
 			tputs(tgetstr("up", 0), 1, my_putc);
 			nb = case_newline(line);
@@ -71,14 +73,14 @@ int		move_left(t_line *line)
 	return (0);
 }
 
-int		move_nleft(t_line *line)
+int			move_nleft(t_line *line)
 {
 	while (line->pos > 0)
 		move_left(line);
 	return (0);
 }
 
-int		mv_left_word(t_line *line)
+int			mv_left_word(t_line *line)
 {
 	int		left;
 
@@ -87,7 +89,7 @@ int		mv_left_word(t_line *line)
 		left = line->buf_len - 1;
 	if (line->pos != line->buf_len && left && line->buf[left] != ' ' && \
 			line->buf[left] != '\t' && (line->buf[left - 1] == ' ' \
-			|| line->buf[left - 1] == '\t'))
+				|| line->buf[left - 1] == '\t'))
 		left--;
 	while (left > 0 && (line->buf[left] == ' ' || line->buf[left] == '\t'))
 		left--;
