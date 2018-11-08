@@ -5,7 +5,6 @@ TODO:
 - options of echo builtin ?
 - alias
 	- do not perform alias substitution if the arg is quoted
-- interpreter : ctrl+c should abort the whole command !	
 
 key combinations
 1. move_left_word		CONTROL_SHIFT_ARROW_LEFT
