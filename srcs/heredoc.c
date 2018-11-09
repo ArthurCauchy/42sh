@@ -6,7 +6,7 @@
 /*   By: ccharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 15:32:52 by ccharrie          #+#    #+#             */
-/*   Updated: 2018/11/09 17:30:09 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/09 17:50:22 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,29 +52,22 @@ int			open_heredoc_file(char *filename, char **errmsg)
 	return (fd);
 }
 
-int				write_heredoc(int fd, char *delim)
+static int	write_heredoc(int fd, char *delim)
 {
 	char	*new_line;
-	char	*heredoc_line;
 
 	new_line = NULL;
-	heredoc_line = NULL;
 	while ((new_line = ask_for_input(HEREDOC_PROMPT)))
 	{
 		if (ft_strcmp(new_line, delim) == 0)
+		{
+			free(new_line);
 			break ;
-		else if (0/* getting ctrl-d */)
-			break ;
-		ft_putendl_fd(new_line, 2);
-		heredoc_line = ft_strjoin_free(heredoc_line, new_line);
-		heredoc_line = ft_strjoin_free(heredoc_line, ft_strdup("\n"));
+		}
+		ft_putendl_fd(new_line, fd);
+		free(new_line);
+		new_line = NULL;
 	}
-	if (heredoc_line)
-	{
-		ft_putstr_fd(heredoc_line, fd);
-	}
-	else
-		return (-1);
 	return (0);
 }
 
