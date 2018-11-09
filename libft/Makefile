@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 15:57:30 by acauchy           #+#    #+#              #
-#    Updated: 2018/09/13 16:18:17 by acauchy          ###   ########.fr        #
+#    Updated: 2018/11/09 17:04:23 by ccharrie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,6 +108,7 @@ SRC_NAME = ft_memset.c \
 		 ft_multifree.c \
 		 ft_count.c \
 		 ft_str_is_numeric.c \
+		 ft_isprintable.c \
 		 ft_get_next_line.c
 
 OBJ_PATH = objs

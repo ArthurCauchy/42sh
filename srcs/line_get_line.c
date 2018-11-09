@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/08 17:50:41 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/09 17:49:19 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,31 @@ static void	get_line_without_termcaps(char *new_line)
 int			get_line(char *prompt, char *new_line, t_line *line, t_env **env)
 {
 	unsigned long	key;
+	int				test;
+	int				i;
+	t_key 			t[NB_KEY];
 
 	help_for_line(new_line, prompt);
+	init_for_engine(t);
 	if (init_attr(ADVANCED_LINE_EDIT) == 0)
 	{
 		init_line(prompt, line);
 		while (((key = get_key()) && !(!line->is_tabb4 && key == '\n')) \
 				&& !line->clc && !line->dld)
 		{
+			i = -1;
+			test = 0;
+			while (++i < NB_KEY)
+				if (key == t[i].a_key)
+				   test = 1;	
+	//		ft_putnbr(test);
 			if (key == CONTRL_C)
 				return (ctrl_c(new_line, line));
-			engine(line, key, env);
+			else if (key == 9 || test == 1 || ft_isprint((int)key))
+			{
+	//			ft_putendl("yolo");
+				engine(line, key, env);
+			}
 			if (g_winsize_changed)
 				winsize_change(line);
 		}

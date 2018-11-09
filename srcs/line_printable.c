@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:52:08 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/08 23:38:44 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/09 17:05:53 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,20 @@
 
 void		put_a_key(t_line *line, unsigned long key)
 {
-	if (!not_last_letter(line))
+	if (ft_isprintable((int)key))
 	{
-		tputs(tgetstr("ic", 0), 1, my_putc);
-		for_put_a_key(line, key);
-		tputs(tgetstr("do", 0), 1, my_putc);
-		tputs(tgetstr("cr", 0), 1, my_putc);
+		if (!not_last_letter(line))
+		{
+			tputs(tgetstr("ic", 0), 1, my_putc);
+			for_put_a_key(line, key);
+			tputs(tgetstr("do", 0), 1, my_putc);
+			tputs(tgetstr("cr", 0), 1, my_putc);
+		}
+		else
+			for_put_a_key(line, key);
+		line->pos++;
+		line->buf_len++;
 	}
-	else
-		for_put_a_key(line, key);
-	line->pos++;
-	line->buf_len++;
 }
 
 static void	for_printable(t_line *line, unsigned long key, int *index)
