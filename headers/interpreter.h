@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/09 12:50:16 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/09 14:06:32 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct	s_interpret
 	t_redirect	*redirs;
 	char		*errmsg;
 }				t_interpret;
-
 
 /*
 ** interpreter.c

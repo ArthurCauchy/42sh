@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/09 13:07:03 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/09 14:10:53 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	interpret_loops(t_interpret *interpret, t_env **cmd_env, t_parse_blo
 	}
 	else if (pipeline->wordlist == NULL)
 	{
-		ft_putendl_fd("Invalid null command.", 2); // in case of redir, the file should still be created but empty
+		ft_putendl_fd("Invalid null command.", 2);
 		interpret->child_fds[interpret->pl_size++] = -1;
 	}
 	else
@@ -91,7 +91,7 @@ static void	interpret_wait(t_interpret *interpret)
 	handle_pipes(NULL, NULL);
 	while (i < interpret->pl_size)
 	{
-		if (interpret->child_fds[i] <= 0)// IF NOT ONLY A BUILTIN
+		if (interpret->child_fds[i] <= 0)
 			interpret->ret = -interpret->child_fds[i];
 		else
 		{
@@ -103,7 +103,6 @@ static void	interpret_wait(t_interpret *interpret)
 	tcsetpgrp(0, g_shell_pid);
 }
 
-// NOTE : the pipeline should always contain at least 1 program
 static int	pipeline_run(t_env **cmd_env, t_parse_block *pipeline)
 {
 	t_interpret interpret;
