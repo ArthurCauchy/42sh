@@ -6,7 +6,7 @@
 /*   By: acauchy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 10:12:28 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/09 17:03:55 by ccharrie         ###   ########.fr       */
+/*   Updated: 2018/11/09 18:27:35 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,6 @@ void			ft_multifree(int nbargs, ...);
 int				ft_count(char *str, char c);
 int				ft_str_is_numeric(char *str);
 int				get_next_line(const int fd, char **line);
-int				ft_isprintable(int c);
 
 /*
 ** The following functions MUST NOT be used.
