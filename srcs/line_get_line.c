@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/08 17:50:41 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/09 16:25:02 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,12 @@ int			get_line(char *prompt, char *new_line, t_line *line, t_env **env)
 		{
 			if (key == CONTRL_C)
 				return (ctrl_c(new_line, line));
-			engine(line, key, env);
-			if (g_winsize_changed)
-				winsize_change(line);
+			else if (key != 27)
+			{
+				engine(line, key, env);
+				if (g_winsize_changed)
+					winsize_change(line);
+			}
 		}
 		init_attr(BASIC_LINE_EDIT);
 		ft_strcpy(new_line, (const char *)line->buf);
