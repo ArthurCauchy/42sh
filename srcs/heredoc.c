@@ -6,7 +6,7 @@
 /*   By: ccharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 15:32:52 by ccharrie          #+#    #+#             */
-/*   Updated: 2018/11/09 18:55:46 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/09 19:39:20 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,15 @@ int			open_heredoc_file(char *filename, char **errmsg)
 static int	write_heredoc(int fd, char *delim)
 {
 	char	*new_line;
+	char	ctrl;
 
+	ctrl = 0;
 	while (42)
 	{
-		new_line = ask_for_input(HEREDOC_PROMPT);
-		if (new_line == NULL)
+		new_line = ask_for_input(HEREDOC_PROMPT, &ctrl);
+		if (ctrl != 'd' && new_line == NULL)
 			return (-1);
-		if (ft_strcmp(new_line, delim) == 0)
+		if (ctrl == 'd' || ft_strcmp(new_line, delim) == 0)
 		{
 			free(new_line);
 			break ;

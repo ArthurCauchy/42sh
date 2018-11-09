@@ -6,16 +6,16 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:43:52 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/05 12:52:40 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/09 19:32:28 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <curses.h>
 #include <term.h>
 #include <stdlib.h>
-#include "../headers/line_edit.h"
-#include "../libft/ft_printf/includes/ft_printf.h"
-#include "../headers/global.h"
+#include "line_edit.h"
+#include "ft_printf.h"
+#include "global.h"
 
 int			delete_at_position(t_line *line)
 {

@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/09 17:40:39 by ccharrie         ###   ########.fr       */
+/*   Updated: 2018/11/09 19:26:45 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ void			color_reset(void);
 ** line_input.c
 */
 
-char			*ask_for_input(int prompt_choice);
+char			*ask_for_input(int prompt_choice, char *ctrl);
 
 /*
 ** auto_key_isarrow.c
@@ -265,4 +265,5 @@ int				newline_b4(t_line *line, int index);
 int				last_letter_not_last_col(t_line *line);
 void			for_put_a_key(t_line *line, unsigned long key);
 int				not_last_letter(t_line *line);
+
 #endif
