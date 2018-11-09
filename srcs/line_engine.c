@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:47:13 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/19 14:23:39 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/09 17:33:44 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	init_for_enginie_2(t_key *t)
 	t[21].func = my_clear_screen;
 }
 
-static void	init_for_engine(t_key *t)
+void		init_for_engine(t_key *t)
 {
 	t[0].a_key = ARROW_LEFT;
 	t[0].func = move_left;
