@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/09 17:40:39 by ccharrie         ###   ########.fr       */
+/*   Updated: 2018/11/09 20:35:32 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <sys/types.h>
 # include <limits.h>
-# include "../libft/libft.h"
+# include "libft.h"
 # include "utils.h"
 # include "env.h"
 
@@ -99,7 +99,7 @@ typedef struct	s_line
 	int				auto_ct;
 	int				auto_is_dic;
 	int				auto_current_dic;
-	int				in_heredoc;
+	int				is_special_prompt;
 	int				end_line;
 	int				clc;
 	int				dld;
@@ -183,7 +183,7 @@ void			color_reset(void);
 ** line_input.c
 */
 
-char			*ask_for_input(int prompt_choice);
+char			*ask_for_input(int prompt_choice, char *ctrl);
 
 /*
 ** auto_key_isarrow.c
@@ -265,4 +265,5 @@ int				newline_b4(t_line *line, int index);
 int				last_letter_not_last_col(t_line *line);
 void			for_put_a_key(t_line *line, unsigned long key);
 int				not_last_letter(t_line *line);
+
 #endif

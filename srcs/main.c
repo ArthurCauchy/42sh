@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/09 18:41:39 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/09 19:40:45 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ pid_t		g_shell_pid = -1;
 static int	input_ask(int lex_ret, char **tmp, t_word **cmd_args, char **input)
 {
 	if (lex_ret == 1)
-		*tmp = ask_for_input(SQUOTE_PROMPT);
+		*tmp = ask_for_input(SQUOTE_PROMPT, NULL);
 	else if (lex_ret == 2)
-		*tmp = ask_for_input(DQUOTE_PROMPT);
+		*tmp = ask_for_input(DQUOTE_PROMPT, NULL);
 	else
-		*tmp = ask_for_input(SLASH_PROMPT);
+		*tmp = ask_for_input(SLASH_PROMPT, NULL);
 	if (*tmp == NULL)
 	{
 		delete_wordlist(cmd_args);
@@ -102,7 +102,7 @@ void		recursive_main_loop(char **input)
 	char *new;
 	char *space;
 
-	tmp = ask_for_input(SLASH_PROMPT);
+	tmp = ask_for_input(SLASH_PROMPT, NULL);
 	if (tmp != NULL)
 	{
 		if (ft_strcmp(tmp, "") != 0)
@@ -128,7 +128,7 @@ int			main(int argc, char **argv, char **envp)
 	(void)argv;
 	input = NULL;
 	init(&g_env, envp);
-	while ((input = ask_for_input(NORMAL_PROMPT)) != NULL)
+	while ((input = ask_for_input(NORMAL_PROMPT, NULL)) != NULL)
 	{
 		main_loop(&input);
 		free(input);

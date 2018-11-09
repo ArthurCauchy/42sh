@@ -6,16 +6,16 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:43:52 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/05 12:52:40 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/09 21:20:04 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <curses.h>
 #include <term.h>
 #include <stdlib.h>
-#include "../headers/line_edit.h"
-#include "../libft/ft_printf/includes/ft_printf.h"
-#include "../headers/global.h"
+#include "line_edit.h"
+#include "ft_printf.h"
+#include "global.h"
 
 int			delete_at_position(t_line *line)
 {
@@ -34,10 +34,13 @@ int			ctrl_d(t_line *line)
 		delete_at_position(line);
 	else
 	{
-		if (line->in_heredoc)
+		if (line->is_special_prompt)
 		{
 			line->dld = 1;
-			line->in_heredoc = 0;
+			free_auto_lt(line);
+			line->auto_ct = -1;
+			is_tab(CONTRL_D, line);
+			init_attr(BASIC_LINE_EDIT);
 			return (0);
 		}
 		else
@@ -52,7 +55,6 @@ int			ctrl_d(t_line *line)
 
 int			ctrl_c(char *new_line, t_line *line)
 {
-	(void)new_line;
 	ft_bzero(new_line, INPUT_MAX_LEN);
 	line->clc = 1;
 	free_auto_lt(line);
