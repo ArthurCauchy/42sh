@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 13:53:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/09 12:10:39 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/09 13:02:10 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,40 @@
 #include "line_edit.h"
 #include "global.h"
 
+static void		print_inverted(char *str)
+{
+	while (*str)
+	{
+		if (*str < 0)
+			ft_putchar(-*str);
+		else
+			ft_putchar(*str);
+		++str;
+	}
+	ft_putchar('\n');
+}
+
+static void		print_mask(char *str)
+{
+	while (*str)
+	{
+		if (*str < 0)
+			ft_putchar('1');
+		else
+			ft_putchar('0');
+		++str;
+	}
+	ft_putchar('\n');
+}
+
 void			add_word(t_token token, char *str,
 		t_word **wordlist, t_lexdata *lexdata)
 {
 	t_word	**target;
 	char	*alias;
 
+	print_inverted(str);
+	print_mask(str);
 	target = wordlist;
 	while (*target)
 		target = &((*target)->next);
@@ -54,7 +82,7 @@ static void		update_quotes(char *cmdline, t_lexdata *lexdata)
 		if (cmdline[lexdata->i] == '\'')
 			lexdata->quoted = 0;
 		else if (cmdline[lexdata->i] == '"')
-			lexdata->buff[lexdata->j++] = cmdline[lexdata->i];
+			lexdata->buff[lexdata->j++] = -cmdline[lexdata->i];
 	}
 	else if (lexdata->quoted == 2)
 	{
@@ -95,8 +123,8 @@ static void		do_lex(char *cmdline, t_word **wordlist,
 		lex_escape(cmdline, lexdata);
 	else if (cmdline[lexdata->i] == '\'' || cmdline[lexdata->i] == '"')
 		update_quotes(cmdline, lexdata);
-	else if (lexdata->quoted == 1 && cmdline[lexdata->i] == '$')
-		lex_dollar(cmdline, lexdata);
+	else if (lexdata->quoted == 1)
+		lexdata->buff[lexdata->j++] = -cmdline[lexdata->i];
 	else
 		lexdata->buff[lexdata->j++] = cmdline[lexdata->i];
 }

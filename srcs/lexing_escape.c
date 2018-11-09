@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 14:15:05 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/09 12:21:19 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/09 12:43:15 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ void	lex_escape(char *cmdline, t_lexdata *lexdata)
 	if (next_char)
 	{
 		if (next_char == '$')
-			lexdata->buff[lexdata->j++] = -'$';
+			lexdata->buff[lexdata->j++] = -'$'; // TODO check echo "\$var"
 		else if (lexdata->quoted == 2 && next_char != '"')
 			lexdata->buff[lexdata->j++] = '\\';
+		else if (lexdata->quoted == 1)
+			lexdata->buff[lexdata->j++] = -cmdline[lexdata->i + 1];
 		else
 			lexdata->buff[lexdata->j++] = cmdline[lexdata->i + 1];
 		++lexdata->i;
