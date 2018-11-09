@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/08 13:11:00 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/09 11:37:28 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ static int	pipeline_run(t_env **cmd_env, t_parse_block *pipeline)
 	status = 0;
 	while (pipeline)
 	{
+		apply_var_substitution(pipeline->wordlist);
 		redirs = NULL;
 		handle_pipes(pipeline, &redirs);
 		if (analyze_redirects(&pipeline->wordlist, &redirs, &errmsg) == -1)
@@ -85,14 +86,13 @@ static int	pipeline_run(t_env **cmd_env, t_parse_block *pipeline)
 		}
 		else if (pipeline->wordlist == NULL)
 		{
-			ft_putendl_fd("Invalid null command.", 2); // in case of redir, the file should still be created but empty
+			ft_putendl_fd("Invalid null command.", 2);
 			child_fds[pl_size++] = -1;
 		}
 		else
 		{
 			char **args;
 			
-			apply_var_substitution(pipeline->wordlist);
 			args = arglist_to_array(pipeline->wordlist);
 			proc = new_process(cmd_env, args);
 			proc->redirs = redirs;

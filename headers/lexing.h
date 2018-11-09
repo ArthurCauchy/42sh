@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/09 11:21:10 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/09 12:07:26 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void				lex_rshift_word(char *cmdline,
 void				lex_lshift_word(char *cmdline,
 		t_word **wordlist, t_lexdata *lexdata);
 void				lex_escape(char *cmdline,
+		t_lexdata *lexdata);
+void				lex_dollar(char *cmdline,
 		t_lexdata *lexdata);
 void				lex_tilde_exp(char *cmdline,
 		t_lexdata *lexdata);

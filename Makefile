@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/11/08 16:31:02 by acauchy          ###   ########.fr        #
+#    Updated: 2018/11/09 12:07:49 by acauchy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,6 +83,7 @@ SRC_NAME = utils.c \
 		   word.c \
 		   lexing.c \
 		   lexing_escape.c \
+		   lexing_dollar.c \
 		   lexing_tilde.c \
 		   lexing_semicol.c \
 		   lexing_pipe_or.c \
