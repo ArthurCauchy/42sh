@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/11/09 14:19:07 by acauchy          ###   ########.fr        #
+#    Updated: 2018/11/09 15:06:05 by acauchy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,6 +96,7 @@ SRC_NAME = utils.c \
 		   parsing.c \
 		   parsing_error.c \
 		   interpreter.c \
+		   interpreter_run.c \
 		   process.c \
 		   starter.c \
 		   starter_forked.c \
