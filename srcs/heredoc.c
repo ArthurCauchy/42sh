@@ -6,7 +6,7 @@
 /*   By: ccharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 15:32:52 by ccharrie          #+#    #+#             */
-/*   Updated: 2018/11/09 16:41:16 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/09 16:49:08 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 #include "builtins.h"
 #include "heredoc.h"
 #include "redirects.h"
+#include "line_edit.h"
+#include "global.h"
 
 /*static char 	open_heredoc_file(int *fd)
   {
@@ -54,11 +56,12 @@ int				write_heredoc(int fd, char *delim)
 {
 	char	*new_line;
 	char	*heredoc_line;
-	int		save_in;
+	t_line	*line;
 
 	new_line = NULL;
 	heredoc_line = NULL;
-	while (get_line("heredoc> ", new_line, line, env))
+	line = NULL;
+	while (get_line("heredoc> ", new_line, line, NULL))
 	{
 		if (ft_strcmp(new_line, delim) == 0)
 			break ;
@@ -71,6 +74,7 @@ int				write_heredoc(int fd, char *delim)
 		ft_putstr_fd(heredoc_line, fd);
 	else
 		return (-1);
+	return (0);
 }
 
 static int	ask_input_heredoc(t_word *wordlist, char **errmsg)
