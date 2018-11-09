@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 13:53:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/08 22:54:49 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/09 11:21:28 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void			add_word(t_token token, char *str,
 		lex_analysis(&alias, wordlist, str);
 	}
 	else
-		*target = new_word(token, str, lexdata->force_add);
+		*target = new_word(token, str);
 	lexdata->force_add = 0;
 }
 
@@ -91,6 +91,10 @@ static void		do_lex(char *cmdline, t_word **wordlist,
 	else if (!lexdata->quoted && cmdline[lexdata->i] == '~'
 			&& lexdata->j == 0)
 		lex_tilde_exp(cmdline, lexdata);
+	else if (lexdata->quoted == 1 && cmdline[lexdata->i] == '$')
+	{
+		lexdata->buff[lexdata->j++] = -cmdline[lexdata->i];
+	}
 	else if (lexdata->quoted != 1 && cmdline[lexdata->i] == '\\')
 		lex_escape(cmdline, lexdata);
 	else if (cmdline[lexdata->i] == '\'' || cmdline[lexdata->i] == '"')

@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/08 14:23:45 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/09 11:21:10 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct		s_word
 {
 	t_token			token;
 	char			*str;
-	int				quoted;
 	struct s_word	*next;
 }					t_word;
 
@@ -55,7 +54,7 @@ typedef struct		s_word
 ** word.c
 */
 
-t_word				*new_word(t_token token, char *str, int quoted);
+t_word				*new_word(t_token token, char *str);
 void				remove_word(t_word **wordlist, t_word *word);
 t_word				*copy_wordlist(t_word *wordlist);
 void				delete_wordlist(t_word **head);

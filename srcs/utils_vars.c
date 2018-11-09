@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 14:15:05 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/08 10:51:41 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/09 11:24:06 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ static void	var_subs_onword(t_word *word)
 	j = 0;
 	while (j < INPUT_MAX_LEN - 2 && word->str[i])
 	{
-		if (word->str[i] == '$')
+		if (word->str[i] == -'$')
+			new[j++] = '$';
+		else if (word->str[i] == '$')
 			write_variable(word->str, new, &i, &j);
 		else
 			new[j++] = word->str[i];
@@ -87,7 +89,7 @@ void		apply_var_substitution(t_word *wordlist)
 	cur = wordlist;
 	while (cur)
 	{
-		if (cur->token == ARG && cur->str && cur->quoted != 1)
+		if (cur->str)
 			var_subs_onword(cur);
 		cur = cur->next;
 	}

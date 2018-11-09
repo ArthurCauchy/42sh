@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 10:29:04 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/07 17:34:26 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/09 11:20:30 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "utils.h"
 #include "lexing.h"
 
-t_word	*new_word(t_token token, char *str, int quoted)
+t_word	*new_word(t_token token, char *str)
 {
 	t_word	*new;
 	char	*dup_str;
@@ -26,7 +26,6 @@ t_word	*new_word(t_token token, char *str, int quoted)
 		exit_error("ft_strdup() error");
 	new->token = token;
 	new->str = dup_str;
-	new->quoted = quoted;
 	new->next = NULL;
 	return (new);
 }
@@ -71,7 +70,7 @@ t_word	*copy_wordlist(t_word *wordlist)
 	cur_new = NULL;
 	while (cur_orig)
 	{
-		cur_new = new_word(cur_orig->token, cur_orig->str, cur_orig->quoted);
+		cur_new = new_word(cur_orig->token, cur_orig->str);
 		if (prev_new)
 			prev_new->next = cur_new;
 		else
