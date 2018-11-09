@@ -6,7 +6,7 @@
 /*   By: ccharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 15:32:52 by ccharrie          #+#    #+#             */
-/*   Updated: 2018/11/09 18:33:03 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/09 18:55:46 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,6 @@
 #include "redirects.h"
 #include "line_edit.h"
 #include "global.h"
-
-/*static char 	open_heredoc_file(int *fd)
-  {
-  if ((fd = open(".heredoc", O_WRONLY | O_CREAT | O_TRUNC)) < 0)
-  return (".heredoc");
-  else if ((fd = open("/tmp/.heredoc", O_WRONLY | O_CREAT | O_TRUNC)) < 0)
-  return ("/tmp/.heredoc");
-//	function to get HOME env variable
-else if ((fd = open("HOME/.heredoc", O_WRONLY | O_CREAT | O_TRUNC)) < 0)
-return ("HOME/.heredoc");
-else
-return (NULL);
-}*/
 
 int			open_heredoc_file(char *filename, char **errmsg)
 {

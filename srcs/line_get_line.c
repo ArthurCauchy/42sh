@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/09 18:12:44 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/09 18:24:38 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,32 +67,38 @@ static void	get_line_without_termcaps(char *new_line)
 	ligne ? free(ligne) : (void)ligne;
 }
 
+static int	check_for_valid_key(unsigned long key)
+{
+	t_key	t[NB_KEY];
+	int		res;
+	int		i;
+
+	i = -1;
+	res = 0;
+	init_for_engine(t);
+	while (++i < NB_KEY)
+		if (key == t[i].a_key)
+			res = 1;
+	if (key == 9 || ft_isprint((int)key))
+		res = 1;
+	return (res);
+}
+
 int			get_line(char *prompt, char *new_line, t_line *line, t_env **env)
 {
 	unsigned long	key;
-	int				test;
-	int				i;
-	t_key 			t[NB_KEY];
 
 	help_for_line(new_line, prompt);
-	init_for_engine(t);
 	if (init_attr(ADVANCED_LINE_EDIT) == 0)
 	{
 		init_line(prompt, line);
 		while (((key = get_key()) && !(!line->is_tabb4 && key == '\n')) \
 				&& !line->clc && !line->dld)
 		{
-			i = -1;
-			test = 0;
-			while (++i < NB_KEY)
-				if (key == t[i].a_key)
-				   test = 1;	
 			if (key == CONTRL_C)
 				return (ctrl_c(new_line, line));
-			else if (key == 9 || test == 1 || ft_isprint((int)key))
-			{
+			else if (check_for_valid_key(key) == 1)
 				engine(line, key, env);
-			}
 			if (g_winsize_changed)
 				winsize_change(line);
 		}
