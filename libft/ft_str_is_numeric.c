@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_is_numeric.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acauchy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 09:38:32 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/09 11:52:14 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/09 19:11:08 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,3 @@ int	ft_str_is_numeric(char *str)
 			return (0);
 	return (1);
 }
-

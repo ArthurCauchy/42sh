@@ -16,3 +16,17 @@ key combinations
 3. go up 1 line			OPTION_AWRROW_UP;
 3. go down 1 line		OPTION_AWRROW_DOWN;
 (too lazy to change the number .... :))
+
+FEATURES:
+-		""" (double quote), "’" (simple quote) et "\" (backslash).
+-		heredoc "<<"
+-		builtins history and "!"
+-		Line edition
+-		Autocompletion
+
+BONUSES:
+-		which
+-		help
+-		&&, ||, | inibitor?
+-		line edition colors
+-		alias

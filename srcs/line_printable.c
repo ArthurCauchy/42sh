@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_printable.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:52:08 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/09 17:05:53 by ccharrie         ###   ########.fr       */
+/*   Updated: 2018/11/09 19:02:27 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,17 @@
 
 void		put_a_key(t_line *line, unsigned long key)
 {
-	if (ft_isprintable((int)key))
+	if (!not_last_letter(line))
 	{
-		if (!not_last_letter(line))
-		{
-			tputs(tgetstr("ic", 0), 1, my_putc);
-			for_put_a_key(line, key);
-			tputs(tgetstr("do", 0), 1, my_putc);
-			tputs(tgetstr("cr", 0), 1, my_putc);
-		}
-		else
-			for_put_a_key(line, key);
-		line->pos++;
-		line->buf_len++;
+		tputs(tgetstr("ic", 0), 1, my_putc);
+		for_put_a_key(line, key);
+		tputs(tgetstr("do", 0), 1, my_putc);
+		tputs(tgetstr("cr", 0), 1, my_putc);
 	}
+	else
+		for_put_a_key(line, key);
+	line->pos++;
+	line->buf_len++;
 }
 
 static void	for_printable(t_line *line, unsigned long key, int *index)
