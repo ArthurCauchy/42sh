@@ -6,9 +6,12 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 15:47:16 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/09 17:01:20 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/09 18:53:32 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef HEREDOC_H
+# define HEREDOC_H
 
 /*
 ** heredoc_db.c
@@ -23,3 +26,5 @@ void	clear_heredocs_fds(void);
 */
 
 int		apply_heredocs(t_word *wordlist, char **errmsg);
+
+#endif
