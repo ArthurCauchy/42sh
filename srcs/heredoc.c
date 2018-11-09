@@ -6,7 +6,7 @@
 /*   By: ccharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 15:32:52 by ccharrie          #+#    #+#             */
-/*   Updated: 2018/11/09 17:50:22 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/09 18:33:03 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,11 @@ static int	write_heredoc(int fd, char *delim)
 {
 	char	*new_line;
 
-	new_line = NULL;
-	while ((new_line = ask_for_input(HEREDOC_PROMPT)))
+	while (42)
 	{
+		new_line = ask_for_input(HEREDOC_PROMPT);
+		if (new_line == NULL)
+			return (-1);
 		if (ft_strcmp(new_line, delim) == 0)
 		{
 			free(new_line);
@@ -66,7 +68,6 @@ static int	write_heredoc(int fd, char *delim)
 		}
 		ft_putendl_fd(new_line, fd);
 		free(new_line);
-		new_line = NULL;
 	}
 	return (0);
 }
@@ -92,6 +93,7 @@ int			apply_heredocs(t_word *wordlist, char **errmsg)
 {
 	int	heredoc_fd;
 
+	init_heredoc_fds();
 	while (wordlist)
 	{
 		if (wordlist->token == LSHIFT2)
