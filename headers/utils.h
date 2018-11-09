@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/09 15:19:07 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/09 16:51:42 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define BUILTINS_MAX 42
 # define FD_MAX 1024
 # define HISTSIZE 500
+# define MAX_HEREDOC_TMP 512
 
 # include "lexing.h"
 

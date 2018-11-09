@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/09 16:20:16 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/09 17:03:52 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void	main_loop(char **input)
 			print_n_free_errmsg(&errmsg);
 		clear_heredocs_fds();
 	}
-	if (cmd_args)
+	else if (cmd_args)
 	{
 		ret = do_parsing(cmd_args, &parsed, &errmsg);
 		if (ret != 1)
@@ -98,8 +98,8 @@ static void	main_loop(char **input)
 		else
 			g_last_command_status = 1;
 		free_parse_block(&parsed);
-		delete_wordlist(&cmd_args);
 	}
+	delete_wordlist(&cmd_args);
 }
 
 void		recursive_main_loop(char **input)
