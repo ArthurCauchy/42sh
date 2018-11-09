@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   auto_add_a_list_nbuildin.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 16:45:17 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/06 11:22:11 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/09 15:17:17 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_autolist			*add_a_list(t_autolist *l, char *name, unsigned char type)
 	add = malloc(sizeof(t_autolist));
 	add->next = NULL;
 	ft_bzero(add->name, INPUT_MAX_LEN);
-	ft_strcpy(add->name, name);
+	ft_strncpy(add->name, name, INPUT_MAX_LEN - 1);
 	add->len = ft_strlen(add->name);
 	if (type == DT_DIR)
 		add->is_dic = 1;
