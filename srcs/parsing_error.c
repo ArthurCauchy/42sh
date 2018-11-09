@@ -6,12 +6,17 @@
 /*   By: lumenthi <lumenthi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:13:44 by lumenthi          #+#    #+#             */
-/*   Updated: 2018/11/08 11:28:10 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/09 18:45:34 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "libft.h"
+#include "history.h"
+#include "utils.h"
+#include "env.h"
+#include "global.h"
+#include "interpreter.h"
 #include <stdlib.h>
 
 t_error		init_error(void)
@@ -80,4 +85,21 @@ int			set_error(t_error *error, t_word *tmp)
 			return (parse_error(error->separator));
 	}
 	return (1);
+}
+
+void		main_parsing(t_word **cmd_args, t_parse_block **parsed,
+char **errmsg, char **input)
+{
+	int ret;
+
+	ret = do_parsing(*cmd_args, parsed, errmsg);
+	if (ret != 1)
+		history_add(*input);
+	if (ret == 0)
+		g_last_command_status = do_interpret(&g_env, *parsed);
+	else if (ret == 1)
+		recursive_main_loop(input);
+	else
+		g_last_command_status = 1;
+	free_parse_block(parsed);
 }
