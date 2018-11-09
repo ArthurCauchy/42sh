@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/09 19:26:45 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/09 20:35:32 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <sys/types.h>
 # include <limits.h>
-# include "../libft/libft.h"
+# include "libft.h"
 # include "utils.h"
 # include "env.h"
 
@@ -99,7 +99,7 @@ typedef struct	s_line
 	int				auto_ct;
 	int				auto_is_dic;
 	int				auto_current_dic;
-	int				in_heredoc;
+	int				is_special_prompt;
 	int				end_line;
 	int				clc;
 	int				dld;

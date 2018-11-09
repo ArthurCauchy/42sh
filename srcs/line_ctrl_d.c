@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:43:52 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/09 19:32:28 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/09 21:20:04 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,13 @@ int			ctrl_d(t_line *line)
 		delete_at_position(line);
 	else
 	{
-		if (line->in_heredoc)
+		if (line->is_special_prompt)
 		{
 			line->dld = 1;
-			line->in_heredoc = 0;
+			free_auto_lt(line);
+			line->auto_ct = -1;
+			is_tab(CONTRL_D, line);
+			init_attr(BASIC_LINE_EDIT);
 			return (0);
 		}
 		else
@@ -52,7 +55,6 @@ int			ctrl_d(t_line *line)
 
 int			ctrl_c(char *new_line, t_line *line)
 {
-	(void)new_line;
 	ft_bzero(new_line, INPUT_MAX_LEN);
 	line->clc = 1;
 	free_auto_lt(line);

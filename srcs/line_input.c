@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 15:59:23 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/09 19:39:59 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/09 20:54:23 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char			*ask_for_input(int prompt_choice, char *ctrl)
 	t_line	line;
 	char	*ret;
 
-	line.in_heredoc = 1;
+	line.is_special_prompt = 1;
 	ft_bzero(buffer, INPUT_MAX_LEN);
 	ft_bzero(prompt, INPUT_MAX_LEN);
 	if (prompt_choice == HEREDOC_PROMPT)
@@ -82,18 +82,18 @@ char			*ask_for_input(int prompt_choice, char *ctrl)
 		ft_strcpy(prompt, "> ");
 	else
 	{
-		line.in_heredoc = 0;
+		line.is_special_prompt = 0;
 		get_normal_prompt(prompt, INPUT_MAX_LEN);
 	}
 	if (get_line(prompt, buffer, &line, &g_env) == 1
 			&& prompt_choice != NORMAL_PROMPT)
 		ret = NULL;
-	if (ctrl && line.dld)
-		*ctrl = 'c';
-	if (ctrl && line.clc)
-		*ctrl = 'd';
 	else
 		ret = ft_strdup(buffer);
+	if (ctrl && line.clc)
+		*ctrl = 'c';
+	if (ctrl && line.dld)
+		*ctrl = 'd';
 	if (g_with_termcap)
 		ft_putchar('\n');
 	return (ret);
