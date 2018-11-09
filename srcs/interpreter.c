@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 16:11:38 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/07 18:35:06 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/09 13:07:03 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "parsing.h"
 #include "starter.h"
 #include "global.h"
+#include "interpreter.h"
 
 static void	handle_pipes(t_parse_block *pipeline, t_redirect **redirs)
 {
@@ -57,66 +58,70 @@ static void	handle_pipes(t_parse_block *pipeline, t_redirect **redirs)
 	}
 }
 
-// NOTE : the pipeline should always contain at least 1 program
-static int	pipeline_run(t_env **cmd_env, t_parse_block *pipeline)
+static void	interpret_loops(t_interpret *interpret, t_env **cmd_env, t_parse_block *pipeline)
 {
-	int			child_fds[FD_MAX];
-	t_process	*proc;
-	int			pl_size;
-	int			i;
-	pid_t		pgid;
-	int			status;
-	int			ret;
-	t_redirect	*redirs;
-	char		*errmsg;
+	char **args;
 
-	ft_bzero(child_fds, FD_MAX * sizeof(int));
-	pgid = -1;
-	pl_size = 0;
-	status = 0;
-	while (pipeline)
+	if (analyze_redirects(&pipeline->wordlist, &(interpret->redirs), &(interpret->errmsg)) == -1)
 	{
-		redirs = NULL;
-		handle_pipes(pipeline, &redirs);
-		if (analyze_redirects(&pipeline->wordlist, &redirs, &errmsg) == -1)
-		{
-			print_n_free_errmsg(&errmsg);
-			child_fds[pl_size++] = -1;
-		}
-		else if (pipeline->wordlist == NULL)
-		{
-			ft_putendl_fd("Invalid null command.", 2); // in case of redir, the file should still be created but empty
-			child_fds[pl_size++] = -1;
-		}
-		else
-		{
-			char **args;
-			
-			apply_var_substitution(pipeline->wordlist);
-			args = arglist_to_array(pipeline->wordlist);
-			proc = new_process(cmd_env, args);
-			proc->redirs = redirs;
-			child_fds[pl_size++] = start_process(cmd_env, proc, pipeline->next ? 1 : 0, &pgid);
-			delete_process(proc);
-		}
-		delete_redirects(redirs);
-		pipeline = pipeline->next;
+		print_n_free_errmsg(&(interpret->errmsg));
+		interpret->child_fds[interpret->pl_size++] = -1;
 	}
-	handle_pipes(NULL, NULL);
-	i = 0;
-	while (i < pl_size)
+	else if (pipeline->wordlist == NULL)
 	{
-		if (child_fds[i] <= 0)// IF NOT ONLY A BUILTIN
-			ret = -child_fds[i];
+		ft_putendl_fd("Invalid null command.", 2); // in case of redir, the file should still be created but empty
+		interpret->child_fds[interpret->pl_size++] = -1;
+	}
+	else
+	{
+		apply_var_substitution(pipeline->wordlist);
+		args = arglist_to_array(pipeline->wordlist);
+		interpret->proc = new_process(cmd_env, args);
+		interpret->proc->redirs = interpret->redirs;
+		interpret->child_fds[interpret->pl_size++] = start_process(cmd_env, interpret->proc, pipeline->next ? 1 : 0, &(interpret->pgid));
+		delete_process(interpret->proc);
+	}
+}
+
+static void	interpret_wait(t_interpret *interpret)
+{
+	int i;
+
+	i = 0;
+	handle_pipes(NULL, NULL);
+	while (i < interpret->pl_size)
+	{
+		if (interpret->child_fds[i] <= 0)// IF NOT ONLY A BUILTIN
+			interpret->ret = -interpret->child_fds[i];
 		else
 		{
-			waitpid(child_fds[i], &status, WUNTRACED);
-			ret = get_process_return(status);
+			waitpid(interpret->child_fds[i], &(interpret->status), WUNTRACED);
+			interpret->ret = get_process_return(interpret->status);
 		}
 		++i;
 	}
 	tcsetpgrp(0, g_shell_pid);
-	return (ret);
+}
+
+// NOTE : the pipeline should always contain at least 1 program
+static int	pipeline_run(t_env **cmd_env, t_parse_block *pipeline)
+{
+	t_interpret interpret;
+
+	ft_bzero(interpret.child_fds, FD_MAX * sizeof(int));
+	interpret.pgid = -1;
+	interpret.pl_size = 0;
+	interpret.status = 0;
+	while (pipeline)
+	{
+		interpret.redirs = NULL;
+		handle_pipes(pipeline, &interpret.redirs);
+		interpret_loops(&interpret, cmd_env, pipeline);
+		delete_redirects(interpret.redirs);
+		pipeline = pipeline->next;
+	}
+	interpret_wait(&interpret);
+	return (interpret.ret);
 }
 
 static void	pipeline_add(t_parse_block **pipeline, t_parse_block *new)
