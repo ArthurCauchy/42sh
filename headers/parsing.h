@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/08 11:33:56 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/09 18:42:00 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ t_parse_block	*clone_parse_block(t_parse_block *orig);
 
 t_error			init_error(void);
 int				set_error(t_error *error, t_word *tmp);
-
+void			main_parsing(t_word **cmd_args, t_parse_block **parsed,
+				char **errmsg, char **input);
 /*
 ** parsing.c
 */

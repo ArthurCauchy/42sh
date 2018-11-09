@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/09 18:36:12 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/09 18:41:39 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,23 +70,6 @@ static int	input_lexing(char **input, t_word **cmd_args)
 		exc_mark(input);
 	}
 	return (0);
-}
-
-static void	main_parsing(t_word **cmd_args, t_parse_block **parsed,
-char **errmsg, char **input)
-{
-	int ret;
-
-	ret = do_parsing(*cmd_args, parsed, errmsg);
-	if (ret != 1)
-		history_add(*input);
-	if (ret == 0)
-		g_last_command_status = do_interpret(&g_env, *parsed);
-	else if (ret == 1)
-		recursive_main_loop(input);
-	else
-		g_last_command_status = 1;
-	free_parse_block(parsed);
 }
 
 static void	main_loop(char **input)
