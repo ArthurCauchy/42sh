@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 14:35:33 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/08 22:43:08 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/09 14:08:42 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int			start_builtin(t_process *proc, t_builtin *builtin)
 	int			fdtmp_array[FD_MAX];
 	int			fdsave_array[FD_MAX];
 
+	errmsg = NULL;
 	ft_bzero(fdtmp_array, FD_MAX * sizeof(int));
 	ft_memset(fdsave_array, -1, FD_MAX * sizeof(int));
 	if (apply_redirects(proc->redirs, fdtmp_array,

@@ -3,10 +3,6 @@ TODO:
 	- check crash & leaks if BASIC line edition enabled (no termcaps)
 	- secure the scrolling (ex : disable writing when the command line goes above the window size)
 
-TEST:
-- test var as redirection source and/or dest fd
-- echo abc > '$abc' ==> Conditional move or jump
-
 key combinations
 1. move_left_word		CONTROL_SHIFT_ARROW_LEFT
 1. move_right_word		CONTROL_SHIFT_ARROW_RIGHT
@@ -20,5 +16,3 @@ key combinations
 3. go up 1 line			OPTION_AWRROW_UP;
 3. go down 1 line		OPTION_AWRROW_DOWN;
 (too lazy to change the number .... :))
-
-crash line too long with history

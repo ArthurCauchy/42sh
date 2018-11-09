@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 13:53:13 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/09 13:02:10 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/09 14:17:23 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,40 +17,12 @@
 #include "line_edit.h"
 #include "global.h"
 
-static void		print_inverted(char *str)
-{
-	while (*str)
-	{
-		if (*str < 0)
-			ft_putchar(-*str);
-		else
-			ft_putchar(*str);
-		++str;
-	}
-	ft_putchar('\n');
-}
-
-static void		print_mask(char *str)
-{
-	while (*str)
-	{
-		if (*str < 0)
-			ft_putchar('1');
-		else
-			ft_putchar('0');
-		++str;
-	}
-	ft_putchar('\n');
-}
-
 void			add_word(t_token token, char *str,
 		t_word **wordlist, t_lexdata *lexdata)
 {
 	t_word	**target;
 	char	*alias;
 
-	print_inverted(str);
-	print_mask(str);
 	target = wordlist;
 	while (*target)
 		target = &((*target)->next);
