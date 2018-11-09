@@ -6,10 +6,12 @@
 /*   By: ccharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 15:32:52 by ccharrie          #+#    #+#             */
-/*   Updated: 2018/11/09 16:21:05 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/09 16:41:16 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
+#include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "libft.h"
@@ -17,26 +19,58 @@
 #include "env.h"
 #include "builtins.h"
 #include "heredoc.h"
+#include "redirects.h"
 
-void	init_heredoc(t_line *line, t_env *env, char *eof)
+/*static char 	open_heredoc_file(int *fd)
+  {
+  if ((fd = open(".heredoc", O_WRONLY | O_CREAT | O_TRUNC)) < 0)
+  return (".heredoc");
+  else if ((fd = open("/tmp/.heredoc", O_WRONLY | O_CREAT | O_TRUNC)) < 0)
+  return ("/tmp/.heredoc");
+//	function to get HOME env variable
+else if ((fd = open("HOME/.heredoc", O_WRONLY | O_CREAT | O_TRUNC)) < 0)
+return ("HOME/.heredoc");
+else
+return (NULL);
+}*/
+
+int			open_heredoc_file(char *filename, char **errmsg)
+{
+	int flags;
+	int fd;
+
+	flags = O_WRONLY | O_CREAT | O_EXCL | O_TRUNC;
+	fd = open(filename, flags, 0600);
+	if (fd < 0)
+	{
+		*errmsg = ft_strdup(filename);
+		*errmsg = ft_strjoin_free(*errmsg, ft_strdup(": "));
+		*errmsg = ft_strjoin_free(*errmsg, ft_strdup(strerror(errno)));
+	}
+	return (fd);
+}
+
+int				write_heredoc(int fd, char *delim)
 {
 	char	*new_line;
 	char	*heredoc_line;
-	int		fd;
 	int		save_in;
 
 	new_line = NULL;
 	heredoc_line = NULL;
-	fd = open(".heredoc", O_WRONLY | O_CREAT | O_TRUNC);
 	while (get_line("heredoc> ", new_line, line, env))
 	{
-		if (ft_strcmp(new_line, eof) == 0)
+		if (ft_strcmp(new_line, delim) == 0)
+			break ;
+		else if (0/* getting ctrl-d */)
 			break ;
 		heredoc_line = ft_strjoin_free(heredoc_line, new_line);
-		heredoc_line = ft_strjoin_free(heredoc_line, "\n");
+		heredoc_line = ft_strjoin_free(heredoc_line, ft_strdup("\n"));
 	}
-	ft_putstr_fd(heredoc_line, fd);
-	//	execute_command(t_line *line);
+	if (heredoc_line)
+		ft_putstr_fd(heredoc_line, fd);
+	else
+		return (-1);
 }
 
 static int	ask_input_heredoc(t_word *wordlist, char **errmsg)
