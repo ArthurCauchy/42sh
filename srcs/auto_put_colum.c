@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 17:33:25 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 12:43:23 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/08 23:44:38 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,18 @@ static int			jump_list(t_line *line, int *total_row)
 {
 	int			row;
 	int			nb_row_command;
-	int			i;
-	t_autolist	*cp;
 
 	*total_row = line->w.line;
-	i = line->auto_ct % nb_list(line->auto_lt) + 1;
-	cp = line->auto_lt;
-	while (--i > 0)
-		cp = cp->next;
-	nb_row_command = (line->buf_len + ft_strlen(cp->name) - \
-			ft_strlen((char *)line->auto_compare) - 1) / line->line_max + 1;
-	if (line->screen_height - nb_row_command - line->w.line - 1 < 0)
-		*total_row = line->screen_height - nb_row_command - 1;
+	nb_row_command = nb_line_command(line);
+	if (line->screen_height - nb_row_command - line->w.line < 0)
+		*total_row = line->screen_height - nb_row_command;
+	line->real_nb_auto_line = *total_row;
 	if (line->auto_ct < 0)
 		return (0);
 	row = line->auto_ct % nb_list(line->auto_lt) % line->w.line + 1;
-	if (nb_row_command + row + 1 <= line->screen_height)
+	if (nb_row_command + row <= line->screen_height)
 		return (0);
-	return (row + 3 - line->screen_height - nb_row_command);
+	return (row - (line->screen_height - nb_row_command));
 }
 
 static t_autolist	*start_list(t_line *line, int *total_row)
@@ -69,10 +63,10 @@ void				put_colum(t_line *line)
 	t_helper	ct;
 	int			total_row;
 
-	ct.j = -1;
+	ct.j = 0;
 	total_row = line->w.line;
 	lt = start_list(line, &total_row);
-	while (++(ct.j) < total_row)
+	while (++(ct.j) <= total_row)
 	{
 		cp = lt;
 		ct.i = -1;
@@ -84,7 +78,8 @@ void				put_colum(t_line *line)
 			while (cp && (ct.index)++ < line->w.line)
 				cp = cp->next;
 		}
-		ft_printf("\n");
+		if (ct.j < total_row)
+			ft_printf("\n");
 		lt = lt->next;
 	}
 }

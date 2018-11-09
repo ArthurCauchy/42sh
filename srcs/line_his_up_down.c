@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:49:10 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/05 15:49:11 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/08 23:25:37 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,16 @@ static int	help_2big_input(int *i, int *max, t_line *line)
 	return (0);
 }
 
+static void	put_history(t_line *line, char *cmd, int index)
+{
+	while (cmd[index])
+	{
+		put_a_key(line, cmd[index]);
+		line->buf[index] = cmd[index];
+		index++;
+	}
+}
+
 int			history_up(t_line *line)
 {
 	int		i;
@@ -54,12 +64,7 @@ int			history_up(t_line *line)
 		return (0);
 	(g_history->position < max) ? g_history->position++ : 0;
 	cmd = ft_strdup(g_history->line[max - g_history->position]);
-	while (cmd[i])
-	{
-		put_a_key(line, cmd[i]);
-		line->buf[i] = cmd[i];
-		i++;
-	}
+	put_history(line, cmd, i);
 	free(cmd);
 	return (0);
 }
@@ -82,12 +87,7 @@ int			history_down(t_line *line)
 	else
 		return (0);
 	cmd = ft_strdup(g_history->line[max - g_history->position]);
-	while (cmd[i])
-	{
-		put_a_key(line, cmd[i]);
-		line->buf[i] = cmd[i];
-		i++;
-	}
+	put_history(line, cmd, i);
 	free(cmd);
 	return (0);
 }

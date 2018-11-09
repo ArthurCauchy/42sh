@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/11/09 14:11:27 by acauchy          ###   ########.fr        #
+#    Updated: 2018/11/09 14:19:07 by acauchy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,7 +121,8 @@ SRC_NAME = utils.c \
 		   exc_mark_return.c \
 		   line_termcap_setting.c \
 		   line_engine.c \
-		   line_mv_left_right.c \
+		   line_mv_right.c \
+		   line_mv_left.c \
 		   line_delete.c \
 		   line_printable.c \
 		   line_his_up_down.c \
@@ -144,6 +145,7 @@ SRC_NAME = utils.c \
 		   auto_return_key.c \
 		   auto_put_choice.c \
 		   auto_my_tabkey.c \
+		   auto_help.c \
 		   main.c
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))

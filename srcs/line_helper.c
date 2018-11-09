@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 12:09:44 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 17:46:31 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/06 11:23:26 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char			**path(t_env **env)
 	if (!(path = read_from_env(env, "PATH")))
 		return (NULL);
 	split_path = ft_strsplit(path, ':');
-	free (path);
+	free(path);
 	return (split_path);
 }
 

@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 09:34:09 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 20:07:41 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/08 23:41:06 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ static void	put_first_lst(t_line *line)
 	else
 		str = line->auto_lt->name + ft_strlen((char *)line->auto_compare);
 	while (*str)
+	{
+		if (*str == ' ' || *str == '\\')
+			printable(line, '\\');
 		printable(line, *str++);
+	}
 }
 
 void		one_autolist(t_line *line)
@@ -43,7 +47,11 @@ static void	for_put_choice(t_autolist *cp, t_line *line)
 
 	str = cp->name;
 	while (*str)
+	{
+		if (*str == ' ' || *str == '\\')
+			printable(line, '\\');
 		printable(line, *str++);
+	}
 	line->auto_is_dic = cp->is_dic;
 }
 
