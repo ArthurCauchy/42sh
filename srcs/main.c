@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/09 14:18:39 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/09 16:20:16 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 #include "line_edit.h"
 #include "parsing.h"
 #include "interpreter.h"
+#include "redirects.h"
+#include "heredoc.h"
 
 t_env		*g_env = NULL;
 t_history	*g_history = NULL;
@@ -54,8 +56,8 @@ static int	input_lexing(char **input, t_word **cmd_args)
 		if (lex_ret == 1 || lex_ret == 2)
 		{
 			*input = ft_strjoin_free(
-				ft_strjoin_free(*input, ft_strdup("\n")),
-				tmp);
+					ft_strjoin_free(*input, ft_strdup("\n")),
+					tmp);
 		}
 		else
 			*input = ft_strjoin_free(*input, tmp);
@@ -78,6 +80,12 @@ static void	main_loop(char **input)
 	exc_mark(input);
 	if (input_lexing(input, &cmd_args) == 1)
 		return ;
+	if (apply_heredocs(cmd_args, &errmsg) == -1)
+	{
+		if (errmsg)
+			print_n_free_errmsg(&errmsg);
+		clear_heredocs_fds();
+	}
 	if (cmd_args)
 	{
 		ret = do_parsing(cmd_args, &parsed, &errmsg);

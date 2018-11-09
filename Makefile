@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/11/09 15:06:05 by acauchy          ###   ########.fr        #
+#    Updated: 2018/11/09 16:21:18 by acauchy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ HEADER_NAME = utils.h \
 			  interpreter.h \
 			  starter.h \
 			  redirects.h \
+			  heredoc.h \
 			  init.h \
 			  global.h \
 			  history.h \
@@ -111,6 +112,8 @@ SRC_NAME = utils.c \
 		   redirections_apply_lshift.c \
 		   redirections_apply_lshift2.c \
 		   redirections_apply_lshift_amp.c \
+		   heredoc.c \
+		   heredoc_db.c \
 		   history_tools.c \
 		   history_init.c \
 		   history_helper.c \
