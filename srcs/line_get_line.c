@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/10 11:40:05 by ccharrie         ###   ########.fr       */
+/*   Updated: 2018/11/10 12:16:31 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ static void	get_line_without_termcaps(char *new_line)
 int			get_line(char *prompt, char *new_line, t_line *line, t_env **env)
 {
 	unsigned long	key;
+	int				ret;
 
-	(void)env;
 	help_for_line(new_line, prompt);
 	if (init_attr(ADVANCED_LINE_EDIT) == 0)
 	{
@@ -97,10 +97,13 @@ int			get_line(char *prompt, char *new_line, t_line *line, t_env **env)
 		{
 			if (key == CONTRL_C)
 				return (ctrl_c(new_line, line));
-			if (key == CONTRL_D)
-				return (ctrl_d(line));
-			/*else if (check_for_valid_key(key) == 1)*/
-			engine(line, key, env);
+			else if (key == CONTRL_D)
+			{
+				if ((ret = ctrl_d(line)) != 0)
+					return (ret);
+			}
+			else
+				engine(line, key, env);
 			if (g_winsize_changed)
 				winsize_change(line);
 		}
