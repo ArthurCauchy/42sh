@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 18:51:28 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/09 18:51:35 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/10 11:54:29 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int			winsize_change(t_line *line)
 	while (--nb_line >= 0)
 		tputs(tgetstr("up", 0), 1, my_putc);
 	tputs(tgetstr("cd", 0), 1, my_putc);
+	if (line->auto_lt)
+		free_auto_lt(line);
 	reprint_line(line);
 	g_winsize_changed = 0;
 	return (0);
