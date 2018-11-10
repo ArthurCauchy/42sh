@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/10 11:35:48 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/10 11:40:05 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ int			get_line(char *prompt, char *new_line, t_line *line, t_env **env)
 				return (ctrl_c(new_line, line));
 			if (key == CONTRL_D)
 				return (ctrl_d(line));
-			/*else if (check_for_valid_key(key) == 1)
-				engine(line, key, env);*/
+			/*else if (check_for_valid_key(key) == 1)*/
+			engine(line, key, env);
 			if (g_winsize_changed)
 				winsize_change(line);
 		}
