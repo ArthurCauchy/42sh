@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 17:50:04 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/10 11:31:01 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/10 12:05:10 by ccharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ int		return_key(t_line *line)
 	if (nb_list(line->auto_lt) > 1)
 		clear_auto_onscreen(line);
 	move_nright(line);
-//	if (line->auto_lt)
-//		free_auto_lt(line);
 	return (0);
 }
 
