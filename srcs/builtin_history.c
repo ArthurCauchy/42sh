@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/08 11:55:56 by lumenthi         ###   ########.fr       */
+/*   Updated: 2018/11/10 12:23:24 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,20 +98,20 @@ int			builtin_history(t_env **env, char **args)
 	if (arg == '0')
 		return (history_base(args, start));
 	else if (arg == 'c')
-		return (history_doclear());
+		return (-history_doclear());
 	else if (arg == 'r')
-		return (history_r(args[start]));
+		return (-history_r(args[start]));
 	else if (arg == 'a')
-		return (history_a(args[start]));
+		return (-history_a(args[start]));
 	else if (arg == 'n')
-		return (history_n(args[start]));
+		return (-history_n(args[start]));
 	else if (arg == 'w')
-		return (history_w(args[start]));
+		return (-history_w(args[start]));
 	else if (arg == 'p')
-		return (history_p(args));
+		return (-history_p(args));
 	else if (arg == 's')
-		return (history_s(args));
+		return (-history_s(args));
 	else if (arg == 'd')
-		return (history_d(args, start));
-	return (1);
+		return (-history_d(args, start));
+	return (0);
 }
