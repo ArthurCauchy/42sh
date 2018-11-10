@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 17:50:04 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/08 23:43:18 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/10 11:31:01 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int		return_key(t_line *line)
 	if (nb_list(line->auto_lt) > 1)
 		clear_auto_onscreen(line);
 	move_nright(line);
-	if (line->auto_lt)
-		free_auto_lt(line);
+//	if (line->auto_lt)
+//		free_auto_lt(line);
 	return (0);
 }
 
@@ -57,4 +57,6 @@ void	clear_auto_onscreen(t_line *line)
 		tputs(tgetstr("up", 0), 1, my_putc);
 	line->pos = 0 - line->start_po;
 	move_nright(line);
+	if (line->auto_lt)
+		free_auto_lt(line);
 }
