@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/10 11:28:51 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/10 11:35:48 by lumenthi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int			get_line(char *prompt, char *new_line, t_line *line, t_env **env)
 {
 	unsigned long	key;
 
+	(void)env;
 	help_for_line(new_line, prompt);
 	if (init_attr(ADVANCED_LINE_EDIT) == 0)
 	{
