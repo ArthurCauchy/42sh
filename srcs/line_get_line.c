@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/10 12:18:42 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/10 12:40:31 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,23 @@ static void	get_line_without_termcaps(char *new_line)
 	ligne ? free(ligne) : (void)ligne;
 }
 
+static int	get_line_key(char *new_line, t_line *line,
+		unsigned long key, t_env **env)
+{
+	int ret;
+
+	if (key == CONTRL_C)
+		return (ctrl_c(new_line, line));
+	else if (key == CONTRL_D)
+	{
+		if ((ret = ctrl_d(line)) != 0)
+			return (ret);
+	}
+	else
+		engine(line, key, env);
+	return (0);
+}
+
 int			get_line(char *prompt, char *new_line, t_line *line, t_env **env)
 {
 	unsigned long	key;
@@ -78,15 +95,8 @@ int			get_line(char *prompt, char *new_line, t_line *line, t_env **env)
 		while (((key = get_key()) && !(!line->is_tabb4 && key == '\n')) \
 				&& !line->clc && !line->dld)
 		{
-			if (key == CONTRL_C)
-				return (ctrl_c(new_line, line));
-			else if (key == CONTRL_D)
-			{
-				if ((ret = ctrl_d(line)) != 0)
-					return (ret);
-			}
-			else
-				engine(line, key, env);
+			if ((ret = get_line_key(new_line, line, key, env)) != 0)
+				return (ret);
 			if (g_winsize_changed)
 				winsize_change(line);
 		}

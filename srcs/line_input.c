@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 15:59:23 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/10 12:06:42 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/10 12:53:48 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,25 @@ static void		get_normal_prompt(char *prompt, int index)
 	ft_strcat(prompt, " ");
 }
 
+static void		prompt_init(int prompt_choice, char *prompt, t_line *line)
+{
+	line->is_special_prompt = 1;
+	ft_bzero(prompt, INPUT_MAX_LEN);
+	if (prompt_choice == HEREDOC_PROMPT)
+		ft_strcpy(prompt, "heredoc> ");
+	else if (prompt_choice == DQUOTE_PROMPT)
+		ft_strcpy(prompt, "dquote> ");
+	else if (prompt_choice == SQUOTE_PROMPT)
+		ft_strcpy(prompt, "squote> ");
+	else if (prompt_choice == SLASH_PROMPT)
+		ft_strcpy(prompt, "> ");
+	else
+	{
+		line->is_special_prompt = 0;
+		get_normal_prompt(prompt, INPUT_MAX_LEN);
+	}
+}
+
 /*
 ** we can choose NORMAL_PROMPT, HEREDOC_PROMPT, SQUOTE_PROMPT,
 ** DQUOTE_PROMPT, SQUOTE_PROMPT
@@ -69,22 +88,8 @@ char			*ask_for_input(int prompt_choice, char *ctrl)
 	t_line	line;
 	char	*ret;
 
-	line.is_special_prompt = 1;
 	ft_bzero(buffer, INPUT_MAX_LEN);
-	ft_bzero(prompt, INPUT_MAX_LEN);
-	if (prompt_choice == HEREDOC_PROMPT)
-		ft_strcpy(prompt, "heredoc> ");
-	else if (prompt_choice == DQUOTE_PROMPT)
-		ft_strcpy(prompt, "dquote> ");
-	else if (prompt_choice == SQUOTE_PROMPT)
-		ft_strcpy(prompt, "squote> ");
-	else if (prompt_choice == SLASH_PROMPT)
-		ft_strcpy(prompt, "> ");
-	else
-	{
-		line.is_special_prompt = 0;
-		get_normal_prompt(prompt, INPUT_MAX_LEN);
-	}
+	prompt_init(prompt_choice, prompt, &line);
 	if (get_line(prompt, buffer, &line, &g_env) == 1
 			&& prompt_choice != NORMAL_PROMPT)
 		ret = NULL;
