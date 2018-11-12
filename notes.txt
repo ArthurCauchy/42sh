@@ -1,13 +1,7 @@
-TODO:
-- line edition
-	- check crash & leaks if BASIC line edition enabled (no termcaps)
-	- secure the scrolling (ex : disable writing when the command line goes above the window size)
-
-TEST :
-- ctrl+d in quotes
-- ctrl+d in non-finished parsing
-- ctrl+d in heredoc
-- autocomp + heredoc +ctrl+c/d leak check
+Fix :
+- cmd + space/tab autocomp invalid read/write
+- autocomp+ ctrl+l leak
+- exit builtin
 
 key combinations
 1. move_left_word		CONTROL_SHIFT_ARROW_LEFT
