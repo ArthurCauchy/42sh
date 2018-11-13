@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/10 12:40:31 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/13 12:21:42 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void		init_line(char *prompt, t_line *line)
 {
 	ft_bzero(line->buf, INPUT_MAX_LEN);
 	ft_bzero(line->ici_doc, INPUT_MAX_LEN);
+	ft_bzero(line->cp, INPUT_MAX_LEN);
 	ft_bzero(line->auto_compare, INPUT_MAX_LEN);
 	ft_bzero(line->prompt, INPUT_MAX_LEN);
 	line->pos = 0;
