@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 17:50:04 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/10 12:05:10 by ccharrie         ###   ########.fr       */
+/*   Updated: 2018/11/13 11:55:41 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ void	clear_auto_onscreen(t_line *line)
 	i = nb_line_command(line) + 1;
 	while (--i)
 		tputs(tgetstr("up", 0), 1, my_putc);
-	line->pos = 0 - line->start_po;
+	i = line->start_po + 1;
+	while (--i)
+		tputs(tgetstr("nd", 0), 1, my_putc);
+	line->pos = 0;
 	move_nright(line);
 	if (line->auto_lt)
 		free_auto_lt(line);
