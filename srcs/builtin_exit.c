@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:06:00 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/06 15:01:34 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/13 17:05:21 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "env.h"
 #include "history.h"
 #include "builtins.h"
+#include "global.h"
 
 int	builtin_exit(t_env **env, char **args)
 {
@@ -41,6 +42,7 @@ int	builtin_exit(t_env **env, char **args)
 	}
 	history_exit();
 	clear_builtins();
+	clear_env(g_env);
 	exit(exit_status);
 	return (0);
 }

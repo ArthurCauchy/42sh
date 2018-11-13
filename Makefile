@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/11/09 16:21:18 by acauchy          ###   ########.fr        #
+#    Updated: 2018/11/13 15:50:32 by acauchy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -168,8 +168,6 @@ LIBFTPRINTF = -L$(LIBFTPRINTF_PATH) -lftprintf
 
 LIBTERMCAP = -ltermcap
 
-LIBCURSES = -lcurses
-
 all: compile
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(HEADER)
@@ -177,7 +175,7 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(HEADER)
 
 $(NAME): $(OBJ)
 	@echo -e $(COLOR_YELLOW)"Linking "$@"..."$(COLOR_RESET)
-	$(CC) $^ $(LIBCURSES) $(LIBTERMCAP) $(LIBFTPRINTF) $(LIBFT) -o $@
+	$(CC) $^ $(LIBTERMCAP) $(LIBFTPRINTF) $(LIBFT) -o $@
 	@echo -e $(COLOR_GREEN)$(NAME)" successfully created."$(COLOR_RESET)
 
 $(OBJ_PATH):

@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:43:52 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/13 11:50:56 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/13 15:55:19 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,12 @@ int			ctrl_d(t_line *line)
 		}
 		else
 		{
+			
 			init_attr(BASIC_LINE_EDIT);
 			ft_putendl("exit");
 			history_exit();
 			clear_builtins();
+			clear_env(g_env);
 			exit(0);
 		}
 	}

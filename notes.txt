@@ -1,7 +1,8 @@
 Fix :
-- cmd + space/tab autocomp invalid read/write
 - autocomp+ ctrl+l leak
-- exit builtin
+- remove stdio includes
+- segfault when PATH is null
+- double free hiding somewhere in the jungle (when env -i)
 
 key combinations
 1. move_left_word		CONTROL_SHIFT_ARROW_LEFT
