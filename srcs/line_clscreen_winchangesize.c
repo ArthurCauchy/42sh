@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 18:51:28 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/10 11:54:29 by ccharrie         ###   ########.fr       */
+/*   Updated: 2018/11/14 13:00:05 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static void	reprint_line(t_line *line)
 
 int			my_clear_screen(t_line *line)
 {
+	if (line->auto_lt)
+		free_auto_lt(line);
 	tputs(tgetstr("cl", 0), 1, my_putc);
 	reprint_line(line);
 	return (0);
