@@ -6,27 +6,14 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:30:47 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/08 15:34:33 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/14 12:53:26 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <termios.h>
-#include <stdio.h>
-#include <curses.h>
-#include <term.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/uio.h>
 #include <unistd.h>
-#include <fcntl.h>
 #include "line_edit.h"
 #include "global.h"
-
-static int	return_message(char *message, int re_value, int fd)
-{
-	write(fd, message, ft_strlen(message));
-	return (re_value);
-}
 
 static void	default_termi_mode(void)
 {
@@ -38,23 +25,19 @@ static void	default_termi_mode(void)
 	tcsetattr(STDIN_FILENO, TCSADRAIN, &tattr);
 }
 
-static void	for_attr(struct termios *new, struct termios old)
+static void	for_attr(t_termios *old)
 {
-	*new = old;
-	new->c_lflag &= ~(ECHO | ICANON | ISIG);
-	new->c_oflag &= ~(OPOST);
-	new->c_cc[VMIN] = 1;
-	new->c_cc[VTIME] = 0;
-	tcsetattr(STDIN_FILENO, TCSADRAIN, new);
+	struct termios new;
+	
+	new = *old;
+	new.c_lflag &= ~(ECHO | ICANON | ISIG);
+	new.c_oflag &= ~(OPOST);
+	new.c_cc[VMIN] = 1;
+	new.c_cc[VTIME] = 0;
+	tcsetattr(STDIN_FILENO, TCSADRAIN, &new);
 }
 
-static int	freeterm_set2default(char *term)
-{
-	free(term);
-	default_termi_mode();
-	return (-1);
-}
-
+/*
 int			init_attr(int mod)
 {
 	static struct termios	old;
@@ -79,4 +62,13 @@ int			init_attr(int mod)
 	else
 		default_termi_mode();
 	return (0);
+}
+*/
+
+void		init_attr(int mod)
+{
+	if (g_termcap_enabled && mod == ADVANCED_LINE_EDIT)
+		for_attr(&g_old_termios);
+	else
+		default_termi_mode();
 }

@@ -6,7 +6,7 @@
 #    By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 10:04:49 by acauchy           #+#    #+#              #
-#    Updated: 2018/11/13 15:50:32 by acauchy          ###   ########.fr        #
+#    Updated: 2018/11/14 11:39:17 by saxiao           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ SRC_NAME = utils.c \
 		   init_signals.c \
 		   init_env.c \
 		   init_builtins.c \
+		   init_termios.c \
 		   init_history.c \
 		   word.c \
 		   lexing.c \

@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:48:57 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/08 14:43:52 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/14 11:19:11 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ void		init(t_env **env, char **envp)
 	init_signals();
 	init_builtins();
 	init_env(env, envp);
+	init_termios();
 	init_history(env);
 }

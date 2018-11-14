@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/09 16:51:42 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/14 11:43:23 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,14 @@
 # define HISTSIZE 500
 # define MAX_HEREDOC_TMP 512
 
+# include <termios.h>
 # include "lexing.h"
+
+/*
+** Typedef for termios
+*/
+
+typedef	struct termios t_termios;
 
 /*
 ** utils.c

@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 12:03:19 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/09 19:40:45 by acauchy          ###   ########.fr       */
+/*   Updated: 2018/11/14 12:26:29 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int			g_last_command_status = 0;
 t_alias		*g_aliases = NULL;
 int			g_winsize_changed = 0;
 pid_t		g_shell_pid = -1;
+int			g_termcap_enabled = 0;
+t_termios	g_old_termios;
 
 static int	input_ask(int lex_ret, char **tmp, t_word **cmd_args, char **input)
 {

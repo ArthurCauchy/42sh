@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/09 20:35:32 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/14 11:48:03 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ typedef struct	s_helper
 	int		index;
 }				t_helper;
 
-int				init_attr(int mod);
+void			init_attr(int mod);
 int				my_putc(int c);
 int				engine(t_line *line, unsigned long key, t_env **env);
 int				move_left(t_line *line);

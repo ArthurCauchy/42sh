@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/09/14 15:06:20 by arthur           ###   ########.fr       */
+/*   Updated: 2018/11/14 11:40:02 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,11 @@ void	init_builtins(void);
 */
 
 void	init_history(t_env **env);
+
+/*
+** init_termios.c
+*/
+
+void	init_termios(void);
 
 #endif

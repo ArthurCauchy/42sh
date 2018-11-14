@@ -6,7 +6,7 @@
 /*   By: saxiao <saxiao@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/13 12:21:42 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/14 12:41:07 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void		init_line(char *prompt, t_line *line)
 	line->dld = 0;
 	line->clc = 0;
 	line->auto_last_choice_len = -1;
-	g_with_termcap = 1;
 	line->real_nb_auto_line = 0;
+	g_with_termcap = 1;
 	ft_strcpy(line->prompt, prompt);
 }
 
@@ -90,8 +90,9 @@ int			get_line(char *prompt, char *new_line, t_line *line, t_env **env)
 	int				ret;
 
 	help_for_line(new_line, prompt);
-	if (init_attr(ADVANCED_LINE_EDIT) == 0)
+	if (g_termcap_enabled)
 	{
+		init_attr(ADVANCED_LINE_EDIT);
 		init_line(prompt, line);
 		while (((key = get_key()) && !(!line->is_tabb4 && key == '\n')) \
 				&& !line->clc && !line->dld)
