@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 15:05:59 by saxiao            #+#    #+#             */
-/*   Updated: 2018/10/22 17:17:35 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/13 12:49:54 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ t_autolist			*get_autolist(t_line *line, t_env **env)
 		all = path(env);
 	if (!ft_strchr((char *)line->auto_compare, '/'))
 	{
-		if (ft_strlen((char *)line->auto_compare) || !ft_strcmp(all[0], "./"))
+		if (ft_strlen((char *)line->auto_compare) || (all && \
+					!ft_strcmp(all[0], "./")))
 			list = addlist_in_path(line, all, list);
 	}
 	else
