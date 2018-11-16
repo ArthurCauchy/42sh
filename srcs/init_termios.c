@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 12:56:09 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/14 12:54:17 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/16 18:40:28 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	init_termios(void)
 {
 	char	*termtype;
 
-	tcgetattr(0, &g_old_termios); // TODO check return value ?
+	if (tcgetattr(0, &g_old_termios) == -1)
+		exit_error("tcgetattr() error");
 	termtype = read_from_env(&g_env, "TERM");
 	if (termtype && tgetent(NULL, termtype) > 0)
 		g_termcap_enabled = 1;

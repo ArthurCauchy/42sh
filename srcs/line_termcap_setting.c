@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:30:47 by saxiao            #+#    #+#             */
-/*   Updated: 2018/11/14 12:53:26 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/16 18:37:38 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	default_termi_mode(void)
 static void	for_attr(t_termios *old)
 {
 	struct termios new;
-	
+
 	new = *old;
 	new.c_lflag &= ~(ECHO | ICANON | ISIG);
 	new.c_oflag &= ~(OPOST);
@@ -36,34 +36,6 @@ static void	for_attr(t_termios *old)
 	new.c_cc[VTIME] = 0;
 	tcsetattr(STDIN_FILENO, TCSADRAIN, &new);
 }
-
-/*
-int			init_attr(int mod)
-{
-	static struct termios	old;
-	static int				oldatt = 0;
-	static char				*term = NULL;
-	struct termios			new;
-
-	if (term == NULL)
-		term = read_from_env(&g_env, "TERM");
-	if (!oldatt)
-	{
-		oldatt = 1;
-		if (tcgetattr(0, &old) == -1)
-			return (return_message("can't get att", -1, 2));
-	}
-	if (mod == ADVANCED_LINE_EDIT)
-	{
-		for_attr(&new, old);
-		if (tgetent(NULL, term) != 1)
-			return (freeterm_set2default(term));
-	}
-	else
-		default_termi_mode();
-	return (0);
-}
-*/
 
 void		init_attr(int mod)
 {

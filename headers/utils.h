@@ -6,7 +6,7 @@
 /*   By: acauchy <acauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 14:20:15 by acauchy           #+#    #+#             */
-/*   Updated: 2018/11/14 11:43:23 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/11/16 18:24:28 by acauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 ** Typedef for termios
 */
 
-typedef	struct termios t_termios;
+typedef	struct termios	t_termios;
 
 /*
 ** utils.c
